@@ -18,11 +18,8 @@ const AdminFilter =()=>{
         down:true,
         monthlyPayment:true,
         dealer:true,
-   
         NSD:true,
-  
         PIP:true,
-
         MVR:true,
         location:true,
         bound:true,
@@ -32,6 +29,29 @@ const AdminFilter =()=>{
         category:true
   })
   },[])
+  const selectAll =()=>{
+      setColumns({
+        clientName:!columns.clientName,
+        clientEmail:!columns.clientEmail,
+        clientTel:!columns.clientTel,
+        CompanyId:!columns.CompanyId,
+        ProducerId:!columns.ProducerId,
+        down:!columns.down,
+        monthlyPayment:!columns.monthlyPayment,
+        dealer:!columns.dealer,
+   
+        NSD:!columns.NSD,
+  
+        PIP:!columns.PIP,
+
+        MVR:!columns.MVR,
+        location:!columns.location,
+        bound:!columns.bound,
+        notes:!columns.notes,
+            
+        category:!columns.category
+      })
+  }
   
     return(
         <div className="genericDiv">
@@ -45,6 +65,13 @@ const AdminFilter =()=>{
                 
                         <p className="FITfilter">Filtrar por:</p>
                     
+                    <div style={{flexDirection:"row", display:"flex", paddingLeft:"40px", marginTop:"10px"}}>
+                    <div className="FITind">
+                                <input class="checkbox" style={{display:"flex", marginRight:"15px", marginBottom:"3px"}} type="checkbox" checked={columns.clientName} key="clientId" name="clientId" onChange = {selectAll}/>
+                                <div><p   className="FITtype" style={{fontWeight:700}}>Select all</p></div>
+                            
+                            </div>
+                    </div>
                     <div style={{flexDirection:"row", display:"flex", paddingLeft:"40px", marginTop:"10px"}}>
                         <div style={{ display:"flex", flexDirection:"column", marginRight:"50px"}}>
                             <div className="FITind">
@@ -126,22 +153,7 @@ const AdminFilter =()=>{
                                 <p className="FITtype">Status</p>
                                 
                             </div>
-                            {/* <div className="FITind">
-                                <input class="checkbox" style={{display:"flex", marginRight:"15px", marginBottom:"3px"}} type="checkbox" checked={columns.notes} key="notes" name="notes" onChange = {() => setColumns({...columns,notes:!columns.notes})}/>
-                                <p className="FITtype">Notes</p>
                            
-                            </div> */}
-                            
-                            {/* <div className="FITind">
-                                <input class="checkbox" className="checkbox" style={{display:"flex", marginRight:"15px", marginBottom:"3px"}} type="checkbox" checked={columns.renewDown} key="renewDown" name="renewDown" onChange = {() => setColumns({...columns,renewDown:!columns.renewDown})}/>
-                                <p className="FITtype">Renew down</p>
-                            
-                            </div>     
-                            <div className="FITind">
-                                <input class="checkbox" style={{display:"flex", marginRight:"15px", marginBottom:"3px"}} type="checkbox" checked={columns.creditCardFee} key="creditCardFee" name="creditCardFee" onChange = {() => setColumns({...columns,creditCardFee:!columns.creditCardFee})}/>
-                                <p className="FITtype">Credit card fee</p>
-                            
-                            </div> */}
                             <div className="FITind">
                                 <input class="checkbox" style={{display:"flex", marginRight:"15px", marginBottom:"3px"}}  type="checkbox" checked={columns.category} key="category" name="category" onChange = {() => setColumns({...columns,category:!columns.category})}/>
                                 <p className="FITtype">Category</p>
@@ -155,7 +167,7 @@ const AdminFilter =()=>{
              </div>
                 
                 <NavLink to={{
-                    pathname:("/filter/report"),
+                    pathname:("/quoteReport"),
                     aboutProps:columns
                 }}>
                 <button className="FITbutton">

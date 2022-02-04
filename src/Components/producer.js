@@ -44,7 +44,7 @@ const [quotes, setQuotes]= useState([])
             </div>
          
     
-    <div style={{paddingLeft:"60px", paddingTop:"20px", paddingBottom:"20px"}}>
+    <div style={{paddingLeft:"60px", paddingTop:"20px", paddingBottom:"8px"}}>
     <p className="PRsubtitle">Producer list</p>
     </div>
     
@@ -69,10 +69,10 @@ const [quotes, setQuotes]= useState([])
         <tbody>
             {
                producers.map((e)=>{
-                   return (<tr>
+                   return (<tr >
                             
-                                <td scope="row">{<NavLink style={{ textDecoration: 'none' }} to={{
-                                pathname:("/producer/details"),
+                                <td scope="row">{<NavLink style={{ textDecoration: 'none', color:"black" }} to={{
+                                pathname:("/producers/details"),
                                 aboutProps:e
                                 }}>{e.name}</NavLink>}</td>
                            
@@ -91,7 +91,9 @@ const [quotes, setQuotes]= useState([])
         </table>
 </div>
         <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
+            <NavLink to="/managerP">
                  <button className="PAYbutton" ><MdAdd  color="white" size={"20px"} className="PAYbuttonIcon"/><p className="PAYbuttonText">New Producer</p></button>
+            </NavLink>
             </div>
 
     </div>

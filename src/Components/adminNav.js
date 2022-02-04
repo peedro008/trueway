@@ -65,7 +65,7 @@ function AdminNav() {
      </Link></div>
      <span/>
      <div className="NAcontainer">
-      <Link  className="icons" to='/filter'>
+      <Link  className="icons" to='/report'>
       <VscGraph className="NAicon" size="20px" color="#969CBA" />
      </Link></div>
      <span/>

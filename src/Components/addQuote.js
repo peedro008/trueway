@@ -13,6 +13,18 @@ const AddQuote = ()=>{
     const [companies, setCompanies]= useState([])
     const [categories, setCategories]= useState([])
     const [locations, setLocations] = useState([])
+    const [dealers, setDealers] = useState([])
+    useEffect(()=>{
+        axios.get(`http://localhost:4000/getDealer`)
+            .then(function(response){
+                setDealers(response.data)
+                
+            })
+            .catch(error=>{
+              console.log(error)  
+            })
+    
+    },[]) 
     useEffect(()=>{
         axios.get(`http://localhost:4000/clients`)
             .then(function(response){
@@ -254,7 +266,7 @@ const handleNewClient = () =>{
                             {inputs.dealer?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>} 
                         </div>
                         {inputs.dealer&&
-                         <input className="AQinput2" placeholder="Dealer Sale Person" key="dealerSalePerson" name="dealerSalePerson"  value={inputs.dealerSalePerson} onChange={event => setInputs({...inputs,dealerSalePerson:event.target.value})}/>
+                         <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={dealers.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, DealerId:e.value})}}/>
                         }
                     </div>
                 </div>

@@ -97,7 +97,7 @@ const AdminDash = ()=>{
                         </div>
                     </div>
                 </div>
-                <BsChevronRight color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"30px", alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>
+                <BsChevronRight color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"2%",top:"50%", alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>
 
             </div>
             :
@@ -155,7 +155,7 @@ const AdminDash = ()=>{
                         
                     </div>
               </div>  
-                <BsChevronLeft color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"30px" ,alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>
+                <BsChevronLeft color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"2%", top:"50%" ,alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>
             </div>
             
             

@@ -4,7 +4,7 @@ import AdminNav from "./adminNav"
 import Report from './report';
 // import Balances from './Balances';
  import Producer from './producer';
-
+import ProducerEdit from './producerEdit';
 // import AddCompany from './addCompany';
  import Payments from "./payments"
  import Payment from './payment';
@@ -21,6 +21,8 @@ import QuoteDetails from "./quoteDetails"
 import ModifyQuote from './modifyQuote';
 import AddQuote from './addQuote';
 import ManagerCa from './managerCa';
+import PayReport from './payReport';
+import QuoteReport from "./quoteReport"
 
 import {
     BrowserRouter as Router,
@@ -42,9 +44,12 @@ import {
           <Route exact path='/managerD' component={ManagerD}/>
           <Route exact path='/managerCa' component={ManagerCa}/>
           <Route exact path='/producers' component={Producer}/>
-          <Route exact path='/producer/details' component={ProducerDetails}/>
+          <Route exact path='/producers/edit' component={ProducerEdit}/>
+          <Route exact path='/producers/details' component={ProducerDetails}/>
+          <Route exact path='/report' component={Report}/>
           <Route exact path='/filter' component={AdminFilter}/>
-          <Route exact path='/filter/report' component={Report}/>
+          <Route exact path='/quoteReport' component={QuoteReport}/>
+          <Route exact path='/payReport' component={PayReport}/>
           <Route exact path='/quote' component={QuoteDetails}/>
           <Route exact path='/modifyquote' component={ModifyQuote}/>
           <Route exact path='/addquote' component={AddQuote}/>

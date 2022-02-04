@@ -5,6 +5,41 @@ import axios from "axios";
 import Select from 'react-select'
 const ManagerD=()=>{
     const [company, setCompany] = useState([])
+    const [inputs, setinputs]= useState({})
+    const onSubmitHandler = () => {
+        inputs&&
+        fetch(`http://localhost:4000/addDealer`, {
+            
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+            body: JSON.stringify(inputs)
+            
+        })
+        .then(async res => { 
+            
+                try {
+                const jsonRes = await res.json();
+                
+                if (res.status !== 200) {
+                    console.log("error")
+                } else {
+                   
+                   console.log(jsonRes)
+                  
+                  
+                    
+                }
+            } catch (err) {
+                console.log(err);
+            };
+        
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
     useEffect(()=>{
         axios.get(`http://localhost:4000/getCompany`)
             .then(function(response){
@@ -28,11 +63,11 @@ const ManagerD=()=>{
             <div className="managerInputsubContainer">
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Name</p>
-                    <input placeholder="Name" className="PAYsub-title"></input>
+                    <input onChange={(e)=>{setinputs({...inputs, name:e.target.value})}}  placeholder="Name" className="PAYsub-title"></input>
                 </div>
                <div className="inputDiv" > 
                     <p className="PAYtitle">Company</p>
-                    <Select options={company.map(e=>({value:e.id,label:e.name}))} className="PAYselect"  placeholder="Select Company"/>
+                    <Select onChange={(e)=>{setinputs({...inputs, CompanyId:e.value})}}  options={company.map(e=>({value:e.id,label:e.name}))} className="PAYselect"  placeholder="Select Company"/>
                 </div>  
                 
 
@@ -43,7 +78,7 @@ const ManagerD=()=>{
 
 
 
-        <button className="button4" >Add Dealer</button>
+        <button onClick={onSubmitHandler} className="button4" >Add Dealer</button>
 
         </div>
     

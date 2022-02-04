@@ -7,7 +7,8 @@ import { BiDownload, BiMessageSquareAdd } from "react-icons/bi";
 import Select from 'react-select'
 
  function Payment(){
-    const [payment, setPayment]= useState({})
+    const [inputs, setinputs]= useState({})
+    const [payment, setPayment]= useState({creditCardFee:0})
     const [locations, setLocations] = useState([])
     const userId = useSelector(state=> state.UserId)
     const [box, setBox] = useState({pay1:0,pay5:0,pay10:0,pay20:0,pay50:0,pay100:0})
@@ -100,8 +101,8 @@ import Select from 'react-select'
     const submitPayment =()=>{
         if(newClient==false){
         if(payment.amount&&payment.clientId&&payment.clientId!==undefined&&payment.method&&payment.type){
-                
-          
+        setPayment({...payment, total: parseInt(payment.creditCardFee)+parseInt(payment.amount)})        
+         console.log(parseInt(payment.creditCardFee+parseInt(payment.amount))) 
             fetch(`http://localhost:4000/addPayment`, {
             
             method: 'POST',
@@ -202,7 +203,7 @@ import Select from 'react-select'
                 </div>
 
                 <div className="PAYInputCont">
-                    <p  className="PAYtitle">Amounth</p>
+                    <p  className="PAYtitle">Amount</p>
                     <input className="PAYsub-title" value={payment.amount} onChange={(event)=>{setPayment({...payment, amount:event.target.value})}}/>
                     
                 </div> 

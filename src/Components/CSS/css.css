@@ -98,7 +98,7 @@
 
 .sidebar{
     height: 100vh;
-    width:5vw;
+    width:4.5vw;
     background-color: #2B4162;
     display:flex;
     flex-direction: column;
@@ -110,7 +110,7 @@
 .topbar{
     width: 100vw;
     background-color: #FFFFFF;
-    height: 4.5vw;
+    height: 4vw;
     position: fixed;
     z-index: 1;
     display:flex;
@@ -118,8 +118,8 @@
 }
 .image{
     background-color: #FFFFFF;
-    width: 4.2vw;
-    height: 3.5vw;
+    width: 90%;
+    height: 6.8%;
     padding:6px
 }
 .NAcontainer{
@@ -176,8 +176,8 @@
      padding-left: 5vw;
      background-color: #E5E5E5;
      display: flex;
-     max-height:90.2vh;
-     height: 91vh;
+     max-height:90%;
+     height: 90vh;
      max-width: 95vw;
      flex-direction: column;
  }
@@ -192,6 +192,7 @@
     min-height: 90vh;
     flex-direction: column;
 }
+
  .genericTitle{
     font-family: "Gilroy";
     font-size: 28px;
@@ -229,9 +230,7 @@
     justify-content: center;
     padding-right: 20px ;
     padding-left: 16px ;
-    border-color: #7a91b3;
-    border-width: 1px;
-    box-shadow: 2px 2px 2px grey;    
+    box-shadow: 2px 2px 2px rgb(165, 162, 162);    
  }
  .PAYbuttonText{
     font-family: "Gilroy";
@@ -248,7 +247,7 @@
     display: flex;
     width: 600px;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 35px;
     padding-left: 40px;
 }
 
@@ -309,7 +308,7 @@
     height: 28px;
     border-width: 0.5px;
     border-color: white;
-    
+    ;
     padding-left: 8px;
     
 }
@@ -319,9 +318,9 @@
 /*-------------------MANAGER------------------*/
 
 .managerContainer{
-    width: 90%;
+    width: 50%;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     padding-left: 1.5%;
     margin-top: 35px;
     padding-left: 40px;
@@ -332,6 +331,7 @@
     flex-direction: column;
     padding-left: 40px;
     margin-top: 40px;
+
 }
 .managerInputsubContainer{
     display: flex;
@@ -339,6 +339,7 @@
     justify-content: space-between;
     width: 80%;
     margin-bottom: 30px;
+        margin-right: 20px;
 }
 
 /*-------------Table-------------------------------*/
@@ -584,6 +585,27 @@
 
 /*----------Report--------------------*/
 
+
+.RepSearchButton{
+    height: 25px;
+    min-width: 74px;
+    left: 678px;
+    top: 247px;
+    border-radius: 10px;
+    background-color: #519BD0;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: center;
+    border: 0;
+    color: white;
+    margin-left: 20px;
+
+
+}
 .row1{
     font-family: "Poppins";
     font-size: 13px;
@@ -670,7 +692,7 @@
     display:flex;
     flex-direction: column;  
     padding-left: 40px;
-    padding-top: 25px;
+    padding-top: 60px;
   
 
 }
@@ -683,10 +705,11 @@
     margin-bottom: 20px;
 }
 .DETsBox{
-    height: 111px;
+    height: 80px;
     width: 200px;
     border-radius: 13px;
     background-color: #FDFDFF;
+ 
 }
 .DETtitle{
     font-family: Gilroy;
@@ -710,12 +733,12 @@
     text-align: left;
     color:#323C47;
     padding-left: 15px;
-    padding-top: 15px;
+    padding-top: 3px;
     padding-right: 15px;
 }
 .DETbBox{
-    height: 180px;
-    width: 600px;
+    height: 80px;
+    width: 695px;
     border-radius: 13px;
     background-color: #FDFDFF;
    
@@ -785,6 +808,9 @@
 }
 
 /*------------------------------ADDQUOTE----------------*/
+.AQcheckInput{
+    margin-right: 20px;
+}
 .title33{
     font-family: "Gilroy";
     font-size: 17px;
@@ -1175,4 +1201,103 @@
 .dashText{
     margin-left: 20px;
     
+}
+
+.asdasd{
+    background-image: url("../../assets/producerDetailsG11.png");
+    background-size:contain;
+    width: 650px;
+    height: 205px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/*---------------------producerEdit--------------------------*/
+
+.ProdEditContainer{
+    display: flex;  
+    flex-direction: row;
+    width: 100%;
+    height: max-content;
+}
+.ProdEditSubContainer{
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    min-width: 300px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:40px;
+    padding-top:20px
+}
+.ProdEditInput{
+    border-radius: 7px;
+    border-width: 0;
+    background-color: #F5F5F5;
+    height: 24px;
+    font-family: "Gilroy";
+    font-weight: 700;
+    font-size: 12px;
+    width:220px;
+    color:black;
+    padding-left: 7px;
+    margin-bottom: 10px;
+}
+.ProdEditTitle{
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 4px;
+
+}
+.ProdEditT{
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 20px;
+
+}
+.ProdEditSave{
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.08em;
+    height: 30px;
+    width: 112px;
+    left: 0px;
+    top: 0px;
+    border-width: 0 ;
+    border-radius: 10px;
+    background-color: #519BD0;
+    color: white;
+    position:static;
+    margin-left: 39%;
+    margin-top: 10%;
+
+}
+.ProdEditInputS{
+    border-radius: 7px;
+    border-width: 0;
+    background-color: #F5F5F5;
+    height: 24px;
+    font-family: "Gilroy";
+    font-weight: 700;
+    font-size: 12px;
+    width:230px;
+    color:black;
+    
+    margin-bottom: 10px;
 }

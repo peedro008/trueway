@@ -2,7 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./CSS/css.css"
-
+import ProducerDetailBox1 from "../assets/ProducerDetailBox1.png"
+import ProducerDetailBox2 from "../assets/ProducerDetailBox2.png"
+import ProducerDetailBox3 from "../assets/ProducerDetailBox3.png"
+import producerDetailsG11 from "../assets/producerDetailsG11.png"
+import producerDetailsG12 from "../assets/producerDetailsG12.png"
+import producerDetailsG2 from "../assets/producerDetailsG2.png"
+import { BiPencil } from "react-icons/bi";
 const ProducerDetails = (props) => {
     let Producer = props.location.aboutProps
     const [quotes, setQuotes] = useState([])
@@ -39,52 +45,30 @@ const ProducerDetails = (props) => {
 
 
             <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"75%", padding:"40px"   }}>
-            
-            <div className="producerInfoBox">
-                <p className="producerInfoTitle">Sold Quotes</p>
-                <div style={{flexDirection:"row", display:"flex", justifyContent:"space-between", maxWidth:"80%"}}>
-                <p className="producerInfoText">{quotes.filter(g=>g.bound=="Sold").length} Sold</p>
-                <p className="producerInfoText">{(quotes.filter(g=>g.bound=="Sold").length)/(quotes.filter(g=>g.bound!=="Need to Call").length) - (gquotes.filter(g=>g.bound=="Sold").length)/(gquotes.filter(g=>g.bound!=="Need to Call").length)} %</p>
-                </div>
-            </div>
-            
-            <div className="producerInfoBox">
-                <p className="producerInfoTitle">Sold Quotes</p>
-                <div style={{flexDirection:"row", display:"flex", justifyContent:"space-between", maxWidth:"80%"}}>
-                <p className="producerInfoText">{quotes.filter(g=>g.bound=="Sold").length} Sold</p>
-                <p className="producerInfoText">{(quotes.filter(g=>g.bound=="Sold").length)/(quotes.filter(g=>g.bound!=="Need to Call").length) - (gquotes.filter(g=>g.bound=="Sold").length)/(gquotes.filter(g=>g.bound!=="Need to Call").length)} %</p>
-                </div>
-            </div>
-            
-            <div className="producerInfoBox">
-                <p className="producerInfoTitle">Sold Quotes</p>
-                <div style={{flexDirection:"row", display:"flex", justifyContent:"space-between", maxWidth:"80%"}}>
-                <p className="producerInfoText">{quotes.filter(g=>g.bound=="Sold").length} Sold</p>
-                <p className="producerInfoText">{(quotes.filter(g=>g.bound=="Sold").length)/(quotes.filter(g=>g.bound!=="Need to Call").length) - (gquotes.filter(g=>g.bound=="Sold").length)/(gquotes.filter(g=>g.bound!=="Need to Call").length)} %</p>
-                </div>
-            </div>
+            <img src={ProducerDetailBox1} style={{width:"315px", height:"143px", paddingRight:"20px"}}/>
+            <img src={ProducerDetailBox2} style={{width:"315px", height:"143px", paddingRight:"20px"}}/>
+            <img src={ProducerDetailBox3} style={{width:"315px", height:"143px", paddingRight:"20px"}}/>
+          
         </div>
         <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"75%", paddingLeft:"40px"   }}>
-
-        <div className="producerGraphicBox">
-                <p className="producerInfoTitle">Sold Quotes</p>
-                <div style={{flexDirection:"row", display:"flex", justifyContent:"space-between", maxWidth:"80%"}}>
-                <p className="producerInfoText">{quotes.filter(g=>g.bound=="Sold").length} Sold</p>
-                <p className="producerInfoText">{(quotes.filter(g=>g.bound=="Sold").length)/(quotes.filter(g=>g.bound!=="Need to Call").length) - (gquotes.filter(g=>g.bound=="Sold").length)/(gquotes.filter(g=>g.bound!=="Need to Call").length)} %</p>
-                </div>
-            </div>
-
-            <div className="producerGraphicBox1">
-                <p className="producerInfoTitle">Sold Quotes</p>
-                <div style={{flexDirection:"row", display:"flex", justifyContent:"space-between", maxWidth:"80%"}}>
-                <p className="producerInfoText">{quotes.filter(g=>g.bound=="Sold").length} Sold</p>
-                <p className="producerInfoText">{(quotes.filter(g=>g.bound=="Sold").length)/(quotes.filter(g=>g.bound!=="Need to Call").length) - (gquotes.filter(g=>g.bound=="Sold").length)/(gquotes.filter(g=>g.bound!=="Need to Call").length)} %</p>
-                </div>
-            </div>
-
+        <div class="asdasd">
+             <img src={producerDetailsG12} style={{width:"84%", paddingLeft:"8px", paddingTop:"19px",}}/> 
+        </div>
+       <img src={producerDetailsG2} style={{width:"245px", height:"210px"}}/>
+       
 
         </div>
-
+                <NavLink to={{
+                            pathname:("/producers/edit"),
+                            props: Producer
+                        }}>
+                <button className="FITbutton">
+                    <div style={{display:"flex", flexDirection:"row"}}>
+                    <BiPencil size="20px" style={{display:"flex", color:"#2B4162", marginLeft:"8px", marginTop:"1px"}}/>
+                    <p className="FITbuttonText">Edit</p>
+                    </div>
+                </button>
+                </NavLink>
         </div>
     )
 }

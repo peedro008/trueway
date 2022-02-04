@@ -20,7 +20,7 @@ function QuoteDetails(props) {
     }, [id])
 
     return (
-        <div className='genericDiv'>
+        <div className='genericDiv1'>
             {!quote.length?<p>No quotes</p>:
                <div>
                <div className="genericHeader">
@@ -74,10 +74,54 @@ function QuoteDetails(props) {
                         <p className="DETtext">{quote[0].Producer.name}</p>
                     </div>
                  </div>
-                    <div className='DETbBox'>
+                    
+                    <div style={{marginTop:"25px", }}>
+                        <p  style={{ marginBottom:"25px"}}className="PAYtitle">Quote history</p>
+                      
+
+                        {quote[0].QuoteStatuses[0]&& 
+                        (quote[0].QuoteStatuses.reverse()).map(e=>{
+                            return(<div className='DETcontainer'>
+                               <div className='DETsBox'>
+                                <p className="DETtitle" >Status</p>
+                                <p className="DETtext"  style={{fontWeight:"700", color:e.Status=="Cancelled"?"red":e.Status=="Renew down"?"blue":e.Status=="Sold"?"green":"black" }}>{e.Status}</p>
+                            </div>
+                            <div className='DETsBox'>
+                                <p className="DETtitle">Modification date</p>
+                                <p className="DETtext">{e.date}</p>
+                            </div>
+                            <div className='DETbBox'>
+                                <p className="DETtitle">Notes</p>
+                                <p className="DETtext">{e.note}</p>
+                            </div>  </div>
+                            )
+                        })
+                           
+
+                            }
+
+
+                       
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    {/* <div className='DETbBox'>
                         <p className="DETtitle">Notes</p>
                         <p className="DETtext">{quote[0].notes}</p>
-                    </div>
+                    </div> */}
             </div>
         </div>}
         <NavLink to={{
