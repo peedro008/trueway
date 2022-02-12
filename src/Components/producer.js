@@ -36,7 +36,7 @@ const [quotes, setQuotes]= useState([])
 
     return(
         
-        <div className="genericDiv">
+        <div className="genericDiv1">
        
         
        <div className="genericHeader">
@@ -71,7 +71,7 @@ const [quotes, setQuotes]= useState([])
                producers.map((e)=>{
                    return (<tr >
                             
-                                <td scope="row">{<NavLink style={{ textDecoration: 'none', color:"black" }} to={{
+                                <td scope="row">{<NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }} to={{
                                 pathname:("/producers/details"),
                                 aboutProps:e
                                 }}>{e.name}</NavLink>}</td>

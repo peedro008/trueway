@@ -173,7 +173,7 @@ const AdminFilter =()=>{
                 <button className="FITbutton">
                     <div style={{display:"flex", flexDirection:"row"}}>
                     <BiPencil size="20px" style={{display:"flex", color:"#2B4162", marginLeft:"8px", marginTop:"1px"}}/>
-                    <p className="FITbuttonText">Ver Reporte</p>
+                    <p className="FITbuttonText">Submit</p>
                     </div>
                 </button>
                 </NavLink>

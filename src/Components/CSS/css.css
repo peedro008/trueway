@@ -565,7 +565,9 @@
     right:50px;
     top:90px;
     display:flex;
-    padding-top:6px
+    align-items: center;
+    padding-bottom: 1px;
+    width:100px;
 
 }
 .FITbuttonText{
@@ -1218,15 +1220,30 @@
 
 .ProdEditContainer{
     display: flex;  
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     height: max-content;
 }
 .ProdEditSubContainer{
     background-color: #FFFFFF;
     border-radius: 20px;
-    min-width: 300px;
-    min-height: 300px;
+    max-width: 300px;
+    height: 270px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:40px;
+    margin-top: -15px;
+    padding-top:20px
+}
+.ProdEditSubContainer1{
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    max-width: 80%;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1242,6 +1259,8 @@
     font-weight: 700;
     font-size: 12px;
     width:220px;
+    border-width: 0.1pt;
+    border-color: #F5F5F5;
     color:black;
     padding-left: 7px;
     margin-bottom: 10px;
@@ -1264,7 +1283,7 @@
     font-weight: 700;
     line-height: 22px;
     letter-spacing: 0em;
-    text-align: left;
+    margin-top: -5px;
     margin-bottom: 20px;
 
 }
@@ -1285,7 +1304,7 @@
     color: white;
     position:static;
     margin-left: 39%;
-    margin-top: 10%;
+    margin-top: 5%;
 
 }
 .ProdEditInputS{
@@ -1300,4 +1319,266 @@
     color:black;
     
     margin-bottom: 10px;
+}
+
+/*-------------MODAL---------*/
+.modal{
+    height: 242px;
+    width: 438px;
+    left: 741px;
+    top: 419px;
+    border-radius: 25px;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+.modalText{
+    font-family: Gilroy;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: 0.5px;
+    text-align: center;
+
+}
+.modalButton{
+    height: 29.72413635253906px;
+    width: 100px;
+    font-family: Gilroy;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    border-radius: 5px;
+    background-color: white;
+    border-width: 1px;
+    align-self: center;
+    margin-top: 20px;
+
+}
+
+
+/*----------------DEPOSIT-------------------*/
+.table2{
+    font-family: Gilroy;
+    font-weight: 100;
+    border-collapse:collapse;
+    
+    width: 43vw;
+    height: max-content;
+    margin-left: 40px;
+    
+    margin-right: 20px;
+    background:white;
+    border-radius:6px;
+    overflow:hidden;
+
+   
+ 
+    
+    
+  
+}
+
+.table2 td, .table2 th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    
+    
+}
+
+
+.table2 tr:nth-child(even){
+    background-color: #EDEDED;
+    
+
+}
+.table2 tr:hover {
+    background-color: #ddd;
+    
+}
+.table2 th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    background-color: white;
+    color: white;
+    
+  }
+  .REPsearch1{
+    width:5vw;
+    display:flex;
+    position: absolute;
+    left:51%;
+    top: 22%;
+   
+    border-radius: 20px;
+}
+.DEPinput{
+    height: 25px;
+    width: 110px;
+    margin-bottom: 10px;
+    background: #FBFBFB;
+    border: 0.678715px solid #D6E4EC;
+    box-sizing: border-box;
+    border-radius: 7px;
+    padding-left: 5px;
+    color:#6E6B7B; 
+}
+.DEPinput::placeholder{
+    padding-left: 5px;
+}
+.DEPbils{
+    font-family: Montserrat;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #6E6B7B;
+}
+.bilsContainer{
+    margin-left: 50px;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    max-width: 450px;
+    width: 450px;
+    height: max-content;
+    border-radius: 6px;
+    padding: 25px 35px 20px 35px;
+    justify-content: space-between;
+}
+.DEPcont{
+    display: flex;
+    margin-top: 50px;
+   
+}
+.DEPtotal{
+
+    height: 35px;
+max-width: 358px;
+width: 198px;
+display:flex;
+align-items:"center";
+justify-content: center;
+align-self: center;
+justify-self: flex-end;
+border-radius: 0px;
+margin-top: 65%;
+    background-color: #E3E3E3;
+
+}
+
+.DEPboxy{
+    background: #FBFBFB;
+/* Dark / Variant * 200 */
+height: 25px;
+    width: 110px;
+border: 0.678715px solid #D6E4EC;
+box-sizing: border-box;
+border-radius: 7px;
+justify-content: center;
+
+padding-top:4px;
+display:flex;
+}
+.DEPtotalT{
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: center;
+    align-self: center;
+
+}
+
+/*------------DAILY-----------------*/
+.table2{
+    font-family: Gilroy;
+    font-weight: 100;
+    border-collapse:collapse;
+    min-width: 72vw;
+    width: max-content;
+    height: max-content;
+    margin-left: 40px;
+    margin-top: 25px;
+    margin-right: 20px;
+    background:white;
+    border-radius:6px;
+    overflow:hidden;
+
+   
+ 
+    
+    
+  
+}
+
+.table2 td, .table2 th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    
+    
+}
+
+
+.table2 tr:nth-child(even){
+    background-color: #EDEDED;
+    
+
+}
+.table2 tr:hover {
+    background-color: #ddd;
+    
+}
+.table2 th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    background-color: white;
+    color: white;
+    
+  }
+  .DAIsearch{
+    width:5vw;
+    align-self: flex-end;
+    justify-content: flex-end;
+    padding-left: 800px;
+    border-radius: 20px;
+}
+.DAItotalCont{
+    display: flex;
+    flex-direction: row;
+    padding-left: 40px;
+    padding-top: 20px;
+    width: 50vw;
+    
+    justify-content: space-between;
+}
+.DAItotal{
+    width: max-content;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 32px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(204, 203, 203);
+}
+.DEPtotalT{
+    font-family: Montserrat;
+font-size: 15px;
+font-style: normal;
+font-weight: 700;
+line-height: 22px;
+letter-spacing: 0em;
+text-align: center;
+
 }

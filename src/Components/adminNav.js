@@ -21,8 +21,10 @@ import { logout } from '../redux/actions';
 
 function AdminNav() {
   const dispatch = useDispatch()
-  const Name= useSelector(state=>state.userName)
+
+   const Name= useSelector(state=>state.userName)
   const Role= useSelector(state=>state.userRole)
+
   
   const logOut=()=>{
     dispatch(logout())
@@ -33,7 +35,7 @@ function AdminNav() {
   
    <div style={{paddingRight:"40px", display:"flex"}}>
         <div className="circle">
-        <p className="initial">{Name.substring(0,1)}{Name.substring(0,1)}</p>
+        <p className="initial">{Name&&Name.substring(0,1)}</p>
         </div>
     <div className='ANusercontainer'>
       

@@ -44,7 +44,7 @@ const PayReport = () => {
         /></div>
 
                 </div>
-           <table class="table1">
+           <table class="table2">
       
         <tbody>
             <tr>

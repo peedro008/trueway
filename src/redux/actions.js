@@ -6,6 +6,7 @@ export const USER_ROLE = "USER_ROLE"
 export const USER_NAME = "USER_NAME"
 export const USER_ID = "USER_ID"
 export const LOGOUT = "LOGOUT"
+export const ADD_PAY = "ADD_PAY"
 
 // LOGIN ACTION
 
@@ -44,6 +45,12 @@ export function userName(UserName){
     return{
     type: USER_ID,
     payload: UserId
+    }
+  }
+  export function addPay(payment){
+    return{
+    type: ADD_PAY,
+    payload: payment
     }
   }
 

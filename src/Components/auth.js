@@ -7,6 +7,10 @@ import { userRole } from '../redux/actions';
 import { userName } from '../redux/actions';
 import { user } from '../redux/actions';
 import { userId } from '../redux/actions';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+import ERRORR from "../assets/ERRORR.png"
+import { NavLink } from "react-router-dom";
 
 
 const Auth = ()=>{
@@ -18,7 +22,10 @@ const Auth = ()=>{
 
     const [isError, setIsError] = useState(false);
     const [message, setMessage] = useState('');
-    
+    const [locations, setLocations] = useState([])
+    const [open, setOpen] = useState(false);
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
   
 
     const onSubmitHandler = () => {
@@ -43,6 +50,7 @@ const Auth = ()=>{
                 if (res.status !== 200) {
                     setIsError(true);
                     setMessage(jsonRes.message);
+                    onOpenModal()
                 } else {
                    
                     setIsError(false);
@@ -56,11 +64,13 @@ const Auth = ()=>{
                 }
             } catch (err) {
                 console.log(err);
+                onOpenModal()
             };
         
         })
         .catch(err => {
             console.log(err);
+            onOpenModal()
         });
 
        
@@ -97,13 +107,24 @@ const Auth = ()=>{
             
            </div>
             </div>
-          <h1>{message}</h1>
+          
             
             </div>
         </div>
         </div>
 
+        <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+    <div className="modal" style={{minWidth:"250px"}}>
+        <img src={ERRORR} style={{width:"55px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
+        
+        <p className="modalText">{message}</p>
+       
+       
+        <button  className="modalButton" onClick={onCloseModal}>Continue</button>
       
+        
+        </div>
+      </Modal>
     </div>
     )
 }

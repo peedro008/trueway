@@ -1,11 +1,21 @@
+
 import axios from "axios";
 
 import React, { useEffect, useState } from 'react';
 import {  BiMessageSquareAdd } from "react-icons/bi";
+import { useSelector } from "react-redux";
 import Select from 'react-select'
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+import Icon from "../assets/Icon.png"
+import { NavLink } from "react-router-dom";
+
 
 const AddQuote = ()=>{
-
+    const [open, setOpen] = useState(false);
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
+    const userId = useSelector(state=> state.UserId)
     const [newClient, setNewClient] = useState(false)
     const [clients, setClients] = useState([])
     const [inputs, setInputs] = useState({});
@@ -14,11 +24,12 @@ const AddQuote = ()=>{
     const [categories, setCategories]= useState([])
     const [locations, setLocations] = useState([])
     const [dealers, setDealers] = useState([])
+   
     useEffect(()=>{
         axios.get(`http://localhost:4000/getDealer`)
             .then(function(response){
                 setDealers(response.data)
-                
+                setInputs({...inputs, ProducerId:1})
             })
             .catch(error=>{
               console.log(error)  
@@ -143,7 +154,7 @@ const AddQuote = ()=>{
     }
 
     const onSubmitHandler = () => {
-     
+ 
         const payload = {
            inputs
          
@@ -158,31 +169,32 @@ const AddQuote = ()=>{
             
         })
         .then(async res => { 
-            console.log(inputs )
-                try {
-                const jsonRes = await res.json();
+            
+            try {
+            const jsonRes = await res.json();
+            
+            if (res.status !== 200) {
+                console.log("error")
+            } else {
+               
+               console.log(jsonRes)
+              
+              
                 
-                if (res.status !== 200) {
-                    console.log("error")
-                } else {
-                   
-                   console.log(jsonRes)
-                  
-                  
-                    
-                }
-            } catch (err) {
-                console.log(err);
-            };
-        
-        })
+            }
+        } catch (err) {
+            console.log(err);
+        };
+    onOpenModal()
+    })
+      
         .catch(err => {
             console.log(err);
         });
          reload()
-         myFormRef.reset()
+        
     };
-    let myFormRef
+    
 const handleNewClient = () =>{
     setNewClient(!newClient)
 }
@@ -209,7 +221,7 @@ const handleNewClient = () =>{
                 <BiMessageSquareAdd onClick={()=>handleNewClient()} size="20" color="#28C76F" style={{ marginLeft:"60px"}}/>
                 </div>
                 {!newClient?
-                <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={clients.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, clientId:e.value})}}/>
+                <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={clients.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, ClientId:e.value})}}/>
                 :
                 <input className="AQinput" placeholder="Client name" value={inputs.clientName} onChange={(event)=>{setInputs({...inputs, clientName:event.target.value})}}/>
                 }
@@ -246,17 +258,17 @@ const handleNewClient = () =>{
             <div className="AQrowContainer">
             <div className="AQinputContainer">
                     <p className="AQinputName">Category</p>
-                    <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={categories.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, clientId:e.value})}}/>
+                    <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={categories.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, CategoryId:e.value})}}/>
                     
                 </div>
                 <div className="AQinputContainer">
                     <p className="AQinputName">Company</p>
-                    <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={companies.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, clientId:e.value})}}/>
+                    <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={companies.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, CompanyId:e.value})}}/>
                 </div>
                 <div className="AQinputContainer">
                     <p className="AQinputName">Office</p>
                     
-                    <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={locations.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, clientId:e.value})}}/>
+                    <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={locations.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, LocationId:e.value})}}/>
                 </div>
                 <div className="AQinputContainer" >
                     <p className="AQinputName">Dealer</p>
@@ -315,7 +327,7 @@ const handleNewClient = () =>{
                     <p className="AQinputName">PIP</p>
                     <div className="AQyesNoContainer">
                         <div>
-                            <input   type="checkbox" checked={inputs.PIP} value={inputs.PIP} key="PIP" name="PIP" onChange = {(event) =>setInputs({...inputs,PIP:!inputs.PIP})}/>
+                            <input   type="checkbox" checked={inputs.PIP} value={inputs.PIP} key="PIP" name="PIP" onChange = {(event) =>setInputs({...inputs,PIP:!inputs.PIP}),(event) =>setInputs({...inputs,PIPvalue:10})}/>
                             {inputs.PIP?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>}
                         </div>
                         {inputs.PIP&&
@@ -341,11 +353,21 @@ const handleNewClient = () =>{
        
               
             <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
-                <button className="PAYbutton" ><p className="PAYbuttonText">Add Quote</p></button>
+                <button onClick={onSubmitHandler} className="PAYbutton" ><p className="PAYbuttonText">Add Quote</p></button>
             </div>     
               
-            
-            
+            <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+    <div className="modal">
+        <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
+        
+        <p className="modalText">Quote added successfully</p>
+       
+       
+        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/"}>Continue</NavLink></button>
+      
+        
+        </div>
+      </Modal>
     </div>
            
     )

@@ -1,6 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { BiPencil } from 'react-icons/bi'
 import { NavLink } from 'react-router-dom'
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+import Icon from "../assets/Icon.png"
 
 function ModifyQuote(props) {
     const id = props.location.aboutProps
@@ -11,12 +15,16 @@ function ModifyQuote(props) {
     const [notes, setNotes] = useState("")
     const [monthly, setMonthly] = useState("")
     const [down, setDown] = useState("")
+    const [inputs, setInputs] = useState([])
+    const [open, setOpen] = useState(false);
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
     useEffect(() => {
         axios.get(`http://localhost:4000/idquotes`,{ params: { id: id } })
         .then(function(response){
             setQuote(response.data)
             
-
+            setInputs({...inputs, QuoteId: id})
             
         })
         .catch(error=>{
@@ -26,21 +34,61 @@ function ModifyQuote(props) {
     
     const checkRenew = () => {
         setBound(false)
+        setInputs({...inputs, Status:"Renew down"})
         setCancel(false)
         setRenew(!renew)
     }
     const checkBound = () => {
         setRenew(false)
+        setInputs({...inputs, Status:"Sold"})
         setCancel(false)
         setBound(!bound)
     }
   
     const checkCancel = () => {
         setBound(false)
+        setInputs({...inputs, Status:"Cancelled"})
         setRenew(false)
         setCancel(!cancel)
     }
-  
+    const submit = () =>{
+        inputs&&
+      
+        
+        console.log(inputs)
+        fetch(`http://localhost:4000/modifyQuote`, {
+            
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+            body: JSON.stringify(inputs)
+            
+        })
+        .then(async res => { 
+            
+                try {
+                const jsonRes = await res.json();
+                
+                if (res.status !== 200) {
+                    console.log("error")
+                } else {
+                   
+                   console.log(jsonRes)
+                  
+                   
+                    
+                }
+            } catch (err) {
+                console.log(err);
+            };
+           
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        onOpenModal()
+    }
   
   
     return (
@@ -106,17 +154,17 @@ function ModifyQuote(props) {
                    <div className="MOBmainInput">
                         <div className="MOBinputDiv"> 
                             <p className="MOBinputText">Down amount</p>
-                            <input onChange={(e)=>setDown(e.target.value)} placeholder="down" className="MOBinput"></input>
+                            <input onChange={(e)=>{setInputs({...inputs, down:e.target.value})}} placeholder="down" className="MOBinput"></input>
                         </div>
                         <div className="MOBinputDiv"> 
                             <p className="MOBinputText">Monthly amount</p>
-                            <input onChange={(e)=>setMonthly(e.target.value)} placeholder="monthly" className="MOBinput"></input>
+                            <input onChange={(e)=>{setInputs({...inputs, monthly:e.target.value})}} placeholder="monthly" className="MOBinput"></input>
                         </div>
                     </div></div>}
                     {(renew||bound||cancel)&&
                     <div className="MOBinputDiv">
                          <p className="MOBinputText">Notes</p>
-                         <textarea onChange={(e)=>setNotes(e.target.value)} className='MOBtexta'/>
+                         <textarea onChange={(e)=>{setInputs({...inputs, note:e.target.value})}} className='MOBtexta'/>
                     </div>}
                 </div>
             
@@ -133,7 +181,24 @@ function ModifyQuote(props) {
             </div>
         
         </div>
-            
+        <button className="FITbutton" onClick={submit}>
+                    <div style={{display:"flex", flexDirection:"row"}}>
+                    <BiPencil size="20px" style={{display:"flex", color:"#2B4162", marginLeft:"8px", marginTop:"1px"}}/>
+                    <p className="FITbuttonText">Submit</p>
+                    </div>
+                </button>
+                <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+    <div className="modal">
+        <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
+        
+        <p className="modalText">Quote modified successfully</p>
+       
+       
+        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/"}>Continue</NavLink></button>
+      
+        
+        </div>
+      </Modal>
         </div>
     )
 }

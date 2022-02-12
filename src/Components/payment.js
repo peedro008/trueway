@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./CSS/css.css"
-
+import { addPay } from '../redux/actions';
 import { BiDownload, BiMessageSquareAdd } from "react-icons/bi";
 import Select from 'react-select'
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+import Icon from "../assets/Icon.png"
+import { NavLink } from "react-router-dom";
+ 
 
- function Payment(){
+function Payment(){
+    const dispatch = useDispatch()
+    const [open, setOpen] = useState(false);
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
     const [inputs, setinputs]= useState({})
     const [payment, setPayment]= useState({creditCardFee:0})
     const [locations, setLocations] = useState([])
@@ -14,6 +23,7 @@ import Select from 'react-select'
     const [box, setBox] = useState({pay1:0,pay5:0,pay10:0,pay20:0,pay50:0,pay100:0})
     const [clients, setClients] = useState([])
     const [newClient, setNewClient] = useState(false)
+    
     const customStyles = {
         control: base => ({
           ...base,
@@ -77,17 +87,18 @@ import Select from 'react-select'
     const refresh =()=>{
        !newClient?
         setPayment({
-            location:"",
-            method:"",
-            type:"",
+            LocationId:null,
+            method:null,
+            type:null,
             amount:"",
             clientId:null,
         }):
         setPayment({
-            location:"",
-            method:"",
-            type:"",
+            LocationId:null,
+            method:null,
+            type:null,
             amount:"",
+          
             Tel: "",
             clientEmail:"",
             clientName:""
@@ -99,47 +110,97 @@ import Select from 'react-select'
 
     }
     const submitPayment =()=>{
-        if(newClient==false){
-        if(payment.amount&&payment.clientId&&payment.clientId!==undefined&&payment.method&&payment.type){
-        setPayment({...payment, total: parseInt(payment.creditCardFee)+parseInt(payment.amount)})        
-         console.log(parseInt(payment.creditCardFee+parseInt(payment.amount))) 
-            fetch(`http://localhost:4000/addPayment`, {
+       
+        if(payment.method=="Cash"){
             
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                },
-            body: JSON.stringify(payment),
-            
-        })
-        refresh()  
-        }
-        else{
-            alert("you must complete all the fields")
-        }
-        }
-        else{
-            if(payment.clientName&&payment.clientEmail&&payment.Tel&&payment.amount&&payment.method&&payment.type){
+            if(newClient==false){
+                if(payment.amount&&payment.clientId&&payment.clientId!==undefined&&payment.method&&payment.type){
+                setPayment({...payment, total: parseInt(payment.creditCardFee)+parseInt(payment.amount)})        
                 
-          
-                fetch(`http://localhost:4000/addClientPayment`, {
-                
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    },
-                body: JSON.stringify(payment),
-                
-            })
-            refresh()  
-            }
-            else{
-                alert("you must complete all the fields")
-            }
-
-
-        }
+                    fetch(`http://localhost:4000/addPayment`, {
+                    
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        },
+                    body: JSON.stringify(payment),
+                    
+                })
+                .then(response => response.json())
+                .then(data => dispatch(addPay(data)));
+               
+                onOpenModal() 
+                }
+                else{
+                    alert("you must complete all the fields")
+                }
+                }
+                else{
+                    if(payment.clientName&&payment.clientEmail&&payment.Tel&&payment.amount&&payment.method&&payment.type){
+                        
+                  
+                        fetch(`http://localhost:4000/addClientPayment`, {
+                        
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            },
+                        body: JSON.stringify(payment),
+                        
+                    })
+                   onOpenModal() 
+                    }
+                    else{
+                        alert("you must complete all the fields")
+                    }
         
+                    
+                }
+                
+        }
+        else{
+            if(newClient==false){
+                if(payment.amount&&payment.clientId&&payment.clientId!==undefined&&payment.method&&payment.type){
+                setPayment({...payment, total: parseInt(payment.creditCardFee)+parseInt(payment.amount)})        
+                 console.log(parseInt(payment.creditCardFee+parseInt(payment.amount))) 
+                    fetch(`http://localhost:4000/addPayment`, {
+                    
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        },
+                    body: JSON.stringify(payment),
+                    
+                })
+                onOpenModal() 
+                }
+                else{
+                    alert("you must complete all the fields")
+                }
+                }
+                else{
+                    if(payment.clientName&&payment.clientEmail&&payment.Tel&&payment.amount&&payment.method&&payment.type){
+                        
+                  
+                        fetch(`http://localhost:4000/addClientPayment`, {
+                        
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            },
+                        body: JSON.stringify(payment),
+                        
+                    })
+                   onOpenModal() 
+                   }
+                    else{
+                        alert("you must complete all the fields")
+                    }
+        
+                    
+                }
+        }
+       
         
     }
 
@@ -212,7 +273,7 @@ import Select from 'react-select'
 
 
                 <div className="PAYInputCont">
-                <p  className="PAYtitle">Payment Status</p>
+                <p  className="PAYtitle">Payment type</p>
                 <Select styles={customStyles} options={[{value:"Monthly Payment", label:"Monthly Payment"},
                                  {value:"Down Payment", label:"Down Payment"},
                                  {value:"Endorsement", label:"Endorsement"},
@@ -244,7 +305,18 @@ import Select from 'react-select'
 
         
            
+            <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+    <div className="modal">
+        <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
         
+        <p className="modalText">Payment added successfully</p>
+       
+       
+        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/payments"}>Continue</NavLink></button>
+      
+        
+        </div>
+      </Modal>
         
            
             
@@ -306,7 +378,7 @@ import Select from 'react-select'
 
         
       <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
-                <button  onClick={()=>submitPayment()} className="PAYbutton" ><p className="PAYbuttonText">Add Quote</p></button>
+                <button  onClick={()=>submitPayment()} className="PAYbutton" ><p className="PAYbuttonText">Add payment</p></button>
             </div>     
               
 

@@ -1,13 +1,16 @@
 import { 
-    EXAMPLE, USER, USER_ROLE,USER_NAME, USER_ID, LOGOUT
+    EXAMPLE, USER, USER_ROLE,USER_NAME, USER_ID, LOGOUT, ADD_PAY
      } from './actions'
   
   const initialState = {
+ 
+  TotalDeposit:0,
   example:0,
   User:null,
   userRole:null,
   UserId:null,
-  userName:null
+  userName:null,
+  
   
   }
   
@@ -46,6 +49,12 @@ import {
                   userRole:null,
                 
                 }
+
+            case ADD_PAY:
+              return{
+                ...state,
+                TotalDeposit:state.TotalDeposit+parseInt(action.payload.amount) 
+              }
                   
        default: return state  
     }

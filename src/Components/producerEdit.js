@@ -52,14 +52,16 @@ const ProducerEdit = (props) => {
       };
       
     return(
-    <div className="genericDiv">
+    <div className="genericDiv1">
         <div className="genericHeader">
             <p className="genericTitle">Edit producer</p>
         </div>
         
         <div className="ProdEditContainer">
-            <div className="ProdEditSubContainer">
-                <p style={{width:"78%", textAlign:"left", marginLeft:"5px"}} className="ProdEditT">Profile</p>
+            <div className="ProdEditSubContainer1">
+               
+                <p style={{width:"100%", textAlign:"left"}} className="ProdEditT">Profile</p>
+                <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-between"}}>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle">Full name</p>
                     <input className="ProdEditInput" placeholder={Producer.name}/>
@@ -76,6 +78,7 @@ const ProducerEdit = (props) => {
                     <p className="ProdEditTitle">Location</p>
                     <Select  styles={customStyles}    placeholder="Name" className="ProdEditInputS"  options={locations.map(e=>({value:e.id,label:e.name}))}/>
                 </div>
+                </div>
 
 
             </div>
@@ -89,11 +92,11 @@ const ProducerEdit = (props) => {
                 </div>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle">Password</p>
-                    <input className="ProdEditInput"/>
+                    <input placeholder="*******" className="ProdEditInput"/>
                 </div>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle">Repeat password</p>
-                    <input className="ProdEditInput"/>
+                    <input placeholder="*******" className="ProdEditInput"/>
                 </div>
                <button className="ProdEditSave">Save</button>
 

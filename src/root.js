@@ -25,7 +25,7 @@ if(state===null){
   
   }
 
- if (state==="Admin"){
+//  if (state==="Admin"){
   return (
 
     
@@ -35,20 +35,15 @@ if(state===null){
   
   )
 
-}
+// }
 
-if (state==="Producer"){
-  return (
+// if (state==="Producer"){
+//   return (
 
-    <Router>
-    
-     
-      <Route exact="true" path="/" component={producersRouter}  />
+//     <AdminRouter/>
+//   )
 
-    </Router>
-  )
-
-}
+// }
 
 
 }
