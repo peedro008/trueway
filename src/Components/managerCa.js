@@ -6,20 +6,37 @@ import { Modal } from 'react-responsive-modal';
 import Icon from "../assets/Icon.png"
 import { NavLink } from "react-router-dom";
 import Isologo_background from  "../assets/Isologo_background.png"
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+
+const schema = yup.object({
+    name: yup.string().required(),
+    
+
+}).required();
+  
+
 const ManagerCa=()=>{
     const [inputs, setinputs]= useState({})
     const [open, setOpen] = useState(false);
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
-    const onSubmitHandler = () => {
-        inputs&&
+    const { register, handleSubmit, formState:{ errors } } = useForm({
+        resolver: yupResolver(schema)
+      });
+
+
+    const onSubmit = (data) => {
+        data&&
         fetch(`http://localhost:4000/addCategories`, {
             
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 },
-            body: JSON.stringify(inputs)
+            body: JSON.stringify(data)
             
         })
         .then(async res => { 
@@ -50,21 +67,22 @@ const ManagerCa=()=>{
         <div className="genericHeader">
            <p className="genericTitle">Add Category</p>
         </div>
-        
+        <form onSubmit={handleSubmit(onSubmit)}>
         <div className="managerInputsContainer">
             <div className="managerInputsubContainer">
                 <div className="inputDiv"> 
-                    <p className="PAYtitle">Category Name</p>
-                    <input placeholder="Category Name" onChange={(e)=>{setinputs({...inputs, name:e.target.value})}} className="PAYsub-title"></input>
+                    <p   className="PAYtitle">Category Name</p>
+                    <input {...register("name")} placeholder="Category Name" onChange={(e)=>{setinputs({...inputs, name:e.target.value})}} className="PAYsub-title"></input>
+                    <p className="FORMerror">{errors.name?.message}</p>
                 </div>
             </div>
         </div>
     
-
+        </form>
 
 
         <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
-            <button onClick={onSubmitHandler} className="PAYbutton" ><p className="PAYbuttonText">Add Category</p></button>
+            <button onClick={handleSubmit(onSubmit)} className="PAYbutton" ><p className="PAYbuttonText">Add Category</p></button>
         </div>
         <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
     <div className="modal">

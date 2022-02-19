@@ -12,6 +12,7 @@ function ModifyQuote(props) {
     const [renew, setRenew] = useState(false)
     const [cancel, setCancel] = useState(false)
     const [bound, setBound] = useState(false)
+    const [reInstall, setReInstall] = useState(false)
     const [notes, setNotes] = useState("")
     const [monthly, setMonthly] = useState("")
     const [down, setDown] = useState("")
@@ -36,12 +37,21 @@ function ModifyQuote(props) {
         setBound(false)
         setInputs({...inputs, Status:"Renew down"})
         setCancel(false)
+        setReInstall(false)
         setRenew(!renew)
+    }
+    const checkReinstall = () => {
+        setBound(false)
+        setInputs({...inputs, Status:"Re-install"})
+        setCancel(false)
+        setRenew(false)
+        setReInstall(!false)
     }
     const checkBound = () => {
         setRenew(false)
         setInputs({...inputs, Status:"Sold"})
         setCancel(false)
+        setReInstall(false)
         setBound(!bound)
     }
   
@@ -49,6 +59,7 @@ function ModifyQuote(props) {
         setBound(false)
         setInputs({...inputs, Status:"Cancelled"})
         setRenew(false)
+        setReInstall(false)
         setCancel(!cancel)
     }
     const submit = () =>{
@@ -128,8 +139,8 @@ function ModifyQuote(props) {
                             <td className="row1" scope="row">{quote[0].down}</td>
                             <td className="row1" scope="row">{quote[0].date}</td>
                             <td className="row1" scope="row">{parseInt(quote[0].time.substring(11,13))-5}{quote[0].time.substring(16,19)}</td>
-                            <td className="row1" scope="row">{quote[0].Producer.name}</td>
-                            <td className="row1" scope="row">{quote[0].Producer.name}</td>
+                            <td className="row1" scope="row">{quote[0].User.name}</td>
+                            <td className="row1" scope="row">{quote[0].User.name}</td>
                             
                            
                            
@@ -146,31 +157,22 @@ function ModifyQuote(props) {
         </tbody>
         </table>}
 
-        <div className="MOBbox">
-            <div className='MOBsBox'>
+        <div className="MOBbox"  >
+            <div className='MOBsBox' style={{  width:"max-content"}}>
+              <div style={{display: "flex", flexDirection:"row"}}>
+              <div className='MOBsBox'>
                  <p className='MOBtitle' style={{color:"#28C76F"}}>Renew down</p>
                  <input class="checkbox" style={{display:"flex", marginRight:"15px",marginTop:"15px", }} type="checkbox" key="Renew" name="Renew" checked={renew} onChange={checkRenew}/>
-                {(renew||bound)&&<div> 
-                   <div className="MOBmainInput">
-                        <div className="MOBinputDiv"> 
-                            <p className="MOBinputText">Down amount</p>
-                            <input onChange={(e)=>{setInputs({...inputs, down:e.target.value})}} placeholder="down" className="MOBinput"></input>
-                        </div>
-                        <div className="MOBinputDiv"> 
-                            <p className="MOBinputText">Monthly amount</p>
-                            <input onChange={(e)=>{setInputs({...inputs, monthly:e.target.value})}} placeholder="monthly" className="MOBinput"></input>
-                        </div>
-                    </div></div>}
-                    {(renew||bound||cancel)&&
-                    <div className="MOBinputDiv">
-                         <p className="MOBinputText">Notes</p>
-                         <textarea onChange={(e)=>{setInputs({...inputs, note:e.target.value})}} className='MOBtexta'/>
-                    </div>}
-                </div>
-            
-            <div className='MOBsBox'>
+                 </div>
+                 
+                 <div className='MOBsBox'>
                  <p className='MOBtitle' style={{color:"#28C76F"}}>Bound</p>
                  <input class="checkbox" style={{display:"flex", marginRight:"15px",marginTop:"15px", }} type="checkbox" key="Bound" name="Bound" checked={bound} onChange={checkBound}/>
+               
+            </div>
+            <div className='MOBsBox'>
+                 <p className='MOBtitle' style={{color:"#28C76F"}}>Re-install</p>
+                 <input class="checkbox" style={{display:"flex", marginRight:"15px",marginTop:"15px", }} type="checkbox" key="Bound" name="Bound" checked={reInstall} onChange={checkReinstall}/>
                
             </div>
             <div className='MOBsBox'>
@@ -179,6 +181,54 @@ function ModifyQuote(props) {
                 
               
             </div>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            
+                {(renew||bound||reInstall)&&<div style={{width:"max-content"}} > 
+                   <div className="MOBmainInput"  >
+                        <div className="MOBinputDiv" > 
+                            <p className="MOBinputText">Down amount</p>
+                            <input onChange={(e)=>{setInputs({...inputs, down:e.target.value})}} placeholder="down" className="MOBinput"></input>
+                        </div>
+                        <div className="MOBinputDiv" > 
+                            <p  className="MOBinputText">Monthly amount</p>
+                            <input  onChange={(e)=>{setInputs({...inputs, monthly:e.target.value})}} placeholder="monthly" className="MOBinput"></input>
+                        </div>
+                    </div></div>}
+                    {(renew||bound||cancel||reInstall)&&
+                    <div className="MOBinputDiv">
+                         <p className="MOBinputText">Notes</p>
+                         <textarea onChange={(e)=>{setInputs({...inputs, note:e.target.value})}} className='MOBtexta'/>
+                    </div>}
+                </div>
+            
+
+
+
+
+
+            {/* <div className='MOBsBox'>
+                 <p className='MOBtitle' style={{color:"#28C76F"}}>Bound</p>
+                 <input class="checkbox" style={{display:"flex", marginRight:"15px",marginTop:"15px", }} type="checkbox" key="Bound" name="Bound" checked={bound} onChange={checkBound}/>
+               
+            </div>
+            <div className='MOBsBox'>
+                 <p className='MOBtitle' style={{color:"#28C76F"}}>Re-install</p>
+                 <input class="checkbox" style={{display:"flex", marginRight:"15px",marginTop:"15px", }} type="checkbox" key="Bound" name="Bound" checked={reInstall} onChange={checkReinstall}/>
+               
+            </div>
+            <div className='MOBsBox'>
+                 <p className='MOBtitle' style={{color:"#FF4C61"}}>Cancelation</p>
+                 <input class="checkbox" style={{display:"flex", marginRight:"15px",marginTop:"15px", }} type="checkbox" key="Cancelation" name="Cancelation" checked={cancel} onChange={checkCancel}/>
+                
+              
+            </div> */}
         
         </div>
         <button className="FITbutton" onClick={submit}>

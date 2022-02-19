@@ -6,14 +6,33 @@ import { Modal } from 'react-responsive-modal';
 import Icon from "../assets/Icon.png"
 import Isologo_background from  "../assets/Isologo_background.png"
 import { NavLink } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+const schema = yup.object({
+    name: yup.string().required(),
+    email: yup.string().required().email(),
+    phone: yup.number().positive().integer().required(),
+    address: yup.string().required(),
+    
+
+}).required();
+  
+
+
+
 const ManagerL=()=>{
-    const [locations, setLocations] = useState([])
+
     const [open, setOpen] = useState(false);
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
-    const [inputs, setinputs]= useState({})
-    const onSubmitHandler = () => {
-        inputs&&
+
+    const { register, handleSubmit, formState:{ errors } } = useForm({
+        resolver: yupResolver(schema)
+      });
+    const onSubmit = (data) => {
+        data&&
       
         
         fetch(`http://localhost:4000/addLocation`, {
@@ -22,7 +41,7 @@ const ManagerL=()=>{
             headers: {
                 'Content-Type': 'application/json',
                 },
-            body: JSON.stringify(inputs)
+            body: JSON.stringify(data)
             
         })
         .then(async res => { 
@@ -61,19 +80,28 @@ const ManagerL=()=>{
             <div className="managerInputsubContainer">
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Name</p>
-                    <input placeholder="Name" onChange={(e)=>{setinputs({...inputs, name:e.target.value})}} className="PAYsub-title"></input>
+                    <input {...register("name")} placeholder="Name"  className="PAYsub-title"></input>
+                    <p className="FORMerror">{errors.name?.message}</p>
                 </div>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Email</p>
-                    <input placeholder="Email" onChange={(e)=>{setinputs({...inputs, email:e.target.value})}} className="PAYsub-title"></input>
+                    <input {...register("email",{
+                        required: 'Email is required',
+                        pattern: {
+                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: 'Please enter a valid email',
+                        }})}  placeholder="Email" className="PAYsub-title"></input>
+                    <p className="FORMerror">{errors.email?.message}</p>
                 </div>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Phone</p>
-                    <input placeholder="Phone" onChange={(e)=>{setinputs({...inputs, TEL:e.target.value})}} className="PAYsub-title"></input>
+                    <input placeholder="Phone"{...register("phone")}  className="PAYsub-title"></input>
+                    <p className="FORMerror">{errors.phone?.message.substring(0,25)}</p>
                 </div>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Address</p>
-                    <input placeholder="Address" onChange={(e)=>{setinputs({...inputs, address:e.target.value})}} className="PAYsub-title"></input>
+                    <input placeholder="Address"  {...register("address")} className="PAYsub-title"></input>
+                    <p className="FORMerror">{errors.address?.message}</p>
                 </div>
                 
 
@@ -84,7 +112,7 @@ const ManagerL=()=>{
 
 
         <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
-            <button onClick={onSubmitHandler} className="PAYbutton" ><p className="PAYbuttonText">Add Location</p></button>
+            <button onClick={handleSubmit(onSubmit)} className="PAYbutton" ><p className="PAYbuttonText">Add Location</p></button>
         </div>
         <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
     <div className="modal">

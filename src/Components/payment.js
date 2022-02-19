@@ -9,21 +9,47 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Icon from "../assets/Icon.png"
 import { NavLink } from "react-router-dom";
- 
+import MyDocument from "./PDF/prueba";
+import ReactPDF, { PDFDownloadLink, PDFViewer} from '@react-pdf/renderer';
+import { useForm, Controller,setVa } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+const schema = yup.object({
+    name:yup.string().optional().min(6),
+    email:yup.string().email().optional().min(6),
+    phone:yup.number().optional(),
+    ClientId: yup.number().optional(),
+    amount: yup.number().positive().integer().required(),
+    type: yup.string().required(),
+    method: yup.string().required(),
+    creditCardFee: yup.number().optional(),
+    LocationId: yup.number().positive().integer().required(),
+    UserId: yup.number().required()
+    
+    
+
+}).required();
 
 function Payment(){
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
     const onOpenModal = () => setOpen(true);
-    const onCloseModal = () => setOpen(false);
-    const [inputs, setinputs]= useState({})
+    const [method, setMethod] = useState("");
+    const [ERR, setERR] = useState({ ClientId: false})
     const [payment, setPayment]= useState({creditCardFee:0})
     const [locations, setLocations] = useState([])
     const userId = useSelector(state=> state.UserId)
-    const [box, setBox] = useState({pay1:0,pay5:0,pay10:0,pay20:0,pay50:0,pay100:0})
     const [clients, setClients] = useState([])
     const [newClient, setNewClient] = useState(false)
+
+
     
+
+    const { register, handleSubmit,control, formState:{ errors }, setValue } = useForm({
+        resolver: yupResolver(schema)
+      });
+      setValue("UserId", `${userId}`)
     const customStyles = {
         control: base => ({
           ...base,
@@ -33,6 +59,7 @@ function Payment(){
         
           
         }),
+        
         placeholder: defaultStyles => {
             return {
               ...defaultStyles,
@@ -53,7 +80,10 @@ function Payment(){
         })
 
       };
-      
+      const reload =()=>{
+        window.location.reload()
+       
+    }
     useEffect(()=>{
         axios.get(`http://localhost:4000/clients`)
             .then(function(response){
@@ -83,7 +113,13 @@ function Payment(){
     const handleNewClient = () =>{
         setNewClient(!newClient)
     }
- 
+    const optionM = [{value:"credit/debit", label:"credit/debit"},
+    {value:"EFT", label:"EFT"},
+    {value:"Cash", label:"Cash"}]
+    const optionT = [{value:"Monthly Payment", label:"Monthly Payment"},
+    {value:"Down Payment", label:"Down Payment"},
+    {value:"Endorsement", label:"Endorsement"},
+    {value:"Renew Down", label:"Renew Down"}]
     const refresh =()=>{
        !newClient?
         setPayment({
@@ -104,39 +140,41 @@ function Payment(){
             clientName:""
         })
 
-        setBox({
-            pay1:0,pay5:0,pay10:0,pay20:0,pay50:0,pay100:0
-        })
 
     }
-    const submitPayment =()=>{
-       
-        if(payment.method=="Cash"){
+    const onSubmit =(data)=>{
+  
+        console.log(data)
+      
             
             if(newClient==false){
-                if(payment.amount&&payment.clientId&&payment.clientId!==undefined&&payment.method&&payment.type){
-                setPayment({...payment, total: parseInt(payment.creditCardFee)+parseInt(payment.amount)})        
                 
-                    fetch(`http://localhost:4000/addPayment`, {
+               data.ClientId!==undefined?
+                  
+                
+                
+               
+                fetch(`http://localhost:4000/addPayment`, {
                     
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         },
-                    body: JSON.stringify(payment),
+                    body: JSON.stringify(data),
                     
                 })
                 .then(response => response.json())
-                .then(data => dispatch(addPay(data)));
+                .then(data => dispatch(addPay(data),onOpenModal() ))
                
-                onOpenModal() 
+                
+                  
+
+                :
+                setERR({...ERR, ClientId:true})
+
                 }
                 else{
-                    alert("you must complete all the fields")
-                }
-                }
-                else{
-                    if(payment.clientName&&payment.clientEmail&&payment.Tel&&payment.amount&&payment.method&&payment.type){
+                 
                         
                   
                         fetch(`http://localhost:4000/addClientPayment`, {
@@ -145,71 +183,35 @@ function Payment(){
                         headers: {
                             'Content-Type': 'application/json',
                             },
-                        body: JSON.stringify(payment),
+                        body: JSON.stringify(data),
                         
                     })
                    onOpenModal() 
-                    }
-                    else{
-                        alert("you must complete all the fields")
-                    }
+                 
         
                     
                 }
                 
         }
-        else{
-            if(newClient==false){
-                if(payment.amount&&payment.clientId&&payment.clientId!==undefined&&payment.method&&payment.type){
-                setPayment({...payment, total: parseInt(payment.creditCardFee)+parseInt(payment.amount)})        
-                 console.log(parseInt(payment.creditCardFee+parseInt(payment.amount))) 
-                    fetch(`http://localhost:4000/addPayment`, {
-                    
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        },
-                    body: JSON.stringify(payment),
-                    
-                })
-                onOpenModal() 
-                }
-                else{
-                    alert("you must complete all the fields")
-                }
-                }
-                else{
-                    if(payment.clientName&&payment.clientEmail&&payment.Tel&&payment.amount&&payment.method&&payment.type){
-                        
-                  
-                        fetch(`http://localhost:4000/addClientPayment`, {
-                        
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            },
-                        body: JSON.stringify(payment),
-                        
-                    })
-                   onOpenModal() 
-                   }
-                    else{
-                        alert("you must complete all the fields")
-                    }
-        
-                    
-                }
-        }
+       
+              
+               
+                
+          
        
         
-    }
+    
+    const optionsC = clients.map(e=>({value:e.id,label:e.name}))
+    const optionsL = locations.map(e=>({value:e.id,label:e.name}))
+  
 
      return(
+         
     <div className="genericDiv">
        <div className="genericHeader">
            <p className="genericTitle">Add payment</p>
         </div>
-        
+      
         <div className="PAYMainBox">
            
                
@@ -225,10 +227,22 @@ function Payment(){
                     <BiMessageSquareAdd onClick={()=>handleNewClient()} size="20" color="#28C76F" style={{ marginLeft:"70px"}}/>
                     </div>
                     {!newClient?
-                    <Select  styles={customStyles} placeholder="Name" className="PAYselect"  options={clients.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setPayment({...payment, clientId:e.value})}}/>
+                   <>
+                    <Controller
+                        control={control}
+                        name="ClientId"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select value={optionsC.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={clients.map(e=>({value:e.id,label:e.name}))} name={"ClientId"} className="PAYselect"  placeholder="Select Client"/>
+                        )}
+                        />
+                        {ERR.ClientId&&<p className="FORMerror">"Client is a required field"</p>}
+                    </>
                     :
-                    <input className="PAYsub-title" value={payment.clientName} onChange={(event)=>{setPayment({...payment, clientName:event.target.value})}}/>
-                    }
+                    <>
+                    <input className="PAYsub-title"  {...register("name")}/>
+                    <p className="FORMerror">{errors.name?.message}</p>
+                     </>
+                   }
                 
                 </div>
                 {newClient&&
@@ -237,11 +251,18 @@ function Payment(){
 
                  <div className="PAYInputCont">
                  <p  className="PAYtitle">Email</p>
-                 <input className="PAYsub-title" value={payment.clientEmail} onChange={(event)=>{setPayment({...payment, clientEmail:event.target.value})}}/>
+                 <input {...register("email",{
+                        required: 'Email is required',
+                        pattern: {
+                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: 'Please enter a valid email',
+                        }})}  placeholder="Email" className="PAYsub-title"></input>
+                    <p className="FORMerror">{errors.email?.message}</p>
                  </div>
                  <div className="PAYInputCont">
                     <p  className="PAYtitle">Phone</p>
-                    <input className="PAYsub-title" value={payment.Tel} onChange={(event)=>{setPayment({...payment, Tel:event.target.value})}}/>
+                    <input  {...register("phone")}  placeholder="Phone" className="PAYsub-title"></input>
+                    <p className="FORMerror">{errors.phone?.message.substring(0,25)}</p>
                     
                 </div> 
                   </div>
@@ -258,15 +279,23 @@ function Payment(){
             <div className="PAYBox"> 
             <div className="PAYInputCont">
                 <p className="PAYtitle">Location</p>
-                <Select styles={customStyles} options={locations.map(e=>({value:e.id,label:e.name}))} className="PAYselect"  placeholder="Select Location" onChange={(e)=>setPayment({...payment,LocationId:e.value})}/>
+                <Controller
+                        control={control}
+                        name="LocationId"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select value={optionsL.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={locations.map(e=>({value:e.id,label:e.name}))} name={"LocationId"} className="PAYselect"  placeholder="Select Location"/>
+                        )}
+                    />
+
+                    <p className="FORMerror">{errors.LocationId?.message}</p>
            
-          
+                    <p className="FORMerror">{errors.UserId?.message}</p>
                 </div>
 
                 <div className="PAYInputCont">
                     <p  className="PAYtitle">Amount</p>
-                    <input className="PAYsub-title" value={payment.amount} onChange={(event)=>{setPayment({...payment, amount:event.target.value})}}/>
-                    
+                    <input className="PAYsub-title" value={payment.amount} {...register("amount")}/>
+                    <p className="FORMerror">{errors.amount?.message}</p>
                 </div> 
 
 
@@ -274,28 +303,34 @@ function Payment(){
 
                 <div className="PAYInputCont">
                 <p  className="PAYtitle">Payment type</p>
-                <Select styles={customStyles} options={[{value:"Monthly Payment", label:"Monthly Payment"},
-                                 {value:"Down Payment", label:"Down Payment"},
-                                 {value:"Endorsement", label:"Endorsement"},
-                                 {value:"Renew Down", label:"Renew Down"}]} 
-            className="PAYselect"  onChange={(e)=>setPayment({...payment,type:e.value})}>
-                  
-            </Select>
+                <Controller
+                        control={control}
+                        name="type"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select value={optionT.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={optionT.map(e=>({value:e.value,label:e.label}))} name={"type"} className="PAYselect"  placeholder="Select method"/>
+                        )}
+                    />
+            <p className="FORMerror">{errors.type?.message}</p>
             </div>
             <div className="PAYInputCont" >
                 <p className="PAYtitle">Payment Method</p>
-                <Select styles={customStyles}   options={[{value:"credit/debit", label:"credit/debit"},
-                                 {value:"EFT", label:"EFT"},
-                                 {value:"Cash", label:"Cash"}]}
-                className="PAYselect"  onChange={(e)=>setPayment({...payment,method:e.value})}>
-                    
-                                                
-                </Select>
-                {payment.method=="credit/debit"&&
-                <div style={{marginTop:"40px"}}>
+                <Controller
+                        control={control}
+                        name="method"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select value={optionM.find(c => c.value === value)} onChange={val => {onChange(val.value) ;setMethod(val.value)}} control={control} options={optionM.map(e=>({value:e.value,label:e.label}))} name={"method"} className="PAYselect"  placeholder="Select method"/>
+                        )}
+                    />
+
+                <p className="FORMerror">{errors.method?.message}</p>
+                {method=="credit/debit"&&
+                <>
+                <div style={{position:"absolute",marginTop:"20px"}}>
                  <p className="PAYtitle">Credit card fee</p>
-                 <input className="PAYsub-title" value={payment.creditCardFee} onChange={(event)=>{setPayment({...payment, creditCardFee:event.target.value})}}/>
+                 <input className="PAYsub-title"   {...register("creditCardFee")}/>
                 </div>
+                  <p className="FORMerror">{errors.creditCardFee?.message}</p>
+                  </>
                 }
                 </div>
 
@@ -305,14 +340,15 @@ function Payment(){
 
         
            
-            <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+            <Modal open={open} onClose={reload} center classNames={"modal"}>
     <div className="modal">
         <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
         
         <p className="modalText">Payment added successfully</p>
        
-       
-        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/payments"}>Continue</NavLink></button>
+        {/* <PDFDownloadLink document={<MyDocument data={data} />} fileName="TEST"> */}
+        <button  className="modalButton" onClick={reload}> Continue</button>
+        {/* </PDFDownloadLink> */}
       
         
         </div>
@@ -378,7 +414,7 @@ function Payment(){
 
         
       <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
-                <button  onClick={()=>submitPayment()} className="PAYbutton" ><p className="PAYbuttonText">Add payment</p></button>
+                <button  onClick={handleSubmit(onSubmit)} className="PAYbutton" ><p className="PAYbuttonText">Add payment</p></button>
             </div>     
               
 

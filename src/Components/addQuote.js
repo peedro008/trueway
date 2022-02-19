@@ -9,9 +9,33 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Icon from "../assets/Icon.png"
 import { NavLink } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
+const schema = yup.object({
+    LocationId:yup.number().required(),
+    CategoryId:yup.number().required(),
+    ClientId:yup.number().optional(),
+    CompanyId:yup.number().required(),
+    UserId:yup.number().required(),
+    DealerId:yup.number().optional(),
+    down:yup.number().required(),
+    monthlyPayment:yup.number().required(),
+  
+    NSDvalue:yup.number().optional().default(0),
+
+    PIPvalue:yup.number().optional().default(0),
+    
+    MVRvalue:yup.number().optional().default(0),
+    name:yup.string().optional().min(1),
+    email:yup.string().optional().email().min(1),
+    tel:yup.string().optional().min(6)
+    
+    }).required();
 
 const AddQuote = ()=>{
+
     const [open, setOpen] = useState(false);
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
@@ -23,8 +47,12 @@ const AddQuote = ()=>{
     const [companies, setCompanies]= useState([])
     const [categories, setCategories]= useState([])
     const [locations, setLocations] = useState([])
+    const [ERR, setERR] = useState({ ClientId: false})
     const [dealers, setDealers] = useState([])
-   
+    const { register, handleSubmit,control, formState:{ errors }, setValue } = useForm({
+        resolver: yupResolver(schema)
+      });
+      setValue("UserId", `${userId}`)
     useEffect(()=>{
         axios.get(`http://localhost:4000/getDealer`)
             .then(function(response){
@@ -93,9 +121,7 @@ const AddQuote = ()=>{
           ...base,
           height: 30,
           minHeight: 30,
-    
-        
-          
+     
         }),
         placeholder: defaultStyles => {
             return {
@@ -119,29 +145,7 @@ const AddQuote = ()=>{
       };
       
     const reload =()=>{
-        setInputs({
-            clientName:"",
-            clientEmail:"",
-            clientTel:"",
-            CompanyId:"",
-            ProducerId:"",
-            down:"",
-            monthlyPayment:"",
-            dealer:false,
-            dealerSalePerson:"",
-            NSD:false,
-            NSDvalue:"",
-            PIP:false,
-            PIPvalue:"",
-            MVR:false,
-            MVRvalue:"",
-            LocationId:"",
-            status:"",
-            notes:"",
-            CategoryId:""
-            
-
-        })
+        window.location.reload()
        
     }
     
@@ -153,19 +157,16 @@ const AddQuote = ()=>{
           })
     }
 
-    const onSubmitHandler = () => {
+    const onSubmit = (data) => {
  
-        const payload = {
-           inputs
-         
-        };
+       
         fetch(`http://localhost:4000/addQuote`, {
             
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 },
-            body: JSON.stringify(inputs),
+            body: JSON.stringify(data),
             
         })
         .then(async res => { 
@@ -191,14 +192,18 @@ const AddQuote = ()=>{
         .catch(err => {
             console.log(err);
         });
-         reload()
+         
         
     };
     
 const handleNewClient = () =>{
     setNewClient(!newClient)
 }
-
+const optionsCa = categories.map(e=>({value:e.id,label:e.name}))
+const optionsCo = companies.map(e=>({value:e.id,label:e.name}))
+const optionsL = locations.map(e=>({value:e.id,label:e.name}))
+const optionsD = dealers.map(e=>({value:e.id,label:e.name}))
+const optionsC = clients.map(e=>({value:e.id,label:e.name}))
     return(
 
 
@@ -211,6 +216,7 @@ const handleNewClient = () =>{
             </div>
             
         <div className="AQcontainer">
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div className="AQrowContainer"style={{marginRight:"309px"}}>
            
                 
@@ -221,9 +227,25 @@ const handleNewClient = () =>{
                 <BiMessageSquareAdd onClick={()=>handleNewClient()} size="20" color="#28C76F" style={{ marginLeft:"60px"}}/>
                 </div>
                 {!newClient?
-                <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={clients.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, ClientId:e.value})}}/>
+                 <>
+                 <Controller
+                     control={control}
+                     name="ClientId"
+                     render={({ field: { onChange, onBlur, value, ref } }) => (
+                         <Select value={optionsC.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={clients.map(e=>({value:e.id,label:e.name}))} name={"ClientId"} className="PAYselect"  placeholder="Select Client"/>
+                     )}
+                     
+                     />
+
+                     {ERR.ClientId&&<p className="FORMerror">"Client is a required field"</p>}
+                     <p className="FORMerror">{errors.UserId?.message}</p>
+                     <p className="FORMerror">{errors.UserId?.message}</p>
+                 </>
                 :
-                <input className="AQinput" placeholder="Client name" value={inputs.clientName} onChange={(event)=>{setInputs({...inputs, clientName:event.target.value})}}/>
+                <>
+                <input className="AQinput" placeholder="Client name" value={inputs.clientName}  {...register("name")}/>
+                <p className="FORMerror">{errors.name?.message}</p>
+                </>
                 }
             
             </div>
@@ -233,13 +255,15 @@ const handleNewClient = () =>{
 
              <div className="AQinputContainer">
              <p  className="AQinputName">Email</p>
-             <input placeholder="Client email" className="AQinput" value={inputs.clientEmail} onChange={(event)=>{setInputs({...inputs, clientEmail:event.target.value})}}/>
+             <input placeholder="Client email" className="AQinput" value={inputs.clientEmail}  {...register("email")}/>
+             <p className="FORMerror">{errors.email?.message}</p>
              </div>
                 }
              {newClient&&
              <div className="AQinputContainer">
                 <p  className="AQinputName">Phone</p>
-                <input placeholder="Client phone" className="AQinput" value={inputs.Tel} onChange={(event)=>{setInputs({...inputs, Tel:event.target.value})}}/>
+                <input placeholder="Client phone" className="AQinput" value={inputs.Tel}  {...register("tel")}/>
+                <p className="FORMerror">{errors.tel?.message}</p>
                 
             </div> 
              
@@ -258,17 +282,39 @@ const handleNewClient = () =>{
             <div className="AQrowContainer">
             <div className="AQinputContainer">
                     <p className="AQinputName">Category</p>
-                    <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={categories.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, CategoryId:e.value})}}/>
+                    <Controller
+                        control={control}
+                        name="CategoryId"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select value={optionsCa.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={categories.map(e=>({value:e.id,label:e.name}))} name={"CategoryId"} className="PAYselect"  placeholder="Select Category"/>
+                        )}
+                    />
+
+                    <p className="FORMerror">{errors.CategoryId?.message}</p>
                     
                 </div>
                 <div className="AQinputContainer">
                     <p className="AQinputName">Company</p>
-                    <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={companies.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, CompanyId:e.value})}}/>
+                    <Controller
+                        control={control}
+                        name="CompanyId"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select value={optionsCo.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={companies.map(e=>({value:e.id,label:e.name}))} name={"CompanyId"} className="PAYselect"  placeholder="Select Company"/>
+                        )}
+                    />
+                 <p className="FORMerror">{errors.CompanyId?.message}</p>
                 </div>
                 <div className="AQinputContainer">
                     <p className="AQinputName">Office</p>
                     
-                    <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={locations.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, LocationId:e.value})}}/>
+                    <Controller
+                        control={control}
+                        name="LocationId"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select value={optionsL.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={locations.map(e=>({value:e.id,label:e.name}))} name={"LocationId"} className="PAYselect"  placeholder="Select Location"/>
+                        )}
+                    />
+                    <p className="FORMerror">{errors.LocationId?.message}</p>
                 </div>
                 <div className="AQinputContainer" >
                     <p className="AQinputName">Dealer</p>
@@ -278,21 +324,32 @@ const handleNewClient = () =>{
                             {inputs.dealer?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>} 
                         </div>
                         {inputs.dealer&&
-                         <Select  styles={customStyles}  placeholder="Name" className="AQinput"  options={dealers.map(e=>({value:e.id,label:e.name}))} onChange={(e)=>{setInputs({...inputs, DealerId:e.value})}}/>
+                         <>
+                         <Controller
+                             control={control}
+                             name="DealerId"
+                             render={({ field: { onChange, onBlur, value, ref } }) => (
+                                 <Select value={optionsD.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={dealers.map(e=>({value:e.id,label:e.name}))} name={"DealerId"} className="PAYselect"  placeholder="Select Dealer"/>
+                             )}
+                             />
+                             {ERR.DealerId&&<p className="FORMerror">"Client is a required field"</p>}
+                         </>
                         }
                     </div>
                 </div>
                
             
             </div>
-            <div className="AQrowContainer">
+            <div className="AQrowContainer1">
                 <div className="AQinputContainer">
                     <p className="AQinputName">Down payment</p>
-                    <input className="AQinput" placeholder="Down payment" key="down" name="down"  value={inputs.down} onChange={event => setInputs({...inputs,down:event.target.value})}/>
+                    <input className="AQinput" placeholder="Down payment" key="down" name="down"  value={inputs.down} {...register("down")}/>
+                    <p className="FORMerror">{errors.down?.message.substring(0,24)}</p>
                 </div>
-                <div className="AQinputContainer" style={{marginRight:"618px"}}>
+                <div className="AQinputContainer" style={{display:"flex", flexDirection:"column", backgroundColor:"start"}}>
                     <p className="AQinputName">Monthly payment</p>
-                    <input className="AQinput" placeholder="Monthly payment" key="monthlyPayment" name="monthlyPayment"  value={inputs.monthlyPayment} onChange={event => setInputs({...inputs,monthlyPayment:event.target.value})}/>
+                    <input className="AQinput" placeholder="Monthly payment" key="monthlyPayment" name="monthlyPayment"  value={inputs.monthlyPayment} {...register("monthlyPayment")}/>
+                    <p className="FORMerror">{errors.monthlyPayment?.message.substring(0,24)}</p>
                 </div>
                
             </div>
@@ -306,8 +363,11 @@ const handleNewClient = () =>{
                                 <input  className="AQcheckInput" type="checkbox" checked={inputs.NSD}  value={inputs.NSD} key="NSD" name="NSD" onChange = {(event) => setInputs({...inputs,NSD:!inputs.NSD})}/>
                                 {inputs.NSD?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>}
                                 </div>
-                                {inputs.NSD&&<input className="AQinput2" placeholder="How much?" key="NSDvalue" name="NSDvalue"  value={inputs.NSDvalue} onChange={event => setInputs({...inputs,NSDvalue:event.target.value})}/>   }
-                             
+                                {inputs.NSD&&
+                                <>
+                                <input className="AQinput2" placeholder="How much?" key="NSDvalue" name="NSDvalue"  value={inputs.NSDvalue} {...register("NSDvalue")}/>  
+                                <p className="FORMerror">{errors.NSDvalue?.message}</p>  </>}
+                            
                              </div>
                 </div>
                
@@ -318,7 +378,9 @@ const handleNewClient = () =>{
                                 <input  className="AQcheckInput" type="checkbox" checked={inputs.MVR} key="MVR" name="MVR" onChange = {(event) => setInputs({...inputs,MVR:!inputs.MVR})}/>
                                 {inputs.MVR?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>}
                                 </div>
-                                {inputs.MVR&&<input className="AQinput2" placeholder="How much" key="MVRvalue" name="MVRvalue"  value={inputs.MVRvalue} onChange={event => setInputs({...inputs,MVRvalue:event.target.value})}/>}
+                                {inputs.MVR&&<>
+                                    <input className="AQinput2" placeholder="How much" key="MVRvalue" name="MVRvalue"  value={inputs.MVRvalue} {...register("MVRvalue")}/>
+                                    <p className="FORMerror">{errors.NSDvalue?.message}</p> </>}
                              
                              </div>
                 </div>
@@ -331,7 +393,11 @@ const handleNewClient = () =>{
                             {inputs.PIP?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>}
                         </div>
                         {inputs.PIP&&
-                         <input className="AQinput3" placeholder="Dealer Sale Person" key="dealerSalePerson" name="dealerSalePerson"  value={inputs.PIP==true?10:0} placeholder={inputs.PIP==true?10:0}/>
+                        <>
+                        <input className="AQinput3" placeholder="PIP value" key="dealerSalePerson" name="dealerSalePerson"  {...register("PIPvalue")}/>
+                        <p className="FORMerror">{errors.NSDvalue?.message}</p> 
+                        </>
+                         
                         }
                     </div>
                 </div>
@@ -343,8 +409,10 @@ const handleNewClient = () =>{
            
             <div className="AQinputContainer" style={{marginTop:"20px"}}>
                     <p className="AQinputName">Notes</p>
-                    <textarea  className="AQtextarea" placeholder="Notes" key="notes" name="notes"  value={inputs.notes} onChange={event => setInputs({...inputs,notes:event.target.value})}/>   
+                    <textarea  className="AQtextarea" placeholder="Notes" key="notes" name="notes"  value={inputs.notes} {...register("notes")}/>   
+                    <p className="FORMerror">{errors.notes?.message}</p>
                 </div>
+                </form>
             </div>
 
          
@@ -353,21 +421,22 @@ const handleNewClient = () =>{
        
               
             <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
-                <button onClick={onSubmitHandler} className="PAYbutton" ><p className="PAYbuttonText">Add Quote</p></button>
+                <button onClick={handleSubmit(onSubmit)} className="PAYbutton" ><p className="PAYbuttonText">Add Quote</p></button>
             </div>     
               
-            <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+            <Modal open={open} onClose={reload} center classNames={"modal"}>
     <div className="modal">
         <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
         
         <p className="modalText">Quote added successfully</p>
        
        
-        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/"}>Continue</NavLink></button>
+        <button  className="modalButton" onClick={reload}>Continue</button>
       
         
         </div>
       </Modal>
+      
     </div>
            
     )

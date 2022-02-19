@@ -67,11 +67,11 @@ function QuoteDetails(props) {
                     </div>
                     <div className='DETsBox'>
                         <p className="DETtitle">Quoted by</p>
-                        <p className="DETtext">{quote[0].Producer.name}</p>
+                        <p className="DETtext">{quote[0].User.name}</p>
                     </div>
                     <div className='DETsBox'>
                         <p className="DETtitle">Sold by</p>
-                        <p className="DETtext">{quote[0].Producer.name}</p>
+                        <p className="DETtext">{quote[0].User.name}</p>
                     </div>
                  </div>
                     

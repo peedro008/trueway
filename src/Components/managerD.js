@@ -8,21 +8,40 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Icon from "../assets/Icon.png"
 import { NavLink } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+const schema = yup.object({
+    name: yup.string().required(),
+
+    CompanyId: yup.number().required(),
+
+}).required();
+
+
+
+
 const ManagerD=()=>{
     const [company, setCompany] = useState([])
-    const [inputs, setinputs]= useState({})
+
     const [open, setOpen] = useState(false);
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
-    const onSubmitHandler = () => {
-        inputs&&
+    const { register, handleSubmit,control, formState:{ errors } } = useForm({
+        resolver: yupResolver(schema)
+      });
+
+
+    const onSubmit = (data) => {
+        data&&
         fetch(`http://localhost:4000/addDealer`, {
             
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 },
-            body: JSON.stringify(inputs)
+            body: JSON.stringify(data)
             
         })
         .then(async res => { 
@@ -61,6 +80,7 @@ const ManagerD=()=>{
             })
     
     },[]) 
+    const options = company.map(e=>({value:e.id,label:e.name}))
     return( 
         <div  className="genericDiv">
 
@@ -68,32 +88,40 @@ const ManagerD=()=>{
             <p className="genericTitle">Add Dealer sale person</p>
             </div>
         
-        
+            <form onSubmit={handleSubmit(onSubmit)}>
         <div className="managerInputsContainer" style={{width:"max-content"}}>
             <div className="managerInputsubContainer">
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Name</p>
-                    <input onChange={(e)=>{setinputs({...inputs, name:e.target.value})}}  placeholder="Name" className="PAYsub-title"></input>
+                    <input {...register("name")}  placeholder="Name" className="PAYsub-title"></input>
+                    <p className="FORMerror">{errors.name?.message}</p>
                 </div>
                <div className="inputDiv" > 
                     <p className="PAYtitle">Company</p>
-                    <Select onChange={(e)=>{setinputs({...inputs, CompanyId:e.value})}}  options={company.map(e=>({value:e.id,label:e.name}))} className="PAYselect"  placeholder="Select Company"/>
+                    <Controller
+                        control={control}
+                        name="CompanyId"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select value={options.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={company.map(e=>({value:e.id,label:e.name}))} name={"CompanyId"} className="PAYselect"  placeholder="Select Company"/>
+                        )}
+                    />
+                 <p className="FORMerror">{errors.CompanyId?.message}</p>
                 </div>  
                 
 
             </div>
          
         </div>
-    
+    </form>
 
 
 
-        <button onClick={onSubmitHandler} className="button4" >Add Dealer</button>
+        <button onClick={handleSubmit(onSubmit)} className="button4" >Add Dealer</button>
         <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
     <div className="modal">
         <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
         
-        <p className="modalText">¡Quote added successfully</p>
+        <p className="modalText">¡Dealer added successfully</p>
        
        
         <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/"}>Continue</NavLink></button>
