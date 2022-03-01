@@ -2,6 +2,7 @@ import axios from 'axios'
 import {BiPencil} from "react-icons/bi"
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 
 function QuoteDetails(props) {
     const id = props.location.aboutProps.ID
@@ -100,7 +101,7 @@ function QuoteDetails(props) {
 
                             }
 
-
+<BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>
                        
                     </div>
                     

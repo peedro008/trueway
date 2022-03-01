@@ -2,7 +2,7 @@
 
 @import url(    'https://fonts.googleapis.com/css?family=Montserrat');
 @import url(//db.onlinewebfonts.com/c/1dc8ecd8056a5ea7aa7de1db42b5b639?family=Gilroy);
-
+@import url(    'https://fonts.googleapis.com/css?family=Inter');
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import url('http://fonts.googleapis.com/css?family=Lato:400,700');
 
@@ -118,8 +118,8 @@
 }
 .image{
     background-color: #FFFFFF;
-    width: 90%;
-    height: 6.8%;
+    width: 89%;
+    height: 6.5%;
     padding:6px
 }
 .NAcontainer{
@@ -245,7 +245,7 @@
  }
 .PAYbuttonCont{
     display: flex;
-    width: 600px;
+    width: 550px;
     justify-content: space-between;
     margin-top: 35px;
     padding-left: 40px;
@@ -1135,23 +1135,96 @@
 
 .DashContainer{
     display: flex;
-    flex-direction: row;
-    width: 90%;
-    height: max-content;
-    padding-left: 40px;
-    padding-top: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px 30px;
+    height: 85%;
+    
+    
 }
-.DashSubContainer{
+.DashSubCont{
+    display: flex;
+    flex-direction: row;
+height: auto;
+
+}
+.DashPList{
+    background-color: #FFFFFF;
+    height: max-content;
+    width: 300px;
+    border-radius: 10px;
+    max-height: 92%;
+    min-height: 92%;
+    overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    max-width: 50%;
-    height: max-content;
 }
+.DashPListHeader{
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+.DashPListTitle{
+    font-size: 14px;
+    color: #000000;
+    font-family: "Gilroy";
+    font-weight: 600;
+}
+.DashPListSTitle{
+    font-size: 14px;
+    color: #A6ACBE;
+    font-family: "Gilroy";
+    font-weight: 500;
+}
+.DashPListDivider{
+    background-color:#EEF0F7;
+    border-width: 1px;
+    width:100%;
+    height: 1px;
+    align-self: center;
+    display:flex;
+    margin-bottom: 5px;
+}
+.DashPListRow{
+    height: 30px; 
+    display: flex;
+    width: 250px;
+    flex-direction: row;
+    align-items: center;
+  
+    padding: 0px 15px;
+    margin:1px 0px;
+    justify-content: space-between;
+}
+.DashPListItemText{
+    font-family: Gilroy;
+    font-size: 14px;
+    color:#A6ACBE;
+    font-weight: 500;
+    
+
+}
+.DashPListCircle{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 207, 232, 0.12);
+    margin-right: 15px;
+}
+
+
+
 .dashContCard{
     display: flex;
     flex-direction: row;
     width: max-content;
-    margin-top: 13px;
+   
     
 }
 .dashCard{
@@ -1224,6 +1297,104 @@
     align-items: center;
     justify-content: center;
 }
+.dashListColumnT{
+   
+font-family: Inter;
+font-size: 12px;
+font-style: normal;
+font-weight: 600;
+line-height: 30px;
+letter-spacing: 0.5px;
+text-align: left;
+width:25%;
+}
+
+
+.DashStatusCont{
+    background-color: #FFFF;
+    width: 45%;
+    height: max-content;
+    max-height: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+    
+}
+
+.DashStatusHeader{
+    height:25px;
+}
+.DashStatusColumns{
+    background-color: #F3F4F6;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 17px;
+    margin-bottom: 10px;
+}
+.DashStatusRow{
+    display: flex;
+    flex-direction: row;
+ height: 30px;
+    padding: 0px 17px;
+    justify-content: space-between;
+  
+}
+.DashStatusItem{
+    width:25%;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+
+}
+.DashNumber{
+    font-family: Gilroy;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 16px;
+letter-spacing: 0.01em;
+max-width: 30px;
+overflow: hidden;
+
+
+}
+.DashNumberDiv{
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+    position: relative;
+    justify-self: flex-end;
+    
+}
+.DashStatusItemC{
+    
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    color:white;
+    margin-left:5px;
+    margin-right:5px;
+
+
+}
+.DashStatusColor{
+    
+    border-radius: 20px;
+    width: max-content;
+    height: 22px;
+}
+
+
 
 
 /*---------------------producerEdit--------------------------*/
@@ -1367,17 +1538,17 @@
     border-width: 1px;
     align-self: center;
     margin-top: 20px;
-
+    
 }
 
 
 /*----------------DEPOSIT-------------------*/
-.table2{
+.table3{
     font-family: Gilroy;
     font-weight: 100;
     border-collapse:collapse;
     
-    width: 43vw;
+    width: 45vw;
     height: max-content;
     margin-left: 40px;
     
@@ -1393,7 +1564,7 @@
   
 }
 
-.table2 td, .table2 th{
+.table3 td, .table3 th{
     border: 1px solid #ddd;
     padding: 8px;
     
@@ -1401,16 +1572,16 @@
 }
 
 
-.table2 tr:nth-child(even){
+.table3 tr:nth-child(even){
     background-color: #EDEDED;
     
 
 }
-.table2 tr:hover {
+.table3 tr:hover {
     background-color: #ddd;
     
 }
-.table2 th {
+.table3 th {
     padding-top: 5px;
     padding-bottom: 5px;
     text-align: left;
@@ -1603,4 +1774,135 @@ text-align: center;
     text-align: left;
     color: #2B4162;
     margin-top: 5px;
+}
+/*---------------PRDUCERDETAILS----------------------------*/
+.PRODcont1{
+    height: 26%;
+    max-width: 70%;
+    display: flex;    
+    flex-direction: row;
+
+    justify-content: space-between;
+    padding: 0px 40px;
+    margin-top: 40px;
+}
+.PRODrect{
+    max-width: 45%;
+    width: 29%;
+    height: 85%;
+    background-color: #FDFDFF;
+    border: 1px solid #EBEBEB;
+    border-radius: 13px;
+    display: flex;
+    flex-direction: column;
+}
+.PRODrectH{
+    display: flex;
+    flex-direction: row;
+    max-width:100%;
+    height: 35%;
+    justify-content: space-between;
+    padding: 15px 18px ;
+    align-items: center;
+    
+
+}
+.PRODrectT{
+    font-family: Gilroy;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #4F4F4F;
+}
+.PRODrectB{
+    display: flex;
+    flex-direction: row;
+  
+    justify-content: space-between;
+    padding: 0px 18px;
+    margin-top: 5%;
+}
+.PRODrectQ{
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #4F4F4F;
+}
+.PRODrectPT{
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #979797;
+}
+.PRODrectP{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.PRODdotsCont1{
+    position:fixed;
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: max-content;
+    width: 6%;
+    left: 25.5%;
+    padding: 8px 5px;
+    border: 1px solid #A9A9A9;
+    border-radius: 13px;
+    align-items: left;
+}
+.PRODdotsCont2{
+    position:fixed;
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: max-content;
+    width: 6%;
+    left: 49.7%;
+    padding: 8px 5px;
+    border: 1px solid #A9A9A9;
+    border-radius: 13px;
+    align-items: left;
+}
+.PRODdotsCont3{
+    position:fixed;
+    overflow:hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: max-content;
+    width: 6%;
+    left: 73.5%;
+    padding: 8px 5px;
+    border: 1px solid #A9A9A9;
+    border-radius: 13px;
+    align-items: left;
+}
+.PRODdotT{
+    font-family: Gilroy;
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 20px;
+
+/* or 200% */
+
+display: flex;
+align-items: center;
+text-decoration-line: underline;
 }

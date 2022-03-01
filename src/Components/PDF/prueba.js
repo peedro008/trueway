@@ -1,9 +1,11 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Image, Font } from '@react-pdf/renderer';
 import ReactPDF from '@react-pdf/renderer';
-import logo from "../../assets/logo.jpg"
+import LOGOpdf from "../../assets/LOGOpdf.png"
 import "../CSS/css.css"
+import RobotoMedium from "../../assets/Roboto-Medium.ttf"
 import Montserrat from "../../assets/Montserrat.ttf"
+import RobotoRegular from "../../assets/Roboto-Regular.ttf"
 // Create styles
 Font.register({
     family: "Montserrat",
@@ -12,12 +14,25 @@ Font.register({
   
   });
   Font.register({
-    family: 'Open Sans',
+    family: "Roboto",
+    format: "truetype",
+    src: RobotoMedium ,
+  
+  });
+  Font.register({
+    family: "Roboto Regular",
+    format: "truetype",
+    src: RobotoRegular ,
+  
+  });
+  Font.register({
+    family: 'Roboto',
     fonts: [
     { src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-regular.ttf' },
     { src: 'https://cdn.jsdelivr.net/npm/open-sans-all@0.1.3/fonts/open-sans-600.ttf', fontWeight: 600 }
     ]
     });
+    
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
@@ -30,9 +45,10 @@ const styles = StyleSheet.create({
   },
 
   image: {
-      height: "70px",
-      width:"70px",
-      marginTop:"40px"
+      height: "auto",
+      width:"150px",
+      marginTop:"40px",
+      marginBottom:"20px"
 
   },
   title:{
@@ -57,7 +73,7 @@ div2:{
     flexDirection:"row",
     alignSelf:"center",
     textAlign:"center",
-    width:"33%",
+    width:"45%",
     justifyContent:"space-between"
 },
 div3:{
@@ -94,67 +110,69 @@ divFooter:{
     width:"100%"
 },
     receipt:{
-        fontFamily: 'Open Sans',
+        fontFamily: 'Roboto',
         fontSize: "18px",
-        fontWeight: 600,
+        fontWeight: 700,
         textAlign:"center",
-        marginTop:"40px",
+        marginTop:"30px",
         
 },
     client:{
-        fontFamily: "Open Sans",
+        fontFamily:  "Roboto Regular",
         fontSize: "15px",
-        fontWeight: 600,
+      
         textAlign:"center",
-        marginBottom:"20px"
+        marginBottom:"30px",
+        marginTop: "10px"
     },
     total:{
-        fontFamily: "Open Sans",
-        fontSize: "13px",
-        
+        fontFamily: "Roboto",
+        fontSize: "18px",
+        fontWeight: 700,
         textAlign:"center",
         marginBottom:"40px",
         
     },
     total1:{
-        fontFamily: "Open Sans",
-        fontSize: "13px",
-        
+        fontFamily: "Roboto",
+        fontSize: "18px",
+        fontWeight: 700,
         textAlign:"center",
         marginBottom:"40px",
         
     },
     make:{
-        fontFamily: "Open Sans",
-        fontSize: "13px",
-        fontWeight: 600,
+        fontFamily:"Roboto Regular",
+        fontSize: "18px",
+        fontWeight: 500,
         textAlign:"center",
         
     },
     text:{
-        fontFamily: "Open Sans",
-        fontSize: "9px",
+        fontFamily:"Roboto Regular",
+        fontSize: "13px",
         textAlign:"left",
-        marginTop:"30px"
+        marginTop:"15px",
+      
     },
     text1:{
-        fontFamily: "Open Sans",
-        fontSize: "9px",
+        fontFamily: "Roboto",
+        fontSize: "10px",
         textAlign:"left",
-        marginTop:"30px",
+        marginTop:"15px",
         color:"#E75353",
       
     },
     producer:{
-        fontFamily: "Open Sans",
-        fontSize: "13px",
+        fontFamily: "Roboto Regular",
+        fontSize: "15px",
         
         textAlign:"center",
         marginBottom:"10px",
         
     },
     footer:{
-        fontFamily: "Open Sans",
+        fontFamily: "Roboto",
         fontSize: "9px",
         textAlign:"center",
        
@@ -170,20 +188,22 @@ const MyDocument = ({ data }) => {
     <Page size="A4" style={styles.page}>
       <View>
         <View style={styles.div}>
-        <Image source={logo} style={styles.image}/>
+        <Image source={LOGOpdf} style={styles.image}/>
         </View>
-        <Text  style={styles.title}>TRUEWAY INSURANCE</Text>
+        
       </View>
       <View style={styles.div}>
         <Text style={styles.receipt}>Receipt</Text>
         <Text style={styles.client}>{data.client}</Text>
         <View  style={styles.div2}>
             <Text style={styles.total}>Total Paid</Text>
-            <Text style={styles.total1}>{data.total}</Text>
+            <Text style={styles.total1}>${data.total}</Text>
         </View>
       </View>
       <View style={styles.div}>
-          <Text style={styles.make}>Make thigs easier on yourself by bundling your policies!</Text>
+          <Text style={styles.make}>¡Make things easier on yourself by bundling your policies!
+
+</Text>
           <Text style={styles.make}>Auto - Home - Commercial - Healt</Text>
       </View>
       <View style={styles.div3}>
@@ -203,7 +223,7 @@ const MyDocument = ({ data }) => {
             <Text style={styles.producer}>{data.producer}</Text>
             <Text style={styles.producer}>1/5/22 08:20pm</Text>
         </View>
-        <Text style={styles.producer}>{data.phone}</Text>
+
       </View>
       <View style={styles.div5}>
           <Text style={styles.text1}>

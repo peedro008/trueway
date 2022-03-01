@@ -4,7 +4,8 @@ import Auth from './Components/auth';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
 import AdminRouter from './Components/adminRouter';
-import producersRouter from "./Components/producersRouter"
+
+import ProducerRouter from './Components/producersRouter';
 
 
 
@@ -25,7 +26,7 @@ if(state===null){
   
   }
 
-//  if (state==="Admin"){
+ if (state==="Admin"){
   return (
 
     
@@ -35,15 +36,15 @@ if(state===null){
   
   )
 
-// }
+}
 
-// if (state==="Producer"){
-//   return (
+if (state==="Producer"){
+  return (
 
-//     <AdminRouter/>
-//   )
+    <ProducerRouter/>
+  )
 
-// }
+}
 
 
 }

@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Icon from "../assets/Icon.png"
+import { useSelector } from 'react-redux';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 function ModifyQuote(props) {
     const id = props.location.aboutProps
@@ -18,6 +20,7 @@ function ModifyQuote(props) {
     const [down, setDown] = useState("")
     const [inputs, setInputs] = useState([])
     const [open, setOpen] = useState(false);
+    const userId = useSelector(state=> state.UserId)
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
     useEffect(() => {
@@ -25,13 +28,13 @@ function ModifyQuote(props) {
         .then(function(response){
             setQuote(response.data)
             
-            setInputs({...inputs, QuoteId: id})
+            setInputs({...inputs, QuoteId: id, UserId: userId})
             
         })
         .catch(error=>{
           console.log(error)  
         })
-    }, [setQuote])
+    }, [setQuote,userId])
     
     const checkRenew = () => {
         setBound(false)
@@ -249,6 +252,7 @@ function ModifyQuote(props) {
         
         </div>
       </Modal>
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
         </div>
     )
 }

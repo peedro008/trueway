@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { BsChevronLeft } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 
 import SearchField from "react-search-field";
@@ -111,7 +112,7 @@ function ClientsReport() {
             </table>
 
 
-          
+            <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>    
     </div>
   )
 }

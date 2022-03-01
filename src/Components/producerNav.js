@@ -1,68 +1,93 @@
-import React, { useEffect } from 'react';
+
+
+import React from 'react';
 import {
-  Route,
+  
   Link} from 'react-router-dom'
-  import "./CSS/css.css"
+import "./CSS/css.css"
 
 import logo from '../assets/logo.png';
 import { FiGrid } from "react-icons/fi";
-import {MdCreditScore} from "react-icons/md"
+
 import {FiUser} from "react-icons/fi";
 import {VscGraph} from "react-icons/vsc"
-import {BiAddToQueue} from "react-icons/bi"
-import { useSelector } from 'react-redux';
-
+// import Manager from "./manager"
+import {FaRegMoneyBillAlt} from "react-icons/fa"
+import {FiLogOut} from "react-icons/fi"
+import {AiOutlineFile} from "react-icons/ai"
+import {MdAdd} from "react-icons/md"
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../redux/actions';
 function ProducerNav({onSearch}) {
 
-  const Name= useSelector(state=>state.userName)
-  const Role= useSelector(state=>state.userRole)
 
+  const dispatch = useDispatch()
+
+  const Name= useSelector(state=>state.userName)
+ const Role= useSelector(state=>state.userRole)
+
+ 
+ const logOut=()=>{
+   dispatch(logout())
+ }
 
   return (
-   <div >
-     <div className="logo">
-     <img className="image" src={logo} />
-     <div className="profile">
-        <div>
-        <p className="name">{Name}</p>
-        <p className="role">{Role}</p>
-        </div>
-        <div className="circle">
-        <p className="initial">{Name}</p>
-        </div>
+    <div style={{display:"flex"}}>
+    <div className='topbar'>
+    
+     <div style={{paddingRight:"40px", display:"flex"}}>
+          <div className="circle">
+          <p className="initial">{Name&&Name.substring(0,1)}</p>
+          </div>
+      <div className='ANusercontainer'>
+        
+      <p className='NAname'>{Name}</p>
+      <p className='NArole'>{Role}</p>
       </div>
-     </div>
-   
-    <nav className="sidebar">
-      <div className="container">
-      <Link className="icons" to='/'>
-      <div className="center"> <FiGrid className="icon"  color="#969CBA"  /> </div>
-      </Link>
-      </div>
-      <span/>
-      <div className="container">
-      <Link className="icons" to='/payments'>
-      <div className="center"> <FiUser className="icon"  color="#969CBA"/> </div>
-     </Link></div>
-     <span/>
-     <div className="container">
-      <Link  className="icons" to='/myquotes'>
-      <div  className="center"><MdCreditScore className="icon" color="#969CBA" /> </div>
-     </Link></div>
-     <span/>
-     <div className="container">
-      <Link  className="icons" to='/add'>
-      <div  className="center"><VscGraph className="icon" color="#969CBA" /> </div>
-     </Link></div>
-     <span/>
-     <div className="container">
-      <Link  className="icons" to='/manager'>
-      <div  className="center"><BiAddToQueue className="icon" color="#969CBA" /> </div>
-     </Link></div>
-
-      
+      <button onClick={()=>logOut()} style={{backgroundColor:"transparent", borderWidth:"0px"}}>
+      <FiLogOut size="20px" color='grey' style={{alignSelf:"center"}}/></button>
+  
+    </div>
+    </div>
+    
+    <div className="sidebar">
+        <img className="image" src={logo} alt={"logo"}/>
+        <div className="NAcontainer">
+        <Link className="icons" to='/'>
+         <FiGrid className="NAicon"  color="#969CBA"  />
+        </Link>
+        </div>
+        <span/>
+        <div className="NAcontainer">
+        <Link className="icons" to='/payments'>
+         <FaRegMoneyBillAlt className="NAicon"  color="#969CBA"  />
+        </Link>
+        </div>
+        <div className="NAcontainer">
+        <Link className="icons" to='/profile'>
+         <FiUser className="NAicon" size="20px"  color="#969CBA"/>
+       </Link></div>
+       <span/>
+       <div className="NAcontainer">
+        <Link  className="icons" to='/report'>
+        <VscGraph className="NAicon" size="20px" color="#969CBA" />
+       </Link></div>
+       <span/>
+       
+       
+       
+       
+       <div className="NAcontainer">
+        <Link  className="icons" to='/addquote'>
+        <AiOutlineFile className="NAicon" size="20px" color="#969CBA" />
+       </Link></div>
+       <span/>
+       
      
-    </nav></div>
+  
+        
+       
+      </div></div>
   );
 };
 

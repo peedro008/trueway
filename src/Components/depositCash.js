@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Modal } from 'react-responsive-modal';
 import Icon from "../assets/Icon.png"
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 
 const DepositCash = () => {
@@ -63,7 +64,7 @@ const DepositCash = () => {
             <div className="DEPcont">
             <div className="DEPsubCont">
              
-            <table class="table2" >
+            <table class="table3" >
                     <tbody>
                         <tr>
                             <th scope="col" className="column1"><p   className="REPtype">Client name</p></th>
@@ -166,7 +167,8 @@ const DepositCash = () => {
       
         
         </div>
-      </Modal>       
+      </Modal> 
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
     )
 }

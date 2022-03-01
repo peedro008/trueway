@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./CSS/css.css"
 import SearchField from 'react-search-field';
 import { NavLink } from "react-router-dom";
+import { BsChevronRight } from "react-icons/bs";
 const QuoteReport=(props)=>{
     
     const [quotes, setQuotes]=useState([]) 
@@ -115,7 +116,7 @@ const QuoteReport=(props)=>{
                             <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{parseInt(e.time.substring(11,13))-5}{e.time.substring(16,19)}</NavLink></td>
                             {columns.down&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.down}</NavLink></td>}
                             {columns.monthlyPayment&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.monthlyPayment}</NavLink></td>}
-                            {columns.dealer&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.dealer?e.Dealer.name:"false"}</NavLink></td>}
+                            {columns.dealer&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.Dealer?e.Dealer.name:"false"}</NavLink></td>}
                             {columns.NSD&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.NSDvalue}</NavLink></td>}
                             {columns.PIP&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.PIPvalue}</NavLink></td>}
                             {columns.MVR&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.MVRvalue}</NavLink></td>}
@@ -156,7 +157,7 @@ const QuoteReport=(props)=>{
                     {columns.clienTel&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.Client.tel}</NavLink></td>}
                     {columns.category&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.Category.name}</NavLink></td>}
                     {columns.CompanyId&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.Company.name}</NavLink></td>}
-                    {columns.ProducerId&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.Producer.name}</NavLink></td>}
+                    {columns.ProducerId&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.User.name}</NavLink></td>}
                     {columns.bound&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.QuoteStatuses[e.QuoteStatuses.length-1].Status}</NavLink></td>}
                     <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{e.date}</NavLink></td>
                     <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/quote",aboutProps:{ID:e.id}}}>{parseInt(e.time.substring(11,13))-5}{e.time.substring(16,19)}</NavLink></td>
@@ -195,7 +196,7 @@ const QuoteReport=(props)=>{
 
 
 
-        
+      
         
     </div>
     )

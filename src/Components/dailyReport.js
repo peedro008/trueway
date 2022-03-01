@@ -1,17 +1,22 @@
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { useSelector } from 'react-redux'
 import SearchField from "react-search-field";
+import MyDocument from './PDF/daily';
 
 function DailyReport() {
     const [payments, setPayments] = useState([])
     const [cash, setCash] = useState(0)
     const [credit, setCredit] = useState(0)
     const [EFT, setEFT] = useState(0)
+    const [producers, setProducers] = useState([])
     const [search, setSearch] = useState("")
+    const [date, setDate ] = useState("")
     const UserId = useSelector(state=> state.UserId)
     useEffect(() => {
-        axios.get(`http://localhost:4000/dailyReport`,{ params: { UserId: UserId } })
+        axios.get(`http://localhost:4000/dailyReport`)
         .then(function(response){
             setPayments(response.data)
             
@@ -35,6 +40,25 @@ function DailyReport() {
         setCredit(CR)
         setEFT(EF)
     },[payments])
+    let pes = []
+    let DATE = ""
+    useEffect(()=>{
+           payments.map(e=>{
+            if(!pes.filter(f=>f.name==e.User.name).length){
+                pes.push({name: e.User.name, location: e.Location.name})
+            }
+        
+           })
+     
+       setProducers(pes)
+       payments.map(e=>{
+        if(!DATE){
+            DATE = e.date
+        }
+    setDate(DATE)
+       })
+    },[payments])
+    
   return (
     <div className='genericDiv1'>
         <div className="genericHeader">
@@ -50,7 +74,7 @@ function DailyReport() {
         /></div>
 
                 </div>
-           <table class="table2">
+           <table className="table2">
       
         <tbody>
             <tr>
@@ -133,7 +157,14 @@ function DailyReport() {
                     </p>
                 </div>
         </div>
-          
+
+        <PDFDownloadLink document={<MyDocument data={{payments:payments, producers:producers, date: date}} fileName="TEST"/>}>
+       
+        <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
+                <button className="PAYbutton" ><p className="PAYbuttonText">Add payment</p></button>
+            </div>    
+        </PDFDownloadLink>
+        <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
     </div>
   )
 }

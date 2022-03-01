@@ -11,6 +11,7 @@ import { NavLink } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 const schema = yup.object({
     name: yup.string().required(),
@@ -161,6 +162,7 @@ const ManagerC=()=>{
         </div>
       </Modal>
       <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"528px", opacity:"0.5"}}/>
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
 
     )

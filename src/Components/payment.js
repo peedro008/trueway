@@ -14,6 +14,7 @@ import ReactPDF, { PDFDownloadLink, PDFViewer} from '@react-pdf/renderer';
 import { useForm, Controller,setVa } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 const schema = yup.object({
     name:yup.string().optional().min(6),
@@ -23,7 +24,7 @@ const schema = yup.object({
     amount: yup.number().positive().integer().required(),
     type: yup.string().required(),
     method: yup.string().required(),
-    creditCardFee: yup.number().optional(),
+    creditCardFee: yup.number().optional().default(0),
     LocationId: yup.number().positive().integer().required(),
     UserId: yup.number().required()
     
@@ -40,13 +41,15 @@ function Payment(){
     const [payment, setPayment]= useState({creditCardFee:0})
     const [locations, setLocations] = useState([])
     const userId = useSelector(state=> state.UserId)
+    const userName = useSelector(state=> state.userName)
     const [clients, setClients] = useState([])
     const [newClient, setNewClient] = useState(false)
-
+    const [form, setForm] = useState({res: "res"})
+    
 
     
 
-    const { register, handleSubmit,control, formState:{ errors }, setValue } = useForm({
+    const { register, handleSubmit,control, formState:{ errors }, setValue,  } = useForm({
         resolver: yupResolver(schema)
       });
       setValue("UserId", `${userId}`)
@@ -111,7 +114,10 @@ function Payment(){
     }, [userId])
     
     const handleNewClient = () =>{
-        setNewClient(!newClient)
+        !newClient?
+        setNewClient(true)
+        :
+        reload()
     }
     const optionM = [{value:"credit/debit", label:"credit/debit"},
     {value:"EFT", label:"EFT"},
@@ -120,30 +126,10 @@ function Payment(){
     {value:"Down Payment", label:"Down Payment"},
     {value:"Endorsement", label:"Endorsement"},
     {value:"Renew Down", label:"Renew Down"}]
-    const refresh =()=>{
-       !newClient?
-        setPayment({
-            LocationId:null,
-            method:null,
-            type:null,
-            amount:"",
-            clientId:null,
-        }):
-        setPayment({
-            LocationId:null,
-            method:null,
-            type:null,
-            amount:"",
-          
-            Tel: "",
-            clientEmail:"",
-            clientName:""
-        })
-
-
-    }
+    
+    
     const onSubmit =(data)=>{
-  
+        console.log(optionsC.filter(e=>e.value==control._formValues.ClientId).label)
         console.log(data)
       
             
@@ -199,7 +185,7 @@ function Payment(){
                 
           
        
-        
+   
     
     const optionsC = clients.map(e=>({value:e.id,label:e.name}))
     const optionsL = locations.map(e=>({value:e.id,label:e.name}))
@@ -232,7 +218,7 @@ function Payment(){
                         control={control}
                         name="ClientId"
                         render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <Select value={optionsC.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={clients.map(e=>({value:e.id,label:e.name}))} name={"ClientId"} className="PAYselect"  placeholder="Select Client"/>
+                            <Select value={optionsC.find(c => c.value === value)}  onChange={val =>{ onChange(val.value) ; setForm({...form, client: val.label})}} control={control} options={clients.map(e=>({value:e.id,label:e.name}))} name={"ClientId"} className="PAYselect"  placeholder="Select Client"/>
                         )}
                         />
                         {ERR.ClientId&&<p className="FORMerror">"Client is a required field"</p>}
@@ -332,6 +318,7 @@ function Payment(){
                   <p className="FORMerror">{errors.creditCardFee?.message}</p>
                   </>
                 }
+
                 </div>
 
 
@@ -346,64 +333,25 @@ function Payment(){
         
         <p className="modalText">Payment added successfully</p>
        
-        {/* <PDFDownloadLink document={<MyDocument data={data} />} fileName="TEST"> */}
+        <PDFDownloadLink document={<MyDocument data={{client:form.client, total:(control._formValues.creditCardFee?(control._formValues.amount+control._formValues.creditCardFee):control._formValues.amount), producer: userName}} />} fileName="TEST">
         <button  className="modalButton" onClick={reload}> Continue</button>
-        {/* </PDFDownloadLink> */}
+        </PDFDownloadLink>
       
-        
+        <BsChevronRight color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"2%",top:"50%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
       </Modal>
         
            
             
             
-            
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
             
           
         
         
         
         </div>
-        {/* <div className="cash">
-        {payment.method=="Cash"&&
-            <div style={{display:"flex",flexDirection:"row", backgroundColor:"white", width:"600px", height:"310px", borderRadius:"6px", marginTop:"8px", padding:"15px"}}>
-                <div className="inputCont">  
-                <p  className="PAYtitle" style={{marginBottom:"20px"}}>Monto a pagar</p>
-                <div style={{display:"flex", flexDirection:"row"}}>
-                <p className="bils">Bills $1</p><input type="number"  className="sub-title3" value={box.pay} onChange={(event)=>{setBox({...box, pay1:event.target.value})}} />
-                </div>
-                <div style={{display:"flex", flexDirection:"row"}}>
-                <p className="bils">Bills $5   </p><input  type="number" className="sub-title3" value={box.pay} onChange={(event)=>{setBox({...box, pay5:event.target.value})}} />
-                </div>
-                <div style={{display:"flex", flexDirection:"row"}}>
-                <p className="bils">Bills $10 </p><input type="number" className="sub-title3" value={box.pay} onChange={(event)=>{setBox({...box, pay10:event.target.value})}} />
-                </div>
-                <div style={{display:"flex", flexDirection:"row"}}>
-                <p className="bils">Bills $20 </p><input type="number" className="sub-title3" value={box.pay} onChange={(event)=>{setBox({...box, pay20:event.target.value})}} />
-                </div>
-                <div style={{display:"flex", flexDirection:"row"}}>
-                <p className="bils">Bills $50 </p><input type="number" className="sub-title3" value={box.pay} onChange={(event)=>{setBox({...box, pay50:event.target.value})}} />
-                </div>
-                <div style={{display:"flex", flexDirection:"row"}}>
-                <p className="bils">Bills $100</p><input type="number" className="sub-title3" value={box.pay} onChange={(event)=>{setBox({...box, pay100:event.target.value})}} />
-                </div>
-
-                </div>
-                <div style={{marginLeft:"50px"}}>
-                <div className="inputCont">
-                <p  className="PAYtitle"  style={{marginBottom:"20px"}}>Change</p>
-                <p  className="PAYsub-title" style={{marginTop:"4px"}}>{payment.amount&&box?((Number(box.pay1))+(Number(box.pay5)*5)+(Number(box.pay10)*10)+(Number(box.pay20)*20)+(Number(box.pay50)*50)+(Number(box.pay100)*100)-payment.amount):0}</p>
-                </div> 
-                <div className="inputCont">
-                <p  className="PAYtitle">Depositado en el banco</p>
-                
-                </div> 
-                </div>
-
-            </div>
-            }
-        </div> */}
-      
+       
 
 
 

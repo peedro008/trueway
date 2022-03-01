@@ -19,9 +19,9 @@ const schema = yup.object({
     ClientId:yup.number().optional(),
     CompanyId:yup.number().required(),
     UserId:yup.number().required(),
-    DealerId:yup.number().optional(),
+    DealerId:yup.number().optional().default(0),
     down:yup.number().required(),
-    monthlyPayment:yup.number().required(),
+    monthlyPayment:yup.number().optional(),
   
     NSDvalue:yup.number().optional().default(0),
 
@@ -197,14 +197,19 @@ const AddQuote = ()=>{
     };
     
 const handleNewClient = () =>{
-    setNewClient(!newClient)
+    !newClient?
+    setNewClient(true)
+    :
+    reload()
+    
 }
 const optionsCa = categories.map(e=>({value:e.id,label:e.name}))
 const optionsCo = companies.map(e=>({value:e.id,label:e.name}))
 const optionsL = locations.map(e=>({value:e.id,label:e.name}))
 const optionsD = dealers.map(e=>({value:e.id,label:e.name}))
 const optionsC = clients.map(e=>({value:e.id,label:e.name}))
-    return(
+
+return(
 
 
      <div className="genericDiv">
@@ -351,7 +356,12 @@ const optionsC = clients.map(e=>({value:e.id,label:e.name}))
                     <input className="AQinput" placeholder="Monthly payment" key="monthlyPayment" name="monthlyPayment"  value={inputs.monthlyPayment} {...register("monthlyPayment")}/>
                     <p className="FORMerror">{errors.monthlyPayment?.message.substring(0,24)}</p>
                 </div>
-               
+                <div className="AQinputContainer" style={{display:"flex", flexDirection:"column", backgroundColor:"start"}}>
+
+                </div>
+                <div className="AQinputContainer" style={{display:"flex", flexDirection:"column", backgroundColor:"start"}}>
+
+                </div>
             </div>
 
             
@@ -389,12 +399,12 @@ const optionsC = clients.map(e=>({value:e.id,label:e.name}))
                     <p className="AQinputName">PIP</p>
                     <div className="AQyesNoContainer">
                         <div>
-                            <input   type="checkbox" checked={inputs.PIP} value={inputs.PIP} key="PIP" name="PIP" onChange = {(event) =>setInputs({...inputs,PIP:!inputs.PIP}),(event) =>setInputs({...inputs,PIPvalue:10})}/>
+                            <input   className="AQcheckInput"  type="checkbox" checked={inputs.PIP} value={inputs.PIP} key="PIP" name="PIP" onChange = {(event) =>setInputs({...inputs,PIP:!inputs.PIP}),(event) =>setInputs({...inputs,PIP:!inputs.PIP})}/>
                             {inputs.PIP?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>}
                         </div>
                         {inputs.PIP&&
                         <>
-                        <input className="AQinput3" placeholder="PIP value" key="dealerSalePerson" name="dealerSalePerson"  {...register("PIPvalue")}/>
+                        <input className="AQinput2" placeholder="PIP value" key="dealerSalePerson" name="dealerSalePerson"  {...register("PIPvalue")}/>
                         <p className="FORMerror">{errors.NSDvalue?.message}</p> 
                         </>
                          

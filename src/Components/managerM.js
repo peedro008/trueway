@@ -8,6 +8,7 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import Icon from "../assets/Icon.png"
 import { NavLink } from "react-router-dom";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 const ManagerM=()=>{
     const [locations, setLocations] = useState([])
     const [open, setOpen] = useState(false);
@@ -86,7 +87,7 @@ const ManagerM=()=>{
         </div>
       </Modal>
       <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"528px", opacity:"0.5"}}/>
-
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
 </div>
     )
 }
