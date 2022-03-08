@@ -43,13 +43,13 @@ import ClientEdit from './clientEdit';
           <Route exact path='/dailyReport' component={DailyReport}/>
           <Route exact path='/profile' component={ProducerPerfil}/>
           <Route exact path='/report' component={Report}/>
-          <Route exact path='/filter' component={AdminFilter}/>
-          <Route exact path='/quoteReport' component={QuoteReport}/>
+          <Route exact path='/report/filter' component={AdminFilter}/>
+          <Route exact path='/report/quoteReport' component={QuoteReport}/>
           <Route exact path='/payReport' component={PayReport}/>
-          <Route exact path='/quote' component={QuoteDetails}/>
-          <Route exact path='/modifyquote' component={ModifyQuote}/>
+          <Route exact path='/report/quote' component={QuoteDetails}/>
+          <Route exact path='/report/modifyquote' component={ModifyQuote}/>
           <Route exact path='/addquote' component={AddQuote}/>
-          <Route exact path='/clients' component={ClientsReport}/>
+          <Route exact path='/report/clients' component={ClientsReport}/>
           <Route exact path='/clientedit' component={ClientEdit}/>
            {/* <Route exact path='/myquotes/report' component={MyQuotes}/> 
           <Route exact path='/myquotes' component={ProducerFilter}/>

@@ -34,7 +34,7 @@ const Auth = ()=>{
             UserName,
             Password,
         };
-        fetch(`http://localhost:4000/login`, {
+        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/login`, {
             
             method: 'POST',
             headers: {

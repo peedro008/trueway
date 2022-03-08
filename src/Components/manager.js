@@ -13,26 +13,26 @@ const Manager=()=>{
         </div>
         <div className="managerContainer">
             
-            <NavLink to={"./managerC"}  style={{ textDecoration: 'none', color:"#000" }}>
+            <NavLink to={"./manager/managerC"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd  color="white" size={"20px"} className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Add Company</p></button>
             </NavLink>
-            <NavLink to={"./managerP"}  style={{ textDecoration: 'none', color:"#000" }}>
+            <NavLink to={"./manager/managerP"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd color="white" size={"20px"}  className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Add Producer</p></button>
             </NavLink>
-            <NavLink to={"./managerM"}  style={{ textDecoration: 'none', color:"#000" }}>
+            <NavLink to={"./manager/managerM"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd color="white" size={"20px"}   className="PAYbuttonIcon"/><p className="PAYbuttonText"> Add Manager</p></button>
             </NavLink>
             </div>
         
         <div className="managerContainer">
-            <NavLink to={"./managerL"}  style={{ textDecoration: 'none', color:"#000" }}>
+            <NavLink to={"./manager/managerL"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd color="white" size={"20px"}   className="PAYbuttonIcon"/> <p className="PAYbuttonText">Add Location</p></button>
             </NavLink>
 
-            <NavLink to={"./managerD"}  style={{ textDecoration: 'none', color:"#000" }}>
+            <NavLink to={"./manager/managerD"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd color="white" size={"20px"}   className="PAYbuttonIcon"/> <p className="PAYbuttonText">Add Dealer sale person</p></button>
             </NavLink>
-            <NavLink to={"./managerCa"}  style={{ textDecoration: 'none', color:"#000" }}>
+            <NavLink to={"./manager/managerCa"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd color="white" size={"20px"}   className="PAYbuttonIcon"/> <p className="PAYbuttonText">Add Category</p></button>
             </NavLink>
         </div>

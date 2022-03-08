@@ -24,7 +24,7 @@ function ModifyQuote(props) {
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
     useEffect(() => {
-        axios.get(`http://localhost:4000/idquotes`,{ params: { id: id } })
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/idquotes`,{ params: { id: id } })
         .then(function(response){
             setQuote(response.data)
             
@@ -70,7 +70,7 @@ function ModifyQuote(props) {
       
         
         console.log(inputs)
-        fetch(`http://localhost:4000/modifyQuote`, {
+        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/modifyQuote`, {
             
             method: 'POST',
             headers: {
@@ -252,7 +252,7 @@ function ModifyQuote(props) {
         
         </div>
       </Modal>
-      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
         </div>
     )
 }

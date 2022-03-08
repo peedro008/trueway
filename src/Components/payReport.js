@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, {  useEffect, useState } from "react";
 import SearchField from "react-search-field";
+import { BsChevronLeft } from "react-icons/bs";
+
 const PayReport = () => {
     const [payments, setPayments] = useState([]) 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/getPayments`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getPayments`)
             .then(function(response){
                 setPayments(response.data)
                 
@@ -25,6 +27,12 @@ const PayReport = () => {
                 <p className="genericTitle">Payment reports</p>
             </div>
             <div className="REPcontrol">
+            <div className="REPsearch">
+         <SearchField 
+            classNames="pepe"
+            placeholder='Search item'
+            
+        /></div>
          <div className="REPDate">
              <p className="REPdateText">From</p>
              <input className="REPmonth" placeholder="MM"/>
@@ -36,12 +44,7 @@ const PayReport = () => {
              <input className="REPyear" placeholder="YYYY"/>
              <button className="RepSearchButton">Search</button>
          </div>
-         <div className="REPsearch">
-         <SearchField 
-            classNames="pepe"
-            placeholder='Search item'
-            
-        /></div>
+ 
 
                 </div>
            <table class="table2">
@@ -86,6 +89,7 @@ const PayReport = () => {
         
         </tbody>
             </table>
+            <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
     )
 }

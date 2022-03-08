@@ -11,7 +11,7 @@ function ClientsReport() {
     const [search, setSearch] = useState("")
     
     useEffect(() => {
-        axios.get(`http://localhost:4000/clients`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/clients`)
         .then(function(response){
             setPayments(response.data)
             
@@ -28,11 +28,11 @@ function ClientsReport() {
         </div>
         <div className="REPcontrol">
        
-         <div className="DAIsearch">
+        <div className="REPsearch">
          <SearchField 
-            classNames="pepee"
+            classNames="pepe"
             placeholder='Search item'
-            onChange={setSearch}
+            
         /></div>
 
                 </div>
@@ -112,7 +112,7 @@ function ClientsReport() {
             </table>
 
 
-            <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>    
+            <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>    
     </div>
   )
 }

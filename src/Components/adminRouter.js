@@ -39,28 +39,28 @@ import ClientEdit from './clientEdit';
           <Route component={AdminNav}/>
           <Route exact path='/' component={AdminDash}/>
           <Route exact path='/payments' component={Payments}/>
-          <Route exact path='/payment' component={Payment}/>
-          <Route exact path="/deposit" component={DepositCash}/>
+          <Route exact path='/payments/pay' component={Payment}/>
+          <Route exact path="/payments/deposit" component={DepositCash}/>
           <Route exact path='/manager' component={Manager}/>
-          <Route exact path='/managerC' component={ManagerC}/>
-          <Route exact path='/managerL' component={ManagerL}/>
-          <Route exact path='/managerM' component={ManagerM}/>
-          <Route exact path='/managerP' component={ManagerP}/>
-          <Route exact path='/managerD' component={ManagerD}/>
-          <Route exact path='/managerCa' component={ManagerCa}/>
+          <Route exact path='/manager/managerC' component={ManagerC}/>
+          <Route exact path='/manager/managerL' component={ManagerL}/>
+          <Route exact path='/manager/managerM' component={ManagerM}/>
+          <Route exact path='/manager/managerP' component={ManagerP}/>
+          <Route exact path='/manager/managerD' component={ManagerD}/>
+          <Route exact path='/manager/managerCa' component={ManagerCa}/>
           <Route exact path='/producers' component={Producer}/>
           <Route exact path='/producers/edit' component={ProducerEdit}/>
           <Route exact path='/producers/details' component={ProducerDetails}/>
           <Route exact path='/report' component={Report}/>
-          <Route exact path='/filter' component={AdminFilter}/>
-          <Route exact path='/quoteReport' component={QuoteReport}/>
-          <Route exact path='/payReport' component={PayReport}/>
-          <Route exact path='/quote' component={QuoteDetails}/>
-          <Route exact path='/modifyquote' component={ModifyQuote}/>
+          <Route exact path='/report/filter' component={AdminFilter}/>
+          <Route exact path='/report/quoteReport' component={QuoteReport}/>
+          <Route exact path='/report/payReport' component={PayReport}/>
+          <Route exact path='/report/quote' component={QuoteDetails}/>
+          <Route exact path='/report/modifyquote' component={ModifyQuote}/>
           <Route exact path='/addquote' component={AddQuote}/>
-          <Route exact path='/dailyReport' component={DailyReport}/>
-          <Route exact path='/clients' component={ClientsReport}/>
-          <Route exact path='/clientedit' component={ClientEdit}/>
+          <Route exact path='/payments/dailyReport' component={DailyReport}/>
+          <Route exact path='/report/clients' component={ClientsReport}/>
+          <Route exact path='/report/clientedit' component={ClientEdit}/>
          {/*  <Route exact path='/producer/info' component={ProducerInfo}/>
           <Route exact path='/balances' component={Balances}/>
           <Route exact path='/filter' component={AdminFilter}/>

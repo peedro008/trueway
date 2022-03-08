@@ -8,7 +8,7 @@ function PizzaChart ({google}) {
   const [dato, setDato]= useState([])
   console.log(quotes.filter(f=>f.User.name=="Producer").length)
       useEffect(()=>{
-          axios.get(`http://localhost:4000/getProducer`)
+          axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
               .then(function(response){
                   setProducers(response.data)
               })
@@ -18,7 +18,7 @@ function PizzaChart ({google}) {
       
       },[])
       useEffect(()=>{
-          axios.get(`http://localhost:4000/quotes`)
+          axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
               .then(function(response){
                   setQuotes(response.data)
               })
@@ -49,11 +49,17 @@ function PizzaChart ({google}) {
                      'width':995,
                      "height": 350,
                      fontSize:12,
-                     
+                     titleTextStyle: {
+                      
+                      fontName: "Gilroy",
+                      fontSize: "14", 
+                      marginLeft:"-10px"
+                  },
 
                      "colors": ["#6F52ED","#FF7A00"],
-                     backgroundColor:"#E5E5E5",
-                     bar: { groupWidth: "20%"},
+                     backgroundColor:"#fafafa",
+
+                     bar: { groupWidth: "10%"},
                      vAxis: {format:'0'},
                      hAxis: {format:'0'}
                     };

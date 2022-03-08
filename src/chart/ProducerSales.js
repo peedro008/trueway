@@ -12,18 +12,19 @@ function ProducerSales ( {aboutProps ,google}) {
   
   
   useEffect (()=>{
-      let Producer = aboutProps
-    axios.get(`http://localhost:4000/producerQuotes?UserId=${Producer.UserId}`)
+      let userId = aboutProps.UserId
+      console.log(userId)
+    axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/producerQuotes?UserId=${userId}`)
     .then(function(response){
         setQuotes(response.data)
-       
+        console.log(response.data)  
         
         
     })
     .catch(error=>{
       console.log(error)  
     })
-},[aboutProps])
+},[])
 useEffect(()=>{
     
     const date =  new Date()
@@ -56,7 +57,7 @@ useEffect(()=>{
    
     Yquotes.map((e)=>{
         if(e.date.substring(5,7)=="01"){
-           if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+           if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                m0=m0+1
            }
            else{
@@ -64,7 +65,7 @@ useEffect(()=>{
            }
         } 
         else if(e.date.substring(5,7)=="02"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m1=m1+1
             }
             else{
@@ -72,7 +73,7 @@ useEffect(()=>{
             }
          } 
         else if(e.date.substring(5,7)=="03"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m2=m2+1
             }
             else{
@@ -80,7 +81,7 @@ useEffect(()=>{
             }
          } 
          else if(e.date.substring(5,7)=="04"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m3=m3+1
             }
             else{
@@ -88,7 +89,7 @@ useEffect(()=>{
             }
          } 
          else if(e.date.substring(5,7)=="05"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m4=m4+1
             }
             else{
@@ -96,7 +97,7 @@ useEffect(()=>{
             }
          } 
          else if(e.date.substring(5,7)=="06"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m5=m5+1
             }
             else{
@@ -104,7 +105,7 @@ useEffect(()=>{
             }
         } 
         else if(e.date.substring(5,7)=="07"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m6=m6+1
             }
             else{
@@ -112,7 +113,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="08"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m7=m7+1
             }
             else{
@@ -120,7 +121,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="09"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m8=m8+1
             }
             else{
@@ -128,7 +129,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="10"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m9=m9+1
             }
             else{
@@ -136,7 +137,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="11"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m10=m10+1
             }
             else{
@@ -144,7 +145,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="12"){
-            if(e.QuoteStatuses[0].Status!=="Cancelled"&&e.QuoteStatuses[0].Status!=="Quoted"){
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
                 m11=m11+1
             }
             else{
@@ -182,9 +183,14 @@ useEffect(()=>{
                      "height": 220,
                      fontSize:12,
                      
-
+                     titleTextStyle: {
+                      
+                        fontName: "Gilroy",
+                        fontSize: "14", 
+                        marginLeft:"-10px"
+                    },
                      "colors": ["#6F52ED","#FF7A00"],
-                     backgroundColor:"#E5E5E5",
+                     backgroundColor:"#fbfbfb",
                      bar: { groupWidth: "20%"}
 
                     };
@@ -194,7 +200,7 @@ useEffect(()=>{
       newChart.draw(data, options);
       console.log(dato)
       setChart(newChart);
-    }}, 200)
+    }}, 1000)
   }, [ chart, dato]);
   
   return (

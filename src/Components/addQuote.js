@@ -54,7 +54,7 @@ const AddQuote = ()=>{
       });
       setValue("UserId", `${userId}`)
     useEffect(()=>{
-        axios.get(`http://localhost:4000/getDealer`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getDealer`)
             .then(function(response){
                 setDealers(response.data)
                 setInputs({...inputs, ProducerId:1})
@@ -65,7 +65,7 @@ const AddQuote = ()=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/clients`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/clients`)
             .then(function(response){
                 setClients(response.data)
                 
@@ -76,7 +76,7 @@ const AddQuote = ()=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/getLocations`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -87,7 +87,7 @@ const AddQuote = ()=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:4000/getProducer`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
             .then(function(response){
                 setProducers(response.data)
             })
@@ -97,7 +97,7 @@ const AddQuote = ()=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:4000/getCategories`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getCategories`)
             .then(function(response){
                 setCategories(response.data)
             })
@@ -107,7 +107,7 @@ const AddQuote = ()=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:4000/getCompany`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getCompany`)
             .then(function(response){
                 setCompanies(response.data)
             })
@@ -160,7 +160,7 @@ const AddQuote = ()=>{
     const onSubmit = (data) => {
  
        
-        fetch(`http://localhost:4000/addQuote`, {
+        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addQuote`, {
             
             method: 'POST',
             headers: {
@@ -220,9 +220,9 @@ return(
                 <p className="genericTitle">Add quote</p>
             </div>
             
-        <div className="AQcontainer">
+        <div className="AQcontainer" >
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="AQrowContainer"style={{marginRight:"309px"}}>
+            <div className="AQrowContainer2" >
            
                 
             <div className="AQinputContainer">
@@ -399,7 +399,7 @@ return(
                     <p className="AQinputName">PIP</p>
                     <div className="AQyesNoContainer">
                         <div>
-                            <input   className="AQcheckInput"  type="checkbox" checked={inputs.PIP} value={inputs.PIP} key="PIP" name="PIP" onChange = {(event) =>setInputs({...inputs,PIP:!inputs.PIP}),(event) =>setInputs({...inputs,PIP:!inputs.PIP})}/>
+                            <input   className="AQcheckInput"  type="checkbox" checked={inputs.PIP} value={inputs.PIP} key="PIP" name="PIP" onChange = {(event) =>setInputs({...inputs,PIP:!inputs.PIP})}/>
                             {inputs.PIP?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>}
                         </div>
                         {inputs.PIP&&

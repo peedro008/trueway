@@ -1,0 +1,59 @@
+DASHBOARD
+
+* El fondo tiene un desfazado hacia arriba
+* El logo tiene un desfazado del costado derecho
+* La barra superior blanca deberia empatar con el height del logo
+* Falta el valor promedio del cuadro "Sellers average sale"
+* Al hacer la navegación con las flechas, volviendo a la pantalla #1 sale lag.
+
+* Las secciones internas no figuran con el background blanco de la sección en el menu
+
+* La flecha de retroceso esta muy grande
+
+
+PAYMENTS
+
+* El fondo esta desfazado hacia arriba
+
+	PAYMENTS -> Add payment
+	* El campo "amount" debe tener el mismo hight que el resto de campos
+	* El popup de "payment added successfully" tiene una flecha hacia la derecha y el boton de continue no esta centrado
+***** Despues de aceptar se descarga bien el pdf pero produce error en pantalla
+	* Alinear el boton azul con la altura del titulo
+	
+	
+	PAYMENTS ->	Deposit cash
+	* Agregar padding lateral al boton submit
+	
+	
+	PAYMENTS -> Daily report
+	* Poner el buscador al margen izquierdo, agregar border radius
+
+
+PRODUCER
+* Alinear el boton azul con la altura del titulo
+
+
+REPORTS
+* Mismo width a los 3 botones
+
+	REPORTS -> Quotes
+	* Padding al boton submit de los filtros
+	* Achicar tamaño de letra en los campos MM/DD/YY
+	* Disponer el buscador al margen izq (al lado del filtro de fecha)
+	
+	REPORTS -> Payments
+	* Disponer el buscador al margen izq (al lado del filtro de fecha)
+	* Es importante que figure en la barra del menu la sección en la cual se esta
+	
+	REPORTS -> Clients
+	* Disponer el buscador al margen izq (al lado del filtro de fecha)
+	
+
+ADD QUOTE
+	* Alinear el boton azul con la altura del titulo
+	* Height de los campos y desplegables de mismo tamaño
+	* Margin vertical igual para todos los campos
+	* En los campos cuando das click para insertar texto sigue figurando el name placeholder entonces no te das cuenta que ya puedes escribir
+	* Al hacer la interacción con los botones, el cursor no cambia a la manito
+***** Despues de agregar la Quote figura error

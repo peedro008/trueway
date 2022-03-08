@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+import { BsChevronLeft } from "react-icons/bs";
 
 const schema = yup.object({
     name: yup.string().required(),
@@ -39,7 +39,7 @@ const ManagerC=()=>{
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
     useEffect(()=>{
-        axios.get(`http://localhost:4000/getCategories`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getCategories`)
             .then(function(response){
                 setCategories(response.data)
                 
@@ -52,7 +52,7 @@ const ManagerC=()=>{
     const onSubmit = (data) => {
         data&&
         console.log(JSON.stringify(data))
-        fetch(`http://localhost:4000/addCompany`, {
+        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addCompany`, {
             
             method: 'POST',
             headers: {
@@ -162,7 +162,7 @@ const ManagerC=()=>{
         </div>
       </Modal>
       <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"528px", opacity:"0.5"}}/>
-      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
 
     )

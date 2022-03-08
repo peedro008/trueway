@@ -2,12 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./CSS/css.css"
-import ProducerDetailBox1 from "../assets/ProducerDetailBox1.png"
-import ProducerDetailBox2 from "../assets/ProducerDetailBox2.png"
-import ProducerDetailBox3 from "../assets/ProducerDetailBox3.png"
-import producerDetailsG11 from "../assets/producerDetailsG11.png"
-import producerDetailsG12 from "../assets/producerDetailsG12.png"
-import producerDetailsG2 from "../assets/producerDetailsG2.png"
+import { BsChevronLeft } from "react-icons/bs";
 import { BiPencil,BiDotsHorizontalRounded } from "react-icons/bi";
 import { AiOutlineArrowDown,AiOutlineArrowUp } from "react-icons/ai";
 import ProducerSales from "../chart/ProducerSales";
@@ -30,7 +25,7 @@ const ProducerDetails = (props) => {
     const [dots2V, setDots2V] = useState(0)
     const [dots3V, setDots3V] = useState(0)
     useEffect (()=>{
-        axios.get(`http://localhost:4000/producerQuotes?UserId=${Producer.UserId}`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/producerQuotes?UserId=${Producer.UserId}`)
         .then(function(response){
             setQuotes(response.data)
            
@@ -60,11 +55,11 @@ const ProducerDetails = (props) => {
         let m = mquotes
         let y  = yquotes
         m.map(e=>
-            pes.push(e.QuoteStatuses[0])
+            pes.push(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0])
         )
         setMstat(pes)
         y.map(e=>
-            pas.push(e.QuoteStatuses[0])
+            pas.push(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0])
         )
         setYstat(pas)
         
@@ -187,6 +182,7 @@ const ProducerDetails = (props) => {
                     </div>
                 </button>
                 </NavLink>
+                <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
     )
 }

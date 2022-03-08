@@ -16,7 +16,7 @@ function DailyReport() {
     const [date, setDate ] = useState("")
     const UserId = useSelector(state=> state.UserId)
     useEffect(() => {
-        axios.get(`http://localhost:4000/dailyReport`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/dailyReport`)
         .then(function(response){
             setPayments(response.data)
             
@@ -164,7 +164,7 @@ function DailyReport() {
                 <button className="PAYbutton" ><p className="PAYbuttonText">Add payment</p></button>
             </div>    
         </PDFDownloadLink>
-        <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
+        <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
     </div>
   )
 }

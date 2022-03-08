@@ -88,7 +88,7 @@ function Payment(){
        
     }
     useEffect(()=>{
-        axios.get(`http://localhost:4000/clients`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/clients`)
             .then(function(response){
                 setClients(response.data)
                 
@@ -99,7 +99,7 @@ function Payment(){
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/getLocations`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -140,7 +140,7 @@ function Payment(){
                 
                 
                
-                fetch(`http://localhost:4000/addPayment`, {
+                fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addPayment`, {
                     
                     method: 'POST',
                     headers: {
@@ -163,7 +163,7 @@ function Payment(){
                  
                         
                   
-                        fetch(`http://localhost:4000/addClientPayment`, {
+                        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addClientPayment`, {
                         
                         method: 'POST',
                         headers: {
@@ -333,18 +333,18 @@ function Payment(){
         
         <p className="modalText">Payment added successfully</p>
        
-        <PDFDownloadLink document={<MyDocument data={{client:form.client, total:(control._formValues.creditCardFee?(control._formValues.amount+control._formValues.creditCardFee):control._formValues.amount), producer: userName}} />} fileName="TEST">
-        <button  className="modalButton" onClick={reload}> Continue</button>
-        </PDFDownloadLink>
+     
+        <button  className="modalButton" onClick={reload}>   <PDFDownloadLink document={<MyDocument data={{client:form.client, total:(control._formValues.creditCardFee?(control._formValues.amount+control._formValues.creditCardFee):control._formValues.amount), producer: userName}} />} fileName="TEST"> Continue  </PDFDownloadLink></button>
       
-        <BsChevronRight color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"2%",top:"50%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
+      
+        
         </div>
       </Modal>
         
            
             
             
-      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
+      <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
             
           
         

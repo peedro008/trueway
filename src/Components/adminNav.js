@@ -3,7 +3,7 @@
 import React from 'react';
 import {
   
-  Link} from 'react-router-dom'
+  Link, NavLink} from 'react-router-dom'
 import "./CSS/css.css"
 
 import logo from '../assets/logo.png';
@@ -43,7 +43,7 @@ function AdminNav() {
     <p className='NArole'>{Role}</p>
     </div>
     <button onClick={()=>logOut()} style={{backgroundColor:"transparent", borderWidth:"0px"}}>
-    <FiLogOut size="20px" color='grey' style={{alignSelf:"center"}}/></button>
+    <FiLogOut size="20px" className='NAicon'  style={{alignSelf:"center"}}/></button>
 
   </div>
   </div>
@@ -51,40 +51,40 @@ function AdminNav() {
   <div className="sidebar">
       <img className="image" src={logo} alt={"logo"}/>
       <div className="NAcontainer">
-      <Link className="icons" to='/'>
-       <FiGrid className="NAicon"  color="#969CBA"  />
-      </Link>
+      <NavLink className="icons" to='/'activeClassName='NAavtive'exact  >
+       <FiGrid className="NAicon"   color="#868ba5" activeClassName='NAactive'  />
+      </NavLink>
       </div>
       <span/>
       <div className="NAcontainer">
-      <Link className="icons" to='/payments'>
-       <FaRegMoneyBillAlt className="NAicon"  color="#969CBA"  />
-      </Link>
+      <NavLink className="icons" to='/payments'activeClassName='NAavtive' >
+       <FaRegMoneyBillAlt className="NAicon"  color="#868ba5"  />
+      </NavLink>
       </div>
       <div className="NAcontainer">
-      <Link className="icons" to='/producers'>
-       <FiUser className="NAicon" size="20px"  color="#969CBA"/>
-     </Link></div>
+      <NavLink className="icons" to='/producers'activeClassName='NAavtive'>
+       <FiUser className="NAicon" size="20px"  color="#868ba5"/>
+     </NavLink></div>
      <span/>
      <div className="NAcontainer">
-      <Link  className="icons" to='/report'>
-      <VscGraph className="NAicon" size="20px" color="#969CBA" />
-     </Link></div>
+      <NavLink  className="icons" to='/report'activeClassName='NAavtive'>
+      <VscGraph className="NAicon" size="20px" color="#868ba5" />
+     </NavLink></div>
      <span/>
      
      
      
      
      <div className="NAcontainer">
-      <Link  className="icons" to='/addquote'>
-      <AiOutlineFile className="NAicon" size="20px" color="#969CBA" />
-     </Link></div>
+      <NavLink  className="icons" to='/addquote'activeClassName='NAavtive'>
+      <AiOutlineFile className="NAicon" size="20px" color="#868ba5" />
+     </NavLink></div>
      <span/>
      
      <div className="NAcontainer">
-      <Link  className="icons" to='/Manager'>
-      <MdAdd className="NAicon" size="25px" color="#969CBA" />
-     </Link></div>
+      <NavLink  className="icons" to='/Manager'activeClassName='NAavtive'>
+      <MdAdd className="NAicon" size="25px" color="#868ba5" />
+     </NavLink></div>
 
       
      

@@ -20,20 +20,20 @@ import Isologo_background from  "../assets/Isologo_background.png"
            
             <div className="PAYbuttonCont">
                 
-                <NavLink  style={{ textDecoration: 'none', color:"#000" }} to="/payment">
+                <NavLink  style={{ textDecoration: 'none', color:"#000" }} to="/payments/pay">
                     <button  className="PAYbutton">
                     <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF"/> 
                     <p className="PAYbuttonText">Add payment</p>
                     </button>
                 </NavLink>
-                <NavLink  style={{ textDecoration: 'none', color:"#000" }} to="/deposit">
+                <NavLink  style={{ textDecoration: 'none', color:"#000" }} to="/payments/deposit">
                     <button  className="PAYbutton">
                     
                     <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF"/> 
                     <p className="PAYbuttonText">Deposit cash</p>
                     </button>
                 </NavLink>
-                <NavLink to="/dailyReport" style={{ textDecoration: 'none', color:"#000" }}>
+                <NavLink to="/payments/dailyReport" style={{ textDecoration: 'none', color:"#000" }}>
                     <button className="PAYbutton">
                         <CgImport size="1.2em" className="PAYbuttonIcon" color="#FFFFFF"/> 
                         <p className="PAYbuttonText">Generate daily report</p>

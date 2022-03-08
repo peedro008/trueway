@@ -12,8 +12,8 @@ function ProducerPie ({aboutProps, google}) {
       ])
 
       useEffect (()=>{
-        let Producer = aboutProps
-      axios.get(`http://localhost:4000/producerQuotes?UserId=${Producer.UserId}`)
+        let userId = aboutProps.UserId
+      axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/producerQuotes?UserId=${userId}`)
       .then(function(response){
           setQuotes(response.data)
          
@@ -29,7 +29,7 @@ function ProducerPie ({aboutProps, google}) {
       let quoted = 0
       let cancelled = 0
       let sold = 0
-      quotes.map(e=>e.QuoteStatuses[0].Status=="Cancelled"?
+      quotes.map(e=>e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status=="Cancelled"?
       cancelled= cancelled+1
       :e.QuoteStatuses[0].Status=="Quoted"?
       quoted=quoted+1:
@@ -52,13 +52,19 @@ function ProducerPie ({aboutProps, google}) {
       var options = {'title':'Cancelations',
                   
                     pieHole: 0.4,
+                    "colors": ["#FFB800","#33D69F","#FF4C61"],
                    
                      'height':250,
                       "width":400,
                       
-          
+                      titleTextStyle: {
                       
-                     backgroundColor:"#e5e5e5"
+                        fontName: "Gilroy",
+                        fontSize: "14", 
+                        marginLeft:"-10px"
+                    },
+                      
+                     backgroundColor:"#fbfbfb"
                     };
       
       // Instantiate and draw our chart, passing in some options.
@@ -66,7 +72,7 @@ function ProducerPie ({aboutProps, google}) {
       newChart.draw(data, options);
       
       setChart(newChart);
-    }}, 200)
+    }}, 1000)
   }, [dato, chart]);
 
   return (

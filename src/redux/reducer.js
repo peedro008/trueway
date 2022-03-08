@@ -44,7 +44,7 @@ import {
               }
               case LOGOUT:
                 return{
-                  ...state,
+                 
                  
                   userRole:null,
                 

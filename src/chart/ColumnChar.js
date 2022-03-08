@@ -10,7 +10,7 @@ function PozzaChart ({google}) {
 
     useEffect (()=>{
      
-    axios.get(`http://localhost:4000/quotes`)
+    axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
     .then(function(response){
         setQuotes(response.data)
        
@@ -26,7 +26,7 @@ useEffect(()=>{
     
     let pes = []
     quotes.map(e=>{
-      pes.push((e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status))
+      pes.push((e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status))
     })
     setAsd(pes)
 
@@ -50,29 +50,41 @@ useEffect(()=>{
       :
       reins=reins+1}
       )
-      setDato([["Quoted",quoted],["Cancelled",cancelled],["Sold",sold], ["Renew Down",renew],["Re-install",reins]])
-},[asd])
+      let pes = [["Quoted",quoted],["Cancelled",cancelled],["Sold",sold], ["Renew Down",renew],["Re-install",reins]]
+      let pas = []
+      pes.map(e=>{if(e[1]!==0)pas.push(e)})
+      
+    
+      setDato(pas)
+      console.log(dato)
+    },[asd])
 
   useEffect(() => {
+  
    setTimeout(()=>{
     if (google && !chart) {
       const data = new google.visualization.DataTable();
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
-      console.log(dato)
+      
       data.addRows(dato);
       
       // Set chart options
       var options = {'title':'Quote status',
                   
                     pieHole: 0.4,
-                   
+                    titleTextStyle: {
+                      
+                      fontName: "Gilroy",
+                      fontSize: "14", 
+                      marginLeft:"-10px"
+                  },
                      'height':400,
                       "width":600,
-                      
+                      "colors": ["#FFB800","#33D69F","#FF4C61","#777DA7","#ADD9F4"],
           
                       
-                     backgroundColor:"#e5e5e5"
+                     backgroundColor:"#fafafa"
                     };
       
       // Instantiate and draw our chart, passing in some options.
@@ -80,7 +92,7 @@ useEffect(()=>{
       newChart.draw(data, options);
       
       setChart(newChart);
-    }}, 200)
+    }}, 1000)
   }, [ dato, chart]);
   return (
     <>

@@ -30,9 +30,10 @@ const AdminDash = ()=>{
    const [quotes, setQuotes]= useState([])
     const [dataList, setDataList] = useState([])
     const [status, setStatus] = useState([])
+    const [quotes2, setQuotes2]=useState([])
 
        useEffect(()=>{
-           axios.get(`http://localhost:4000/getProducer`)
+           axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
                .then(function(response){
                    setProducers(response.data)
                })
@@ -42,7 +43,7 @@ const AdminDash = ()=>{
        
        },[])
        useEffect(()=>{
-        axios.get(`http://localhost:4000/getStatus`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getStatus`)
             .then(function(response){
                 setStatus(response.data)
             })
@@ -52,9 +53,10 @@ const AdminDash = ()=>{
     
     },[])
        useEffect(()=>{
-           axios.get(`http://localhost:4000/quotes`)
+           axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
                .then(function(response){
                    setQuotes(response.data)
+                   setQuotes2(response.data)
                })
                .catch(error=>{
                  console.log(error)  
@@ -83,12 +85,12 @@ const AdminDash = ()=>{
             </div>
             {!next?
             <div className="DashContainer">
-                <div className="DashSubCont">
+                <div className="DashSubCont" >
                <div style={{marginLeft:"-100px"}}>
                 {google&&   <PizzaChart 
                 google={google}/>}
             </div>
-            <div className="DashPList">
+            <div className="DashPList1">
                 <div className="DashPListHeader">
                     <p className="DashPListTitle">Sellers average sale</p>
                     <p className="DashPListSTitle">Descending</p>
@@ -96,7 +98,7 @@ const AdminDash = ()=>{
                 <div className="DashPListDivider"/>
                 {dataList.map(e=>{
                     return (
-                        <div className="DashPListRow">
+                        <div className="DashPListRow1" style={{marginBottom:"7px"}}>
                             <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
                             <div className="DashPListCircle">
                                <img src={mask}/> 
@@ -196,9 +198,9 @@ const AdminDash = ()=>{
                 </div>
             </div>}
             {!next?
-            <BsChevronRight color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"2%",top:"50%", alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>
+            <BsChevronRight color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"1%",top:"50%", alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>
             :
-            <BsChevronLeft color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"2%",top:"50%", alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>}
+            <BsChevronLeft color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"1%",top:"50%", alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>}
             
             </div>
     

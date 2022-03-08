@@ -2,7 +2,8 @@ import React, {useEffect, useState} from "react";
 
 import { NavLink } from "react-router-dom";
 import "./CSS/css.css"
-import {BiPencil} from "react-icons/bi"
+import {BiPencil,} from "react-icons/bi"
+import {BsChevronLeft} from "react-icons/bs"
 
 const AdminFilter =()=>{
 
@@ -97,7 +98,7 @@ const AdminFilter =()=>{
                             
                             </div>
                             <div className="FITind">
-                                <input class="checkbox" class="checkbox" style={{display:"flex", marginRight:"15px", marginBottom:"3px"}} type="checkbox" checked={columns.ProducerId} key="ProducerId" name="ProducerId" onChange = {() => setColumns({...columns,ProducerId:!columns.ProducerId})}/>
+                                <input class="checkbox" style={{display:"flex", marginRight:"15px", marginBottom:"3px"}} type="checkbox" checked={columns.ProducerId} key="ProducerId" name="ProducerId" onChange = {() => setColumns({...columns,ProducerId:!columns.ProducerId})}/>
                                 <p className="FITtype">Producer</p>
                             </div>
                             <div className="FITind">
@@ -167,7 +168,7 @@ const AdminFilter =()=>{
              </div>
                 
                 <NavLink to={{
-                    pathname:("/quoteReport"),
+                    pathname:("/report/quoteReport"),
                     aboutProps:columns
                 }}>
                 <button className="FITbutton">
@@ -177,6 +178,7 @@ const AdminFilter =()=>{
                     </div>
                 </button>
                 </NavLink>
+                <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
     )}
     export default AdminFilter

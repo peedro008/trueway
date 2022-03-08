@@ -8,7 +8,7 @@ function QuoteDetails(props) {
     const id = props.location.aboutProps.ID
     const [quote, setQuote] = useState([])
     useEffect(() => {
-        axios.get(`http://localhost:4000/idquotes`,{ params: { id: id } })
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/idquotes`,{ params: { id: id } })
         .then(function(response){
             setQuote(response.data)
             
@@ -101,7 +101,7 @@ function QuoteDetails(props) {
 
                             }
 
-<BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5%",top:"2%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>
+<BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>
                        
                     </div>
                     
@@ -126,7 +126,7 @@ function QuoteDetails(props) {
             </div>
         </div>}
         <NavLink to={{
-                    pathname:("/modifyquote"),
+                    pathname:("/report/modifyquote"),
                     aboutProps:id
                 }}>
                 <button className="FITbutton">

@@ -15,14 +15,14 @@ const Report = () =>{
         </div>
         <div className="managerContainer">
             
-            <NavLink to={"/filter"}  style={{ textDecoration: 'none', color:"#000" }}>
-                <button className="PAYbutton" style={{    marginRight: "20px"}}><AiOutlineFile  color="white" size={"20px"} className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Quotes</p></button>
+            <NavLink to={"/report/filter"}  style={{ textDecoration: 'none', color:"#000" }}>
+                <button className="PAYbutton" style={{  width:"135px",  marginRight: "20px"}}><AiOutlineFile  color="white" size={"20px"} className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Quotes</p></button>
             </NavLink>
-            <NavLink to={"/payreport"}  style={{ textDecoration: 'none', color:"#000" }}>
-                <button className="PAYbutton" style={{    marginRight: "20px"}}><CgImport color="white" size={"20px"}  className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Payments</p></button>
+            <NavLink to={"/report/payReport"}  style={{ textDecoration: 'none', color:"#000" }}>
+                <button className="PAYbutton" style={{    width:"135px", marginRight: "20px"}}><CgImport color="white" size={"20px"}  className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Payments</p></button>
             </NavLink>
-            <NavLink to={"/clients"}  style={{ textDecoration: 'none', color:"#000" }}>
-                <button className="PAYbutton" style={{    marginRight: "20px"}}><CgImport color="white" size={"20px"}  className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Clients</p></button>
+            <NavLink to={"/report/clients"}  style={{ textDecoration: 'none', color:"#000" }}>
+                <button className="PAYbutton" style={{   width:"135px",  marginRight: "20px"}}><CgImport color="white" size={"20px"}  className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Clients</p></button>
             </NavLink>
          
             </div>

@@ -8,8 +8,9 @@ const Producer = ()=>{
 const [producers, setProducers]= useState([])
 const [quotes, setQuotes]= useState([])
 
+    
     useEffect(()=>{
-        axios.get(`http://localhost:4000/getProducer`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
             .then(function(response){
                 setProducers(response.data)
             })
@@ -19,7 +20,7 @@ const [quotes, setQuotes]= useState([])
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:4000/quotes`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
             .then(function(response){
                 setQuotes(response.data)
             })
@@ -91,7 +92,7 @@ const [quotes, setQuotes]= useState([])
         </table>
 </div>
         <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
-            <NavLink to="/managerP">
+            <NavLink to="/manager/managerP"  style={{ textDecoration: 'none', color:"#000" }}>
                  <button className="PAYbutton" ><MdAdd  color="white" size={"20px"} className="PAYbuttonIcon"/><p className="PAYbuttonText">New Producer</p></button>
             </NavLink>
             </div>
