@@ -1890,9 +1890,9 @@ display:flex;
   }
   .DAIsearch{
     width:5vw;
-    align-self: flex-end;
-    justify-content: flex-end;
-    padding-left: 800px;
+    align-self: flex-start;
+    justify-content: flex-start;
+    margin-left: 40px;
     border-radius: 20px;
 }
 .DAItotalCont{

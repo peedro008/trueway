@@ -7,8 +7,9 @@ import "./CSS/css.css"
 const Producer = ()=>{
 const [producers, setProducers]= useState([])
 const [quotes, setQuotes]= useState([])
-
-    
+const [sold, setSold]= useState(0)
+const [unSold, setUnSold]= useState(0)  
+ 
     useEffect(()=>{
         axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
             .then(function(response){
@@ -30,7 +31,6 @@ const [quotes, setQuotes]= useState([])
     
     },[])
 
-  
 
 
 
@@ -79,8 +79,8 @@ const [quotes, setQuotes]= useState([])
                            
                             <td scope="row">{e.email}</td>
                             <td scope="row">{e.phone}</td>
-                            <td scope="row">{(quotes.filter(f=>f.ProducerId==e.id)).filter(g=>g.status=="Bound").length}</td>
-                            <td scope="row">{(quotes.filter(f=>f.ProducerId==e.id)).filter(g=>g.status!=="Bound").length}</td>
+                            <td scope="row">{(quotes.filter(f=>f.UserId==e.UserId)).filter(g=>g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted").length}</td>
+                            <td scope="row">{(quotes.filter(f=>f.UserId==e.UserId)).filter(g=>g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status=="Cancelled"||g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status=="Quoted").length}</td>
                             
                         </tr>)
                })

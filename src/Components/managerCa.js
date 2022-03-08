@@ -73,7 +73,7 @@ const ManagerCa=()=>{
             <div className="managerInputsubContainer">
                 <div className="inputDiv"> 
                     <p   className="PAYtitle">Category Name</p>
-                    <input {...register("name")} placeholder="Category Name" onChange={(e)=>{setinputs({...inputs, name:e.target.value})}} className="PAYsub-title"></input>
+                    <input {...register("name")} placeholder="Category Name" onChange={(e)=>{setinputs({...inputs, name:e.target.value})}} className="AQinput"></input>
                     <p className="FORMerror">{errors.name?.message}</p>
                 </div>
             </div>

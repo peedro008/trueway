@@ -30,7 +30,9 @@ const AdminDash = ()=>{
    const [quotes, setQuotes]= useState([])
     const [dataList, setDataList] = useState([])
     const [status, setStatus] = useState([])
-    const [quotes2, setQuotes2]=useState([])
+    const [sold, setSold] = useState([])
+    const [unSold, setUnSold] = useState([])
+    const [payments, setPayments]=useState([])
 
        useEffect(()=>{
            axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
@@ -56,21 +58,49 @@ const AdminDash = ()=>{
            axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
                .then(function(response){
                    setQuotes(response.data)
-                   setQuotes2(response.data)
+                  
                })
                .catch(error=>{
                  console.log(error)  
                })
        
        },[])
+       useEffect(()=>{
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
+            .then(function(response){
+                setPayments(response.data)
+            
+            })
+            .catch(error=>{
+              console.log(error)  
+            })
+    
+    },[])
 
        useEffect(() => {
            let pes = []
+           let q = quotes
          producers.map(e=>
-            pes.push([e.name,(quotes.filter(f=>f.User.name==e.name).map(e=>{return e.QuoteStatuses.pop()}))])
+            pes.push([e.name,(q.filter(f=>f.User.name==e.name).map(e=>{return e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0]}))])
          )
          setDataList(pes)
        }, [quotes])
+       useEffect(() => {
+        let pes = 0
+        let pas = 0
+        let q = quotes
+        quotes.map(e=>{
+            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"){
+                pes=pes+1
+            }
+        else{
+                pas=pas+1
+            } 
+        } 
+      )
+      setSold(pes)
+      setUnSold(pas)
+    }, [quotes])
        
 
    
@@ -121,7 +151,7 @@ const AdminDash = ()=>{
                              
                             </div>
                             <div className="dashText" >
-                                    <p className="dashCardTitle">26</p>
+                                    <p className="dashCardTitle">{unSold}</p>
                                     <p className="dashCardText">Usold quotes</p>
                             </div>
                         </div>
@@ -131,7 +161,7 @@ const AdminDash = ()=>{
                              
                             </div>
                             <div className="dashText">
-                                    <p className="dashCardTitle">167</p>
+                                    <p className="dashCardTitle">{sold}</p>
                                     <p className="dashCardText">Total quotes sold per month</p>
                             </div>
                         </div>
@@ -141,7 +171,7 @@ const AdminDash = ()=>{
                              
                             </div>
                             <div className="dashText">
-                                    <p className="dashCardTitle">460</p>
+                                    <p className="dashCardTitle">{sold}</p>
                                     <p className="dashCardText">Total quotes sold per year</p>
                             </div>
                         </div>
@@ -151,7 +181,7 @@ const AdminDash = ()=>{
                              
                             </div>
                             <div className="dashText">
-                                    <p className="dashCardTitle">330</p>
+                                    <p className="dashCardTitle">{payments.length}</p>
                                     <p className="dashCardText">Total payments per month</p>
                             </div>
                         </div>

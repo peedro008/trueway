@@ -39,19 +39,19 @@ const ManagerM=()=>{
     <div className="managerInputsubContainer">
         <div className="inputDiv"> 
             <p className="PAYtitle">User</p>
-            <input placeholder="User" className="PAYsub-title"></input>
+            <input placeholder="User" className="AQinput"></input>
         </div>
         <div className="inputDiv"> 
             <p className="PAYtitle">Email</p>
-            <input placeholder="Email" className="PAYsub-title"></input>
+            <input placeholder="Email" className="AQinput"></input>
         </div>
         <div className="inputDiv"> 
             <p className="PAYtitle">Phone</p>
-            <input placeholder="Phone" className="PAYsub-title"></input>
+            <input placeholder="Phone" className="AQinput"></input>
         </div>
         <div className="inputDiv"> 
             <p className="PAYtitle">Address</p>
-            <input placeholder="Address" className="PAYsub-title"></input>
+            <input placeholder="Address" className="AQinput"></input>
         </div>
         
 
@@ -59,7 +59,7 @@ const ManagerM=()=>{
     <div className="managerInputsubContainer" style={{width:"33.7vw"}}>
         <div className="inputDiv"> 
             <p className="PAYtitle">Password</p>
-            <input placeholder="Password" className="PAYsub-title"></input>
+            <input placeholder="Password" className="AQinput"></input>
         </div>  
         <div className="inputDiv" > 
             <p className="PAYtitle">Location</p>

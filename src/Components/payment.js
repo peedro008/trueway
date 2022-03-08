@@ -280,7 +280,7 @@ function Payment(){
 
                 <div className="PAYInputCont">
                     <p  className="PAYtitle">Amount</p>
-                    <input className="PAYsub-title" value={payment.amount} {...register("amount")}/>
+                    <input className="AQinput" value={payment.amount} {...register("amount")}/>
                     <p className="FORMerror">{errors.amount?.message}</p>
                 </div> 
 

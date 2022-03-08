@@ -97,7 +97,7 @@ const ManagerC=()=>{
             <div className="managerInputsubContainer">
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Company Name</p>
-                    <input {...register("name")}  placeholder="Company Name" className="PAYsub-title"></input>
+                    <input {...register("name")}  placeholder="Company Name" className="AQinput"></input>
                     <p className="FORMerror">{errors.name?.message}</p>
                 </div>
                 <div className="inputDiv"> 
@@ -107,17 +107,17 @@ const ManagerC=()=>{
                         pattern: {
                             value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                             message: 'Please enter a valid email',
-                        }})}  placeholder="Email" className="PAYsub-title"></input>
+                        }})}  placeholder="Email" className="AQinput"></input>
                     <p className="FORMerror">{errors.email?.message}</p>
                 </div>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Phone</p>
-                    <input  {...register("phone")}  placeholder="Phone" className="PAYsub-title"></input>
+                    <input  {...register("phone")}  placeholder="Phone" className="AQinput"></input>
                     <p className="FORMerror">{errors.phone?.message.substring(0,25)}</p>
                 </div>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Address</p>
-                    <input {...register("address")}  placeholder="Address" className="PAYsub-title"></input>
+                    <input {...register("address")}  placeholder="Address" className="AQinput"></input>
                     <p className="FORMerror">{errors.address?.message}</p>
                 </div>
                

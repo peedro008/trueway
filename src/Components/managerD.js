@@ -94,7 +94,7 @@ const ManagerD=()=>{
             <div className="managerInputsubContainer">
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Name</p>
-                    <input {...register("name")}  placeholder="Name" className="PAYsub-title"></input>
+                    <input {...register("name")}  placeholder="Name" className="AQinput"></input>
                     <p className="FORMerror">{errors.name?.message}</p>
                 </div>
                <div className="inputDiv" > 

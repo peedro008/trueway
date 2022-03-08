@@ -95,7 +95,7 @@ const ManagerP=()=>{
             <div className="managerInputsubContainer">
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Name</p>
-                    <input {...register("name")} placeholder="Name" onChange={(e)=>{setinputs({...inputs, name:e.target.value})}} className="PAYsub-title"></input>
+                    <input {...register("name")} placeholder="Name" onChange={(e)=>{setinputs({...inputs, name:e.target.value})}} className="AQinput"></input>
                     <p className="FORMerror">{errors.name?.message}</p>
                 </div>
                 <div className="inputDiv"> 
@@ -105,17 +105,17 @@ const ManagerP=()=>{
                         pattern: {
                             value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                             message: 'Please enter a valid email',
-                        }})} placeholder="Email"  className="PAYsub-title"></input>
+                        }})} placeholder="Email"  className="AQinput"></input>
                     <p className="FORMerror">{errors.email?.message}</p>
                 </div>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Phone</p>
-                    <input {...register("phone")} placeholder="Phone" onChange={(e)=>{setinputs({...inputs, phone:e.target.value})}}  className="PAYsub-title"></input>
+                    <input {...register("phone")} placeholder="Phone" onChange={(e)=>{setinputs({...inputs, phone:e.target.value})}}  className="AQinput"></input>
                     <p className="FORMerror">{errors.phone?.message.substring(0,25)}</p>
                 </div>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Address</p>
-                    <input {...register("address")} placeholder="Address" onChange={(e)=>{setinputs({...inputs, address:e.target.value})}}  className="PAYsub-title"></input>
+                    <input {...register("address")} placeholder="Address" onChange={(e)=>{setinputs({...inputs, address:e.target.value})}}  className="AQinput"></input>
                     <p className="FORMerror">{errors.address?.message}</p>
                 </div>
                 
@@ -124,7 +124,7 @@ const ManagerP=()=>{
             <div className="managerInputsubContainer" style={{width:"33.7vw"}}>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Password</p>
-                    <input type="password" {...register("Password")} placeholder="Password"   className="PAYsub-title"></input>
+                    <input type="password" {...register("Password")} placeholder="Password"   className="AQinput"></input>
                     <p className="FORMerror">{errors.Password?.message}</p>
                 </div>  
                 <div className="inputDiv" > 
