@@ -31,7 +31,7 @@ const ManagerCa=()=>{
 
     const onSubmit = (data) => {
         data&&
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com//addCategories`, {
+        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addCategories`, {
             
             method: 'POST',
             headers: {
@@ -99,7 +99,7 @@ const ManagerCa=()=>{
       </Modal>
 
       <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"528px", opacity:"0.5"}}/>
-      <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
+      <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
 
     )

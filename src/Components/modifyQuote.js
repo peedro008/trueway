@@ -66,10 +66,7 @@ function ModifyQuote(props) {
         setCancel(!cancel)
     }
     const submit = () =>{
-        inputs&&
-      
-        
-        console.log(inputs)
+        inputs.Status?
         fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/modifyQuote`, {
             
             method: 'POST',
@@ -79,29 +76,12 @@ function ModifyQuote(props) {
             body: JSON.stringify(inputs)
             
         })
-        .then(async res => { 
-            
-                try {
-                const jsonRes = await res.json();
-                
-                if (res.status !== 200) {
-                    console.log("error")
-                } else {
-                   
-                   console.log(jsonRes)
-                  
-                   
-                    
-                }
-            } catch (err) {
-                console.log(err);
-            };
-           
-        })
-        .catch(err => {
-            console.log(err);
-        });
-        onOpenModal()
+        .then( onOpenModal()) 
+       
+        :
+        alert("You must select a status")
+        
+
     }
   
   
@@ -252,7 +232,7 @@ function ModifyQuote(props) {
         
         </div>
       </Modal>
-      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
         </div>
     )
 }

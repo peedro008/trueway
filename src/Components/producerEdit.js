@@ -14,7 +14,7 @@ const ProducerEdit = (props) => {
        
     },[Producer])
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com//getLocations`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -28,7 +28,7 @@ const ProducerEdit = (props) => {
     
 
     const submit = () => {
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com//modifyProducer`, {
+        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/modifyProducer`, {
             
             method: 'POST',
             headers: {
@@ -134,7 +134,7 @@ const ProducerEdit = (props) => {
 
 
 
-        <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"5.5%",top:"2.6%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>
+        <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>
 
 
     </div>   )

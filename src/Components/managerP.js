@@ -37,7 +37,7 @@ const ManagerP=()=>{
         data&&
         setinputs({...inputs, UserRole:"Producer"})
         
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com//addProducer`, {
+        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addProducer`, {
             
             method: 'POST',
             headers: {
@@ -70,7 +70,7 @@ const ManagerP=()=>{
         });
     }
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com//getLocations`)
+        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 

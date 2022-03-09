@@ -26,7 +26,7 @@ if(state===null){
   
   }
 
- if (state==="Admin"){
+ if (state==="Admin"||state=="Manager"){
   return (
 
     

@@ -53,6 +53,12 @@ const AddQuote = ()=>{
         resolver: yupResolver(schema)
       });
       setValue("UserId", `${userId}`)
+      setValue("PIPvalue", 0)
+      setValue("NSDvalue", 0)
+      setValue("MVRvalue", 0)
+      setValue("monthlyPayment", 0)
+      setValue("monthlyPayment", 0)
+
     useEffect(()=>{
         axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getDealer`)
             .then(function(response){

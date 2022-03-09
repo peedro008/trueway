@@ -135,7 +135,7 @@
     
 }
 .NAavtive{
-   width:46px;
+   width:40px;
    height:40px ;
     display: flex;
     justify-content: center;
@@ -146,8 +146,8 @@
 }
 
 .NAicon{
-    height: 1.5vw;
-    width: 1.5vw;
+    height: 22px;
+    width: 22px;
     
 }
 
