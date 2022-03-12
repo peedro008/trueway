@@ -14,7 +14,7 @@ const ProducerEdit = (props) => {
        
     },[Producer])
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getLocations`)
+        axios.get(`https://truewayagentbackend.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -28,7 +28,7 @@ const ProducerEdit = (props) => {
     
 
     const submit = () => {
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/modifyProducer`, {
+        fetch(`https://truewayagentbackend.com/modifyProducer`, {
             
             method: 'POST',
             headers: {

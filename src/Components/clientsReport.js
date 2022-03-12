@@ -11,7 +11,7 @@ function ClientsReport() {
     const [search, setSearch] = useState("")
     
     useEffect(() => {
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/clients`)
+        axios.get(`https://truewayagentbackend.com/clients`)
         .then(function(response){
             setPayments(response.data)
             

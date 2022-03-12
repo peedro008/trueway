@@ -31,7 +31,7 @@ const ManagerCa=()=>{
 
     const onSubmit = (data) => {
         data&&
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addCategories`, {
+        fetch(`https://truewayagentbackend.com/addCategories`, {
             
             method: 'POST',
             headers: {

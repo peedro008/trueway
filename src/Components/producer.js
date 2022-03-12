@@ -11,7 +11,7 @@ const [sold, setSold]= useState(0)
 const [unSold, setUnSold]= useState(0)  
  
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
+        axios.get(`https://truewayagentbackend.com/getProducer`)
             .then(function(response){
                 setProducers(response.data)
             })
@@ -21,7 +21,7 @@ const [unSold, setUnSold]= useState(0)
     
     },[])
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
+        axios.get(`https://truewayagentbackend.com/quotes`)
             .then(function(response){
                 setQuotes(response.data)
             })

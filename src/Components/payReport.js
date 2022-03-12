@@ -6,7 +6,7 @@ import { BsChevronLeft } from "react-icons/bs";
 const PayReport = () => {
     const [payments, setPayments] = useState([]) 
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getPayments`)
+        axios.get(`https://truewayagentbackend.com/getPayments`)
             .then(function(response){
                 setPayments(response.data)
                 

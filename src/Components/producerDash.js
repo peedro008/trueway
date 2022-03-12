@@ -38,7 +38,7 @@ const ProducerDash = ()=>{
      const [status, setStatus] = useState([])
      const [payments, setPayments] = useState([]) 
      useEffect (()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/producerQuotes?UserId=${userId}`)
+        axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
         .then(function(response){
             setPquotes(response.data)
            
@@ -50,7 +50,7 @@ const ProducerDash = ()=>{
         })
     },[userId])
      useEffect(()=>{
-         axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getPayments`)
+         axios.get(`https://truewayagentbackend.com/getPayments`)
              .then(function(response){
                  setPayments(response.data)
                  
@@ -65,7 +65,7 @@ const ProducerDash = ()=>{
      },[])
  
         useEffect(()=>{
-            axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
+            axios.get(`https://truewayagentbackend.com/getProducer`)
                 .then(function(response){
                     setProducers(response.data)
                 })
@@ -76,7 +76,7 @@ const ProducerDash = ()=>{
         },[])
      
         useEffect(()=>{
-            axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
+            axios.get(`https://truewayagentbackend.com/quotes`)
                 .then(function(response){
                    
                     setQuotes2(response.data)

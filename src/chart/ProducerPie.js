@@ -13,7 +13,7 @@ function ProducerPie ({aboutProps, google}) {
 
       useEffect (()=>{
         let userId = aboutProps.UserId
-      axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/producerQuotes?UserId=${userId}`)
+      axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
       .then(function(response){
           setQuotes(response.data)
          

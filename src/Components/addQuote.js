@@ -60,7 +60,7 @@ const AddQuote = ()=>{
       setValue("monthlyPayment", 0)
 
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getDealer`)
+        axios.get(`https://truewayagentbackend.com/getDealer`)
             .then(function(response){
                 setDealers(response.data)
                 setInputs({...inputs, ProducerId:1})
@@ -71,7 +71,7 @@ const AddQuote = ()=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/clients`)
+        axios.get(`https://truewayagentbackend.com/clients`)
             .then(function(response){
                 setClients(response.data)
                 
@@ -82,7 +82,7 @@ const AddQuote = ()=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getLocations`)
+        axios.get(`https://truewayagentbackend.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -93,7 +93,7 @@ const AddQuote = ()=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
+        axios.get(`https://truewayagentbackend.com/getProducer`)
             .then(function(response){
                 setProducers(response.data)
             })
@@ -103,7 +103,7 @@ const AddQuote = ()=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getCategories`)
+        axios.get(`https://truewayagentbackend.com/getCategories`)
             .then(function(response){
                 setCategories(response.data)
             })
@@ -113,7 +113,7 @@ const AddQuote = ()=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getCompany`)
+        axios.get(`https://truewayagentbackend.com/getCompany`)
             .then(function(response){
                 setCompanies(response.data)
             })
@@ -166,7 +166,7 @@ const AddQuote = ()=>{
     const onSubmit = (data) => {
  
        
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addQuote`, {
+        fetch(`https://truewayagentbackend.com/addQuote`, {
             
             method: 'POST',
             headers: {

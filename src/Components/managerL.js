@@ -36,7 +36,7 @@ const ManagerL=()=>{
         data&&
       
         
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addLocation`, {
+        fetch(`https://truewayagentbackend.com/addLocation`, {
             
             method: 'POST',
             headers: {

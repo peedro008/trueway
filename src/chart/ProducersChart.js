@@ -8,7 +8,7 @@ function PizzaChart ({google}) {
   const [dato, setDato]= useState([])
   console.log(quotes.filter(f=>f.User.name=="Producer").length)
       useEffect(()=>{
-          axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getProducer`)
+          axios.get(`https://truewayagentbackend.com/getProducer`)
               .then(function(response){
                   setProducers(response.data)
               })
@@ -18,7 +18,7 @@ function PizzaChart ({google}) {
       
       },[])
       useEffect(()=>{
-          axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
+          axios.get(`https://truewayagentbackend.com/quotes`)
               .then(function(response){
                   setQuotes(response.data)
               })

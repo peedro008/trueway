@@ -88,7 +88,7 @@ function Payment(){
        
     }
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/clients`)
+        axios.get(`https://truewayagentbackend.com/clients`)
             .then(function(response){
                 setClients(response.data)
                 
@@ -99,7 +99,7 @@ function Payment(){
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getLocations`)
+        axios.get(`https://truewayagentbackend.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -140,7 +140,7 @@ function Payment(){
                 
                 
                
-                fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addPayment`, {
+                fetch(`https://truewayagentbackend.com/addPayment`, {
                     
                     method: 'POST',
                     headers: {
@@ -163,7 +163,7 @@ function Payment(){
                  
                         
                   
-                        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addClientPayment`, {
+                        fetch(`https://truewayagentbackend.com/addClientPayment`, {
                         
                         method: 'POST',
                         headers: {

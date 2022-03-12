@@ -21,7 +21,7 @@ const DepositCash = () => {
     
     const UserId= useSelector(state=>state.UserId)
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getcashpayment`,{ params: { UserId: UserId } })
+        axios.get(`https://truewayagentbackend.com/getcashpayment`,{ params: { UserId: UserId } })
         .then(function(response){
             setDbPayments(response.data)
             
@@ -42,7 +42,7 @@ const DepositCash = () => {
 
     const submit = () =>{
         onOpenModal()
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/deposit`, {
+        fetch(`https://truewayagentbackend.com/deposit`, {
                     
             method: 'POST',
             headers: {

@@ -16,7 +16,7 @@ function DailyReport() {
     const [date, setDate ] = useState("")
     const UserId = useSelector(state=> state.UserId)
     useEffect(() => {
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/dailyReport`)
+        axios.get(`https://truewayagentbackend.com/dailyReport`)
         .then(function(response){
             setPayments(response.data)
             

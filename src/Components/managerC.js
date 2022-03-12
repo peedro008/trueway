@@ -39,7 +39,7 @@ const ManagerC=()=>{
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getCategories`)
+        axios.get(`https://truewayagentbackend.com/getCategories`)
             .then(function(response){
                 setCategories(response.data)
                 
@@ -52,7 +52,7 @@ const ManagerC=()=>{
     const onSubmit = (data) => {
         data&&
         console.log(JSON.stringify(data))
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addCompany`, {
+        fetch(`https://truewayagentbackend.com/addCompany`, {
             
             method: 'POST',
             headers: {

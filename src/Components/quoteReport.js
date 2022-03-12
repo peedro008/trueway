@@ -21,7 +21,7 @@ const QuoteReport=(props)=>{
     const [search, setSearch] = useState("")
     let columns = props.location.aboutProps
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/quotes`)
+        axios.get(`https://truewayagentbackend.com/quotes`)
             .then(function(response){
                 setQuotes(response.data)
                 

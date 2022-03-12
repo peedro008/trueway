@@ -36,7 +36,7 @@ const ManagerD=()=>{
 
     const onSubmit = (data) => {
         data&&
-        fetch(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/addDealer`, {
+        fetch(`https://truewayagentbackend.com/addDealer`, {
             
             method: 'POST',
             headers: {
@@ -71,7 +71,7 @@ const ManagerD=()=>{
         });
     }
     useEffect(()=>{
-        axios.get(`http://trueway-env.eba-j5wkwmpy.us-east-1.elasticbeanstalk.com/getCompany`)
+        axios.get(`https://truewayagentbackend.com/getCompany`)
             .then(function(response){
                 setCompany(response.data)
                 
