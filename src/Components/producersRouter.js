@@ -38,7 +38,7 @@ import ClientEdit from './clientEdit';
           <Route component={ProducerNav}/>
           <Route exact path='/' component={ProducerDash}/>
           <Route exact path='/payments' component={Payments}/>
-          <Route exact path='/payment' component={Payment}/>
+          
           <Route exact path="/deposit" component={DepositCash}/>
           <Route exact path='/dailyReport' component={DailyReport}/>
           <Route exact path='/profile' component={ProducerPerfil}/>
@@ -51,6 +51,9 @@ import ClientEdit from './clientEdit';
           <Route exact path='/addquote' component={AddQuote}/>
           <Route exact path='/report/clients' component={ClientsReport}/>
           <Route exact path='/clientedit' component={ClientEdit}/>
+          <Route exact path='/payments/pay' component={Payment}/>
+          <Route exact path="/payments/deposit" component={DepositCash}/>
+          <Route exact path='/payments/dailyReport' component={DailyReport}/>
            {/* <Route exact path='/myquotes/report' component={MyQuotes}/> 
           <Route exact path='/myquotes' component={ProducerFilter}/>
           <Route exact path='/add' component={ProducerAddQuote}/>

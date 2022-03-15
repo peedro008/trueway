@@ -28,6 +28,7 @@ const AdminDash = ()=>{
    const google = useGoogleCharts();
    const [producers, setProducers]= useState([])
    const [quotes, setQuotes]= useState([])
+   const [modify, setModify]= useState([])
     const [dataList, setDataList] = useState([])
     const [status, setStatus] = useState([])
     const [sold, setSold] = useState([])
@@ -66,9 +67,20 @@ const AdminDash = ()=>{
        
        },[])
        useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/quotes`)
+        axios.get(`https://truewayagentbackend.com/getpayments`)
             .then(function(response){
                 setPayments(response.data)
+            
+            })
+            .catch(error=>{
+              console.log(error)  
+            })
+    
+    },[])
+    useEffect(()=>{
+        axios.get(`https://truewayagentbackend.com/getStatus`)
+            .then(function(response){
+                setModify(response.data)
             
             })
             .catch(error=>{
@@ -79,12 +91,15 @@ const AdminDash = ()=>{
 
        useEffect(() => {
            let pes = []
-           let q = quotes
+           let quo = quotes
+           
+           
+           let q = modify
          producers.map(e=>
-            pes.push([e.name,(q.filter(f=>f.User.name==e.name).map(e=>{return e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0]}))])
+            pes.push([e.name,(q.filter(f=>(f.User.name==e.name&&f.Status!=="Quoted"&&f.Status!=="Cancelled"))).length, quo.filter(i=>i.User.name==e.name).length])
          )
          setDataList(pes)
-       }, [quotes])
+       }, [modify])
        useEffect(() => {
         let pes = 0
         let pas = 0
@@ -136,7 +151,7 @@ const AdminDash = ()=>{
                             <p className="DashPListItemText">{e[0]}</p>
                             </div>
                             <div className="DashNumberDiv">
-                                <p className="DashNumber">{(e[1].filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled")).length?((e[1].filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled")).length/(e[1].length)):0}</p>
+                                 <p className="DashNumber">{(e[1]/e[2])?(e[1]/e[2]):0}</p> 
                             </div>
                         </div>
                     )

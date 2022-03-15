@@ -3,23 +3,20 @@ import axios from "axios"
 
 function ProducerSales ( {aboutProps ,google}) {
   const [chart, setChart] = useState(null);
-  const [producers, setProducers]= useState([])
+  
   const [quotes, setQuotes]= useState([])
   const [dato, setDato]= useState([])
   const [year, setYear] = useState([])
   const [showLoading, setShowLoading] = useState(true)
   let timer1 = setTimeout(() => setShowLoading(true), 1000)
   
-  
+  let userId = aboutProps
   useEffect (()=>{
-      let userId = aboutProps.UserId
-      console.log(userId)
+      
+      
     axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
     .then(function(response){
         setQuotes(response.data)
-        console.log(response.data)  
-        
-        
     })
     .catch(error=>{
       console.log(error)  

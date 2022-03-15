@@ -6,7 +6,7 @@ function PizzaChart ({google}) {
   const [producers, setProducers]= useState([])
   const [quotes, setQuotes]= useState([])
   const [dato, setDato]= useState([])
-  console.log(quotes.filter(f=>f.User.name=="Producer").length)
+
       useEffect(()=>{
           axios.get(`https://truewayagentbackend.com/getProducer`)
               .then(function(response){
@@ -18,7 +18,7 @@ function PizzaChart ({google}) {
       
       },[])
       useEffect(()=>{
-          axios.get(`https://truewayagentbackend.com/quotes`)
+          axios.get(`https://truewayagentbackend.com/getStatus`)
               .then(function(response){
                   setQuotes(response.data)
               })
@@ -31,7 +31,7 @@ function PizzaChart ({google}) {
         let pes = []
           producers.map((e, index)=>{
             
-            pes.push([e.name, quotes.filter(f=>f.User.name==e.name).length, (quotes.filter(f=>f.User.name==e.name).filter(f=>f.PIPvalue!==0).length)])
+            pes.push([e.name, quotes.filter(f=>f.User.name==e.name&&f.Status!=="quoted"&&f.Status!=="Cancelled").length, quotes.filter(f=>f.User.name==e.name&&f.Status!=="quoted"&&f.Status!=="Cancelled"&&f.Quote.PIPvalue!==0).length])
           })
           setDato(pes)
       }, [quotes])
