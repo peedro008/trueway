@@ -82,7 +82,7 @@ const ManagerCa=()=>{
         </form>
 
 
-        <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
+        <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
             <button onClick={handleSubmit(onSubmit)} className="PAYbutton" ><p className="PAYbuttonText">Add Category</p></button>
         </div>
         <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>

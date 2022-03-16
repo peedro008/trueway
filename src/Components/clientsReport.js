@@ -32,7 +32,7 @@ function ClientsReport() {
          <SearchField 
             classNames="pepe"
             placeholder='Search item'
-            
+            onChange={setSearch}
         /></div>
 
                 </div>

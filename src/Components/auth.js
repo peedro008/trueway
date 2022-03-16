@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 
 
 const Auth = ()=>{
-    console.log(window.screen.width)
+
     const dispatch = useDispatch()
     const [UserName, setUserName] = useState('');
 

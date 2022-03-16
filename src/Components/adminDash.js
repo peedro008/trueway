@@ -19,6 +19,7 @@ import PizzaChart from "../chart/ProducersChart"
 import PozzaChart from "../chart/ColumnChar";
 import axios from "axios";
 import Isologo_background from  "../assets/Isologo_background.png"
+import { NavLink } from "react-router-dom";
 
 
 
@@ -48,7 +49,9 @@ const AdminDash = ()=>{
        useEffect(()=>{
         axios.get(`https://truewayagentbackend.com/getStatus`)
             .then(function(response){
-                setStatus(response.data)
+                let paz = response.data
+                paz.sort(function(a,b){return a.id-b.id}).reverse()
+                setStatus(paz)
             })
             .catch(error=>{
               console.log(error)  
@@ -96,8 +99,9 @@ const AdminDash = ()=>{
            
            let q = modify
          producers.map(e=>
-            pes.push([e.name,(q.filter(f=>(f.User.name==e.name&&f.Status!=="Quoted"&&f.Status!=="Cancelled"))).length, quo.filter(i=>i.User.name==e.name).length])
+            pes.push([e.name,(q.filter(f=>(f.User.name==e.name&&f.Status!=="Quoted"&&f.Status!=="Cancelled"))).length, quo.filter(i=>i.User.name==e.name).length,e])
          )
+         pes.sort(function(a,b){return (a[1]/a[2])-(b[1]/b[2])}).reverse()
          setDataList(pes)
        }, [modify])
        useEffect(() => {
@@ -146,9 +150,16 @@ const AdminDash = ()=>{
                         <div className="DashPListRow1" style={{marginBottom:"7px"}}>
                             <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
                             <div className="DashPListCircle">
-                               <img src={mask}/> 
+                            <NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }} to={{
+                                pathname:("/producers/details"),
+                                aboutProps:e[3]
+                                }}><img src={mask}/></NavLink> 
                             </div>
-                            <p className="DashPListItemText">{e[0]}</p>
+                            
+                            <p className="DashPListItemText"><NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }} to={{
+                                pathname:("/producers/details"),
+                                aboutProps:e[3]
+                                }}>{e[0]}</NavLink></p>
                             </div>
                             <div className="DashNumberDiv">
                                  <p className="DashNumber">{(e[1]/e[2])?(e[1]/e[2]):0}</p> 
@@ -167,7 +178,7 @@ const AdminDash = ()=>{
                             </div>
                             <div className="dashText" >
                                     <p className="dashCardTitle">{unSold}</p>
-                                    <p className="dashCardText">Usold quotes</p>
+                                    <p className="dashCardText">Unsold quotes</p>
                             </div>
                         </div>
                         <div className="dashCard" style={{marginLeft:"50px"}}>
@@ -214,7 +225,7 @@ const AdminDash = ()=>{
                 />}
                 <div className="DashStatusCont">
                     <div className="DashStatusHeader">
-                        <p className="DashPListTitle">Notificación de polizas modificadas</p>
+                        <p className="DashPListTitle">Notification of modified policies</p>
                     </div>
                     <div className="DashStatusColumns">
                         <p className="dashListColumnT">QUOTE ID</p>
@@ -225,15 +236,15 @@ const AdminDash = ()=>{
                     <div className="DastStatusBody">
                     {
                         status.length?
-                        status.reverse().map(e=>{
+                        status.map(e=>{
                             return(
                                 <div className="DashStatusRow">
-                                    <p className="DashStatusItem">{e.Quote.id}</p>
-                                    <p className="DashStatusItem">{e.User.name}</p>
-                                    <p className="DashStatusItem">{e.date}</p>
+                                    <p className="DashStatusItem"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.Quote.id}}}>{e.id}</NavLink></p>
+                                    <p className="DashStatusItem"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.Quote.id}}}>{e.User.name}</NavLink></p>
+                                    <p className="DashStatusItem"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.Quote.id}}}>{e.date}</NavLink></p>
                                     <div style={{width:"25%"}}>
                                     <div className="DashStatusColor" style={{backgroundColor:e.Status=="Cancelled"?"#D14343":e.Status=="Sold"?"#14B8A6":e.Status=="Renew down"?"#FFB020": "#14B8A6"}}>
-                                    <p className="DashStatusItemC">{e.Status}</p></div></div>
+                                    <p className="DashStatusItemC"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.Quote.id}}}>{e.Status}</NavLink></p></div></div>
                                 </div>
                             )
                         })

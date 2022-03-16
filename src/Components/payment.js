@@ -334,7 +334,7 @@ function Payment(){
         <p className="modalText">Payment added successfully</p>
        
      
-        <button  className="modalButton" onClick={reload}>   <PDFDownloadLink document={<MyDocument data={{client:form.client, total:(control._formValues.creditCardFee?(control._formValues.amount+control._formValues.creditCardFee):control._formValues.amount), producer: userName}} />} fileName="TEST"> Continue  </PDFDownloadLink></button>
+        <button  className="modalButton" onClick={reload}>   <PDFDownloadLink style={{textDecoration:"none", color:"black"}} document={<MyDocument data={{client:form.client, total:(control._formValues.creditCardFee?(control._formValues.amount+control._formValues.creditCardFee):control._formValues.amount), producer: userName}} />} fileName="Receipt"> Continue  </PDFDownloadLink></button>
       
       
         
@@ -361,7 +361,7 @@ function Payment(){
 
 
         
-      <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
+      <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
                 <button  onClick={handleSubmit(onSubmit)} className="PAYbutton" ><p className="PAYbuttonText">Add payment</p></button>
             </div>     
               

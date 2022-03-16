@@ -11,17 +11,23 @@ function ProducerSales ( {aboutProps ,google}) {
   let timer1 = setTimeout(() => setShowLoading(true), 1000)
   
   let userId = aboutProps
+  
   useEffect (()=>{
       
       
-    axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
+    axios.get(`https://truewayagentbackend.com/getStatus`)
     .then(function(response){
-        setQuotes(response.data)
+        let paz = response.data
+
+        setQuotes(paz.filter(e=>e.UserId==userId))
     })
     .catch(error=>{
       console.log(error)  
     })
 },[])
+
+
+
 useEffect(()=>{
     
     const date =  new Date()
@@ -54,7 +60,7 @@ useEffect(()=>{
    
     Yquotes.map((e)=>{
         if(e.date.substring(5,7)=="01"){
-           if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+           if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                m0=m0+1
            }
            else{
@@ -62,7 +68,7 @@ useEffect(()=>{
            }
         } 
         else if(e.date.substring(5,7)=="02"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m1=m1+1
             }
             else{
@@ -70,7 +76,7 @@ useEffect(()=>{
             }
          } 
         else if(e.date.substring(5,7)=="03"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m2=m2+1
             }
             else{
@@ -78,7 +84,7 @@ useEffect(()=>{
             }
          } 
          else if(e.date.substring(5,7)=="04"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m3=m3+1
             }
             else{
@@ -86,7 +92,7 @@ useEffect(()=>{
             }
          } 
          else if(e.date.substring(5,7)=="05"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m4=m4+1
             }
             else{
@@ -94,7 +100,7 @@ useEffect(()=>{
             }
          } 
          else if(e.date.substring(5,7)=="06"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m5=m5+1
             }
             else{
@@ -102,7 +108,7 @@ useEffect(()=>{
             }
         } 
         else if(e.date.substring(5,7)=="07"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m6=m6+1
             }
             else{
@@ -110,7 +116,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="08"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m7=m7+1
             }
             else{
@@ -118,7 +124,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="09"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m8=m8+1
             }
             else{
@@ -126,7 +132,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="10"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m9=m9+1
             }
             else{
@@ -134,7 +140,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="11"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m10=m10+1
             }
             else{
@@ -142,7 +148,7 @@ useEffect(()=>{
             }
         }
         else if(e.date.substring(5,7)=="12"){
-            if(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted"){
+            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
                 m11=m11+1
             }
             else{
@@ -195,7 +201,7 @@ useEffect(()=>{
       // Instantiate and draw our chart, passing in some options.
       const newChart = new google.visualization.ColumnChart(document.getElementById('producerSales'));
       newChart.draw(data, options);
-      console.log(dato)
+      
       setChart(newChart);
     }}, 1000)
   }, [ chart, dato]);

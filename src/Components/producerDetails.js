@@ -13,6 +13,7 @@ const ProducerDetails = (props) => {
     const [quotes, setQuotes] = useState([])
     const google = useGoogleCharts();
     const [mquotes, setMquotes] = useState([])
+    const [modify, setModify]= useState([])
     const [mstat, setMstat] = useState([])
     const [yquotes, setYquotes] = useState([])
     const [ystat, setYstat] = useState([])
@@ -24,24 +25,38 @@ const ProducerDetails = (props) => {
     const [dots1V, setDots1V] = useState(0)
     const [dots2V, setDots2V] = useState(0)
     const [dots3V, setDots3V] = useState(0)
+ 
     useEffect (()=>{
         axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${Producer.UserId}`)
         .then(function(response){
             setQuotes(response.data)
            
             
-            
+            console.log(Producer)
         })
         .catch(error=>{
           console.log(error)  
         })
     },[Producer])
+    useEffect(()=>{
+        axios.get(`https://truewayagentbackend.com/getStatus`)
+            .then(function(response){
+                let paz = response.data
+
+                setModify(paz.filter(e=>e.UserId==Producer.UserId))
+            
+            })
+            .catch(error=>{
+              console.log(error)  
+            })
+    
+    },[])
    
     useEffect(() => {
         const date =  new Date()
         const DATE = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
-        let yq = quotes
-        let mq = quotes
+        let yq = modify
+        let mq = modify
         setYquotes(yq.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
         setMquotes(mq.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
         
@@ -54,23 +69,27 @@ const ProducerDetails = (props) => {
         let mp = 0
         let m = mquotes
         let y  = yquotes
+        if(m.length){
         m.map(e=>
-            pes.push(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0])
+            pes.push(e)
         )
-        setMstat(pes)
+        setMstat(pes)}
+        else {setMstat([])}
+        if(y.length){
         y.map(e=>
-            pas.push(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0])
+            pas.push(e)
         )
         setYstat(pas)
-        
+        }
+        else{ setYstat([])}
         m.map(e=>{
-            if (e.QuoteStatuses[0]!=="Quoted"&&e.QuoteStatuses[0]!=="Cancelled"){
+            if (e.Status!=="Quoted"&&e.Status!=="Cancelled"){
                 if(e.PIPvalue!==0) {
                 mp=mp+1}
             }
         } )
         y.map(e=>{
-            if (e.QuoteStatuses[0]!=="Quoted"&&e.QuoteStatuses[0]!=="Cancelled"){
+            if (e.Status!=="Quoted"&&e.Status!=="Cancelled"){
                 if(e.PIPvalue!==0) {
                 yp=yp+1}
             }
@@ -99,9 +118,9 @@ const ProducerDetails = (props) => {
                     <div className="PRODrectB">
                        <div style={{display:"flex", flexDirection:"row"}}>
                         {dots1V==1?
-                        <p className="PRODrectQ">{mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}</p>
+                        <p className="PRODrectQ">{mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}&nbsp; </p>
                         :
-                        <p className="PRODrectQ">{ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}</p>
+                        <p className="PRODrectQ">{ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}&nbsp;</p>
                         }
                         <p className="PRODrectQ">Sold</p>
                         </div>
@@ -121,9 +140,9 @@ const ProducerDetails = (props) => {
                     <div className="PRODrectB">
                     <div style={{display:"flex", flexDirection:"row"}}>
                         {dots2V==1?
-                        <p className="PRODrectQ">{mstat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length?mstat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length:0}</p>
+                        <p className="PRODrectQ">{mstat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length?mstat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length:0}&nbsp;</p>
                         :
-                        <p className="PRODrectQ">{ystat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length?ystat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length:0}</p>
+                        <p className="PRODrectQ">{ystat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length?ystat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length:0}&nbsp;</p>
                         }
                         <p className="PRODrectQ">Quotes</p>
                         </div>
@@ -148,7 +167,7 @@ const ProducerDetails = (props) => {
                         :
                         <p className="PRODrectQ">{ypip}</p>
                         }
-                        <p className="PRODrectQ">Sold</p>
+                        <p className="PRODrectQ">&nbsp;Sold</p>
                         </div>
                         <div className="PRODrectP">
                             
@@ -165,9 +184,9 @@ const ProducerDetails = (props) => {
       
             </div>
             <div style={{display:"flex", flexDirection:"row"}}>
-            {google&&  <> <ProducerSales aboutProps={Producer}
+            {google&&  <> <ProducerSales aboutProps={Producer.UserId}
                 google={google}/>
-                <ProducerPie aboutProps={Producer}
+                <ProducerPie aboutProps={Producer.UserId}
                 google={google}/></>}
             </div>
               

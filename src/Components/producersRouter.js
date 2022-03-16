@@ -45,7 +45,7 @@ import ClientEdit from './clientEdit';
           <Route exact path='/report' component={Report}/>
           <Route exact path='/report/filter' component={AdminFilter}/>
           <Route exact path='/report/quoteReport' component={QuoteReport}/>
-          <Route exact path='/payReport' component={PayReport}/>
+          <Route exact path='/report/payReport' component={PayReport}/>
           <Route exact path='/report/quote' component={QuoteDetails}/>
           <Route exact path='/report/modifyquote' component={ModifyQuote}/>
           <Route exact path='/addquote' component={AddQuote}/>

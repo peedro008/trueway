@@ -5,6 +5,7 @@ import { BsChevronLeft } from "react-icons/bs";
 
 const PayReport = () => {
     const [payments, setPayments] = useState([]) 
+    const [search, setSearch] = useState("")
     useEffect(()=>{
         axios.get(`https://truewayagentbackend.com/getPayments`)
             .then(function(response){
@@ -31,6 +32,7 @@ const PayReport = () => {
          <SearchField 
             classNames="pepe"
             placeholder='Search item'
+            onChange={setSearch}
             
         /></div>
          <div className="REPDate">
@@ -62,6 +64,7 @@ const PayReport = () => {
                 <th scope="col" className="column1"><p   className="REPtype">Total</p></th>
             </tr>
             {
+                !search?
                payments.reverse().map((e)=>{
                    
                    return (
@@ -85,6 +88,26 @@ const PayReport = () => {
                      
                     
                     })
+                    : 
+                    (payments.filter(e=>(e.Client.name.toLowerCase()).includes(search.toLowerCase())||(e.User.name.toLowerCase()).includes(search.toLowerCase()))).map((e)=>{
+                        return (
+                            <tr>
+                                <td className="ClientName" scope="row">{e.Client.name}</td>
+                                <td className="ClientName" scope="row">{e.User.name}</td>           
+                                <td className="ClientName" scope="row">{e.Location.name}</td>  
+                                <td className="ClientName" scope="row">{e.type}</td>  
+                                <td className="ClientName" scope="row">{e.date}</td>
+                                <td className="ClientName" scope="row">{e.amount}</td>  
+                                <td className="ClientName" scope="row">{e.method}</td> 
+                                <td className="ClientName" scope="row">{e.creditCardFee}</td>           
+                                <td className="ClientName" scope="row">{e.amount+e.creditCardFee}</td>     
+                            
+                            </tr>
+                         
+                         
+                         
+                         
+                         )})
                 }
         
         </tbody>

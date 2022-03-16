@@ -29,7 +29,8 @@ function DailyReport() {
         let CA=0
         let CR=0
         let EF=0
-        payments.map(e=>{
+        let paz = payments
+        paz.map(e=>{
             e.method=="Cash"?
             CA+=e.amount:
             e.method=="EFT"?
@@ -158,10 +159,10 @@ function DailyReport() {
                 </div>
         </div>
 
-        <PDFDownloadLink document={<MyDocument data={{payments:payments, producers:producers, date: date}} fileName="TEST"/>}>
+        <PDFDownloadLink style={{textDecoration:"none", color:"black"}} document={<MyDocument data={{payments:payments, producers:producers, date: date}} fileName={`DailyCloseout`}/>}>
        
-        <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
-                <button className="PAYbutton" ><p className="PAYbuttonText">Add payment</p></button>
+        <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
+                <button className="PAYbutton" ><p className="PAYbuttonText">Generate</p></button>
             </div>    
         </PDFDownloadLink>
         <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>

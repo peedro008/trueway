@@ -10,28 +10,28 @@ function ProducerPie ({aboutProps, google}) {
         ['Sold'],
         ['Cancelled'],
       ])
+ let userId = aboutProps
+ useEffect (()=>{
+      
+      
+  axios.get(`https://truewayagentbackend.com/getStatus`)
+  .then(function(response){
+      let paz = response.data
 
-      useEffect (()=>{
-        let userId = aboutProps.UserId
-      axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
-      .then(function(response){
-          setQuotes(response.data)
-         
-          
-          
-      })
-      .catch(error=>{
-        console.log(error)  
-      })
-  },[aboutProps])
+      setQuotes(paz.filter(e=>e.UserId==userId))
+  })
+  .catch(error=>{
+    console.log(error)  
+  })
+},[aboutProps])
 
   useEffect(()=>{
       let quoted = 0
       let cancelled = 0
       let sold = 0
-      quotes.map(e=>e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status=="Cancelled"?
+      quotes.map(e=>e.Status=="Cancelled"?
       cancelled= cancelled+1
-      :e.QuoteStatuses[0].Status=="Quoted"?
+      :e.Status=="Quoted"?
       quoted=quoted+1:
       sold=sold+1
       )

@@ -148,7 +148,7 @@ const ManagerM=()=>{
      </div>
 
 
-     <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
+     <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
          <button className="PAYbutton" onClick={handleSubmit(onSubmit)} ><p className="PAYbuttonText">Add Manager</p></button>
     </div>
 <Modal open={open} onClose={reload} center classNames={"modal"}>

@@ -91,7 +91,7 @@ const [unSold, setUnSold]= useState(0)
         </tbody>
         </table>
 </div>
-        <div style={{position:"absolute", right:"50px", top:"100px", display:"flex"}}>
+        <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
             <NavLink to="/manager/managerP"  style={{ textDecoration: 'none', color:"#000" }}>
                  <button className="PAYbutton" ><MdAdd  color="white" size={"20px"} className="PAYbuttonIcon"/><p className="PAYbuttonText">New Producer</p></button>
             </NavLink>
