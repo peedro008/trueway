@@ -97,7 +97,7 @@ function ProducerPerfil() {
         setYpip(yp)
         setMpip(mp)
     
-        let po = Unsold.filter(e=>(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status)=="Cancelled"||(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status)=="Quoted")
+        let po = Unsold.filter(e=>(e.QuoteStatuses.sort(function(a,b){return a.id-b.id})[0].Status)=="Cancelled"||(e.QuoteStatuses.sort(function(a,b){return a.id-b.id})[0].Status)=="Quoted")
         
           setUquotes(po)
        

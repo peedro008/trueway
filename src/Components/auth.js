@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import logo from "../assets/logoLogin.png"
+import logo from "../assets/logored.svg"
 import {  useDispatch } from 'react-redux';
 import "./CSS/css.css"
 import { userRole } from '../redux/actions';
@@ -81,8 +81,8 @@ const Auth = ()=>{
     return (
     <div className="main">
         <div className="containerLogo">
-                
-                    <img style={{paddingBottom:"80px" ,height:"90px",width:"auto", alignSelf:"center",  marginLeft:"23%" }}src={logo}/>
+                <div style={{ display:"flex", alignSelf:"center", marginTop:"45%"}}>
+                    <img style={{width:"250px",height:"auto", objectFit:"cover", display:"flex" }}src={logo}/></div>
                 
         </div>
         <div className="loginContainer">

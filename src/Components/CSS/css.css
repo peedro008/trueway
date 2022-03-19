@@ -24,15 +24,18 @@
 
 .containerLogo{
    height: 100vh;
-    width: 33vw;
+    min-width: 33vw;
     background-color: #2B4162;
     display: flex;
+    flex-direction: column;
+    align-items: "center";
+    justify-content: "center";
  
 }
 .loginContainer{
    
    background-color: #fafafa;;
-    width: 950px;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;

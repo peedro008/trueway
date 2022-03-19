@@ -6,13 +6,13 @@ import Icon from "../assets/Icon.png"
 
 function ClientEdit(props) {
   let Client = props.location.aboutProps
-  const [inputs, setInputs]= useState({name:Client.name,email:Client.email, tel:Client.tel  })
+  const [inputs, setInputs]= useState({name:Client.name,email:Client.email, Tel:Client.Tel , ClientId: Client.id})
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const handleClick = () => {
 
-    fetch(`https://truewayagentbackend.com/addCategories`, {
+    fetch(`https://truewayagentbackend.com/modifyClient`, {
             
       method: 'POST',
       headers: {
@@ -70,8 +70,8 @@ onOpenModal()
     </div>
     </div>      
     <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>      
-    <div  onClick={handleClick}  style={{position:"absolute", right:"555px", top:"83px", display:"flex"}}>
-            <button onClick={handleClick}  ><p className="PAYbuttonText">Submit</p></button>
+    <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
+            <button onClick={handleClick} className="PAYbutton" ><p className="PAYbuttonText">Submit</p></button>
         </div>
         <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
     <div className="modal">

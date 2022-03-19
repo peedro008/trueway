@@ -96,7 +96,7 @@ const ProducerDetails = (props) => {
         } )
         setYpip(yp)
         setMpip(mp)
-    },[])
+    },[mquotes, quotes, yquotes])
 
     
     
