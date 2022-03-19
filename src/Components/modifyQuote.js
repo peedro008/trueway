@@ -227,12 +227,12 @@ function ModifyQuote(props) {
         <p className="modalText">Quote modified successfully</p>
        
        
-        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/"}>Continue</NavLink></button>
+        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/report"}>Continue</NavLink></button>
       
         
         </div>
       </Modal>
-      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
         </div>
     )
 }

@@ -57,7 +57,7 @@ const AddQuote = ()=>{
       setValue("NSDvalue", 0)
       setValue("MVRvalue", 0)
       setValue("monthlyPayment", 0)
-      setValue("monthlyPayment", 0)
+   
 
     useEffect(()=>{
         axios.get(`https://truewayagentbackend.com/getDealer`)

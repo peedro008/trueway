@@ -29,6 +29,7 @@ import ModifyQuote from './modifyQuote';
 import AddQuote from './addQuote';
 import ClientsReport from './clientsReport';
 import ClientEdit from './clientEdit';
+import ProducerDetails from './producerDetails';
 // import MyQuotes from './myQuotes';
  const ProducerRouter=()=>{
 
@@ -54,6 +55,7 @@ import ClientEdit from './clientEdit';
           <Route exact path='/payments/pay' component={Payment}/>
           <Route exact path="/payments/deposit" component={DepositCash}/>
           <Route exact path='/payments/dailyReport' component={DailyReport}/>
+          <Route exact path='/producers/details' component={ProducerDetails}/>
            {/* <Route exact path='/myquotes/report' component={MyQuotes}/> 
           <Route exact path='/myquotes' component={ProducerFilter}/>
           <Route exact path='/add' component={ProducerAddQuote}/>

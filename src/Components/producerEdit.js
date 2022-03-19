@@ -2,17 +2,43 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Select from 'react-select'
 import { BsChevronLeft } from "react-icons/bs";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import Modal from "react-responsive-modal";
+import Icon from "../assets/Icon.png"
+const schema = yup.object({
+    name: yup.string().required(),
+    email: yup.string().email().required(),
+    phone: yup.string().required(),
+    address: yup.string().required(),
+    Password: yup.string().required(),
+    UserId: yup.number().required(),
+    ProducerId: yup.number().required(),
+    LocationId: yup.number().required(),
+
+}).required();
 
 const ProducerEdit = (props) => {
     const [locations, setLocations] = useState([])
     
     const [inputs, setInputs]= useState({})
     let Producer = props.location.props
-    useEffect(()=>{
+    const [open, setOpen] = useState(false);
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
+    const { register, handleSubmit,control, formState:{ errors }, setValue } = useForm({
+        resolver: yupResolver(schema)
+      });
+      setValue("UserId", `${Producer.UserId}`)
+      setValue("email", `${Producer.email}`)
+      setValue("name", `${Producer.name}`)
+      setValue("phone", `${Producer.phone}`)
+      setValue("LocationId", `${Producer.LocationId}`)
+      setValue("address", `${Producer.address}`)
+      setValue("ProducerId", `${Producer.id}`)
+      
 
-        setInputs({name:Producer.name, email:Producer.email, phone: Producer.phone, LocationId:Producer.LocationId, address:Producer.address, UserId:Producer.User.id, Password:null})
-       
-    },[Producer])
     useEffect(()=>{
         axios.get(`https://truewayagentbackend.com/getLocations`)
             .then(function(response){
@@ -27,18 +53,47 @@ const ProducerEdit = (props) => {
 
     
 
-    const submit = () => {
+    const onSubmit = (data) => {
+ 
+       
         fetch(`https://truewayagentbackend.com/modifyProducer`, {
             
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 },
-            body: JSON.stringify(inputs)
+                body: JSON.stringify(data),
             
         })
+        .then(async res => { 
+            
+            try {
+            const jsonRes = await res.json();
+            
+            if (res.status !== 200) {
+                console.log("error")
+            } else {
+               
+               console.log(jsonRes)
+              
+              
+                
+            }
+        } catch (err) {
+            console.log(err);
+        };
+    onOpenModal()
+    })
+      
+        .catch(err => {
+            console.log(err);
+        });
+         
+        
+  
+    
     }
-
+    const optionsC = locations.map(e=>({value:e.id,label:e.name}))
     const customStyles = {
         control: base => ({
           ...base,
@@ -83,19 +138,30 @@ const ProducerEdit = (props) => {
                 <div style={{display:"flex", flexDirection:"row", width:"100%", justifyContent:"space-between"}}>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle">Full name</p>
-                    <input className="ProdEditInput" placeholder={inputs.name} value={inputs.name}  onChange={event => setInputs({...inputs,name:event.target.value})}/>
+                    <input className="ProdEditInput" placeholder={inputs.name}   {...register("name")}/>
+                    <p className="FORMerror">{errors.name?.message}</p>
                 </div>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle">Phone number</p>
-                    <input className="ProdEditInput" placeholder={inputs.phone} value={inputs.phone} onChange={event => setInputs({...inputs,phone:event.target.value})}/>
+                    <input className="ProdEditInput" placeholder={inputs.phone}  {...register("phone")}/>
+                    <p className="FORMerror">{errors.phone?.message}</p>
                 </div>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle" >Address</p>
-                    <input className="ProdEditInput"  placeholder={inputs.address} value={inputs.address}onChange={event => setInputs({...inputs,address:event.target.value})}/>
+                    <input className="ProdEditInput"  placeholder={inputs.address} {...register("address")}/>
+                    <p className="FORMerror">{errors.address?.message}</p>
                 </div>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle">Location</p>
-                    <Select  styles={customStyles}  value={inputs.LocationId}  className="ProdEditInputS"  options={locations.map(e=>({value:e.id,label:e.name}))} onChange={event => setInputs({...inputs,LocationId:event.value})}/>
+                    <Controller
+                     control={control}
+                     name="LocationId"
+                     render={({ field: { onChange, onBlur, value, ref } }) => (
+                         <Select styles={customStyles} value={optionsC.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={locations.map(e=>({value:e.id,label:e.name}))} name={"LocationId"} className="PAYselect"  placeholder="Select Location"/>
+                     )}
+                     
+                     />
+                   
                 </div>
                 </div>
 
@@ -107,19 +173,32 @@ const ProducerEdit = (props) => {
                 <div style={{width:"78%", textAlign:"left", marginLeft:"5px"}}><p className="ProdEditT">Account</p></div>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle">E-mail</p>
-                    <input className="ProdEditInput" value={inputs.email} placeholder={inputs.email}onChange={event => setInputs({...inputs,email:event.target.value})}/>
-                </div>
+                    <input className="ProdEditInput"  placeholder={inputs.email}  {...register("email")}/>
+                    <p className="FORMerror">{errors.email?.message}</p>
+               </div>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle">Password</p>
-                    <input placeholder="*******" className="ProdEditInput" onChange={event => setInputs({...inputs,Password:event.target.value})}/>
+                    <input placeholder="*******" className="ProdEditInput" {...register("Password")}/>
+                    <p className="FORMerror">{errors.Password?.message.substring(0,28)}</p>
                 </div>
                 <div className="ProdEditInputCont">
                     <p className="ProdEditTitle">Repeat password</p>
-                    <input placeholder="*******" className="ProdEditInput"/>
+                    <input placeholder="*******" onChange={(e)=>setInputs(e.target.value)} className="ProdEditInput"/>
                 </div>
-               <button className="ProdEditSave" onClick={submit}>Save</button>
+               <button className="ProdEditSave" onClick={handleSubmit(onSubmit)}>Save</button>
 
-
+               <Modal open={open} onClose={()=>window.history.go(-2)} center classNames={"modal"}>
+    <div className="modal">
+        <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
+        
+        <p className="modalText">Producer modified successfully</p>
+       
+       
+        <button  className="modalButton" onClick={()=>window.history.go(-2)}>Continue</button>
+      
+        
+        </div>
+      </Modal>
 
 
 
@@ -134,7 +213,7 @@ const ProducerEdit = (props) => {
 
 
 
-        <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>
+        <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>
 
 
     </div>   )

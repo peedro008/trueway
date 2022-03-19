@@ -116,7 +116,7 @@ const ManagerC=()=>{
                     <p className="FORMerror">{errors.phone?.message.substring(0,25)}</p>
                 </div>
                 <div className="inputDiv"> 
-                    <p className="PAYtitle">Address</p>
+                    <p className="PAYtitle" >Address</p>
                     <input {...register("address")}  placeholder="Address" className="AQinput"></input>
                     <p className="FORMerror">{errors.address?.message}</p>
                 </div>
@@ -147,7 +147,7 @@ const ManagerC=()=>{
   
         {/* <input type="submit"  className="PAYbutton"/> */}
         <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
-            <button onClick={handleSubmit(onSubmit)} className="PAYbutton" ><p className="PAYbuttonText">Add Manager</p></button>
+            <button onClick={handleSubmit(onSubmit)} className="PAYbutton" ><p className="PAYbuttonText">Add Company</p></button>
         </div>
         <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
     <div className="modal">
@@ -161,8 +161,8 @@ const ManagerC=()=>{
         
         </div>
       </Modal>
-      <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"528px", opacity:"0.5"}}/>
-      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
+      <img src={Isologo_background} style={{position:"absolute",zIndex:0, right:0, bottom:-8, width:"528px", opacity:"0.5"}}/>
+      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
 
     )

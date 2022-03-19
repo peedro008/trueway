@@ -26,6 +26,7 @@ function QuoteDetails(props) {
                <div>
                <div className="genericHeader">
                 <p className="genericTitle">Quote #{id}</p>
+                <p className='subTitt'>LAST MODIFICATION &nbsp;{quote[0].QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].date}</p>
                  </div>
            
            
@@ -85,7 +86,7 @@ function QuoteDetails(props) {
                             return(<div className='DETcontainer'>
                                <div className='DETsBox'>
                                 <p className="DETtitle" >Status</p>
-                                <p className="DETtext"  style={{fontWeight:"700", color:e.Status=="Cancelled"?"red":e.Status=="Renew down"?"blue":e.Status=="Sold"?"green":"black" }}>{e.Status}</p>
+                                <p className="DETtext"  style={{fontWeight:"700",fontSize:"17px", color:e.Status=="Cancelled"?"red":e.Status=="Renew down"?"blue":e.Status=="Sold"?"green":"black" }}>{e.Status}</p>
                             </div>
                             <div className='DETsBox'>
                                 <p className="DETtitle">Modification date</p>
@@ -101,7 +102,7 @@ function QuoteDetails(props) {
 
                             }
 
-<BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.back()}/>
+<BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.back()}/>
                        
                     </div>
                     

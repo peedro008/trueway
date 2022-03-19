@@ -57,7 +57,7 @@ function ClientsReport() {
                             <td className="ClientName" scope="row">
                                 <NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }}
                                  to={{
-                                    pathname:("/clientedit"),
+                                    pathname:("/report/clientedit"),
                                     aboutProps:e}}> 
                                     {e.name}
                                 </NavLink>
@@ -65,7 +65,7 @@ function ClientsReport() {
                             <td className="ClientName" scope="row">
                             <NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }}
                                  to={{
-                                    pathname:("/clientedit"),
+                                    pathname:("/report/clientedit"),
                                     aboutProps:e}}>{e.email}
                                     </NavLink>
                             </td>    
@@ -73,7 +73,7 @@ function ClientsReport() {
                             <td className="ClientName" scope="row">
                             <NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }}
                                  to={{
-                                    pathname:("/clientedit"),
+                                    pathname:("/report/clientedit"),
                                     aboutProps:e}}>{e.tel}
                                     </NavLink>
                                 </td>  
@@ -112,7 +112,7 @@ function ClientsReport() {
             </table>
 
 
-            <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>    
+            <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>    
     </div>
   )
 }

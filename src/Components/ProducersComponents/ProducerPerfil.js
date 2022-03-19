@@ -13,10 +13,12 @@ function ProducerPerfil() {
     const userId = useSelector(state=> state.UserId) 
     const name = useSelector(state=> state.userName) 
     const [quotes, setQuotes] = useState([])
+    const [uquotes, setUquotes] = useState([])
     const google = useGoogleCharts();
     const [mquotes, setMquotes] = useState([])
     const [mstat, setMstat] = useState([])
     const [yquotes, setYquotes] = useState([])
+    const [modify , setModify] = useState([])
     const [ystat, setYstat] = useState([])
     const [ypip, setYpip] = useState(0)
     const [mpip, setMpip] = useState(0)
@@ -38,48 +40,70 @@ function ProducerPerfil() {
           console.log(error)  
         })
     },[userId])
+        useEffect(()=>{
+        axios.get(`https://truewayagentbackend.com/getStatus`)
+            .then(function(response){
+                let paz = response.data
+
+                setModify(paz.filter(e=>e.UserId==userId))
+            
+            })
+            .catch(error=>{
+              console.log(error)  
+            })
+        }, [])
    
     useEffect(() => {
         const date =  new Date()
         const DATE = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
-        let yq = quotes
-        let mq = quotes
+        let yq = modify
+        let mq = modify
         setYquotes(yq.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
         setMquotes(mq.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
-        
+       
   
-    }, [quotes])
+    }, [modify])
     useEffect(()=>{
         let pes = []
         let pas = []
         let yp = 0
         let mp = 0
+        let Unsold = quotes
         let m = mquotes
         let y  = yquotes
+
         m.map(e=>
-            pes.push(e.QuoteStatuses[0])
+            pes.push(e)
         )
         setMstat(pes)
         y.map(e=>
-            pas.push(e.QuoteStatuses[0])
+            pas.push(e)
         )
         setYstat(pas)
         
+        
         m.map(e=>{
-            if (e.QuoteStatuses[0]!=="Quoted"&&e.QuoteStatuses[0]!=="Cancelled"){
+            if (e.Status!=="Quoted"&&e.Status!=="Cancelled"){
                 if(e.PIPvalue!==0) {
                 mp=mp+1}
             }
         } )
         y.map(e=>{
-            if (e.QuoteStatuses[0]!=="Quoted"&&e.QuoteStatuses[0]!=="Cancelled"){
+            if (e.Status!=="Quoted"&&e.Status!=="Cancelled"){
                 if(e.PIPvalue!==0) {
                 yp=yp+1}
             }
         } )
         setYpip(yp)
         setMpip(mp)
-    },[yquotes, mquotes])
+    
+        let po = Unsold.filter(e=>(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status)=="Cancelled"||(e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status)=="Quoted")
+        
+          setUquotes(po)
+       
+       
+
+    },[quotes,yquotes, mquotes])
   
     return(
         <div className="genericDiv">
@@ -97,9 +121,9 @@ function ProducerPerfil() {
                 <div className="PRODrectB">
                    <div style={{display:"flex", flexDirection:"row"}}>
                     {dots1V==1?
-                    <p className="PRODrectQ">{mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}</p>
+                     <p className="PRODrectQ">{mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}&nbsp;</p>
                     :
-                    <p className="PRODrectQ">{ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}</p>
+                    <p className="PRODrectQ">{ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}&nbsp;</p>
                     }
                     <p className="PRODrectQ">Sold</p>
                     </div>
@@ -119,9 +143,9 @@ function ProducerPerfil() {
                 <div className="PRODrectB">
                 <div style={{display:"flex", flexDirection:"row"}}>
                     {dots2V==1?
-                    <p className="PRODrectQ">{mstat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length?mstat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length:0}</p>
+                    <p className="PRODrectQ">{uquotes.length?uquotes.length:0}&nbsp;</p>
                     :
-                    <p className="PRODrectQ">{ystat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length?ystat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length:0}</p>
+                    <p className="PRODrectQ">{uquotes.length?uquotes.length:0}&nbsp;</p>
                     }
                     <p className="PRODrectQ">Quotes</p>
                     </div>
@@ -142,9 +166,9 @@ function ProducerPerfil() {
                 <div className="PRODrectB">
                 <div style={{display:"flex", flexDirection:"row"}}>
                     {dots3V==1?
-                    <p className="PRODrectQ">{mpip}</p>
+                    <p className="PRODrectQ">{mpip}&nbsp;</p>
                     :
-                    <p className="PRODrectQ">{ypip}</p>
+                    <p className="PRODrectQ">{ypip}&nbsp;</p>
                     }
                     <p className="PRODrectQ">Sold</p>
                     </div>

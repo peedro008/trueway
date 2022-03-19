@@ -96,7 +96,7 @@ const ProducerDetails = (props) => {
         } )
         setYpip(yp)
         setMpip(mp)
-    },[yquotes, mquotes])
+    },[])
 
     
     
@@ -201,7 +201,7 @@ const ProducerDetails = (props) => {
                     </div>
                 </button>
                 </NavLink>
-                <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"absolute",zIndex:9, left:"80px",top:"18px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
+                <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
     )
 }

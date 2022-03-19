@@ -342,6 +342,16 @@
 
 /*-------------------MANAGER------------------*/
 
+.managerContainer1{
+    width: 50%;
+    display: flex;
+    justify-content: left;
+    padding-left: 1.5%;
+    margin-top: 25px;
+    padding-left: 40px;
+    
+}
+
 .managerContainer{
     width: 50%;
     display: flex;
@@ -737,7 +747,7 @@
 }
 .DETsBox{
     height: 80px;
-    width: 225px;
+    width: 200px;
     border-radius: 13px;
     background-color: #FDFDFF;
  
@@ -770,7 +780,7 @@
 }
 .DETbBox{
     height: 80px;
-    width: 705px;
+    width: 695px;
     border-radius: 13px;
     background-color: #FDFDFF;
    
@@ -1088,13 +1098,9 @@
     justify-content: space-between;
 }
 
-.AQinput::placeholder{
-    padding-left: 8px;
-}
-.AQinput2::placeholder{
-    padding-left: 8px;
-}
+
 .AQinput{
+    padding-left: 8px;
     font-family: "Gilroy";
     font-weight: 700;
     font-size: 12px;
@@ -1108,6 +1114,7 @@
     border-width: 1px;
 }
 .AQinput2{
+    padding-left: 8px;
     font-family: "Gilroy";
     font-weight: 700;
     font-size: 12px;
@@ -1128,7 +1135,7 @@
     padding-right: 150px;
     padding-top: 10px;
     height: 70px;
-    background-color:#FBFBFB  ;
+    background-color:white  ;
     width: 40%;
     border-radius: 8px;
     margin-top: 40px;
@@ -1513,6 +1520,10 @@ width:25%;
     line-height: 22px;
     letter-spacing: 0px;
     text-align: left;
+    white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding-left: 4px;
 
 }
 .DashNumber{
@@ -2068,4 +2079,15 @@ line-height: 20px;
 display: flex;
 align-items: center;
 text-decoration-line: underline;
+}
+.subTitt{
+    font-family: Gilroy;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    color: #A6ACBE;
+
 }

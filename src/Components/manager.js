@@ -24,7 +24,7 @@ const Manager=()=>{
             </NavLink>
             </div>
         
-        <div className="managerContainer">
+        <div className="managerContainer1">
             <NavLink to={"./manager/managerL"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd color="white" size={"20px"}   className="PAYbuttonIcon"/> <p className="PAYbuttonText">Add Location</p></button>
             </NavLink>
