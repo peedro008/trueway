@@ -177,7 +177,7 @@ useEffect(()=>{
       const data = new google.visualization.DataTable();
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Sold Quotes', "color:#6F52ED");
-      data.addColumn('number', 'Usold Quotes',"color:#FF7A00");
+      data.addColumn('number', 'Unsold Quotes',"color:#FF7A00");
       data.addRows(dato);
       
       // Set chart options
@@ -187,9 +187,9 @@ useEffect(()=>{
                      fontSize:12,
                      
                      titleTextStyle: {
-                      
+                        marginBottom: "20px",
                         fontName: "Gilroy",
-                        fontSize: "14", 
+                        fontSize: "16", 
                         marginLeft:"-10px"
                     },
                      "colors": ["#6F52ED","#FF7A00"],

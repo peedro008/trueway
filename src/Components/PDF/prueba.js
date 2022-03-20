@@ -203,25 +203,30 @@ const MyDocument = ({ data }) => {
       <View style={styles.div}>
           <Text style={styles.make}>¡Make things easier on yourself by bundling your policies!
 
+
+
 </Text>
-          <Text style={styles.make}>Auto - Home - Commercial - Healt</Text>
+          <Text style={styles.make}>Auto - Home -Commercial - Health</Text>
       </View>
       <View style={styles.div3}>
-          <Text style={styles.text}>Insure more than one car with Trueway and you could get a discount of up to 30% ib nist if your car insurance coverages.</Text>
+          <Text style={styles.text}>Insure more than one car with Trueway and you could get a discount of up to 30% on most of your car insurance coverages.</Text>
       </View>
       <View style={styles.div3}>
-          <Text style={styles.text}>Trueway Insurance has been providing excekkent services to the community in Florida for many years.
-              Our goal is to establish a lastomg relationship with our clients, this can only be achieved by providing reliable services, while saving hundreds of dollars in your Auto, Home and Buisness insurance.
+          <Text style={styles.text}>Insure more than one car with Trueway and you could get a discount of up to 30% on most of your car insurance coverages.
+Trueway Insurance has been providing excellent services to the community in Florida for many years. Our goal is to establish a lasting relationship with our clients, this can only be achieved by providing reliable services, while saving hundreds of dollars in your Auto, Home and Business insurance.
+
+
+
           </Text>
       </View>
       <View style={styles.div3}>
-          <Text style={styles.text}>Thank you fir your buisness!!!</Text>
+          <Text style={styles.text}>Thank you for your business!</Text>
       </View>
       <View style={styles.div}>
         <Text style={styles.receipt}>Assisted by</Text>
         <View  style={styles.div4}>
             <Text style={styles.producer}>{data.producer}</Text>
-            <Text style={styles.producer}>1/5/22 08:20pm</Text>
+            <Text style={styles.producer}>{data.date}</Text>
         </View>
 
       </View>

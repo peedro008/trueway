@@ -9,6 +9,7 @@ const [producers, setProducers]= useState([])
 const [quotes, setQuotes]= useState([])
 const [sold, setSold]= useState(0)
 const [unSold, setUnSold]= useState(0)  
+const [modify, setModify]= useState([])
  
     useEffect(()=>{
         axios.get(`https://truewayagentbackend.com/getProducer`)
@@ -30,7 +31,17 @@ const [unSold, setUnSold]= useState(0)
             })
     
     },[])
-
+    useEffect(()=>{
+        axios.get(`https://truewayagentbackend.com/getStatus`)
+            .then(function(response){
+                setModify(response.data)
+            
+            })
+            .catch(error=>{
+              console.log(error)  
+            })
+    
+    },[])
 
 
 
@@ -79,7 +90,7 @@ const [unSold, setUnSold]= useState(0)
                            
                             <td scope="row">{e.email}</td>
                             <td scope="row">{e.phone}</td>
-                            <td scope="row">{(quotes.filter(f=>f.UserId==e.UserId)).filter(g=>g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Cancelled"&&g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status!=="Quoted").length}</td>
+                            <td scope="row">{(modify.filter(f=>f.UserId==e.UserId&&f.Status!=="Quoted"&&f.Status!=="Cancelled")).length}</td>
                             <td scope="row">{(quotes.filter(f=>f.UserId==e.UserId)).filter(g=>g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status=="Cancelled"||g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status=="Quoted").length}</td>
                             
                         </tr>)

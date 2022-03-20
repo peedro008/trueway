@@ -123,7 +123,7 @@ const ManagerL=()=>{
         <p className="modalText">Location added successfully</p>
        
        
-        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/"}>Continue</NavLink></button>
+        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/Manager"}>Continue</NavLink></button>
       
         
         </div>

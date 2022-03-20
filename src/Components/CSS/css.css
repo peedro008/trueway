@@ -25,6 +25,7 @@
 .containerLogo{
    height: 100vh;
     min-width: 33vw;
+    width: 33vw;
     background-color: #2B4162;
     display: flex;
     flex-direction: column;
@@ -218,7 +219,71 @@
     min-width: 100vw;
     min-height: 90vh;
     flex-direction: column;
+    overflow-y: scroll;
 }
+
+.genericDiv1::-webkit-scrollbar{
+    background-color:#F3F4F6;
+    width: 8px;
+   
+border-radius: 0px 10px  10px 0px;
+    
+}
+
+.genericDiv1::-webkit-scrollbar-thumb {
+    background-color: #2B4162;
+    border-radius: 2px;
+
+}
+
+
+.genericDiv1::-webkit-scrollbar{
+    background-color:#F3F4F6;
+    width: 8px;
+   
+border-radius: 0px 10px  10px 0px;
+    
+}
+
+.genericDiv1::-webkit-scrollbar-thumb {
+    background-color: #2B4162;
+    border-radius: 2px;
+
+}
+
+
+
+
+
+.genericDiv::-webkit-scrollbar{
+    background-color:#F3F4F6;
+    width: 8px;
+   
+border-radius: 0px 10px  10px 0px;
+    
+}
+
+.genericDiv::-webkit-scrollbar-thumb {
+    background-color: #2B4162;
+    border-radius: 2px;
+
+}
+
+
+.genericDiv::-webkit-scrollbar{
+    background-color:#F3F4F6;
+    width: 8px;
+   
+border-radius: 0px 10px  10px 0px;
+    
+}
+
+.genericDiv::-webkit-scrollbar-thumb {
+    background-color: #2B4162;
+    border-radius: 2px;
+
+}
+
 
  .genericTitle{
     font-family: "Gilroy";
@@ -369,13 +434,14 @@
     flex-direction: column;
     padding-left: 40px;
     margin-top: 40px;
+    
 
 }
 .managerInputsubContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 80%;
+    width: 70%;
     margin-bottom: 30px;
         margin-right: 20px;
 }
@@ -402,7 +468,7 @@
 
 .table td, .table th{
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px;
     
     
 }
@@ -426,7 +492,7 @@
     
   }
   .tableTitle{
-    font-family: Lato;
+    font-family: Poppins;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -953,7 +1019,7 @@
   
 }
 .inputDiv{
-    margin-right: 100px;
+    margin-right: 50px;
     height: 60px;
    
 
@@ -1225,10 +1291,11 @@ width: 99.5%;
 .DashPList1{
     background-color: #FFFFFF;
     height: max-content;
-    width: 261px;
+    margin-top: 25px;
+    min-width: 261px;
     border-radius: 10px;
     max-height: 90%;
-    min-height: 45vh;
+    min-height: 50vh;
     overflow-y: scroll;
     overflow-x: hidden;
     display: flex;
@@ -1371,8 +1438,8 @@ border-radius: 0px 10px  10px 0px;
 }
 
 .dashCircle{
-    height: 60px;
-    width: 60px;
+    min-height: 60px;
+    min-width: 60px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -1729,7 +1796,7 @@ overflow: hidden;
     height: max-content;
     margin-left: 40px;
     
-    margin-right: 20px;
+    
     background:white;
     border-radius:6px;
     overflow:hidden;
@@ -1813,7 +1880,7 @@ overflow: hidden;
 }
 .DEPcont{
     display: flex;
-    margin-top: 50px;
+    margin-top: 32px;
    
 }
 .DEPtotal{
@@ -1825,12 +1892,56 @@ display:flex;
 align-items:"center";
 justify-content: center;
 align-self: center;
-justify-self: flex-end;
+
 border-radius: 0px;
+border-radius: 5px;
 margin-top: 65%;
+padding: 0px 7px;
     background-color: #E3E3E3;
 
 }
+.DEPsubCont{
+    height: 70vh;
+    overflow-y: scroll;
+
+}
+
+.DEPsubCont::-webkit-scrollbar{
+    background-color:#F3F4F6;
+    width: 6px;
+   
+border-radius: 0px 10px  10px 0px;
+    
+}
+
+.DEPsubCont::-webkit-scrollbar-thumb {
+    background-color: #2B4162;
+    border-radius: 2px;
+
+}
+
+
+.DEPsubCont::-webkit-scrollbar{
+    background-color:#F3F4F6;
+    width: 6px;
+   
+border-radius: 0px 10px  10px 0px;
+    
+}
+
+.DEPsubCont::-webkit-scrollbar-thumb {
+    background-color: #787d84;
+    border-radius: 2px;
+
+}
+
+
+
+
+
+
+
+
 
 .DEPboxy{
     background: #FBFBFB;
@@ -1849,7 +1960,7 @@ display:flex;
     font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
-    font-weight: 800;
+    font-weight: 900;
     line-height: 22px;
     letter-spacing: 0em;
     text-align: center;
@@ -1915,8 +2026,8 @@ display:flex;
     display: flex;
     flex-direction: row;
     padding-left: 40px;
-    padding-top: 20px;
-    width: 50vw;
+    padding-top: 25px;
+    width: 40vw;
     
     justify-content: space-between;
 }
@@ -1925,6 +2036,7 @@ display:flex;
     padding-left: 12px;
     padding-right: 12px;
     height: 32px;
+    border-radius: 4px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -2076,7 +2188,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 16px;
 line-height: 20px;
-
+cursor: pointer;
 /* or 200% */
 
 display: flex;

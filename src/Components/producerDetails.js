@@ -96,7 +96,7 @@ const ProducerDetails = (props) => {
         } )
         setYpip(yp)
         setMpip(mp)
-    },[mquotes, quotes, yquotes])
+    },[mquotes])
 
     
     
@@ -113,7 +113,7 @@ const ProducerDetails = (props) => {
                 <div className="PRODrect">
                     <div className="PRODrectH">
                         <p className="PRODrectT">Sold Quotes</p>
-                        <BiDotsHorizontalRounded size={30} color={"#979797"} onClick={()=>setDots1(!dots1)}/>
+                        <BiDotsHorizontalRounded style={{cursor: "pointer"}} size={30} color={"#979797"} onClick={()=>setDots1(!dots1)}/>
                     </div>
                     <div className="PRODrectB">
                        <div style={{display:"flex", flexDirection:"row"}}>
@@ -125,8 +125,7 @@ const ProducerDetails = (props) => {
                         <p className="PRODrectQ">Sold</p>
                         </div>
                         <div className="PRODrectP">
-                          
-                            <AiOutlineArrowDown/>
+                         
                             
                         </div>
                     </div>
@@ -135,7 +134,7 @@ const ProducerDetails = (props) => {
                 <div className="PRODrect">
                     <div className="PRODrectH">
                         <p className="PRODrectT">Unsold Quotes</p>
-                        <BiDotsHorizontalRounded size={30} color={"#979797"} onClick={()=>setDots2(!dots2)}/>
+                        <BiDotsHorizontalRounded style={{cursor: "pointer"}} size={30} color={"#979797"} onClick={()=>setDots2(!dots2)}/>
                     </div>
                     <div className="PRODrectB">
                     <div style={{display:"flex", flexDirection:"row"}}>
@@ -150,7 +149,7 @@ const ProducerDetails = (props) => {
                         
                         <div className="PRODrectP">
                           
-                            <AiOutlineArrowUp/>
+                       
                         </div>
                     </div>
                 </div>
@@ -158,7 +157,7 @@ const ProducerDetails = (props) => {
                 <div className="PRODrect">
                     <div className="PRODrectH">
                         <p className="PRODrectT">NSD Sales</p>
-                        <BiDotsHorizontalRounded size={30} color={"#979797"} onClick={()=>setDots3(!dots3)}/>
+                        <BiDotsHorizontalRounded style={{cursor: "pointer"}} size={30} color={"#979797"} onClick={()=>setDots3(!dots3)}/>
                     </div>
                     <div className="PRODrectB">
                     <div style={{display:"flex", flexDirection:"row"}}>
@@ -171,7 +170,7 @@ const ProducerDetails = (props) => {
                         </div>
                         <div className="PRODrectP">
                             
-                            <AiOutlineArrowUp/>
+                           
                         </div>
                     </div>
                 </div>

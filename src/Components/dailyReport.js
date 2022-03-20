@@ -69,7 +69,7 @@ function DailyReport() {
        
          <div className="DAIsearch">
          <SearchField 
-            classNames="pepee"
+           
             placeholder='Search item'
             onChange={setSearch}
         /></div>
@@ -159,7 +159,7 @@ function DailyReport() {
                 </div>
         </div>
 
-        <PDFDownloadLink style={{textDecoration:"none", color:"black"}} document={<MyDocument data={{payments:payments, producers:producers, date: date}} fileName={`DailyCloseout`}/>}>
+        <PDFDownloadLink style={{textDecoration:"none", color:"black"}} document={<MyDocument data={{payments:payments, producers:producers, date: date}} />}fileName="DailyCloseout">
        
         <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
                 <button className="PAYbutton" ><p className="PAYbuttonText">Generate</p></button>

@@ -2,11 +2,13 @@ import axios from 'axios'
 import {BiPencil} from "react-icons/bi"
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 
 function QuoteDetails(props) {
     const id = props.location.aboutProps.ID
     const [quote, setQuote] = useState([])
+    const history = useHistory()
     useEffect(() => {
         axios.get(`https://truewayagentbackend.com/idquotes`,{ params: { id: id } })
         .then(function(response){
@@ -21,7 +23,7 @@ function QuoteDetails(props) {
     }, [id])
 
     return (
-        <div className='genericDiv1'>
+        <div className='genericDiv' style={{overflowX:"hidden"}}>
             {!quote.length?<p>No quotes</p>:
                <div>
                <div className="genericHeader">
@@ -82,7 +84,7 @@ function QuoteDetails(props) {
                       
 
                         {quote[0].QuoteStatuses[0]&& 
-                        (quote[0].QuoteStatuses.reverse()).map(e=>{
+                        (quote[0].QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()).map(e=>{
                             return(<div className='DETcontainer'>
                                <div className='DETsBox'>
                                 <p className="DETtitle" >Status</p>
@@ -101,9 +103,9 @@ function QuoteDetails(props) {
                            
 
                             }
-
-<BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.back()}/>
-                       
+<NavLink to={"/report"}>
+<BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} />
+                       </NavLink>
                     </div>
                     
                     

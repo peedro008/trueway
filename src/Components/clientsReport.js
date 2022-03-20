@@ -93,9 +93,19 @@ function ClientsReport() {
                 (clients.filter(e=>(e.name.toLowerCase()).includes(search.toLowerCase()))).map((e)=>{
                     return (
                         <tr>
-                            <td className="ClientName" scope="row">{e.name}</td>
-                            <td className="ClientName" scope="row">{e.email}</td>           
-                            <td className="ClientName" scope="row">{e.tel}</td>  
+                             
+                            <td className="ClientName" scope="row"><NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }}
+                                 to={{
+                                    pathname:("/report/clientedit"),
+                                    aboutProps:e}}>{e.name}</NavLink></td>
+                            <td className="ClientName" scope="row"> <NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }}
+                                 to={{
+                                    pathname:("/report/clientedit"),
+                                    aboutProps:e}}>{e.email}</NavLink></td>           
+                            <td className="ClientName" scope="row"><NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }}
+                                 to={{
+                                    pathname:("/report/clientedit"),
+                                    aboutProps:e}}>{e.tel}</NavLink></td>  
                                
                         
                         </tr>

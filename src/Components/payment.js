@@ -31,7 +31,8 @@ const schema = yup.object({
     
 
 }).required();
-
+const date =  new Date()
+        const DATE = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
 function Payment(){
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
@@ -311,11 +312,12 @@ function Payment(){
                 <p className="FORMerror">{errors.method?.message}</p>
                 {method=="credit/debit"&&
                 <>
-                <div style={{position:"absolute",marginTop:"20px"}}>
+                <div style={{position:"absolute",marginTop:"20px", height:"max-content"}}>
                  <p className="PAYtitle">Credit card fee</p>
                  <input className="PAYsub-title"   {...register("creditCardFee")}/>
+                 <p className="FORMerror">{errors.creditCardFee?.message}</p>
                 </div>
-                  <p className="FORMerror">{errors.creditCardFee?.message}</p>
+                  
                   </>
                 }
 
@@ -334,7 +336,7 @@ function Payment(){
         <p className="modalText">Payment added successfully</p>
        
      
-        <button  className="modalButton" onClick={reload}>   <PDFDownloadLink style={{textDecoration:"none", color:"black"}} document={<MyDocument data={{client:form.client, total:(control._formValues.creditCardFee?(control._formValues.amount+control._formValues.creditCardFee):control._formValues.amount), producer: userName}} />} fileName="Receipt"> Continue  </PDFDownloadLink></button>
+        <button  className="modalButton" onClick={reload}>   <PDFDownloadLink style={{textDecoration:"none", color:"black"}} document={<MyDocument data={{client:form.client, total:(control._formValues.creditCardFee?(control._formValues.amount+control._formValues.creditCardFee):control._formValues.amount), producer: userName, date:DATE}} />} fileName="Receipt"> Continue  </PDFDownloadLink></button>
       
       
         

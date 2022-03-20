@@ -92,7 +92,7 @@ useEffect(()=>{
       newChart.draw(data, options);
       
       setChart(newChart);
-    }}, 1000)
+    }}, 700)
   }, [ dato, chart]);
   return (
     <>

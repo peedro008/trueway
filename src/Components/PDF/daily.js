@@ -171,7 +171,7 @@ const MyDocument = ({ data }) => {
                       <div style={styles.columnCont}><Text style={styles.columnTitle}>Customer</Text></div>
                       <div style={styles.columnCont}><Text style={styles.columnTitle}>Date</Text></div>
                       <div style={styles.columnCont}><Text style={styles.columnTitle}>Method</Text></div>
-                      <div style={styles.columnCont, {textAlign:"right"}}><Text style={styles.columnTitle}>Amount</Text></div>
+                      <div style={styles.columnCont}><Text style={styles.columnTitle}>Amount</Text></div>
                   </div>
                   </div>
   
@@ -203,7 +203,7 @@ const MyDocument = ({ data }) => {
                               <div style={styles.columnCont}><Text style={styles.text}>{h.Client.name}</Text></div>
                               <div style={styles.columnCont}><Text style={styles.text}>{h.date}</Text></div>
                               <div style={styles.columnCont}><Text style={styles.text}>{h.method}</Text></div>
-                              <div style={styles.columnCont, {textAlign:"right"}}><Text style={styles.text}>${h.total}</Text></div>
+                              <div style={styles.columnCont}><Text style={styles.text}>${h.total}</Text></div>
                             </div>
                               
                       )}

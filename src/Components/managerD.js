@@ -86,7 +86,7 @@ const ManagerD=()=>{
         <div  className="genericDiv">
 
             <div className="genericHeader">
-            <p className="genericTitle">Add Dealer sale person</p>
+            <p className="genericTitle">Add Dealer sales person</p>
             </div>
         
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -117,7 +117,9 @@ const ManagerD=()=>{
 
 
 
-        <button onClick={handleSubmit(onSubmit)} className="button4" >Add Dealer</button>
+    <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
+            <button onClick={handleSubmit(onSubmit)} className="PAYbutton" ><p className="PAYbuttonText">Add Dealer</p></button>
+        </div>
         <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
     <div className="modal">
         <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
@@ -125,7 +127,7 @@ const ManagerD=()=>{
         <p className="modalText">¡Dealer added successfully!</p>
        
        
-        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/"}>Continue</NavLink></button>
+        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/Manager"}>Continue</NavLink></button>
       
         
         </div>

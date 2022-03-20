@@ -63,7 +63,7 @@ const DepositCash = () => {
 
 
             <div className="DEPcont">
-            <div className="DEPsubCont">
+            <div className="DEPsubCont" >
              
             <table class="table3" >
                     <tbody>
@@ -77,7 +77,7 @@ const DepositCash = () => {
                         </tr>
                         { dbPayments.length?
                            
-                        dbPayments.reverse().map((e)=>{
+                        dbPayments.map((e)=>{
                             
                             return (
                                     <tr>

@@ -36,8 +36,8 @@ function PizzaChart ({google}) {
           setDato(pes)
       }, [quotes])
   useEffect(() => {
-    
-    if (google && !chart&& dato.length) {
+    setTimeout(()=>{
+    if (google && !chart) {
       const data = new google.visualization.DataTable();
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Quotes', "color:#6F52ED");
@@ -46,8 +46,7 @@ function PizzaChart ({google}) {
       
       // Set chart options
       var options = {'title':'Quotes sold per month',
-                     'width':995,
-                     "height": 350,
+                     
                      fontSize:12,
                      titleTextStyle: {
                       
@@ -69,13 +68,13 @@ function PizzaChart ({google}) {
       newChart.draw(data, options);
       console.log(dato)
       setChart(newChart);
-    }
+    }},1000)
   }, [ chart, dato]);
   
   return (
     <>
       {!google && <p>asssad</p>}
-      <div id="pizzaChart" className={!google ? 'd-none' : ''} />
+      <div style={{minHeight:"350px", minWidth:"66vw"}} id="pizzaChart" className={!google ? 'd-none' : ''} />
     </>
   )
 }

@@ -158,7 +158,7 @@ const ManagerM=()=>{
         <p className="modalText">Manager added successfully</p>
        
        
-        <button onClick={reload} className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/"}>Continue</NavLink></button>
+        <button onClick={reload} className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/Manager"}>Continue</NavLink></button>
       
         
         </div>

@@ -39,8 +39,8 @@ function ProducerPie ({aboutProps, google}) {
   },[quotes])
 
   useEffect(() => {
-      setTimeout(()=>{
-    if (google && !chart  && dato) {
+    setTimeout(()=>{
+    if (google && !chart  ) {
       const data = new google.visualization.DataTable();
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
@@ -56,11 +56,11 @@ function ProducerPie ({aboutProps, google}) {
                    
                      'height':250,
                       "width":400,
-                      
+                   
                       titleTextStyle: {
-                      
+                     
                         fontName: "Gilroy",
-                        fontSize: "14", 
+                        fontSize: 16, 
                         marginLeft:"-10px"
                     },
                       
@@ -73,6 +73,7 @@ function ProducerPie ({aboutProps, google}) {
       
       setChart(newChart);
     }}, 1000)
+    
   }, [dato, chart]);
 
   return (

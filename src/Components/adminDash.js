@@ -124,6 +124,10 @@ const AdminDash = ()=>{
 
    
 
+    const handleNext = (e) =>{
+        setNext(!next)
+            e.preventDefault();
+        }
   
 
     return(
@@ -137,6 +141,7 @@ const AdminDash = ()=>{
                 <div className="DashSubCont" >
                <div style={{marginLeft:"-100px"}}>
                 {google&&   <PizzaChart 
+                
                 google={google}/>}
             </div>
             <div className="DashPList1">
@@ -254,9 +259,9 @@ const AdminDash = ()=>{
                 </div>
             </div>}
             {!next?
-            <BsChevronRight color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"1%",top:"50%", alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>
+            <BsChevronRight color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"1%",top:"50%", alignSelf:"flex-start"}} onClick={handleNext}/>
             :
-            <BsChevronLeft color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"1%",top:"50%", alignSelf:"flex-start"}} onClick={()=>setNext(!next)}/>}
+            <BsChevronLeft color="grey" style={{minWidth:"40px", minHeight:"40px", position:"absolute", right:"1%",top:"50%", alignSelf:"flex-start"}} onClick={handleNext}/>}
             
             </div>
     
@@ -264,7 +269,6 @@ const AdminDash = ()=>{
 }
 
 export default AdminDash
-
 
 
 
