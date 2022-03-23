@@ -8,7 +8,7 @@ import { AiOutlineArrowDown,AiOutlineArrowUp } from "react-icons/ai";
 import ProducerSales from "../chart/ProducerSales";
 import useGoogleCharts from '../chart/useGoogleCharts';
 import ProducerPie from "../chart/ProducerPie";
-const ProducerDetails = (props) => {
+const ManagerDetails = (props) => {
     let Producer = props.location.aboutProps
     const [quotes, setQuotes] = useState([])
     const google = useGoogleCharts();
@@ -190,7 +190,7 @@ const ProducerDetails = (props) => {
             </div>
               
                 <NavLink to={{
-                            pathname:("/users/producers/edit"),
+                            pathname:("/users/manager/edit"),
                             props: Producer
                         }}>
                 <button className="FITbutton">
@@ -204,4 +204,4 @@ const ProducerDetails = (props) => {
         </div>
     )
 }
-export default ProducerDetails
+export default ManagerDetails

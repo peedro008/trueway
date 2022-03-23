@@ -62,7 +62,7 @@ function AdminNav() {
       </NavLink>
       </div>
       <div className="NAcontainer">
-      <NavLink className="icons" to='/producers'activeClassName='NAavtive'>
+      <NavLink className="icons" to='/users'activeClassName='NAavtive'>
        <FiUser className="NAicon" size="20px"  color="#868ba5"/>
      </NavLink></div>
      <span/>

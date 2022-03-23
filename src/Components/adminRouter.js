@@ -32,6 +32,10 @@ import DepositCash from './depositCash';
 import DailyReport from './dailyReport';
 import ClientsReport from './clientsReport';
 import ClientEdit from './clientEdit';
+import Users from './users';
+import Managers from './managers';
+import ManagerDetails from './managerDetails';
+import ManagerEdit from './managerEdit';
  const AdminRouter=()=>{
 
     return (
@@ -48,9 +52,13 @@ import ClientEdit from './clientEdit';
           <Route exact path='/manager/managerP' component={ManagerP}/>
           <Route exact path='/manager/managerD' component={ManagerD}/>
           <Route exact path='/manager/managerCa' component={ManagerCa}/>
-          <Route exact path='/producers' component={Producer}/>
-          <Route exact path='/producers/edit' component={ProducerEdit}/>
-          <Route exact path='/producers/details' component={ProducerDetails}/>
+          <Route exact path='/users/producers' component={Producer}/>
+          <Route exact path='/users/manager' component={Managers}/>
+          <Route exact path='/users' component={Users}/>
+          <Route exact path='/users/manager/details' component={ManagerDetails}/>
+          <Route exact path='/users/producers/edit' component={ProducerEdit}/>
+          <Route exact path='/users/manager/edit' component={ManagerEdit}/>
+          <Route exact path='/users/producers/details' component={ProducerDetails}/>
           <Route exact path='/report' component={Report}/>
           <Route exact path='/report/filter' component={AdminFilter}/>
           <Route exact path='/report/quoteReport' component={QuoteReport}/>

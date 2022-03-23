@@ -4,17 +4,17 @@ import {MdAdd} from "react-icons/md"
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import "./CSS/css.css"
-const Producer = ()=>{
-const [producers, setProducers]= useState([])
+const Managers = ()=>{
+const [managers, setManagers]= useState([])
 const [quotes, setQuotes]= useState([])
 const [sold, setSold]= useState(0)
 const [unSold, setUnSold]= useState(0)  
 const [modify, setModify]= useState([])
  
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getProducer`)
+        axios.get(`https://truewayagentbackend.com/getManager`)
             .then(function(response){
-                setProducers(response.data)
+                setManagers(response.data)
             })
             .catch(error=>{
               console.log(error)  
@@ -52,12 +52,12 @@ const [modify, setModify]= useState([])
        
         
        <div className="genericHeader">
-                <p className="genericTitle">Producer</p>
+                <p className="genericTitle">Manager</p>
             </div>
          
     
     <div style={{paddingLeft:"60px", paddingTop:"20px", paddingBottom:"8px"}}>
-    <p className="PRsubtitle">Producer list</p>
+    <p className="PRsubtitle">Manager list</p>
     </div>
     
     
@@ -80,11 +80,11 @@ const [modify, setModify]= useState([])
         </thead>
         <tbody>
             {
-               producers.map((e)=>{
+               managers.map((e)=>{
                    return (<tr >
                             
                                 <td scope="row">{<NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }} to={{
-                                pathname:("/users/producers/details"),
+                                pathname:("/users/manager/details"),
                                 aboutProps:e
                                 }}>{e.name}</NavLink>}</td>
                            
@@ -103,8 +103,8 @@ const [modify, setModify]= useState([])
         </table>
 </div>
         <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
-            <NavLink to="/manager/managerP"  style={{ textDecoration: 'none', color:"#000" }}>
-                 <button className="PAYbutton" ><MdAdd  color="white" size={"20px"} className="PAYbuttonIcon"/><p className="PAYbuttonText">New Producer</p></button>
+            <NavLink to="/manager/managerM"  style={{ textDecoration: 'none', color:"#000" }}>
+                 <button className="PAYbutton" ><MdAdd  color="white" size={"20px"} className="PAYbuttonIcon"/><p className="PAYbuttonText">New Manager</p></button>
             </NavLink>
             </div>
             <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
@@ -112,4 +112,4 @@ const [modify, setModify]= useState([])
     )
 }
 
-export default Producer
+export default Managers
