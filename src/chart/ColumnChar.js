@@ -75,7 +75,7 @@ useEffect(()=>{
                     pieHole: 0.4,
                     titleTextStyle: {
                       
-                      fontName: "Gilroy",
+                      fontName: "Gilroy-Regular",
                       fontSize: "14", 
                       marginLeft:"-10px"
                   },

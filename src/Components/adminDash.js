@@ -103,7 +103,7 @@ const AdminDash = ()=>{
          )
          pes.sort(function(a,b){return (a[1]/a[2])-(b[1]/b[2])}).reverse()
          setDataList(pes)
-       }, [modify])
+       }, [modify, producers, quotes])
        useEffect(() => {
         let pes = 0
         let pas = 0
@@ -129,7 +129,7 @@ const AdminDash = ()=>{
             e.preventDefault();
         }
   
-
+ console.log(dataList)
     return(
             <div className="genericDiv">
                  <div className="genericHeader">

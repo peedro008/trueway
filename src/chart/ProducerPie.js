@@ -59,7 +59,7 @@ function ProducerPie ({aboutProps, google}) {
                    
                       titleTextStyle: {
                      
-                        fontName: "Gilroy",
+                        fontName: "Gilroy-Regular",
                         fontSize: 16, 
                         marginLeft:"-10px"
                     },

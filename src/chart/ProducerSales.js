@@ -188,7 +188,7 @@ useEffect(()=>{
                      
                      titleTextStyle: {
                         marginBottom: "20px",
-                        fontName: "Gilroy",
+                        fontName: "Gilroy-Regular",
                         fontSize: "16", 
                         marginLeft:"-10px"
                     },

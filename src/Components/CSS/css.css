@@ -1,11 +1,14 @@
 /*AUTH---------------------------------------------*/
 
 @import url(    'https://fonts.googleapis.com/css?family=Montserrat');
-@import url(//db.onlinewebfonts.com/c/1dc8ecd8056a5ea7aa7de1db42b5b639?family=Gilroy);
+
 @import url(    'https://fonts.googleapis.com/css?family=Inter');
 @import url('https://fonts.googleapis.com/css?family=Poppins');
-@import url('http://fonts.googleapis.com/css?family=Lato:400,700');
-
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+@font-face {
+    font-family: "Gilroy-Regular";
+    src: url("../../assets/Gilroy-Regular.ttf");
+  }
 
 * {
     margin: 0;
@@ -286,7 +289,7 @@ border-radius: 0px 10px  10px 0px;
 
 
  .genericTitle{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-size: 28px;
     font-style: normal;
     font-weight: 600;
@@ -295,7 +298,7 @@ border-radius: 0px 10px  10px 0px;
     text-align: left;
 }
  .genericSubTitle{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -326,7 +329,7 @@ border-radius: 0px 10px  10px 0px;
     box-shadow: 2px 2px 2px rgb(165, 162, 162);    
  }
  .PAYbuttonText{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 500;
     font-size: 15px;
     color:#FFFFFF;
@@ -365,14 +368,14 @@ border-radius: 0px 10px  10px 0px;
     margin-right: 50px;
 }
 .PAYtitle{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-size: 17px;
     font-weight: 600;
     margin-bottom: 8px;
 }
 
 .PAYselect{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 13px;
     color:black;
@@ -390,7 +393,7 @@ border-radius: 0px 10px  10px 0px;
 
 
 .PAYsub-title{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 13px;
     color:black;
@@ -450,7 +453,7 @@ border-radius: 0px 10px  10px 0px;
 
 
 .table{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-weight: 100;
     border-collapse:collapse;
     width: 80vw;
@@ -503,7 +506,7 @@ border-radius: 0px 10px  10px 0px;
   }
 
   .table1{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-weight: 100;
     border-collapse:collapse;
     min-width: 90vw;
@@ -594,7 +597,7 @@ border-radius: 0px 10px  10px 0px;
     background-color: #FFFFFF;
 }
 .producerInfoTitle{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 18px;
     line-height: 24.76px;
@@ -605,7 +608,7 @@ border-radius: 0px 10px  10px 0px;
     color: #4F4F4F;
 }
 .producerInfoText{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 500;
     font-size: 18px;
     line-height: 24.76px;
@@ -633,7 +636,7 @@ border-radius: 0px 10px  10px 0px;
 .FITfilter{
     padding-left:8px;
     padding-top:25px;
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 500;
     font-size: 19px;
 }
@@ -677,7 +680,7 @@ border-radius: 0px 10px  10px 0px;
 
 }
 .FITbuttonText{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -822,7 +825,7 @@ border-radius: 0px 10px  10px 0px;
  
 }
 .DETtitle{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 16px;
     font-style: normal;
 
@@ -835,7 +838,7 @@ border-radius: 0px 10px  10px 0px;
     padding-top: 15px
 }
 .DETtext{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -871,7 +874,7 @@ border-radius: 0px 10px  10px 0px;
     
 }
 .MOBtitle{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 19px;
     font-style: normal;
     font-weight: 700;
@@ -897,7 +900,7 @@ border-radius: 0px 10px  10px 0px;
     padding-left: 5px;
 }
 .MOBinputText{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-size: 15px;
     font-weight: 600;
     margin-bottom: 8px;
@@ -923,7 +926,7 @@ border-radius: 0px 10px  10px 0px;
     margin-right: 20px;
 }
 .title33{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-size: 17px;
     font-weight: 600;
     
@@ -936,7 +939,7 @@ border-radius: 0px 10px  10px 0px;
 
 
 .input3{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     color:black;
@@ -954,7 +957,7 @@ border-radius: 0px 10px  10px 0px;
     display: flex;
 }
 .input300{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     color:black;
@@ -971,7 +974,7 @@ border-radius: 0px 10px  10px 0px;
 }
 
 .input33{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     color:black;
@@ -987,7 +990,7 @@ border-radius: 0px 10px  10px 0px;
     text-align: center;
 }
 .input333{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     color:black;
@@ -1003,7 +1006,7 @@ border-radius: 0px 10px  10px 0px;
     
 }
 .Title{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-size: 30px;
     font-weight: 700;
 }
@@ -1087,7 +1090,7 @@ border-radius: 0px 10px  10px 0px;
     right: 40px;
     top:90px;
     color:white;
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 500;
     height: 40px;
     width: 150px;
@@ -1147,7 +1150,7 @@ border-radius: 0px 10px  10px 0px;
     
 }
 .AQinputName{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-size: 17px;
     font-weight: 600;
     
@@ -1170,7 +1173,7 @@ border-radius: 0px 10px  10px 0px;
 
 .AQinput{
     padding-left: 8px;
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     color:black;
@@ -1184,7 +1187,7 @@ border-radius: 0px 10px  10px 0px;
 }
 .AQinput2{
     padding-left: 8px;
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     color:black;
@@ -1212,7 +1215,7 @@ border-radius: 0px 10px  10px 0px;
     
 }
 .AQinput3{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     color:black;
@@ -1231,7 +1234,7 @@ border-radius: 0px 10px  10px 0px;
     padding-left: 8px;
 }
 .AQtextarea{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     color:black;
@@ -1340,13 +1343,13 @@ border-radius: 0px 10px  10px 0px;
 .DashPListTitle{
     font-size: 14px;
     color: #000000;
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 600;
 }
 .DashPListSTitle{
     font-size: 12px;
     color: #A6ACBE;
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 500;
 }
 .DashPListDivider{
@@ -1382,7 +1385,7 @@ border-radius: 0px 10px  10px 0px;
     justify-content: space-between;
 }
 .DashPListItemText{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 14px;
     color:#A6ACBE;
     font-weight: 500;
@@ -1423,7 +1426,7 @@ border-radius: 0px 10px  10px 0px;
 .dashTitle{
     font-size: 14px;
     font-weight: 700;
-    font-family:'Gilroy';
+    font-family: "Gilroy-Regular";
     padding-left: 25px;
   
    
@@ -1431,7 +1434,7 @@ border-radius: 0px 10px  10px 0px;
 .dashTitleGraph{
     font-size: 14px;
     font-weight: 700;
-    font-family:'Gilroy';
+    font-family: "Gilroy-Regular";
     margin-left: 10px;
     margin-bottom: 30px;
    
@@ -1447,7 +1450,7 @@ border-radius: 0px 10px  10px 0px;
     margin-left: 20px ;
 }
 .dashCardTitle{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -1457,7 +1460,7 @@ border-radius: 0px 10px  10px 0px;
 
 }
 .dashCardText{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -1597,7 +1600,7 @@ width:25%;
 
 }
 .DashNumber{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
 font-size: 14px;
 font-style: normal;
 font-weight: 400;
@@ -1680,7 +1683,7 @@ overflow: hidden;
     border-width: 0;
     background-color: #F5F5F5;
     height: 24px;
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     width:220px;
@@ -1737,7 +1740,7 @@ overflow: hidden;
     border-width: 0;
     background-color: #F5F5F5;
     height: 24px;
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
     width:230px;
@@ -1761,7 +1764,7 @@ overflow: hidden;
 
 }
 .modalText{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -1773,7 +1776,7 @@ overflow: hidden;
 .modalButton{
     height: 29.72413635253906px;
     width: 100px;
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -1788,7 +1791,7 @@ overflow: hidden;
 
 /*----------------DEPOSIT-------------------*/
 .table3{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-weight: 100;
     border-collapse:collapse;
     
@@ -1970,7 +1973,7 @@ display:flex;
 
 /*------------DAILY-----------------*/
 .table2{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-weight: 100;
     border-collapse:collapse;
     min-width: 72vw;
@@ -2054,7 +2057,7 @@ text-align: center;
 }
 /*-------------FORM-----------------*/
 .FORMerror{
-    font-family: "Gilroy";
+    font-family: "Gilroy-Regular";
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -2097,7 +2100,7 @@ text-align: center;
 
 }
 .PRODrectT{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
@@ -2115,7 +2118,7 @@ text-align: center;
     margin-top: 5%;
 }
 .PRODrectQ{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
@@ -2125,7 +2128,7 @@ text-align: center;
     color: #4F4F4F;
 }
 .PRODrectPT{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
@@ -2183,7 +2186,7 @@ text-align: center;
     align-items: left;
 }
 .PRODdotT{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
 font-style: normal;
 font-weight: 500;
 font-size: 16px;
@@ -2196,7 +2199,7 @@ align-items: center;
 text-decoration-line: underline;
 }
 .subTitt{
-    font-family: Gilroy;
+    font-family: "Gilroy-Regular";
     font-size: 15px;
     font-style: normal;
     font-weight: 500;

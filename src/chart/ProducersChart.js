@@ -34,7 +34,7 @@ function PizzaChart ({google}) {
             pes.push([e.name, quotes.filter(f=>f.User.name==e.name&&f.Status!=="quoted"&&f.Status!=="Cancelled").length, quotes.filter(f=>f.User.name==e.name&&f.Status!=="quoted"&&f.Status!=="Cancelled"&&f.Quote.PIPvalue!==0).length])
           })
           setDato(pes)
-      }, [quotes])
+      }, [quotes, producers])
   useEffect(() => {
     setTimeout(()=>{
     if (google && !chart) {
@@ -50,7 +50,7 @@ function PizzaChart ({google}) {
                      fontSize:12,
                      titleTextStyle: {
                       
-                      fontName: "Gilroy",
+                      fontName: "Gilroy-Regular",
                       fontSize: "14", 
                       marginLeft:"-10px"
                   },
@@ -69,7 +69,7 @@ function PizzaChart ({google}) {
       console.log(dato)
       setChart(newChart);
     }},1000)
-  }, [ chart, dato]);
+  }, [ chart, dato, producers]);
   
   return (
     <>
