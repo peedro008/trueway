@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsChevronLeft } from 'react-icons/bs'
 import Modal from 'react-responsive-modal';
 import { NavLink } from 'react-router-dom';
@@ -6,12 +6,14 @@ import Icon from "../assets/Icon.png"
 
 function ClientEdit(props) {
   let Client = props.location.aboutProps
-  const [inputs, setInputs]= useState({name:Client.name,email:Client.email, Tel:Client.Tel , ClientId: Client.id})
+  const [inputs, setInputs]= useState({name:Client.name,email:Client.email, Tel:Client.Tel , ClientId: Client.id, new:Client.new, notes:Client.notes,address:Client.address,dateOfBirth:Client.dateOfBirth})
   const [open, setOpen] = useState(false);
+  const [neww, setNeww] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+ 
   const handleClick = () => {
-
+    
     fetch(`https://truewayagentbackend.com/modifyClient`, {
             
       method: 'POST',
@@ -62,14 +64,42 @@ onOpenModal()
         </div>
         <div className="inputDiv"> 
             <p className="PAYtitle">Phone</p>
-            <input placeholder={Client.tel} value={inputs.tel} onChange={(e)=>setInputs({...inputs, tel:e.target.value})} className="PAYsub-title"></input>
+            <input placeholder={Client.tel} value={inputs.Tel} onChange={(e)=>setInputs({...inputs, Tel:e.target.value})} className="PAYsub-title"></input>
         </div>
-   
+        
+        <div className="AQinputContainer" style={{marginLeft:"10px"}}>
+                    <p className="AQinputName">New client</p>
+                    <div className="AQyesNoContainer">
+                        <div>
+                        <input  className="AQcheckInput" type="checkbox" checked={inputs.new} name="new" onChange={(e)=>setInputs({...inputs, new:!inputs.new})}/>
+                            {neww?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>} 
+                        </div>
+                       
+                    </div>
+                    </div>
         
 
     </div>
+    <div className="managerInputsubContainer" style={{width:"36%"}}>
+    <div className="inputDiv"> 
+            <p className="PAYtitle">Address</p>
+            <input placeholder={Client.address} value={inputs.address} onChange={(e)=>setInputs({...inputs, address:e.target.value})} className="PAYsub-title"></input>
+        </div>
+        <div className="inputDiv"> 
+            <p className="PAYtitle">Date of Birth</p>
+            <input type={"date"} placeholder={Client.tel} value={inputs.dateOfBirth} onChange={(e)=>setInputs({...inputs, dateOfBirth:e.target.value})} className="PAYsub-title"></input>
+        </div>
+   
+    </div>
+    <div className="managerInputsubContainer">
+            <div className="MOBinputDiv">
+                         <p className="MOBinputText">Notes</p>
+                         <textarea value={inputs.notes} onChange={(e)=>{setInputs({...inputs, notes:e.target.value})}} className='MOBtexta1' style={{width:"32vw"}}/>
+                    </div>
+   
+    </div>
     </div>      
-    <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>      
+    <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>      
     <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
             <button onClick={handleClick} className="PAYbutton" ><p className="PAYbuttonText">Submit</p></button>
         </div>

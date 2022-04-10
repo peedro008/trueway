@@ -15,6 +15,7 @@ import ManagerM from './managerM';
 import ManagerP from "./managerP"
 import ManagerL from './managerL';
 import ManagerC from './managerC';
+import ManagerClient from './managerClient';
 import ManagerD from './managerD';
 import ProducerDetails from "./producerDetails"
 import QuoteDetails from "./quoteDetails"
@@ -30,12 +31,18 @@ import {
     Route} from 'react-router-dom'
 import DepositCash from './depositCash';
 import DailyReport from './dailyReport';
+import DailyReReport from './dailyReReport';
 import ClientsReport from './clientsReport';
 import ClientEdit from './clientEdit';
 import Users from './users';
 import Managers from './managers';
 import ManagerDetails from './managerDetails';
 import ManagerEdit from './managerEdit';
+import DailyDetails from './dailyDetails';
+import DeletedReport from './deletedReport';
+import DeletedClients from './deletedClient';
+import DeletedQuote from './deletedQuotes';
+import DeletedPayments from './deletedPayments';
  const AdminRouter=()=>{
 
     return (
@@ -52,6 +59,7 @@ import ManagerEdit from './managerEdit';
           <Route exact path='/manager/managerP' component={ManagerP}/>
           <Route exact path='/manager/managerD' component={ManagerD}/>
           <Route exact path='/manager/managerCa' component={ManagerCa}/>
+          <Route exact path='/manager/managerClient' component={ManagerClient}/>
           <Route exact path='/users/producers' component={Producer}/>
           <Route exact path='/users/manager' component={Managers}/>
           <Route exact path='/users' component={Users}/>
@@ -62,6 +70,8 @@ import ManagerEdit from './managerEdit';
           <Route exact path='/report' component={Report}/>
           <Route exact path='/report/filter' component={AdminFilter}/>
           <Route exact path='/report/quoteReport' component={QuoteReport}/>
+          <Route exact path='/report/dailyReport' component={DailyReReport}/>
+          <Route exact path='/report/dailyReport/details' component={DailyDetails}/>
           <Route exact path='/report/payReport' component={PayReport}/>
           <Route exact path='/report/quote' component={QuoteDetails}/>
           <Route exact path='/report/modifyquote' component={ModifyQuote}/>
@@ -69,6 +79,10 @@ import ManagerEdit from './managerEdit';
           <Route exact path='/payments/dailyReport' component={DailyReport}/>
           <Route exact path='/report/clients' component={ClientsReport}/>
           <Route exact path='/report/clientedit' component={ClientEdit}/>
+          <Route exact path='/report/DeletedReport' component={DeletedReport}/>
+          <Route exact path='/report/DeletedReport/clients' component={DeletedClients}/>
+          <Route exact path='/report/DeletedReport/quotes' component={DeletedQuote}/>
+          <Route exact path='/report/DeletedReport/payments' component={DeletedPayments}/>
          {/*  <Route exact path='/producer/info' component={ProducerInfo}/>
           <Route exact path='/balances' component={Balances}/>
           <Route exact path='/filter' component={AdminFilter}/>

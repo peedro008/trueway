@@ -90,8 +90,8 @@ const [modify, setModify]= useState([])
                            
                             <td scope="row">{e.email}</td>
                             <td scope="row">{e.phone}</td>
-                            <td scope="row">{(modify.filter(f=>f.UserId==e.UserId&&f.Status!=="Quoted"&&f.Status!=="Cancelled")).length}</td>
-                            <td scope="row">{(quotes.filter(f=>f.UserId==e.UserId)).filter(g=>g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status=="Cancelled"||g.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status=="Quoted").length}</td>
+                            <td scope="row">{(modify.filter(f=>f.UserId==e.UserId&&f.Status=="Sold")).length}</td>
+                            <td scope="row">{(quotes.filter(f=>f.UserId==e.UserId)).filter(g=>g.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length}</td>
                             
                         </tr>)
                })

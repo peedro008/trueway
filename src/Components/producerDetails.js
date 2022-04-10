@@ -55,51 +55,18 @@ const ProducerDetails = (props) => {
     useEffect(() => {
         const date =  new Date()
         const DATE = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
-        let yq = modify
-        let mq = modify
+        let ys = modify
+        let ms = modify
+        setYstat(ys.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
+        setMstat(ms.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
+        
+
+        let yq = quotes
+        let mq = quotes
         setYquotes(yq.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
         setMquotes(mq.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
-        
-  
-    }, [quotes, Producer])
-    useEffect(()=>{
-        let pes = []
-        let pas = []
-        let yp = 0
-        let mp = 0
-        let m = mquotes
-        let y  = yquotes
-        if(m.length){
-        m.map(e=>
-            pes.push(e)
-        )
-        setMstat(pes)}
-        else {setMstat([])}
-        if(y.length){
-        y.map(e=>
-            pas.push(e)
-        )
-        setYstat(pas)
-        }
-        else{ setYstat([])}
-        m.map(e=>{
-            if (e.Status!=="Quoted"&&e.Status!=="Cancelled"){
-                if(e.PIPvalue!==0) {
-                mp=mp+1}
-            }
-        } )
-        y.map(e=>{
-            if (e.Status!=="Quoted"&&e.Status!=="Cancelled"){
-                if(e.PIPvalue!==0) {
-                yp=yp+1}
-            }
-        } )
-        setYpip(yp)
-        setMpip(mp)
-    },[mquotes])
+    }, [quotes, Producer, modify])
 
-    
-    
 
 
     return(
@@ -118,9 +85,9 @@ const ProducerDetails = (props) => {
                     <div className="PRODrectB">
                        <div style={{display:"flex", flexDirection:"row"}}>
                         {dots1V==1?
-                        <p className="PRODrectQ">{mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?mstat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}&nbsp; </p>
+                        <p className="PRODrectQ">{mstat.filter(e=>e.Status=="Sold").length?mstat.filter(e=>e.Status=="Sold").length:0}&nbsp; </p>
                         :
-                        <p className="PRODrectQ">{ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length?ystat.filter(e=>e.Status!=="Quoted"&&e.Status!=="Cancelled").length:0}&nbsp;</p>
+                        <p className="PRODrectQ">{ystat.filter(e=>e.Status=="Sold").length?mstat.filter(e=>e.Status=="Sold").length:0}&nbsp;</p>
                         }
                         <p className="PRODrectQ">Sold</p>
                         </div>
@@ -139,9 +106,9 @@ const ProducerDetails = (props) => {
                     <div className="PRODrectB">
                     <div style={{display:"flex", flexDirection:"row"}}>
                         {dots2V==1?
-                        <p className="PRODrectQ">{mstat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length?mstat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length:0}&nbsp;</p>
+                        <p className="PRODrectQ">{mquotes.filter(e=>e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length?mquotes.filter(e=>e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length:0}&nbsp;</p>
                         :
-                        <p className="PRODrectQ">{ystat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length?ystat.filter(e=>e.Status=="Quoted"||e.Status=="Cancelled").length:0}&nbsp;</p>
+                        <p className="PRODrectQ">{yquotes.filter(e=>e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length?yquotes.filter(e=>e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length:0}&nbsp;</p>
                         }
                         <p className="PRODrectQ">Quotes</p>
                         </div>
@@ -162,9 +129,9 @@ const ProducerDetails = (props) => {
                     <div className="PRODrectB">
                     <div style={{display:"flex", flexDirection:"row"}}>
                         {dots3V==1?
-                        <p className="PRODrectQ">{mpip}</p>
+                         <p className="PRODrectQ">{(mstat.filter(f=>f.Quote.NSDvalue!=="0"&&f.Status=="Sold").length*5)}&nbsp;</p>
                         :
-                        <p className="PRODrectQ">{ypip}</p>
+                        <p className="PRODrectQ">{(ystat.filter(f=>f.Quote.NSDvalue!=="0"&&f.Status=="Sold").length*5)}&nbsp;</p>
                         }
                         <p className="PRODrectQ">&nbsp;Sold</p>
                         </div>

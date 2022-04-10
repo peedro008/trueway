@@ -194,8 +194,8 @@ const MyDocument = ({ data }) => {
                   
                   <div style={styles.list}>
                       {payments.reverse().map((h)=>{if(h.User.name==e.name){
-                          TOT=TOT+h.total 
-                          MAX = MAX+h.total
+                          TOT=TOT+(parseFloat(h.amount)+parseFloat(h.creditCardFee))
+                          MAX = MAX+(parseFloat(h.amount)+parseFloat(h.creditCardFee))
                           count = count+1
                           return( 
                             <div style={styles.column}>
@@ -203,7 +203,7 @@ const MyDocument = ({ data }) => {
                               <div style={styles.columnCont}><Text style={styles.text}>{h.Client.name}</Text></div>
                               <div style={styles.columnCont}><Text style={styles.text}>{h.date}</Text></div>
                               <div style={styles.columnCont}><Text style={styles.text}>{h.method}</Text></div>
-                              <div style={styles.columnCont}><Text style={styles.text}>${h.total}</Text></div>
+                              <div style={styles.columnCont}><Text style={styles.text}>${parseFloat(h.amount)+parseFloat(h.creditCardFee)}</Text></div>
                             </div>
                               
                       )}

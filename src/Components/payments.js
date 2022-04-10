@@ -4,7 +4,10 @@ import {MdAdd} from "react-icons/md"
 import {CgImport} from "react-icons/cg"
 import { NavLink } from "react-router-dom"
 import Isologo_background from  "../assets/Isologo_background.png"
+import { useSelector } from "react-redux";
  const Payments = ()=>{
+    const userRole = useSelector(state=> state.userRole)
+    console.log(userRole)
     return(
 
         <div className="genericDiv">
@@ -18,7 +21,7 @@ import Isologo_background from  "../assets/Isologo_background.png"
            
            
            
-            <div className="PAYbuttonCont">
+            <div className="PAYbuttonCont" style={{ width:userRole=="Admin"?"340px":"580px"}}>
                 
                 <NavLink  style={{ textDecoration: 'none', color:"#000" }} to="/payments/pay">
                     <button  className="PAYbutton">
@@ -33,12 +36,15 @@ import Isologo_background from  "../assets/Isologo_background.png"
                     <p className="PAYbuttonText">Deposit cash</p>
                     </button>
                 </NavLink>
+                {
+                    userRole!=="Admin"&&
+               
                 <NavLink to="/payments/dailyReport" style={{ textDecoration: 'none', color:"#000" }}>
                     <button className="PAYbutton">
                         <CgImport size="1.2em" className="PAYbuttonIcon" color="#FFFFFF"/> 
                         <p className="PAYbuttonText">Generate daily report</p>
                     </button>
-                </NavLink>
+                </NavLink> }
             </div>
         
         

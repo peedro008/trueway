@@ -10,11 +10,10 @@ import { Divider } from "@mui/material";
 import Select from 'react-select'
 import close from "../assets/close.svg";
 import moment from "moment"
-import {AiOutlineDelete, AiOutlineCloseCircle} from "react-icons/ai"
+import {AiOutlineDelete} from "react-icons/ai"
 import { useSelector } from 'react-redux';
 import Modal from 'react-responsive-modal';
-
-const QuoteReport=(props)=>{
+const DeletedQuote=(props)=>{
     const [producers, setProducers]= useState([])
     const [companies, setCompanies]= useState([]) 
     const userRole = useSelector(state=> state.userRole)
@@ -22,9 +21,7 @@ const QuoteReport=(props)=>{
     const [dealers, setDealers] = useState([])
     const [clients, setClients] = useState([])
     const [locations, setLocations] = useState([])
-    const [open, setOpen] = useState(false);
-    const onOpenModal = () => setOpen(false);
-    const onCloseModal = () => setOpen(false);
+   
     const [deleteConf, setDeleteConf] = useState("")
     const [deletedOne, setDeletedOne] = useState(null)
     const [open1, setOpen1] = useState(false);
@@ -125,7 +122,8 @@ const QuoteReport=(props)=>{
             })
     
     },[]) 
-    axios.get(`https://truewayagentbackend.com/quotes`)
+    useEffect(()=>{
+        axios.get(`https://truewayagentbackend.com/getdeletedquotes`)
             .then(function(response){
                 setQuotes(response.data)
                 
@@ -136,6 +134,8 @@ const QuoteReport=(props)=>{
             .catch(error=>{
               console.log(error)  
             })
+    
+    },[setQuotes])
     useEffect(()=>{ 
         filterSubmit(filterValues)
     },[filterValues,quotes])
@@ -143,10 +143,7 @@ const QuoteReport=(props)=>{
         setFilterValues(e)
          }
     
-    const modify=(e)=>{
-        setQuote(e);
-        setOpen(true)
-    }
+    
     const filterSubmit = (e) => {
        
         let temp = quotes
@@ -193,7 +190,7 @@ const QuoteReport=(props)=>{
     const deleteClient = (data) => {
         data&&
         console.log(data)
-        fetch(`https://truewayagentbackend.com/deleteQuote`, {
+        fetch(`https://truewayagentbackend.com/undeleteQuote`, {
             
             method: 'POST',
             headers: {
@@ -234,7 +231,7 @@ const QuoteReport=(props)=>{
         <div className="genericDiv1">
              
              <div className="genericHeader">
-                <p className="genericTitle">Quote reports</p>
+                <p className="genericTitle">Deleted Quote reports</p>
                 
             </div>
          <div className="REPcontrol">
@@ -334,25 +331,25 @@ const QuoteReport=(props)=>{
       
         <tbody>
             <tr>
-            {columns.clientName&&<th scope="col" className="column1"><p   className="REPtype">&nbsp;</p></th>}
-            {columns.clientName&&<th scope="col" className="column1"><p   className="REPtype">Client name</p></th>}
-            {columns.clientEmail&&<th scope="col" className="column1"><p className="REPtype">Client E-mail</p></th>}
-            {columns.clienTel&&<th scope="col" className="column1"><p className="REPtype">Client phone</p></th>}
-            {columns.category&&<th scope="col" className="column1"><p className="REPtype">Category</p></th>}
-            {columns.CompanyId&&<th scope="col" className="column1"><p className="REPtype">Company</p></th>}
-            {columns.ProducerId&&<th scope="col" className="column1"><p className="REPtype">Producer</p></th>}
+            
+            <th scope="col" className="column1"><p   className="REPtype">Client name</p></th>
+            <th scope="col" className="column1"><p className="REPtype">Client E-mail</p></th>
+            <th scope="col" className="column1"><p className="REPtype">Client phone</p></th>
+            <th scope="col" className="column1"><p className="REPtype">Category</p></th>
+            <th scope="col" className="column1"><p className="REPtype">Company</p></th>
+            <th scope="col" className="column1"><p className="REPtype">Producer</p></th>
             <th scope="col" className="column1"><p className="REPtype">Total</p></th>
-            {columns.bound&&<th scope="col" className="column1"><p className="REPtype">Status</p></th>}
+            <th scope="col" className="column1"><p className="REPtype">Status</p></th>
             {<th scope="col" className="column1"><p className="REPtype">Date</p></th>}
             {<th scope="col" className="column1"><p className="REPtype">Time</p></th>}
-            {columns.down&&<th scope="col" className="column1"><p className="REPtype">Down Payments</p></th>}
-            {columns.monthlyPayment&&<th scope="col" className="column1"><p className="REPtype">Monthly Payments</p></th>}
-            {columns.dealer&&<th scope="col" className="column1"><p className="REPtype">Dealer Name</p></th>}
-            {columns.NSD&&<th scope="col" className="column1"><p className="REPtype">NRSD</p></th>}
-            {columns.PIP&&<th scope="col" className="column1"><p className="REPtype">PIP</p></th>}
-            {columns.MVR&&<th scope="col" className="column1"><p className="REPtype">MVR</p></th>}
-            {columns.location&&<th scope="col" className="column1"><p className="REPtype">Location</p></th>}
-            {userRole!=="Producer"&&<th scope="col" className="column1"><p   className="REPtype">Delete Quote</p></th>
+            <th scope="col" className="column1"><p className="REPtype">Down Payments</p></th>
+            <th scope="col" className="column1"><p className="REPtype">Monthly Payments</p></th>
+            <th scope="col" className="column1"><p className="REPtype">Dealer Name</p></th>
+            <th scope="col" className="column1"><p className="REPtype">NRSD</p></th>
+            <th scope="col" className="column1"><p className="REPtype">PIP</p></th>
+            <th scope="col" className="column1"><p className="REPtype">MVR</p></th>
+            <th scope="col" className="column1"><p className="REPtype">Location</p></th>
+            {userRole!=="Producer"&&<th scope="col" className="column1"><p   className="REPtype">Reset Quote</p></th>
                 }
            
            
@@ -366,26 +363,26 @@ const QuoteReport=(props)=>{
                    
                    return (
                         <tr>
-                            <td className="ClientName" scope="row"><div className="editIcon" onClick={()=>modify(e)}></div></td>
-                            {columns.clientName&&<td className="ClientName" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Client.name}</NavLink></td>}
-                            {columns.clientEmail&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Client.email}</NavLink></td>}
-                            {columns.clienTel&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Client.tel}</NavLink></td>}
-                            {columns.category&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Category.name}</NavLink></td>}
-                            {columns.CompanyId&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Company.name}</NavLink></td>}
-                            {columns.ProducerId&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.User.name}</NavLink></td>}
-
-                            {columns.ProducerId&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${parseFloat(e.down)+parseFloat(e.PIPvalue)+parseFloat(e.NSDvalue)+parseFloat(e.MVRvalue)}</NavLink></td>}
                             
-                            {columns.bound&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.QuoteStatuses[e.QuoteStatuses.length-1].Status}</NavLink></td>}
+                            <td className="ClientName" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Client.name}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Client.email}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Client.tel}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Category.name}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Company.name}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.User.name}</NavLink></td>
+
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${parseFloat(e.down)+parseFloat(e.PIPvalue)+parseFloat(e.NSDvalue)+parseFloat(e.MVRvalue)}</NavLink></td>
+                            
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.QuoteStatuses[e.QuoteStatuses.length-1].Status}</NavLink></td>
                             <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.date}</NavLink></td>
                             <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.time.substring(11,16)}</NavLink></td>
-                            {columns.down&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.down}</NavLink></td>}
-                            {columns.monthlyPayment&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.monthlyPayment}</NavLink></td>}
-                            {columns.dealer&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Dealer?e.Dealer.name:"false"}</NavLink></td>}
-                            {columns.NSD&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.NSDvalue}</NavLink></td>}
-                            {columns.PIP&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.PIPvalue}</NavLink></td>}
-                            {columns.MVR&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.MVRvalue}</NavLink></td>}
-                            {columns.location&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Location.name}</NavLink></td>}
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.down}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.monthlyPayment}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Dealer?e.Dealer.name:"false"}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.NSDvalue}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.PIPvalue}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>${e.MVRvalue}</NavLink></td>
+                            <td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Location.name}</NavLink></td>
                             {userRole!=="Producer"&&
                                      <td className="ClientName" scope="row"  >
                                           <div style={{height:"auto",display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center" }}>
@@ -421,18 +418,13 @@ const QuoteReport=(props)=>{
 
 
 
-{open&&
 
-    <ModifyModal open={open} onCloseModal={onCloseModal} quoteM={quote}/>
-
-      }
 
 
     {openFilter&&  
         <div className="FilterCom">
-             <div className="FilterComTitleD">
-                <p className="FilterComTitle" >Search</p> 
-                <AiOutlineCloseCircle size="20px" style={{color:"#787d84", cursor:"pointer"}} onClick={()=>setOpenFilter(false)}/>
+            <div className="FilterComTitleD">
+                <p className="FilterComTitle">Search</p>
             </div>
             <Divider style={{backgroundColor:"#EBEFF2", height:"1px", borderWidth:"0px",  width:"300px" }}/>
            
@@ -626,10 +618,10 @@ const QuoteReport=(props)=>{
                     <div className="modal" style={{minWidth:"250px", alignItems:"center"}}>
                     
                     <AiOutlineDelete color="#FF4545" size={"50px"} style={{alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
-                    <p className="modalText">Type "delete" to confirm </p>
+                    <p className="modalText">Type "reset" to confirm </p>
                     <input className='AQinput' onChange={(e)=>setDeleteConf(e.target.value)} style={{marginTop:"12px"}}/>
                 
-                    <button disabled={deleteConf=="delete"?false:true} className="modalButton" onClick={handleDeleteModal}>Continue</button>
+                    <button disabled={deleteConf=="reset"?false:true} className="modalButton" onClick={handleDeleteModal}>Continue</button>
                 
                     
                     </div>
@@ -638,6 +630,6 @@ const QuoteReport=(props)=>{
     )
 
 }
-export default QuoteReport
+export default DeletedQuote
 
 

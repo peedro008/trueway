@@ -21,20 +21,28 @@ const schema = yup.object({
     email:yup.string().email().optional().min(6),
     phone:yup.number().optional(),
     ClientId: yup.number().optional(),
-    amount: yup.number().positive().integer().required(),
+    amount: yup.string().required(),
     type: yup.string().required(),
     method: yup.string().required(),
-    creditCardFee: yup.number().optional().default(0),
+    creditCardFee: yup.string().optional().default("0"),
     LocationId: yup.number().positive().integer().required(),
-    UserId: yup.number().required()
-    
-    
-
+    UserId: yup.number().required(),
+    new: yup.bool().optional(),
+    PIPvalue:yup.string().optional().default("0"),
+    NSDvalue:yup.string().optional().default("0"),
+    MVRvalue:yup.string().optional().default("0"),
 }).required();
 const date =  new Date()
         const DATE = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
-function Payment(){
+
+
+
+
+
+function Payment(props){
+    const ClientSelected = props.location.aboutProps
     const dispatch = useDispatch()
+    const [neww, setNeww] = useState(false);
     const [open, setOpen] = useState(false);
     const onOpenModal = () => setOpen(true);
     const [method, setMethod] = useState("");
@@ -46,14 +54,14 @@ function Payment(){
     const [clients, setClients] = useState([])
     const [newClient, setNewClient] = useState(false)
     const [form, setForm] = useState({res: "res"})
-    
+    const [inputs, setInputs] = useState({});
 
     
 
     const { register, handleSubmit,control, formState:{ errors }, setValue,  } = useForm({
         resolver: yupResolver(schema)
       });
-      setValue("UserId", `${userId}`)
+    
     const customStyles = {
         control: base => ({
           ...base,
@@ -92,7 +100,8 @@ function Payment(){
         axios.get(`https://truewayagentbackend.com/clients`)
             .then(function(response){
                 setClients(response.data)
-                
+                setValue("UserId", `${userId}`)
+                setValue("ClientId", `${ClientSelected}`)
             })
             .catch(error=>{
               console.log(error)  
@@ -130,9 +139,8 @@ function Payment(){
     
     
     const onSubmit =(data)=>{
-        console.log(optionsC.filter(e=>e.value==control._formValues.ClientId).label)
+       
         console.log(data)
-      
             
             if(newClient==false){
                 
@@ -180,14 +188,6 @@ function Payment(){
                 }
                 
         }
-       
-              
-               
-                
-          
-       
-   
-    
     const optionsC = clients.map(e=>({value:e.id,label:e.name}))
     const optionsL = locations.map(e=>({value:e.id,label:e.name}))
   
@@ -204,10 +204,10 @@ function Payment(){
                
           
             
-            <div className="PAYBox">
+            <div className="PAYBox" >
             
                 
-                <div className="PAYInputCont" style={{marginTop:"25px"}}>
+                <div className="PAYInputCont" style={{marginTop:"25px",}}>
                     <div style={{display:"flex", flexDirection:"row"}}>
                     
                     <p className="PAYtitle">Client Name</p>
@@ -219,7 +219,7 @@ function Payment(){
                         control={control}
                         name="ClientId"
                         render={({ field: { onChange, onBlur, value, ref } }) => (
-                            <Select value={optionsC.find(c => c.value === value)}  onChange={val =>{ onChange(val.value) ; setForm({...form, client: val.label})}} control={control} options={clients.map(e=>({value:e.id,label:e.name}))} name={"ClientId"} className="PAYselect"  placeholder="Select Client"/>
+                            <Select defaultValue={optionsC.find(c => c.value === ClientSelected)} value={optionsC.find(c => c.value === ClientSelected)}  onChange={val =>{ onChange(val.value) ; setForm({...form, client: val.label})}} control={control} options={clients.map(e=>({value:e.id,label:e.name}))} name={"ClientId"} className="PAYselect"  />
                         )}
                         />
                         {ERR.ClientId&&<p className="FORMerror">"Client is a required field"</p>}
@@ -251,7 +251,21 @@ function Payment(){
                     <input  {...register("phone")}  placeholder="Phone" className="PAYsub-title"></input>
                     <p className="FORMerror">{errors.phone?.message.substring(0,25)}</p>
                     
-                </div> 
+                </div>
+
+
+
+                 {newClient&& <div className="AQinputContainer" style={{marginLeft:"10px"}}>
+                    <p className="AQinputName">New client</p>
+                    <div className="AQyesNoContainer">
+                        <div>
+                        <input  className="AQcheckInput" type="checkbox" checked={neww} name="new" {...register('new')} onChange = {(event) => setNeww(!neww)}/>
+                            {neww?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>} 
+                        </div>
+                       
+                    </div>
+                </div>
+        }       
                   </div>
                  }
              
@@ -263,7 +277,7 @@ function Payment(){
                 
             </div>
 
-            <div className="PAYBox"> 
+            <div className="PAYBox" style={{marginTop:"25px"}}> 
             <div className="PAYInputCont">
                 <p className="PAYtitle">Location</p>
                 <Controller
@@ -281,7 +295,7 @@ function Payment(){
 
                 <div className="PAYInputCont">
                     <p  className="PAYtitle">Amount</p>
-                    <input className="AQinput" value={payment.amount} {...register("amount")}/>
+                    <input placeholder="Amount" className="AQinput" value={payment.amount} {...register("amount")}/>
                     <p className="FORMerror">{errors.amount?.message}</p>
                 </div> 
 
@@ -326,6 +340,53 @@ function Payment(){
 
 
             </div>
+            <div className="AQwhiteContainer11">
+                <div className="AQinputContainer" >
+                    <p className="AQinputName">NRSD</p>
+                    <div className="AQyesNoContainer">
+                                <div>
+                                <input  className="AQcheckInput" type="checkbox" checked={inputs.NSD}  value={inputs.NSD} key="NSD" name="NSD" onChange = {(event) => setInputs({...inputs,NSD:!inputs.NSD})}/>
+                                {inputs.NSD?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>}
+                                </div>
+                                {inputs.NSD&&
+                                <>
+                                <input className="AQinput2" placeholder="How much?" key="NSDvalue" name="NSDvalue"  value={inputs.NSDvalue} {...register("NSDvalue")}/>  
+                                <p className="FORMerror">{errors.NSDvalue?.message}</p>  </>}
+                            
+                             </div>
+                </div>
+               
+                <div className="AQinputContainer" >
+                    <p className="AQinputName">MVR</p>
+                    <div className="AQyesNoContainer">
+                                <div>
+                                <input  className="AQcheckInput" type="checkbox" checked={inputs.MVR} key="MVR" name="MVR" onChange = {(event) => setInputs({...inputs,MVR:!inputs.MVR})}/>
+                                {inputs.MVR?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>}
+                                </div>
+                                {inputs.MVR&&<>
+                                    <input className="AQinput2" placeholder="How much" key="MVRvalue" name="MVRvalue"  value={inputs.MVRvalue} {...register("MVRvalue")}/>
+                                    <p className="FORMerror">{errors.NSDvalue?.message}</p> </>}
+                             
+                             </div>
+                </div>
+               
+                <div className="AQinputContainer1">
+                    <p className="AQinputName">PIP</p>
+                    <div className="AQyesNoContainer">
+                        <div>
+                            <input   className="AQcheckInput"  type="checkbox" checked={inputs.PIP} value={inputs.PIP} key="PIP" name="PIP" onChange = {(event) =>setInputs({...inputs,PIP:!inputs.PIP})}/>
+                            {inputs.PIP?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>}
+                        </div>
+                        {inputs.PIP&&
+                        <>
+                        <input className="AQinput2" placeholder="PIP value" key="dealerSalePerson" name="dealerSalePerson"  {...register("PIPvalue")}/>
+                        <p className="FORMerror">{errors.NSDvalue?.message}</p> 
+                        </>
+                         
+                        }
+                    </div>
+                </div>
+                </div>
 
         
            

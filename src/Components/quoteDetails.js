@@ -13,7 +13,7 @@ function QuoteDetails(props) {
         axios.get(`https://truewayagentbackend.com/idquotes`,{ params: { id: id } })
         .then(function(response){
             setQuote(response.data)
-            
+        
 
             
         })
@@ -75,7 +75,7 @@ function QuoteDetails(props) {
                     </div>
                     <div className='DETsBox'>
                         <p className="DETtitle">Sold by</p>
-                        <p className="DETtext">{quote[0].User.name}</p>
+                        <p className="DETtext">{quote[0].QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].User.name}</p>
                     </div>
                  </div>
                     
@@ -88,7 +88,7 @@ function QuoteDetails(props) {
                             return(<div className='DETcontainer'>
                                <div className='DETsBox'>
                                 <p className="DETtitle" >Status</p>
-                                <p className="DETtext"  style={{fontWeight:"700",fontSize:"17px", color:e.Status=="Cancelled"?"red":e.Status=="Renew down"?"blue":e.Status=="Sold"?"green":"black" }}>{e.Status}</p>
+                                <p className="DETtext"  style={{fontWeight:"700",fontSize:"17px", color:e.Status=="Cancelled"?"#FF4C61":e.Status=="Renew down"?"#4CB8FF":e.Status=="Sold"?"#28C76F":"#FFB020" }}>{e.Status}</p>
                             </div>
                             <div className='DETsBox'>
                                 <p className="DETtitle">Modification date</p>

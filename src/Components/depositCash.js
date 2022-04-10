@@ -17,12 +17,13 @@ const DepositCash = () => {
     const [dbPayments, setDbPayments] = useState([])
     const [total, setTotal] = useState(0)
     const [id, setId] = useState([])
-
     
-    const UserId= useSelector(state=>state.UserId)
-    console.log(UserId)
+    
+    const LocationId= useSelector(state=>state.LocationId)
+ 
+
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCashPayment?UserId=${UserId}`)
+        axios.get(`https://truewayagentbackend.com/getCashPayment?LocationId=${LocationId}`)
         .then(function(response){
             setDbPayments(response.data)
             
@@ -34,7 +35,7 @@ const DepositCash = () => {
     },[])
     useEffect(()=>{
         let amount = 0  
-        dbPayments.map(e=>amount+=e.amount)
+        dbPayments.map(e=>amount +=parseFloat(e.amount))
         setTotal(amount)
         let ids = []
         dbPayments.map(e=>ids.push(e.id))

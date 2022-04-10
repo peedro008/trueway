@@ -26,7 +26,7 @@ useEffect(()=>{
     
     let pes = []
     quotes.map(e=>{
-      pes.push((e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status))
+      pes.push((e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status))
     })
     setAsd(pes)
 

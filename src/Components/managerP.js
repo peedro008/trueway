@@ -155,7 +155,7 @@ const ManagerP=()=>{
         <p className="modalText">Producer added successfully</p>
        
        
-        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/producers"}>Continue</NavLink></button>
+        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/users/producers"}>Continue</NavLink></button>
       
         
         </div>

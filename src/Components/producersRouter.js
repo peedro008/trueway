@@ -14,6 +14,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route} from 'react-router-dom'
+import ManagerClient from './managerClient';
 import ProducerNav from './producerNav';
 import Payments from './payments';
 import Payment from './payment';
@@ -51,13 +52,14 @@ import ProducerDetails from './producerDetails';
           <Route exact path='/report/modifyquote' component={ModifyQuote}/>
           <Route exact path='/addquote' component={AddQuote}/>
           <Route exact path='/report/clients' component={ClientsReport}/>
+          <Route exact path='/report/clientedit' component={ClientEdit}/>
           <Route exact path='/clientedit' component={ClientEdit}/>
           <Route exact path='/payments/pay' component={Payment}/>
           <Route exact path="/payments/deposit" component={DepositCash}/>
           <Route exact path='/payments/dailyReport' component={DailyReport}/>
           <Route exact path='/producers/details' component={ProducerDetails}/>
-           {/* <Route exact path='/myquotes/report' component={MyQuotes}/> 
-          <Route exact path='/myquotes' component={ProducerFilter}/>
+          <Route exact path='/addClient' component={ManagerClient}/> 
+          {/*<Route exact path='/myquotes' component={ProducerFilter}/>
           <Route exact path='/add' component={ProducerAddQuote}/>
           <Route exact path='/payments' component={Payments}/>
           <Route exact path='/deposit' component={DepositCash}/>

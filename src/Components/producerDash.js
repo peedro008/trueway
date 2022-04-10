@@ -19,8 +19,9 @@ import PizzaChart from "../chart/ProducersChart"
 import PozzaChart from "../chart/ColumnChar";
 import axios from "axios";
 import Isologo_background from  "../assets/Isologo_background.png"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { addLocation } from "../redux/actions";
 
 const ProducerDash = ()=>{
     const userId = useSelector(state=> state.UserId) 
@@ -30,13 +31,15 @@ const ProducerDash = ()=>{
     const [producers, setProducers]= useState([])
     const [modify, setModify]= useState([])
     const [pquotes, setPquotes]= useState([])
-
+    
+    const dispatch = useDispatch()
     const [quotes2, setQuotes2]= useState([])
     const [uQuotes, setUQuotes]= useState(0)
     const [sQuotes, setSQuotes]= useState(0)
      const [dataList, setDataList] = useState([])
      const [status, setStatus] = useState([])
      const [payments, setPayments] = useState([]) 
+  
      useEffect (()=>{
         axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
         .then(function(response){
@@ -133,17 +136,18 @@ const ProducerDash = ()=>{
 
 
      
-        useEffect(() => {
-            let pes = []
-          producers.map(e=>{
-            let qa = quotes2.filter(f=>f.User.name==e.name)
-            let stat = qa.map(e=> e.QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status)
-            
-             pes.push([e.name,stat])}
-          )
-          setDataList(pes)
-          console.log("BBBBBBBBBBBBBBBBBBBBBBBB", status)
-        }, [quotes2, producers])
+     useEffect(() => {
+        let pes = []
+        let quo = quotes2
+        
+        
+        let q = modify
+      producers.map(e=>
+         pes.push([e.name,(q.filter(f=>(f.User.name==e.name&&f.Status=="Sold"))).length, quo.filter(i=>i.User.name==e.name&&i.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length,e])
+      )
+      pes.sort(function(a,b){return (a[1]/a[2])-(b[1]/b[2])}).reverse()
+      setDataList(pes)
+    }, [modify, producers, quotes2])
     
     
         useEffect(() => {
@@ -202,8 +206,7 @@ const ProducerDash = ()=>{
                      : <div></div>
                      }</div>
                  </div>
-             <div className="DashPList1">
-             <div className="DashPList1">
+                 <div className="DashPList1">
                 <div className="DashPListHeader">
                     <p className="DashPListTitle">Sellers average sale</p>
                     <p className="DashPListSTitle">Descending</p>
@@ -214,26 +217,18 @@ const ProducerDash = ()=>{
                         <div className="DashPListRow1" style={{marginBottom:"7px"}}>
                             <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
                             <div className="DashPListCircle">
-                            <NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }} to={{
-                                pathname:("/producers/details"),
-                                aboutProps:e[3]
-                                }}><img src={mask}/></NavLink> 
+                            <img src={mask}/> 
                             </div>
                             
-                            <p className="DashPListItemText"><NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }} to={{
-                                pathname:("/producers/details"),
-                                aboutProps:e[3]
-                                }}>{e[0]}</NavLink></p>
+                            <p className="DashPListItemText">{e[0]}</p>
                             </div>
                             <div className="DashNumberDiv">
-                                 <p className="DashNumber">{(e[1]/e[2])?(e[1]/e[2]):0}</p> 
+                                 <p className="DashNumber">{(e[1]/e[2])?((e[1]/e[2])>1?100:((e[1]/e[2])*100).toFixed(0)):0}%</p> 
                             </div>
                         </div>
                     )
                 })}
             </div>  
- 
-        </div>
         </div>
         <div className="dashContCard">
                          <div className="dashCard">
@@ -242,7 +237,7 @@ const ProducerDash = ()=>{
                               
                              </div>
                              <div className="dashText" >
-                                     <p className="dashCardTitle">{uQuotes&&uQuotes}</p>
+                                     <p className="dashCardTitle">{quotes2.filter(e=>e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length}</p>
                                      <p className="dashCardText">Usold quotes</p>
                              </div>
                          </div>
@@ -252,7 +247,7 @@ const ProducerDash = ()=>{
                               
                              </div>
                              <div className="dashText">
-                                     <p className="dashCardTitle">{sQuotes}</p>
+                                     <p className="dashCardTitle">{modify.filter(e=>e.Status=="Sold").length?modify.filter(e=>e.Status=="Sold").length:0}</p>
                                      <p className="dashCardText">Total quotes sold per month</p>
                              </div>
                          </div>
@@ -262,9 +257,9 @@ const ProducerDash = ()=>{
                               
                              </div>
                              <div className="dashText">
-                                     <p className="dashCardTitle">{sQuotes}</p>
-                                     <p className="dashCardText">Total quotes sold per year</p>
-                             </div>
+                                    <p className="dashCardTitle">{quotes2.filter(e=>e.NSDvalue!==0&&e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Sold").length*5}</p>
+                                    <p className="dashCardText">Total NSD sales</p>
+                            </div>
                          </div>
                          <div className="dashCard" style={{marginLeft:"50px"}}>
                              <div className="dashCircle" style={{backgroundColor:" rgba(8, 76, 97, 0.07)"}}>

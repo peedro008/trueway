@@ -4,38 +4,23 @@ import { BiPencil } from 'react-icons/bi'
 import { NavLink } from 'react-router-dom'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-import Icon from "../assets/Icon.png"
+import Icon from "../../assets/Icon.png"
 import { useSelector } from 'react-redux';
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
-function ModifyQuote(props) {
-    const id = props.location.aboutProps
+export const ModifyModal = (props) => {
+    const {quoteM, open, onCloseModal} = props
     const [quote, setQuote] = useState([])
     const [renew, setRenew] = useState(false)
     const [cancel, setCancel] = useState(false)
     const [bound, setBound] = useState(false)
     const [reInstall, setReInstall] = useState(false)
-    const [notes, setNotes] = useState("")
-    const [monthly, setMonthly] = useState("")
-    const [down, setDown] = useState("")
     const [inputs, setInputs] = useState([])
-    const [open, setOpen] = useState(false);
     const userId = useSelector(state=> state.UserId)
-    const onOpenModal = () => setOpen(true);
-    const onCloseModal = () => setOpen(false);
-    useEffect(() => {
-        axios.get(`https://truewayagentbackend.com/idquotes`,{ params: { id: id } })
-        .then(function(response){
-            setQuote(response.data)
-            
-            setInputs({...inputs, QuoteId: id, UserId: userId})
-            
-        })
-        .catch(error=>{
-          console.log(error)  
-        })
-    }, [setQuote,userId])
-    
+    const [open1, setOpen1] = useState(false);
+   
+    const onOpenModal1 = () => setOpen1(true);
+    const onCloseModal1 = () => setOpen1(false);
     const checkRenew = () => {
         setBound(false)
         setInputs({...inputs, Status:"Renew down"})
@@ -65,7 +50,13 @@ function ModifyQuote(props) {
         setReInstall(false)
         setCancel(!cancel)
     }
+    useEffect(()=>{
+        setInputs({...inputs, QuoteId: quoteM.id, UserId: userId})
+    },[props, userId])
     const submit = () =>{
+        
+
+    
         inputs.Status?
         fetch(`https://truewayagentbackend.com/modifyQuote`, {
             
@@ -76,24 +67,25 @@ function ModifyQuote(props) {
             body: JSON.stringify(inputs)
             
         })
-        .then( onOpenModal()) 
+        .then( onOpenModal1()) 
+       
        
         :
         alert("You must select a status")
         
 
     }
-  
-  
-    return (
-        <div className='genericDiv'>
-              <div className="genericHeader">
+    console.log(props)
+    return(
+<Modal open={open} onClose={onCloseModal} center classNames={{modal:"modifyModal"}} >
+    <div  >
+<div className="genericHeader">
                 <p className="genericTitle">Modify quote</p>
-                <p className="genericSubTitle">Quote #{quote.id} </p>
+                <p className="genericSubTitle1">Quote # {quoteM.id} </p>
             </div>
             
-            {!quote.length?<div></div>:
-            <table class="table1">
+            {!quoteM?<div></div>:
+            <table class="table4">
       
         <tbody>
             <tr>
@@ -115,16 +107,16 @@ function ModifyQuote(props) {
             
                    
                    <tr>
-                            <td className="ClientName" scope="row">{quote[0].Client.name}</td>
+                            <td className="ClientName" scope="row">{quoteM.Client.name}</td>
                             
-                            <td className="row1" scope="row">{quote[0].Client.tel}</td>
-                            <td className="row1" scope="row">{quote[0].Company.name}</td>
-                            <td className="row1" scope="row">{quote[0].monthlyPayment}</td>
-                            <td className="row1" scope="row">{quote[0].down}</td>
-                            <td className="row1" scope="row">{quote[0].date}</td>
-                            <td className="row1" scope="row">{parseInt(quote[0].time.substring(11,13))-5}{quote[0].time.substring(16,19)}</td>
-                            <td className="row1" scope="row">{quote[0].User.name}</td>
-                            <td className="row1" scope="row">{quote[0].User.name}</td>
+                            <td className="row1" scope="row">{quoteM.Client.tel}</td>
+                            <td className="row1" scope="row">{quoteM.Company.name}</td>
+                            <td className="row1" scope="row">{quoteM.monthlyPayment}</td>
+                            <td className="row1" scope="row">{quoteM.down}</td>
+                            <td className="row1" scope="row">{quoteM.date}</td>
+                            <td className="row1" scope="row">{parseInt(quoteM.time.substring(11,13))-5}{quoteM.time.substring(16,19)}</td>
+                            <td className="row1" scope="row">{quoteM.User.name}</td>
+                            <td className="row1" scope="row">{quoteM.User.name}</td>
                             
                            
                            
@@ -141,7 +133,7 @@ function ModifyQuote(props) {
         </tbody>
         </table>}
 
-        <div className="MOBbox"  >
+        <div className="MOBbox1"  >
             <div className='MOBsBox' style={{  width:"max-content"}}>
               <div style={{display: "flex", flexDirection:"row"}}>
               <div className='MOBsBox'>
@@ -188,7 +180,7 @@ function ModifyQuote(props) {
                     {(renew||bound||cancel||reInstall)&&
                     <div className="MOBinputDiv">
                          <p className="MOBinputText">Notes</p>
-                         <textarea onChange={(e)=>{setInputs({...inputs, note:e.target.value})}} className='MOBtexta'/>
+                         <textarea onChange={(e)=>{setInputs({...inputs, note:e.target.value})}} className='MOBtexta1'/>
                     </div>}
                 </div>
             
@@ -221,21 +213,18 @@ function ModifyQuote(props) {
                     <p className="FITbuttonText">Submit</p>
                     </div>
                 </button>
-                <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+                <Modal open={open1} onClose={onCloseModal1} center classNames={"modal"}>
     <div className="modal">
         <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
         
         <p className="modalText">Quote modified successfully</p>
        
        
-        <button  className="modalButton"> <NavLink style={{textDecoration: "none", color:"#000"}}  to={"/report"}>Continue</NavLink></button>
+        <button onClick={onCloseModal} className="modalButton">Continue</button>
       
         
         </div>
       </Modal>
-      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
-        </div>
-    )
-}
-
-export default ModifyQuote
+                </div>
+      </Modal>)
+      }

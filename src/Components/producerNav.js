@@ -82,7 +82,10 @@ function ProducerNav({onSearch}) {
         <AiOutlineFile className="NAicon" size="20px" color="#969CBA" />
        </Link></div>
        <span/>
-       
+       <div className="NAcontainer">
+      <Link  className="icons" to='/addClient'activeClassName='NAavtive'>
+      <MdAdd className="NAicon" size="25px" color="#868ba5" />
+     </Link></div>
      
   
         

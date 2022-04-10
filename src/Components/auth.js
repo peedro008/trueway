@@ -3,7 +3,7 @@ import { useState } from 'react';
 import logo from "../assets/logored.svg"
 import {  useDispatch } from 'react-redux';
 import "./CSS/css.css"
-import { userRole } from '../redux/actions';
+import { addLocation, userRole } from '../redux/actions';
 import { userName } from '../redux/actions';
 import { user } from '../redux/actions';
 import { userId } from '../redux/actions';
@@ -11,6 +11,7 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import ERRORR from "../assets/ERRORR.png"
 import { NavLink } from "react-router-dom";
+import axios from 'axios';
 
 
 const Auth = ()=>{
@@ -59,8 +60,11 @@ const Auth = ()=>{
                     dispatch(user(payload.UserName));
                     dispatch(userName(jsonRes.Name));
                     dispatch(userId(jsonRes.userId));
-                   
                     
+                    
+                      
+                    
+                   
                 }
             } catch (err) {
                 console.log(err);

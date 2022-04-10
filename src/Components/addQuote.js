@@ -20,29 +20,29 @@ const schema = yup.object({
     CompanyId:yup.number().required(),
     UserId:yup.number().required(),
     DealerId:yup.number().optional().default(0),
-    down:yup.number().required(),
-    monthlyPayment:yup.number().optional(),
-  
-    NSDvalue:yup.number().optional().default(0),
-
-    PIPvalue:yup.number().optional().default(0),
-    
-    MVRvalue:yup.number().optional().default(0),
+    down:yup.string().required(),
+    monthlyPayment:yup.string().optional(),
+    NSDvalue:yup.string().optional().default("0"),
+    Bound:yup.bool().required(),
+    PIPvalue:yup.string().optional().default("0"),
+    TotalPremium:yup.string().optional().default("0"),
+    MVRvalue:yup.string().optional().default("0"),
     name:yup.string().optional().min(1),
     email:yup.string().optional().email().min(1),
-    tel:yup.string().optional().min(6)
+    tel:yup.string().optional().min(6),
+    new: yup.bool().optional(),
     
     }).required();
 
 const AddQuote = ()=>{
-
+    const [neww, setNeww] = useState(false);
     const [open, setOpen] = useState(false);
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
     const userId = useSelector(state=> state.UserId)
     const [newClient, setNewClient] = useState(false)
     const [clients, setClients] = useState([])
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState({Bound:false});
     const [producers, setProducers]= useState([])
     const [companies, setCompanies]= useState([])
     const [categories, setCategories]= useState([])
@@ -52,11 +52,7 @@ const AddQuote = ()=>{
     const { register, handleSubmit,control, formState:{ errors }, setValue } = useForm({
         resolver: yupResolver(schema)
       });
-      setValue("UserId", `${userId}`)
-      setValue("PIPvalue", 0)
-      setValue("NSDvalue", 0)
-      setValue("MVRvalue", 0)
-      setValue("monthlyPayment", 0)
+     
    
 
     useEffect(()=>{
@@ -164,8 +160,15 @@ const AddQuote = ()=>{
     }
 
     const onSubmit = (data) => {
- 
-       
+        
+        !data.PIPvalue&&setValue("PIPvalue", "0")
+        !data.NSDvalue&&setValue("NSDvalue", "0")
+        !data.MVRvalue&&setValue("MVRvalue", "0")
+        !data.Bound&&setValue("Bound", false)
+        !data.totalPremium&&setValue("totalPremium", "0")
+        !data.monthlyPayments&&setValue("monthlyPayment", "0")
+        setValue("Bound", `${inputs.Bound}`)
+        console.log(data)
         fetch(`https://truewayagentbackend.com/addQuote`, {
             
             method: 'POST',
@@ -214,7 +217,7 @@ const optionsCo = companies.map(e=>({value:e.id,label:e.name}))
 const optionsL = locations.map(e=>({value:e.id,label:e.name}))
 const optionsD = dealers.map(e=>({value:e.id,label:e.name}))
 const optionsC = clients.map(e=>({value:e.id,label:e.name}))
-
+setValue("UserId", `${userId}`)
 return(
 
 
@@ -228,10 +231,10 @@ return(
             
         <div className="AQcontainer" >
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="AQrowContainer2" >
+            <div className="AQrowContainer2" style={{width:"68vw"}}>
            
                 
-            <div className="AQinputContainer">
+            <div className="AQinputContainer" >
                 <div style={{display:"flex", flexDirection:"row"}}>
                 
                 <p className="AQinputName">Client Name</p>
@@ -279,8 +282,18 @@ return(
             </div> 
              
              }
-         
-            
+
+        {newClient&& <div className="AQinputContainer" >
+                    <p className="AQinputName">New client</p>
+                    <div className="AQyesNoContainer">
+                        <div>
+                        <input  className="AQcheckInput" type="checkbox" checked={neww} name="new" {...register('new')} onChange = {(event) => setNeww(!neww)}/>
+                            {neww?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>} 
+                        </div>
+                       
+                    </div>
+                </div>
+        }       
           
              
            
@@ -359,14 +372,19 @@ return(
                 </div>
                 <div className="AQinputContainer" style={{display:"flex", flexDirection:"column", backgroundColor:"start"}}>
                     <p className="AQinputName">Monthly payment</p>
-                    <input className="AQinput" placeholder="Monthly payment" key="monthlyPayment" name="monthlyPayment"  value={inputs.monthlyPayment} {...register("monthlyPayment")}/>
+                    <input className="AQinput" placeholder="Monthly payment" key="monthlyPayment" name="monthlyPayment"   {...register("monthlyPayment")}/>
                     <p className="FORMerror">{errors.monthlyPayment?.message.substring(0,24)}</p>
                 </div>
                 <div className="AQinputContainer" style={{display:"flex", flexDirection:"column", backgroundColor:"start"}}>
-
+                    <p className="AQinputName">Total premium</p>
+                    <input className="AQinput" placeholder="Total premium" key="totalPremium" name="totalPremium"   {...register("TotalPremium")}/>
+                    <p className="FORMerror">{errors.TotalPremium?.message.substring(0,24)}</p>
                 </div>
                 <div className="AQinputContainer" style={{display:"flex", flexDirection:"column", backgroundColor:"start"}}>
-
+                <div> <p className="AQinputName">Bound</p>
+                            <input  className="AQcheckInput" type="checkbox"   checked={inputs.Bound} name="Bound" {...register('Bound')} onChange = {(event) => setInputs({...inputs, Bound:!inputs.Bound })}/>
+                            {inputs.Bound?<p className="AQyesNoText">Yes</p>:<p className="AQyesNoText">No</p>} 
+                        </div>
                 </div>
             </div>
 

@@ -13,8 +13,8 @@ import pdf from "../assets/pdf.svg"
 import {AiOutlineDelete} from "react-icons/ai"
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import MyDocument from "./PDF/prueba";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-const PayReport = () => {
+
+const DeletedPayments = () => {
     const userRole = useSelector(state=> state.userRole)
     const [producers, setProducers]= useState([])
     const [payments, setPayments] = useState([]) 
@@ -22,7 +22,7 @@ const PayReport = () => {
     const [clients, setClients] = useState([])
     const [locations, setLocations] = useState([])
     const [dateF, setDateF] = useState([])
-    
+    const [filteredQuotes, setFilteredQuotes] = useState(false)
     const [openFilter, setOpenFilter] = useState(false)
     const [filtered, setFiltered]= useState(false)
     const [deleteConf, setDeleteConf] = useState("")
@@ -62,7 +62,7 @@ const PayReport = () => {
     const deleteClient = (data) => {
         data&&
         console.log(data)
-        fetch(`https://truewayagentbackend.com/deletePayment`, {
+        fetch(`https://truewayagentbackend.com/undeletePayment`, {
             
             method: 'POST',
             headers: {
@@ -97,7 +97,7 @@ const PayReport = () => {
         };
 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getPayments`)
+        axios.get(`https://truewayagentbackend.com/getDeletedPayment`)
             .then(function(response){
                 setPayments(response.data)
                 
@@ -183,7 +183,7 @@ const PayReport = () => {
         <div className="genericDiv1">
              
              <div className="genericHeader">
-                <p className="genericTitle">Payment reports</p>
+                <p className="genericTitle">Deleted Payment reports</p>
             </div>
             <div className="REPcontrol">
             
@@ -268,9 +268,9 @@ const PayReport = () => {
                 <th scope="col" className="column1"><p className="REPtype">NSD</p></th>
                 <th scope="col" className="column1"><p className="REPtype">MVR</p></th>
                 <th scope="col" className="column1"><p   className="REPtype">Total</p></th>
-                {userRole!=="Producer"&&<th scope="col" className="column1"><p   className="REPtype">Delete</p></th>
+                {userRole!=="Producer"&&<th scope="col" className="column1"><p   className="REPtype">Reset</p></th>
                 }
-                <th scope="col" className="column1"><p   className="REPtype">PDF</p></th>
+               
             </tr>
             {
                paymentsFil.sort(function(a,b){return b.id-a.id}).map((e)=>{
@@ -297,12 +297,7 @@ const PayReport = () => {
                                             </div>
                                         </td>
                                 }
-                                 <td className="ClientName" scope="row"  >
-                                          <div style={{height:"auto",display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center" }}>
-                                          <PDFDownloadLink style={{textDecoration:"none", color:"black"}} document={<MyDocument data={{client:e.Client.name, total:parseFloat(e.amount)+parseFloat(e.creditCardFee)+parseFloat(e.PIPvalue)+parseFloat(e.MVRvalue)+parseFloat(e.NSDvalue), producer: e.User.name, date:e.date}} />} fileName="Receipt"> 
-                                            <VscFilePdf className='pdfIcon' size={"20px"} /></PDFDownloadLink>
-                                            </div>
-                                        </td>
+                                 
                         </tr>
                     )
                      })
@@ -318,9 +313,8 @@ const PayReport = () => {
             <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
             {openFilter&&  
         <div className="FilterCom">
-           <div className="FilterComTitleD">
-                <p className="FilterComTitle" >Search</p> 
-                <AiOutlineCloseCircle size="20px" style={{color:"#787d84", cursor:"pointer"}} onClick={()=>setOpenFilter(false)}/>
+            <div className="FilterComTitleD">
+                <p className="FilterComTitle">Search</p>
             </div>
             <Divider style={{backgroundColor:"#EBEFF2", height:"1px", borderWidth:"0px",  width:"300px" }}/>
             <div className="FilterComRow">
@@ -445,10 +439,10 @@ const PayReport = () => {
                     <div className="modal" style={{minWidth:"250px", alignItems:"center"}}>
                     
                     <AiOutlineDelete color="#FF4545" size={"50px"} style={{alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
-                    <p className="modalText">Type "delete" to confirm </p>
+                    <p className="modalText">Type "reset" to confirm </p>
                     <input className='AQinput' onChange={(e)=>setDeleteConf(e.target.value)} style={{marginTop:"12px"}}/>
                 
-                    <button disabled={deleteConf=="delete"?false:true} className="modalButton" onClick={handleDeleteModal}>Continue</button>
+                    <button disabled={deleteConf=="reset"?false:true} className="modalButton" onClick={handleDeleteModal}>Continue</button>
                 
                     
                     </div>
@@ -456,4 +450,4 @@ const PayReport = () => {
         </div>
     )
 }
-export default PayReport
+export default DeletedPayments

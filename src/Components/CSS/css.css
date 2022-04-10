@@ -297,6 +297,17 @@ border-radius: 0px 10px  10px 0px;
     letter-spacing: 0.01em;
     text-align: left;
 }
+ .genericSubTitle1{
+    font-family: "Gilroy-Regular";
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: 0.01em;
+    text-align: left;
+    
+
+    
+ }
  .genericSubTitle{
     font-family: "Gilroy-Regular";
     font-size: 17px;
@@ -787,14 +798,15 @@ border-radius: 0px 10px  10px 0px;
 .REPsearch{
     margin-right: 40px;
     
-    margin-left: 40px;
+    
     border-radius: 20px;
 }
 .REPcontrol{
     display: flex;
     flex-direction: row;
-    width:80vw;
+    width:100vw;
     margin-top: 20px;
+    padding-left: 40px;
    
 }
 
@@ -873,6 +885,20 @@ border-radius: 0px 10px  10px 0px;
     padding-top: 25px;
     
 }
+.MOBbox1{
+    min-height: 315px;
+    top: 406px;
+    border-radius: 6px;
+    background-color:#FFFFFF;
+    width: 807.08px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: row;
+    
+    padding-left: 25px;
+    padding-top: 15px;
+    
+}
 .MOBtitle{
     font-family: "Gilroy-Regular";
     font-size: 19px;
@@ -906,7 +932,7 @@ border-radius: 0px 10px  10px 0px;
     margin-bottom: 8px;
 }
 .MOBinputDiv{
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .MOBmainInput{
     display: flex;
@@ -916,6 +942,12 @@ border-radius: 0px 10px  10px 0px;
 }
 .MOBtexta{
     height: 123px;
+    width: 500px;
+    border-radius: 7px;
+
+}
+.MOBtexta1{
+    height: 100px;
     width: 500px;
     border-radius: 7px;
 
@@ -1173,6 +1205,7 @@ border-radius: 0px 10px  10px 0px;
 
 .AQinput{
     padding-left: 8px;
+    padding-right: 8px;
     font-family: "Gilroy-Regular";
     font-weight: 700;
     font-size: 12px;
@@ -1180,7 +1213,7 @@ border-radius: 0px 10px  10px 0px;
     border-width: 0;
     background-color:white ;
     border-radius: 4px;
-    width: 190px;
+    width: 175px;
     min-height: 33px;
     border-color: rgb(212, 208, 208);
     border-width: 1px;
@@ -1209,6 +1242,21 @@ border-radius: 0px 10px  10px 0px;
     height: 70px;
     background-color:white  ;
     width: 40%;
+    border-radius: 8px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    
+}
+.AQwhiteContainer11{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding-left: 40px;
+    padding-right: 150px;
+    padding-top: 10px;
+    min-height: 80px;
+    background-color:white  ;
+    width: 80%;
     border-radius: 8px;
     margin-top: 40px;
     margin-bottom: 30px;
@@ -1607,7 +1655,6 @@ font-weight: 400;
 line-height: 16px;
 letter-spacing: 0.01em;
 max-width: 30px;
-overflow: hidden;
 
 
 }
@@ -1763,6 +1810,10 @@ overflow: hidden;
     flex-direction: column;
 
 }
+.modifyModal{
+    min-width: 80vw;
+    height: 88vh;
+}
 .modalText{
     font-family: "Gilroy-Regular";
     font-size: 20px;
@@ -1790,6 +1841,57 @@ overflow: hidden;
 
 
 /*----------------DEPOSIT-------------------*/
+
+
+
+.table4{
+    font-family: "Gilroy-Regular";
+    font-weight: 100;
+    border-collapse:collapse;
+    margin-top:25px;
+    width: 70vw;
+    height: max-content;
+    margin-left: 40px;
+    
+    
+    background:white;
+    border-radius:6px;
+    overflow:hidden;
+
+   
+ 
+    
+    
+  
+}
+
+.table4 td, .table4 th{
+    border: 1px solid #ddd;
+    padding: 8px;
+    
+    
+}
+
+
+.table4 tr:nth-child(even){
+    background-color: #EDEDED;
+    
+
+}
+.table4 tr:hover {
+    background-color: #ddd;
+    
+}
+.table4 th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    background-color: white;
+    color: white;
+    
+  }
+
+
 .table3{
     font-family: "Gilroy-Regular";
     font-weight: 100;
@@ -1995,7 +2097,7 @@ display:flex;
 
 .table2 td, .table2 th{
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 6.5px;
     
     
 }
@@ -2030,14 +2132,14 @@ display:flex;
     flex-direction: row;
     padding-left: 40px;
     padding-top: 25px;
-    width: 40vw;
+    width: 45vw;
     
     justify-content: space-between;
 }
 .DAItotal{
     width: max-content;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 20px;
+    padding-right: 20px;
     height: 32px;
     border-radius: 4px;
     align-items: center;
@@ -2208,4 +2310,214 @@ text-decoration-line: underline;
     text-align: left;
     color: #A6ACBE;
 
+}
+
+
+
+
+
+.paymentIcon{
+    background-image: url('../../assets/paymentH.svg');
+    background-size: cover;
+    width: 15.3px;
+    height: 18.6px;
+}
+.paymentIcon:hover{
+    background-image: url('../../assets/payment.svg');
+    background-size: cover;
+    width: 13.3px;
+    height: 16.6px;
+}
+
+.pdfIcon{
+    color:#858585;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+}
+.pdfIcon:hover{
+    color: #2B4162;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+}
+.editIcon{
+    background-image: url('../../assets/editH.svg');
+    background-size: cover;
+    width: 26px;
+    height: 26px;
+}
+.editIcon:hover{
+    background-image: url('../../assets/edit.svg');
+    background-size: cover;
+    width: 26px;
+    height: 26px;
+}
+.deleteIcon{
+    color: #858585;
+    background-size: cover;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+.deleteIcon:hover{
+    color: #2B4162;
+    background-size: cover;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+
+.FilterButtoN{
+    background-image: url('../../assets/filter.svg');
+    background-size: cover;
+    width: 84px;
+    height: 30px;
+    position: fixed;
+    right: 15px;
+    top:23%;
+    cursor: pointer;
+}
+
+
+
+.FilterCom{
+    display: "flex";
+    position: fixed;
+    height: max-content;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    right: 0;
+    top: 30%;
+    background-color: #FFFFFF;
+    border: 0.5px solid #C9CED6 blur(4px);
+    box-sizing: border-box;
+    filter:drop-shadow(0px 6px 18px rgba(0, 0, 0, 0.06)) ;
+
+}
+.FilterCom::-webkit-scrollbar{
+    background-color:#F3F4F6;
+    width: 6px;
+   
+border-radius: 0px 10px  10px 0px;
+    
+}
+
+.FilterCom::-webkit-scrollbar-thumb {
+    background-color: #2B4162;
+    border-radius: 2px;
+
+}
+
+
+.FilterCom::-webkit-scrollbar{
+    background-color:#F3F4F6;
+    width: 6px;
+   
+border-radius: 0px 10px  10px 0px;
+    
+}
+
+.FilterCom::-webkit-scrollbar-thumb {
+    background-color: #787d84;
+    border-radius: 2px;
+
+}
+
+.FilterComTitleD{
+    display:flex;
+    align-items: center;
+    width:94%;
+    height: 39px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 10px;
+}
+.FilterComTitle{
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+
+}
+.FilterComRow{
+    padding-left: 15px;
+    display:flex;
+    width:50%;
+    height: 39px;
+    flex-direction: row;
+    align-items: center;
+    
+}
+.FilterComText{
+    margin-left: 15px;
+    font-family: Montserrat;
+font-size: 14px;
+font-weight: 300;
+line-height: 18px;
+letter-spacing: 0px;
+text-align: left;
+color:#6E6B7B;
+}
+.FilterComButton{
+    width: 140px;
+    height: 38px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: Gilroy-Regular;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color:#2B4162;
+    background-color: white;
+    border: 1px solid #2B4162;
+
+}
+.cloudFilter{
+    width:max-content;
+    max-height: 20px;
+    
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border: 1px solid #D6E4EC;
+    border-radius: 8px;
+    margin-left: 10px;
+    padding:3px;
+    max-width: max-content;
+    padding-right: 5px;
+  
+    
+}
+.cloudFilterText{
+    font-family: "Gilroy-Regular";
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    text-align: left;
+    color:#AABBC6;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.filterRemove{
+    font-family: "Gilroy-Regular";
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    text-align: left;
+    color:#AABBC6;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

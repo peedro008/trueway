@@ -3,7 +3,7 @@ import axios from "axios"
 
 function ProducerSales ( {aboutProps ,google}) {
   const [chart, setChart] = useState(null);
-  
+  const [modify, setModify]= useState([])
   const [quotes, setQuotes]= useState([])
   const [dato, setDato]= useState([])
   const [year, setYear] = useState([])
@@ -19,19 +19,31 @@ function ProducerSales ( {aboutProps ,google}) {
     .then(function(response){
         let paz = response.data
 
-        setQuotes(paz.filter(e=>e.UserId==userId))
+        setModify(paz.filter(e=>e.UserId==userId))
     })
     .catch(error=>{
       console.log(error)  
     })
 },[])
 
-
+useEffect (()=>{
+    axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
+    .then(function(response){
+        setQuotes(response.data)
+       
+        
+        
+    })
+    .catch(error=>{
+      console.log(error)  
+    })
+},[userId])
 
 useEffect(()=>{
     
     const date =  new Date()
     const DATE = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
+    const Ymodify = modify.filter(e=>e.date.substring(0,4)==DATE.substring(0,4))
     const Yquotes = quotes.filter(e=>e.date.substring(0,4)==DATE.substring(0,4))
     let m0 = 0
     let m1 = 0
@@ -58,107 +70,133 @@ useEffect(()=>{
     let pm10 = 0
     let pm11 = 0
    
-    Yquotes.map((e)=>{
+    Ymodify.map((e)=>{
         if(e.date.substring(5,7)=="01"){
-           if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+           if(e.Status=="Sold"){
                m0=m0+1
-           }
-           else{
-               pm0=pm0+1
            }
         } 
         else if(e.date.substring(5,7)=="02"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m1=m1+1
             }
-            else{
-                pm1=pm1+1
-            }
-         } 
+        } 
         else if(e.date.substring(5,7)=="03"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m2=m2+1
             }
-            else{
-                pm2=pm2+1
-            }
-         } 
+        } 
          else if(e.date.substring(5,7)=="04"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m3=m3+1
             }
-            else{
-                pm3=pm3+1
-            }
-         } 
+        } 
          else if(e.date.substring(5,7)=="05"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m4=m4+1
             }
-            else{
-                pm4=pm4+1
-            }
-         } 
+        } 
          else if(e.date.substring(5,7)=="06"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m5=m5+1
-            }
-            else{
-                pm5=pm5+1
             }
         } 
         else if(e.date.substring(5,7)=="07"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m6=m6+1
-            }
-            else{
-                pm6=pm6+1
             }
         }
         else if(e.date.substring(5,7)=="08"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m7=m7+1
-            }
-            else{
-                pm7=pm7+1
             }
         }
         else if(e.date.substring(5,7)=="09"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m8=m8+1
-            }
-            else{
-                pm8=pm8+1
             }
         }
         else if(e.date.substring(5,7)=="10"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m9=m9+1
-            }
-            else{
-                pm9=pm9+1
             }
         }
         else if(e.date.substring(5,7)=="11"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m10=m10+1
-            }
-            else{
-                pm10=pm10+1
             }
         }
         else if(e.date.substring(5,7)=="12"){
-            if(e.Status!=="Cancelled"&&e.Status!=="Quoted"){
+            if(e.Status=="Sold"){
                 m11=m11+1
-            }
-            else{
-                pm11=pm11+1
             }
         }
     })
+    Yquotes.map((e)=>{
+        if(e.date.substring(5,7)=="01"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                pm0=pm0+1
+            }
+         } 
+         else if(e.date.substring(5,7)=="02"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm1=pm1+1
+             }
+         } 
+         else if(e.date.substring(5,7)=="03"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm2=pm2+1
+             }
+         } 
+          else if(e.date.substring(5,7)=="04"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm3=pm3+1
+             }
+         } 
+          else if(e.date.substring(5,7)=="05"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm4=pm4+1
+             }
+         } 
+          else if(e.date.substring(5,7)=="06"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm5=pm5+1
+             }
+         } 
+         else if(e.date.substring(5,7)=="07"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm6=pm6+1
+             }
+         }
+         else if(e.date.substring(5,7)=="08"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm7=pm7+1
+             }
+         }
+         else if(e.date.substring(5,7)=="09"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm8=pm8+1
+             }
+         }
+         else if(e.date.substring(5,7)=="10"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm9=pm9+1
+             }
+         }
+         else if(e.date.substring(5,7)=="11"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm10=pm10+1
+             }
+         }
+         else if(e.date.substring(5,7)=="12"){
+            if(e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"){
+                 pm11=pm11+1
+             }
+         }
+    }) 
     setYear([[m0,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10,m11],[pm0,pm1,pm2,pm3,pm4,pm5,pm6,pm7,pm8,pm9,pm10,pm11]])
 
-},[quotes])
+},[quotes, modify])
 useEffect(()=>{
     if(year[0]){
     let pes = []

@@ -16,6 +16,7 @@ const Manager=()=>{
             <NavLink to={"./manager/managerC"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd  color="white" size={"20px"} className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Add Company</p></button>
             </NavLink>
+      
             <NavLink to={"./manager/managerP"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd color="white" size={"20px"}  className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Add Producer</p></button>
             </NavLink>
@@ -34,6 +35,12 @@ const Manager=()=>{
             </NavLink>
             <NavLink to={"./manager/managerCa"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd color="white" size={"20px"}   className="PAYbuttonIcon"/> <p className="PAYbuttonText">Add Category</p></button>
+            </NavLink>
+           
+        </div>
+        <div className="managerContainer1">
+             <NavLink to={"./manager/managerClient"}  style={{ textDecoration: 'none', color:"#000" }}>
+                <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd  color="white" size={"20px"} className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Add Client</p></button>
             </NavLink>
         </div>
 

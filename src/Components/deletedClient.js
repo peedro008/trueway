@@ -7,8 +7,8 @@ import SearchField from "react-search-field";
 import { useSelector } from 'react-redux';
 import Modal from 'react-responsive-modal';
 
-function ClientsReport() {
-    const [clients, setPayments] = useState([])
+function DeletedClients() {
+    const [clients, setClients] = useState([])
     const [deleteConf, setDeleteConf] = useState("")
     const [deletedOne, setDeletedOne] = useState(null)
     const [search, setSearch] = useState("")
@@ -21,9 +21,9 @@ function ClientsReport() {
         onOpenModal()
     }
     useEffect(() => {
-        axios.get(`https://truewayagentbackend.com/clients`)
+        axios.get(`https://truewayagentbackend.com/getDeletedClients`)
         .then(function(response){
-            setPayments(response.data)
+            setClients(response.data)
             
         })
         .catch(error=>{
@@ -38,7 +38,7 @@ function ClientsReport() {
     const deleteClient = (data) => {
         data&&
         console.log(data)
-        fetch(`https://truewayagentbackend.com/deleteClient`, {
+        fetch(`https://truewayagentbackend.com/undeleteClient`, {
             
             method: 'POST',
             headers: {
@@ -71,10 +71,11 @@ function ClientsReport() {
             console.log(err);
         });
         };
+        
   return (
     <div className='genericDiv1'>
         <div className="genericHeader">
-                <p className="genericTitle">Client list</p>
+                <p className="genericTitle">Deleted Client list</p>
         </div>
         <div className="REPcontrol">
        
@@ -95,9 +96,9 @@ function ClientsReport() {
                 <th scope="col" className="column1"><p   className="REPtype">Client phone</p></th>
                 <th scope="col" className="column1"><p   className="REPtype">New</p></th>
                 <th scope="col" className="column1"><p   className="REPtype">Notes</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Add payment</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Modify Client</p></th>
-                {userRole!=="Producer"&&<th scope="col" className="column1"><p   className="REPtype">Delete Client</p></th>
+                
+              
+                {userRole!=="Producer"&&<th scope="col" className="column1"><p   className="REPtype">Reset Client</p></th>
                 }
 
             </tr>
@@ -131,25 +132,7 @@ function ClientsReport() {
                             {e.notes}
                                    
                                 </td>       
-                                <td className="ClientName" scope="row" >
-                            <NavLink style={{ textDecoration: 'none', color:"#000", color:"black",  }}
-                                 to={{
-                                    pathname:("/payments/pay"),
-                                    aboutProps:e.id}}>
-                                        <div style={{height:"auto",display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center" }}>
-                                        <div className='paymentIcon'/></div>
-                                    </NavLink>
-                                </td>  
-                                               
-                                <td className="ClientName" scope="row"  >
-                            <NavLink style={{ textDecoration: 'none', color:"#000", color:"black",  }}
-                                 to={{
-                                    pathname:("/report/clientedit"),
-                                    aboutProps:e}}>
-                                        <div style={{height:"auto",display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center" }}>
-                                        <div className='editIcon'/></div>
-                                    </NavLink>
-                                </td>  
+                           
                                 {userRole!=="Producer"&&
                                      <td className="ClientName" scope="row"  >
                                           <div style={{height:"auto",display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center" }}>
@@ -240,10 +223,10 @@ function ClientsReport() {
                     <div className="modal" style={{minWidth:"250px", alignItems:"center"}}>
                     
                     <AiOutlineDelete color="#FF4545" size={"50px"} style={{alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
-                    <p className="modalText">Type "delete" to confirm </p>
+                    <p className="modalText">Type "reset" to confirm </p>
                     <input className='AQinput' onChange={(e)=>setDeleteConf(e.target.value)} style={{marginTop:"12px"}}/>
                 
-                    <button disabled={deleteConf=="delete"?false:true} className="modalButton" onClick={handleDeleteModal}>Continue</button>
+                    <button disabled={deleteConf=="reset"?false:true} className="modalButton" onClick={handleDeleteModal}>Continue</button>
                 
                     
                     </div>
@@ -256,5 +239,4 @@ function ClientsReport() {
   )
 }
 
-export default ClientsReport
-//onClick={()=>{handleDelete({ClientId:e.id})}}
+export default DeletedClients

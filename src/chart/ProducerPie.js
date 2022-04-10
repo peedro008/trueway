@@ -49,7 +49,7 @@ function ProducerPie ({aboutProps, google}) {
       data.addRows(dato);
       
       // Set chart options
-      var options = {'title':'Cancelations',
+      var options = {'title':'Sellers Average',
                   
                     pieHole: 0.4,
                     "colors": ["#FFB800","#33D69F","#FF4C61"],

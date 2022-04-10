@@ -20,6 +20,8 @@ import PozzaChart from "../chart/ColumnChar";
 import axios from "axios";
 import Isologo_background from  "../assets/Isologo_background.png"
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addLocation } from "../redux/actions";
 
 
 
@@ -35,7 +37,8 @@ const AdminDash = ()=>{
     const [sold, setSold] = useState([])
     const [unSold, setUnSold] = useState([])
     const [payments, setPayments]=useState([])
-
+    const UserId= useSelector(state=>state.UserId)
+    
        useEffect(()=>{
            axios.get(`https://truewayagentbackend.com/getProducer`)
                .then(function(response){
@@ -92,6 +95,8 @@ const AdminDash = ()=>{
     
     },[])
 
+    console.log(dataList, "000000000000000000000000000000000000")
+
        useEffect(() => {
            let pes = []
            let quo = quotes
@@ -99,7 +104,7 @@ const AdminDash = ()=>{
            
            let q = modify
          producers.map(e=>
-            pes.push([e.name,(q.filter(f=>(f.User.name==e.name&&f.Status!=="Quoted"&&f.Status!=="Cancelled"))).length, quo.filter(i=>i.User.name==e.name).length,e])
+            pes.push([e.name,(q.filter(f=>(f.User.name==e.name&&f.Status=="Sold"))).length, quo.filter(i=>i.User.name==e.name&&i.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length,e])
          )
          pes.sort(function(a,b){return (a[1]/a[2])-(b[1]/b[2])}).reverse()
          setDataList(pes)
@@ -129,7 +134,7 @@ const AdminDash = ()=>{
             e.preventDefault();
         }
   
- console.log(dataList)
+ 
     return(
             <div className="genericDiv">
                  <div className="genericHeader">
@@ -156,18 +161,18 @@ const AdminDash = ()=>{
                             <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
                             <div className="DashPListCircle">
                             <NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }} to={{
-                                pathname:("/producers/details"),
+                                pathname:("/users/producers/details"),
                                 aboutProps:e[3]
                                 }}><img src={mask}/></NavLink> 
                             </div>
                             
                             <p className="DashPListItemText"><NavLink style={{ textDecoration: 'none', color:"#000", color:"black" }} to={{
-                                pathname:("/producers/details"),
+                                pathname:("/users/producers/details"),
                                 aboutProps:e[3]
                                 }}>{e[0]}</NavLink></p>
                             </div>
                             <div className="DashNumberDiv">
-                                 <p className="DashNumber">{(e[1]/e[2])?(e[1]/e[2]):0}</p> 
+                                 <p className="DashNumber">{(e[1]/e[2])?((e[1]/e[2])>1?100:((e[1]/e[2])*100).toFixed(0)):0}%</p> 
                             </div>
                         </div>
                     )
@@ -182,7 +187,7 @@ const AdminDash = ()=>{
                              
                             </div>
                             <div className="dashText" >
-                                    <p className="dashCardTitle">{unSold}</p>
+                                    <p className="dashCardTitle">{quotes.filter(e=>e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length}</p>
                                     <p className="dashCardText">Unsold quotes</p>
                             </div>
                         </div>
@@ -192,7 +197,7 @@ const AdminDash = ()=>{
                              
                             </div>
                             <div className="dashText">
-                                    <p className="dashCardTitle">{sold}</p>
+                                    <p className="dashCardTitle">{modify.filter(e=>e.Status=="Sold").length?modify.filter(e=>e.Status=="Sold").length:0}</p>
                                     <p className="dashCardText">Total quotes sold per month</p>
                             </div>
                         </div>
@@ -202,8 +207,8 @@ const AdminDash = ()=>{
                              
                             </div>
                             <div className="dashText">
-                                    <p className="dashCardTitle">{sold}</p>
-                                    <p className="dashCardText">Total quotes sold per year</p>
+                                    <p className="dashCardTitle">{quotes.filter(e=>e.NSDvalue!==0&&e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Sold").length*5}</p>
+                                    <p className="dashCardText">Total NSD sales</p>
                             </div>
                         </div>
                         <div className="dashCard" style={{marginLeft:"50px"}}>
@@ -248,7 +253,7 @@ const AdminDash = ()=>{
                                     <p className="DashStatusItem"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.Quote.id}}}>{e.User.name}</NavLink></p>
                                     <p className="DashStatusItem"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.Quote.id}}}>{e.date}</NavLink></p>
                                     <div style={{width:"25%"}}>
-                                    <div className="DashStatusColor" style={{backgroundColor:e.Status=="Cancelled"?"#D14343":e.Status=="Sold"?"#14B8A6":e.Status=="Renew down"?"#FFB020": "#14B8A6"}}>
+                                    <div className="DashStatusColor" style={{backgroundColor:e.Status=="Cancelled"?"#D14343":e.Status=="Sold"?"#14B8A6":e.Status=="Renew down"?"#FFB020": "#777DA7"}}>
                                     <p className="DashStatusItemC"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.Quote.id}}}>{e.Status}</NavLink></p></div></div>
                                 </div>
                             )

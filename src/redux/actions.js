@@ -7,8 +7,8 @@ export const USER_NAME = "USER_NAME"
 export const USER_ID = "USER_ID"
 export const LOGOUT = "LOGOUT"
 export const ADD_PAY = "ADD_PAY"
+export const ADD_LOCATION = "ADD_LOCATION"
 
-// LOGIN ACTION
 
 export function example(){ 
   return{
@@ -53,7 +53,12 @@ export function userName(UserName){
     payload: payment
     }
   }
-
+  export function addLocation(LocationId){
+    return{
+    type: ADD_LOCATION,
+    payload: LocationId
+    }
+  }
 
 
 

@@ -4,9 +4,24 @@ import axios from "axios"
 function PizzaChart ({google}) {
   const [chart, setChart] = useState(null);
   const [producers, setProducers]= useState([])
-  const [quotes, setQuotes]= useState([])
+  const [modify, setModify]= useState([])
   const [dato, setDato]= useState([])
+  const [quotes, setQuotes]= useState([])
+  
+  useEffect(()=>{
+    axios.get(`https://truewayagentbackend.com/quotes`)
+        .then(function(response){
+            setQuotes(response.data)
+            
+        
+            
+        })
+       
+        .catch(error=>{
+          console.log(error)  
+        })
 
+},[])
       useEffect(()=>{
           axios.get(`https://truewayagentbackend.com/getProducer`)
               .then(function(response){
@@ -20,18 +35,19 @@ function PizzaChart ({google}) {
       useEffect(()=>{
           axios.get(`https://truewayagentbackend.com/getStatus`)
               .then(function(response){
-                  setQuotes(response.data)
+                  setModify(response.data)
               })
               .catch(error=>{
                 console.log(error)  
               })
       
       },[])
+      
       useEffect(()=>{
         let pes = []
           producers.map((e, index)=>{
             
-            pes.push([e.name, quotes.filter(f=>f.User.name==e.name&&f.Status!=="quoted"&&f.Status!=="Cancelled").length, quotes.filter(f=>f.User.name==e.name&&f.Status!=="quoted"&&f.Status!=="Cancelled"&&f.Quote.PIPvalue!==0).length])
+            pes.push([e.name, modify.filter(f=>f.User.name==e.name&&f.Status=="Sold").length, modify.filter(f=>f.User.name==e.name&&f.Quote.NSDvalue!=="0"&&f.Status=="Sold").length])
           })
           setDato(pes)
       }, [quotes, producers])
@@ -41,11 +57,11 @@ function PizzaChart ({google}) {
       const data = new google.visualization.DataTable();
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Quotes', "color:#6F52ED");
-      data.addColumn('number', 'PIP',"color:#FF7A00");
+      data.addColumn('number', 'NSD',"color:#FF7A00");
       data.addRows(dato);
       
       // Set chart options
-      var options = {'title':'Quotes sold per month',
+      var options = {'title':'Quotes sold per seller',
                      
                      fontSize:12,
                      titleTextStyle: {
