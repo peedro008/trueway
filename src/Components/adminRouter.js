@@ -43,6 +43,8 @@ import DeletedReport from './deletedReport';
 import DeletedClients from './deletedClient';
 import DeletedQuote from './deletedQuotes';
 import DeletedPayments from './deletedPayments';
+import DeletedManagers from './deletedManager';
+import DeletedProducers from './deletedProducers';
  const AdminRouter=()=>{
 
     return (
@@ -83,6 +85,8 @@ import DeletedPayments from './deletedPayments';
           <Route exact path='/report/DeletedReport/clients' component={DeletedClients}/>
           <Route exact path='/report/DeletedReport/quotes' component={DeletedQuote}/>
           <Route exact path='/report/DeletedReport/payments' component={DeletedPayments}/>
+          <Route exact path='/report/DeletedReport/Managers' component={DeletedManagers}/>
+          <Route exact path='/report/DeletedReport/Producers' component={DeletedProducers}/>
          {/*  <Route exact path='/producer/info' component={ProducerInfo}/>
           <Route exact path='/balances' component={Balances}/>
           <Route exact path='/filter' component={AdminFilter}/>

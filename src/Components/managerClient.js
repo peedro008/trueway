@@ -21,6 +21,7 @@ const schema = yup.object({
     notes: yup.string().optional().default(""),
     dateOfBirth: yup.string().optional().default(""),
     address: yup.string().optional().default(""),
+    CompanyId: yup.number().required(),
 
 }).required();
   
@@ -31,7 +32,7 @@ const schema = yup.object({
 
 const ManagerClient=()=>{
  
-    
+    const [company, setCompany] = useState([])
     const [open, setOpen] = useState(false);
     const [neww, setNeww] = useState(false);
     const { register, handleSubmit,control,setValue, formState:{ errors } } = useForm({
@@ -78,7 +79,18 @@ const ManagerClient=()=>{
         });
         
     }
-   
+    useEffect(()=>{
+        axios.get(`https://truewayagentbackend.com/getCompany`)
+            .then(function(response){
+                setCompany(response.data)
+                
+            })
+            .catch(error=>{
+              console.log(error)  
+            })
+    
+    },[]) 
+    const options = company.map(e=>({value:e.id,label:e.name}))
     return( <div className="genericDiv">
         
         <div className="genericHeader">
@@ -128,6 +140,17 @@ const ManagerClient=()=>{
                     <input {...register("address")}   className="AQinput"></input>
                     <p className="FORMerror">{errors.address?.message}</p>
                 </div>
+                <div className="inputDiv" > 
+                    <p className="PAYtitle">Company</p>
+                    <Controller
+                        control={control}
+                        name="CompanyId"
+                        render={({ field: { onChange, onBlur, value, ref } }) => (
+                            <Select value={options.find(c => c.value === value)} onChange={val => onChange(val.value)} control={control} options={company.map(e=>({value:e.id,label:e.name}))} name={"CompanyId"} className="PAYselect"  placeholder="Select Company"/>
+                        )}
+                    />
+                 <p className="FORMerror">{errors.CompanyId?.message}</p>
+                </div>  
                 <div className="inputDiv"style={{marginRight:"52%"}}> 
                     <p className="PAYtitle">Date of Birth</p>
                     <input type={"date"} {...register("dateOfBirth")}  placeholder="Date of Birth" className="AQinput"></input>

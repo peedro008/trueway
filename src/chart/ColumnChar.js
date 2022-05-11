@@ -23,41 +23,28 @@ function PozzaChart ({google}) {
 },[])
 
 useEffect(()=>{
-    
-    let pes = []
-    quotes.map(e=>{
-      pes.push((e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status))
+  let Sold = 0
+  let Unsold = 0
+  quotes.map(e=>{
+    if(e.QuoteStatuses.some(f=>f.Status==="Sold")){
+        Sold++
+        
+      } 
     })
-    setAsd(pes)
+  Unsold = quotes.length-Sold
+    let pes = [["Unsold",Unsold],["Sold",Sold]]
+    let pas = []
+    pes.map(e=>{if(e[1]!==0)pas.push(e)})
+    
+  
+    setDato(pas)
 
-    
 },[quotes])
-useEffect(()=>{
-    let quoted = 0
-    let cancelled = 0
-    let sold = 0
-    let renew = 0
-    let reins = 0
-    asd.map(e=>{
-      e=="Cancelled"?
-      cancelled= cancelled+1
-      :e=="Quoted"?
-      quoted=quoted+1
-      :e=="Renew Down"?
-      renew=renew+1
-      :e=="Sold"?
-      sold=sold+1
-      :
-      reins=reins+1}
-      )
-      let pes = [["Quoted",quoted],["Cancelled",cancelled],["Sold",sold], ["Renew Down",renew],["Re-install",reins]]
-      let pas = []
-      pes.map(e=>{if(e[1]!==0)pas.push(e)})
-      
-    
-      setDato(pas)
-      console.log(dato)
-    },[asd])
+
+
+
+
+
 
   useEffect(() => {
   
@@ -96,7 +83,7 @@ useEffect(()=>{
   }, [ dato, chart]);
   return (
     <>
-      {!google && <p>sad</p>}
+      {!google && <p>Loading</p>}
       <div id="pozzaChart" className={!google ? 'd-none' : ''} />
     </>
   )

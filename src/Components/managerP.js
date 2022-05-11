@@ -18,7 +18,6 @@ const schema = yup.object({
     name: yup.string().required(),
     email: yup.string().required().email(),
     phone: yup.number().positive().integer().required(),
-    address: yup.string().required(),
     LocationId: yup.number().required(),
     Password: yup.string().required().min(6),
 
@@ -92,7 +91,7 @@ const ManagerP=()=>{
         
         
         <div className="managerInputsContainer">
-            <div className="managerInputsubContainer">
+            <div className="managerInputsubContainer" style={{ width: "50vw" }}>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Name</p>
                     <input {...register("name")} placeholder="Name" onChange={(e)=>{setinputs({...inputs, name:e.target.value})}} className="AQinput"></input>
@@ -113,15 +112,11 @@ const ManagerP=()=>{
                     <input {...register("phone")} placeholder="Phone" onChange={(e)=>{setinputs({...inputs, phone:e.target.value})}}  className="AQinput"></input>
                     <p className="FORMerror">{errors.phone?.message.substring(0,25)}</p>
                 </div>
-                <div className="inputDiv"> 
-                    <p className="PAYtitle">Address</p>
-                    <input {...register("address")} placeholder="Address" onChange={(e)=>{setinputs({...inputs, address:e.target.value})}}  className="AQinput"></input>
-                    <p className="FORMerror">{errors.address?.message}</p>
-                </div>
+              
                 
 
             </div>
-            <div className="managerInputsubContainer" style={{width:"33.7vw"}}>
+            <div className="managerInputsubContainer" style={{width:"32.7vw"}}>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Password</p>
                     <input type="password" {...register("Password")} placeholder="Password"   className="AQinput"></input>
@@ -160,7 +155,7 @@ const ManagerP=()=>{
         
         </div>
       </Modal>
-      <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"528px", opacity:"0.5"}}/>
+      <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"428px", opacity:"0.5"}}/>
       <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"5.5%",top:"2.5%", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
        </div>
     )

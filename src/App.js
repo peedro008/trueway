@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
@@ -15,8 +15,11 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript"></script>
+          <script
+            type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"
+          ></script>
+          <script type="text/javascript"></script>
           Learn React
         </a>
       </header>

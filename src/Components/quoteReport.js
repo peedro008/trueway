@@ -125,7 +125,8 @@ const QuoteReport=(props)=>{
             })
     
     },[]) 
-    axios.get(`https://truewayagentbackend.com/quotes`)
+    useEffect(()=>{
+        axios.get(`https://truewayagentbackend.com/quotes`)
             .then(function(response){
                 setQuotes(response.data)
                 
@@ -136,6 +137,8 @@ const QuoteReport=(props)=>{
             .catch(error=>{
               console.log(error)  
             })
+    },[])
+    
     useEffect(()=>{ 
         filterSubmit(filterValues)
     },[filterValues,quotes])
@@ -151,7 +154,7 @@ const QuoteReport=(props)=>{
        
         let temp = quotes
         if(e.dateFrom&&e.dateTo){
-            temp=temp.filter(h=>moment(`${h.date}`).isBetween(`${e.dateFrom}`,`${e.dateTo}`))
+            temp=temp.filter(h=>moment(`${h.date}`).isBetween(`${e.dateFrom}`,`${e.dateTo}`, undefined, '[]'))
         }
         if(e.ClientId){
             temp=temp.filter(h=>h.ClientId==e.ClientId)
@@ -367,9 +370,9 @@ const QuoteReport=(props)=>{
                    return (
                         <tr>
                             <td className="ClientName" scope="row"><div className="editIcon" onClick={()=>modify(e)}></div></td>
-                            {columns.clientName&&<td className="ClientName" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Client.name}</NavLink></td>}
-                            {columns.clientEmail&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Client.email}</NavLink></td>}
-                            {columns.clienTel&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Client.tel}</NavLink></td>}
+                            {columns.clientName&&<td className="ClientName" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/clientedit",aboutProps:e.Client}}>{e.Client.name}</NavLink></td>}
+                            {columns.clientEmail&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/clientedit",aboutProps:e.Client}}>{e.Client.email}</NavLink></td>}
+                            {columns.clienTel&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/clientedit",aboutProps:e.Client}}>{e.Client.tel}</NavLink></td>}
                             {columns.category&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Category.name}</NavLink></td>}
                             {columns.CompanyId&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.Company.name}</NavLink></td>}
                             {columns.ProducerId&&<td className="row1" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/quote",aboutProps:{ID:e.id}}}>{e.User.name}</NavLink></td>}

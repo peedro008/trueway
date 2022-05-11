@@ -73,10 +73,11 @@ function QuoteDetails(props) {
                         <p className="DETtitle">Quoted by</p>
                         <p className="DETtext">{quote[0].User.name}</p>
                     </div>
+                   {quote[0].QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].Status=="Sold" &&
                     <div className='DETsBox'>
                         <p className="DETtitle">Sold by</p>
                         <p className="DETtext">{quote[0].QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()[0].User.name}</p>
-                    </div>
+                    </div>}
                  </div>
                     
                     <div style={{marginTop:"25px", }}>
@@ -94,10 +95,17 @@ function QuoteDetails(props) {
                                 <p className="DETtitle">Modification date</p>
                                 <p className="DETtext">{e.date}</p>
                             </div>
-                            <div className='DETbBox'>
+                            <div className='DETbBox' >
                                 <p className="DETtitle">Notes</p>
                                 <p className="DETtext">{e.note}</p>
-                            </div>  </div>
+                            </div>  
+                            <div className='DETsBox'>
+                                <p className="DETtitle">Producer</p>
+                                <p className="DETtext">{e.User.name}</p>
+                            </div> 
+                            
+                            </div>
+                            
                             )
                         })
                            

@@ -45,7 +45,7 @@ const Manager=()=>{
         </div>
 
 
-        <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"528px", opacity:"0.5"}}/>
+        <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"428px", opacity:"0.5"}}/>
 
 
 

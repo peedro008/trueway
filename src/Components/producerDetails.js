@@ -17,14 +17,14 @@ const ProducerDetails = (props) => {
     const [mstat, setMstat] = useState([])
     const [yquotes, setYquotes] = useState([])
     const [ystat, setYstat] = useState([])
-    const [ypip, setYpip] = useState(0)
-    const [mpip, setMpip] = useState(0)
     const [dots1, setDots1] = useState(false)
     const [dots2, setDots2] = useState(false)
     const [dots3, setDots3] = useState(false)
     const [dots1V, setDots1V] = useState(0)
     const [dots2V, setDots2V] = useState(0)
-    const [dots3V, setDots3V] = useState(0)
+    const [dots3V, setDots3V] = useState(1)
+    const [NSD, setNSD] = useState(0);
+    const [yNSD, setYNSD] = useState(0);
  
     useEffect (()=>{
         axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${Producer.UserId}`)
@@ -67,7 +67,22 @@ const ProducerDetails = (props) => {
         setMquotes(mq.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
     }, [quotes, Producer, modify])
 
-
+    useEffect(() => {
+        let pes = 0
+        let pas = 0
+        mstat.map(e=>{
+            if(e.Status!=="Quoted"&&e.status!=="Cancelled"){
+                pes+=parseFloat(e.Quote.NSDvalue)
+            }
+        })
+        ystat.map(e=>{
+            if(e.Status!=="Quoted"&&e.status!=="Cancelled"){
+                pas+=parseFloat(e.Quote.NSDvalue)
+            }
+        })
+        setNSD(pes)
+        setYNSD(pas)
+    }, [quotes, Producer, modify,ystat, mstat])
 
     return(
         <div className="genericDiv">
@@ -129,11 +144,11 @@ const ProducerDetails = (props) => {
                     <div className="PRODrectB">
                     <div style={{display:"flex", flexDirection:"row"}}>
                         {dots3V==1?
-                         <p className="PRODrectQ">{(mstat.filter(f=>f.Quote.NSDvalue!=="0"&&f.Status=="Sold").length*5)}&nbsp;</p>
+                         <p className="PRODrectQ">$&nbsp;{NSD*0.125} </p>
                         :
-                        <p className="PRODrectQ">{(ystat.filter(f=>f.Quote.NSDvalue!=="0"&&f.Status=="Sold").length*5)}&nbsp;</p>
+                        <p className="PRODrectQ">$&nbsp;{yNSD*0.125} </p>
                         }
-                        <p className="PRODrectQ">&nbsp;Sold</p>
+                        
                         </div>
                         <div className="PRODrectP">
                             
@@ -141,7 +156,7 @@ const ProducerDetails = (props) => {
                         </div>
                     </div>
                 </div>
-                {dots3&& <div className="PRODdotsCont3"><p className="PRODdotT" onClick={()=>{setDots3V(0);setDots3(!dots3)}}>Per year</p><p className="PRODdotT"onClick={()=>{setDots3V(1);setDots3(!dots3)}}>Per month</p></div>}
+                {dots3&& <div className="PRODdotsCont3"><p className="PRODdotT" style={{color:dots3V==1?"black": "#979797"}} onClick={()=>{setDots3V(0);setDots3(!dots3)}}>this year</p><p className="PRODdotT" style={{color:dots3V==0?"black": "#979797"}} onClick={()=>{setDots3V(1);setDots3(!dots3)}}>this month</p></div>}
 
                 
 

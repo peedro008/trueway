@@ -5,16 +5,19 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import "./CSS/css.css";
 import { useSelector } from "react-redux";
-import { AiOutlineDelete } from "react-icons/ai";
+
+import {FiRefreshCcw} from "react-icons/fi"
 import Modal from "react-responsive-modal";
-const Producer = () => {
-  const [producers, setProducers] = useState([]);
+
+const DeletedManagers = () => {
+  const [managers, setManagers] = useState([]);
   const [quotes, setQuotes] = useState([]);
-  const [deleteConf, setDeleteConf] = useState("");
-  const [deletedOne, setDeletedOne] = useState(null);
   const [sold, setSold] = useState(0);
   const [unSold, setUnSold] = useState(0);
   const [modify, setModify] = useState([]);
+
+  const [deleteConf, setDeleteConf] = useState("");
+  const [deletedOne, setDeletedOne] = useState(null);
   const userRole = useSelector((state) => state.userRole);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -24,12 +27,12 @@ const Producer = () => {
     onOpenModal();
   };
   const handleDeleteModal = (e) => {
-    deleteProducer({ ProducerId: deletedOne });
+    deleteManager({ ManagerId: deletedOne });
     window.location.reload();
   };
-  const deleteProducer = (data) => {
+  const deleteManager = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/deleteProducer`, {
+    fetch(`https://truewayagentbackend.com/undeleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,9 +59,9 @@ const Producer = () => {
   };
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getProducer`)
+      .get(`https://truewayagentbackend.com/getDeletedManager`)
       .then(function (response) {
-        setProducers(response.data);
+        setManagers(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -88,7 +91,7 @@ const Producer = () => {
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
-        <p className="genericTitle">Producer</p>
+        <p className="genericTitle">Manager</p>
       </div>
 
       <div
@@ -98,7 +101,7 @@ const Producer = () => {
           paddingBottom: "8px",
         }}
       >
-        <p className="PRsubtitle">Producer list</p>
+        <p className="PRsubtitle">Manager list</p>
       </div>
 
       <div>
@@ -127,14 +130,14 @@ const Producer = () => {
                 <p className="tableTitle">Unsold quotes</p>
               </th>
               {userRole !== "Producer" && (
-              <th scope="col" className="column1">
-                <p style={{color:"#FFFF"}} className="REPtype">Delete Producer</p>
-              </th>
-            )}
+                <th scope="col" className="column1">
+                  <p style={{color: "#FFFFFF"}} className="REPtype">Reset</p>
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
-            {producers.map((e) => {
+            {managers.map((e) => {
               return (
                 <tr>
                   <td scope="row">
@@ -146,10 +149,7 @@ const Producer = () => {
                           color: "black",
                         }}
                         to={{
-                          pathname:
-                            e.User.UserRole == "Manager"
-                              ? "/users/Manager/details"
-                              : "/users/producers/details",
+                          pathname: "/users/manager/details",
                           aboutProps: e,
                         }}
                       >
@@ -163,7 +163,10 @@ const Producer = () => {
                   <td scope="row">
                     {
                       modify.filter(
-                        (f) => f.UserId == e.UserId && f.Status == "Sold"
+                        (f) =>
+                          f.UserId == e.UserId &&
+                          f.Status !== "Quoted" &&
+                          f.Status !== "Cancelled"
                       ).length
                     }
                   </td>
@@ -174,32 +177,35 @@ const Producer = () => {
                         .filter(
                           (g) =>
                             g.QuoteStatuses.sort(function (a, b) {
-                              return b.id - a.id;
-                            })[0].Status == "Quoted"
+                              return a.id - b.id;
+                            }).reverse()[0].Status == "Cancelled" ||
+                            g.QuoteStatuses.sort(function (a, b) {
+                              return a.id - b.id;
+                            }).reverse()[0].Status == "Quoted"
                         ).length
                     }
                   </td>
                   {userRole !== "Producer" && (
-                        <td className="ClientName" scope="row">
-                          <div
-                            style={{
-                              height: "auto",
-                              display: "flex",
-                              flexDirection: "row",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <AiOutlineDelete
-                              className="deleteIcon"
-                              size={"20px"}
-                              onClick={() => {
-                                handleDelete(e.id);
-                              }}
-                            />
-                          </div>
-                        </td>
-                      )}
+                    <td className="ClientName" scope="row">
+                      <div
+                        style={{
+                          height: "auto",
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <FiRefreshCcw
+                          className="deleteIcon"
+                          size={"20px"}
+                          onClick={() => {
+                            handleDelete(e.id);
+                          }}
+                        />
+                      </div>
+                    </td>
+                  )}
                 </tr>
               );
             })}
@@ -213,17 +219,7 @@ const Producer = () => {
           top: "76px",
           display: "flex",
         }}
-      >
-        <NavLink
-          to="/manager/managerP"
-          style={{ textDecoration: "none", color: "#000" }}
-        >
-          <button className="PAYbutton">
-            <MdAdd color="white" size={"20px"} className="PAYbuttonIcon" />
-            <p className="PAYbuttonText">New Producer</p>
-          </button>
-        </NavLink>
-      </div>
+      ></div>
       <BsChevronLeft
         color="grey"
         style={{
@@ -237,13 +233,13 @@ const Producer = () => {
         }}
         onClick={() => window.history.go(-1)}
       />
-       <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+      <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div
           className="modal"
           style={{ minWidth: "250px", alignItems: "center" }}
         >
-          <AiOutlineDelete
-            color="#FF4545"
+          <FiRefreshCcw
+            color="#14B8A6"
             size={"50px"}
             style={{
               alignSelf: "center",
@@ -251,7 +247,7 @@ const Producer = () => {
               marginBottom: "10px",
             }}
           />
-          <p className="modalText">Type "delete" to confirm </p>
+          <p className="modalText">Type "reset" to confirm </p>
           <input
             className="AQinput"
             onChange={(e) => setDeleteConf(e.target.value)}
@@ -259,7 +255,7 @@ const Producer = () => {
           />
 
           <button
-            disabled={deleteConf == "delete" ? false : true}
+            disabled={deleteConf == "reset" ? false : true}
             className="modalButton"
             onClick={handleDeleteModal}
           >
@@ -271,4 +267,4 @@ const Producer = () => {
   );
 };
 
-export default Producer;
+export default DeletedManagers;

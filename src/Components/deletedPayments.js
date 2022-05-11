@@ -10,7 +10,7 @@ import close from "../assets/close.svg"
 import { useSelector } from 'react-redux';
 import Modal from 'react-responsive-modal';
 import pdf from "../assets/pdf.svg"
-import {AiOutlineDelete} from "react-icons/ai"
+import {FiRefreshCcw} from "react-icons/fi"
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import MyDocument from "./PDF/prueba";
 
@@ -147,7 +147,7 @@ const DeletedPayments = () => {
      const filterSubmit = (e) => {
         let temp = payments
         if(e.dateFrom&&e.dateTo){
-            temp=temp.filter(h=>moment(`${h.date}`).isBetween(`${e.dateFrom}`,`${e.dateTo}`))
+            temp=temp.filter(h=>moment(`${h.date}`).isBetween(`${e.dateFrom}`,`${e.dateTo}`, undefined, '[]'))
         }
         if(e.ClientId){
             temp=temp.filter(h=>h.ClientId==e.ClientId)
@@ -293,7 +293,7 @@ const DeletedPayments = () => {
                             {userRole!=="Producer"&&
                                      <td className="ClientName" scope="row"  >
                                           <div style={{height:"auto",display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center" }}>
-                                            <AiOutlineDelete className='deleteIcon' size={"20px"} onClick={()=>{handleDelete(e.id)}}/>
+                                            <FiRefreshCcw className='deleteIcon' size={"20px"} onClick={()=>{handleDelete(e.id)}}/>
                                             </div>
                                         </td>
                                 }
@@ -438,7 +438,7 @@ const DeletedPayments = () => {
         <Modal open={open} onClose={onCloseModal} center classNames={"modal"} >
                     <div className="modal" style={{minWidth:"250px", alignItems:"center"}}>
                     
-                    <AiOutlineDelete color="#FF4545" size={"50px"} style={{alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
+                    <FiRefreshCcw color="#14B8A6" size={"50px"} style={{alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
                     <p className="modalText">Type "reset" to confirm </p>
                     <input className='AQinput' onChange={(e)=>setDeleteConf(e.target.value)} style={{marginTop:"12px"}}/>
                 

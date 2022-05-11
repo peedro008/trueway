@@ -1,17 +1,31 @@
+
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { BsChevronLeft } from 'react-icons/bs'
 import Modal from 'react-responsive-modal';
 import { NavLink } from 'react-router-dom';
 import Icon from "../assets/Icon.png"
-
+import Select from 'react-select'
 function ClientEdit(props) {
   let Client = props.location.aboutProps
-  const [inputs, setInputs]= useState({name:Client.name,email:Client.email, Tel:Client.Tel , ClientId: Client.id, new:Client.new, notes:Client.notes,address:Client.address,dateOfBirth:Client.dateOfBirth})
+  const [inputs, setInputs]= useState({name:Client.name,email:Client.email, Tel:Client.Tel , ClientId: Client.id, new:Client.new, notes:Client.notes,address:Client.address,dateOfBirth:Client.dateOfBirth,CompanyId:Client.CompanyId})
+  const [company, setCompany] = useState([])
   const [open, setOpen] = useState(false);
   const [neww, setNeww] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
- 
+ useEffect(()=>{
+        axios.get(`https://truewayagentbackend.com/getCompany`)
+            .then(function(response){
+                setCompany(response.data)
+                
+            })
+            .catch(error=>{
+              console.log(error)  
+            })
+    
+    },[]) 
+    
   const handleClick = () => {
     
     fetch(`https://truewayagentbackend.com/modifyClient`, {
@@ -46,6 +60,9 @@ onOpenModal()
       console.log(err);
   });
   }
+
+  const options = company.map(e=>({value:e.id,label:e.name}))
+  console.log(options)
   return (
     
     <div className='genericDiv'>
@@ -86,6 +103,10 @@ onOpenModal()
             <input placeholder={Client.address} value={inputs.address} onChange={(e)=>setInputs({...inputs, address:e.target.value})} className="PAYsub-title"></input>
         </div>
         <div className="inputDiv"> 
+            <p className="PAYtitle">Company	</p>
+        <Select defaultValue={options.find(c => c.value === inputs.CompanyId)} value={options.find(c => c.value === inputs.CompanyId)} onChange={e => setInputs({...inputs, CompanyId:e.value})} options={options} name={"CompanyId"} className="PAYselect"  placeholder="Select Company"/>
+        </div>
+        <div className="inputDiv"> 
             <p className="PAYtitle">Date of Birth</p>
             <input type={"date"} placeholder={Client.tel} value={inputs.dateOfBirth} onChange={(e)=>setInputs({...inputs, dateOfBirth:e.target.value})} className="PAYsub-title"></input>
         </div>
@@ -99,7 +120,7 @@ onOpenModal()
    
     </div>
     </div>      
-    <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>      
+    <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-2)}/>      
     <div style={{position:"absolute", right:"50px", top:"76px", display:"flex"}}>
             <button onClick={handleClick} className="PAYbutton" ><p className="PAYbuttonText">Submit</p></button>
         </div>

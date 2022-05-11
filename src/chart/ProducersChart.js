@@ -47,17 +47,19 @@ function PizzaChart ({google}) {
         let pes = []
           producers.map((e, index)=>{
             
-            pes.push([e.name, modify.filter(f=>f.User.name==e.name&&f.Status=="Sold").length, modify.filter(f=>f.User.name==e.name&&f.Quote.NSDvalue!=="0"&&f.Status=="Sold").length])
+            pes.push(
+              [e.name, modify.filter(f=>f.User.name==e.name&&f.Status=="Sold").length,
+               quotes.filter(f=>f.User.name==e.name&&f.QuoteStatuses.sort(function (a, b) {return  b.id - a.id;})[0].Status=="Quoted").length])
           })
           setDato(pes)
-      }, [quotes, producers])
+      }, [quotes, producers, modify])
   useEffect(() => {
     setTimeout(()=>{
     if (google && !chart) {
       const data = new google.visualization.DataTable();
       data.addColumn('string', 'Topping');
-      data.addColumn('number', 'Quotes', "color:#6F52ED");
-      data.addColumn('number', 'NSD',"color:#FF7A00");
+      data.addColumn('number', 'Sold', "color:#6F52ED");
+      data.addColumn('number', 'Unsold',"color:#FF7A00");
       data.addRows(dato);
       
       // Set chart options
@@ -74,7 +76,7 @@ function PizzaChart ({google}) {
                      "colors": ["#6F52ED","#FF7A00"],
                      backgroundColor:"#fafafa",
 
-                     bar: { groupWidth: "10%"},
+                     bar: { groupWidth: "20%"},
                      vAxis: {format:'0'},
                      hAxis: {format:'0'}
                     };
@@ -82,10 +84,10 @@ function PizzaChart ({google}) {
       // Instantiate and draw our chart, passing in some options.
       const newChart = new google.visualization.ColumnChart(document.getElementById('pizzaChart'));
       newChart.draw(data, options);
-      console.log(dato)
+   
       setChart(newChart);
     }},1000)
-  }, [ chart, dato, producers]);
+  }, [ dato, chart, ]);
   
   return (
     <>

@@ -28,10 +28,21 @@ const DeletedReport = () =>{
            
             
             </div>
+            <div className="managerContainer">
+            
+            <NavLink to={"/report/DeletedReport/managers"}  style={{ textDecoration: 'none', color:"#000" }}>
+                <button className="PAYbutton" style={{  width:"150px",  marginRight: "20px"}}><AiOutlineFile  color="white" size={"20px"} className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Managers</p></button>
+            </NavLink>
+            <NavLink to={"/report/DeletedReport/producers"}  style={{ textDecoration: 'none', color:"#000" }}>
+                <button className="PAYbutton" style={{    width:"150px", marginRight: "20px"}}><CgImport color="white" size={"20px"}  className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Producers</p></button>
+            </NavLink>
+            
            
+            
+            </div>
     
 
-            <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"528px", opacity:"0.5"}}/>
+            <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"428px", opacity:"0.5"}}/>
 
         </div>
         

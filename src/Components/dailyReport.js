@@ -53,10 +53,22 @@ function DailyReport() {
         let paz = payments
         paz.map(e=>{
             e.method=="Cash"?
-            CA+=parseFloat(e.amount):
+            CA+=parseFloat(e.amount) +
+            parseFloat(e.PIPvalue) +
+            parseFloat(e.NSDvalue) +
+            parseFloat(e.MVRvalue) +
+            parseFloat(e.creditCardFee):
             e.method=="EFT"?
-            EF+=parseFloat(e.amount):
-            CR+=parseFloat(e.amount)
+            EF+=parseFloat(e.amount) +
+            parseFloat(e.PIPvalue) +
+            parseFloat(e.NSDvalue) +
+            parseFloat(e.MVRvalue) +
+            parseFloat(e.creditCardFee):
+            CR+=parseFloat(e.amount) +
+            parseFloat(e.PIPvalue) +
+            parseFloat(e.NSDvalue) +
+            parseFloat(e.MVRvalue) +
+            parseFloat(e.creditCardFee)
         })
         setCash(CA)
         setCredit(CR)
@@ -123,31 +135,100 @@ function DailyReport() {
       
         <tbody>
             <tr>
-                <th scope="col" className="column1"><p   className="REPtype">Client name</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">User name</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Location</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Type</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Date</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Amount</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Method</p></th>
-                <th scope="col" className="column1"><p className="REPtype">Fee</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Total</p></th>
+            <th scope="col" className="column1">
+              <p className="REPtype">Client name</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">User name</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">Location</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">Type</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">Date</p>
+            </th>
+            {
+              <th scope="col" className="column1">
+                <p className="REPtype">Time</p>
+              </th>
+            }
+            <th scope="col" className="column1">
+              <p className="REPtype">Amount</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">Method</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">Fee</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">PIP</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">NSD</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">MVR</p>
+            </th>
+            <th scope="col" className="column1">
+              <p className="REPtype">Total</p>
+            </th>
             </tr>
             {
                 !search?
-               payments.reverse().map((e)=>{
+               payments.sort(function (a, b) {
+                return b.id - a.id;
+              }).map((e)=>{
                    
                    return (
                         <tr>
-                            <td className="ClientName" scope="row">{e.Client.name}</td>
-                            <td className="ClientName" scope="row">{e.User.name}</td>           
-                            <td className="ClientName" scope="row">{e.Location.name}</td>  
-                            <td className="ClientName" scope="row">{e.type}</td>  
-                            <td className="ClientName" scope="row">{e.date}</td>
-                            <td className="ClientName" scope="row">{e.amount}</td>  
-                            <td className="ClientName" scope="row">{e.method}</td> 
-                            <td className="ClientName" scope="row">{e.creditCardFee}</td>           
-                            <td className="ClientName" scope="row">{parseFloat(e.amount)+parseFloat(e.creditCardFee)}</td>     
+                             <td className="ClientName" scope="row">
+                    {e.Client.name}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    {e.User.name}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    {e.Location.name}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    {e.type}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    {e.date}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    {e.time.substring(11, 16)}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    ${e.amount}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    {e.method}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    ${e.creditCardFee}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    ${e.PIPvalue}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    ${e.NSDvalue}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    ${e.MVRvalue}
+                  </td>
+                  <td className="ClientName" scope="row">
+                    $
+                    {parseFloat(e.amount) +
+                      parseFloat(e.PIPvalue) +
+                      parseFloat(e.NSDvalue) +
+                      parseFloat(e.MVRvalue) +
+                      parseFloat(e.creditCardFee)}
+                  </td>    
                         
                         </tr>
                      
@@ -163,17 +244,52 @@ function DailyReport() {
                 (payments.filter(e=>(e.Client.name.toLowerCase()).includes(search.toLowerCase()))).map((e)=>{
                     return (
                         <tr>
-                            <td className="ClientName" scope="row">{e.Client.name}</td>
-                            <td className="ClientName" scope="row">{e.User.name}</td>           
-                            <td className="ClientName" scope="row">{e.Location.name}</td>  
-                            <td className="ClientName" scope="row">{e.type}</td>  
-                            <td className="ClientName" scope="row">{e.date}</td>
-                            <td className="ClientName" scope="row">{e.amount}</td>  
-                            <td className="ClientName" scope="row">{e.method}</td> 
-                            <td className="ClientName" scope="row">{e.creditCardFee}</td>           
-                            <td className="ClientName" scope="row">{e.amount+e.creditCardFee}</td>     
-                        
-                        </tr>
+                        <td className="ClientName" scope="row">
+               {e.Client.name}
+             </td>
+             <td className="ClientName" scope="row">
+               {e.User.name}
+             </td>
+             <td className="ClientName" scope="row">
+               {e.Location.name}
+             </td>
+             <td className="ClientName" scope="row">
+               {e.type}
+             </td>
+             <td className="ClientName" scope="row">
+               {e.date}
+             </td>
+             <td className="ClientName" scope="row">
+               {e.time.substring(11, 16)}
+             </td>
+             <td className="ClientName" scope="row">
+               ${e.amount}
+             </td>
+             <td className="ClientName" scope="row">
+               {e.method}
+             </td>
+             <td className="ClientName" scope="row">
+               ${e.creditCardFee}
+             </td>
+             <td className="ClientName" scope="row">
+               ${e.PIPvalue}
+             </td>
+             <td className="ClientName" scope="row">
+               ${e.NSDvalue}
+             </td>
+             <td className="ClientName" scope="row">
+               ${e.MVRvalue}
+             </td>
+             <td className="ClientName" scope="row">
+               $
+               {parseFloat(e.amount) +
+                 parseFloat(e.PIPvalue) +
+                 parseFloat(e.NSDvalue) +
+                 parseFloat(e.MVRvalue) +
+                 parseFloat(e.creditCardFee)}
+             </td>    
+                   
+                   </tr>
                      
                      
                      

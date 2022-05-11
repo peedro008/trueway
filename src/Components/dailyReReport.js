@@ -66,7 +66,7 @@ const DailyReReport = () => {
         let temp = payments
         console.log(temp)
         if(e.dateFrom&&e.dateTo){
-            temp=temp.filter(h=>moment(`${h.date}`).isBetween(`${e.dateFrom}`,`${e.dateTo}`))
+            temp=temp.filter(h=>moment(`${h.date}`).isBetween(`${e.dateFrom}`,`${e.dateTo}`, undefined, '[]'))
         }
        
         if(e.LocationId){

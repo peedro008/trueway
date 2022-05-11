@@ -6,7 +6,7 @@ import {AiOutlineDelete} from "react-icons/ai"
 import SearchField from "react-search-field";
 import { useSelector } from 'react-redux';
 import Modal from 'react-responsive-modal';
-
+import {FiRefreshCcw} from "react-icons/fi"
 function DeletedClients() {
     const [clients, setClients] = useState([])
     const [deleteConf, setDeleteConf] = useState("")
@@ -136,7 +136,7 @@ function DeletedClients() {
                                 {userRole!=="Producer"&&
                                      <td className="ClientName" scope="row"  >
                                           <div style={{height:"auto",display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center" }}>
-                                            <AiOutlineDelete className='deleteIcon' size={"20px"} onClick={()=>{handleDelete(e.id)}}/>
+                                            <FiRefreshCcw className='deleteIcon' size={"20px"} onClick={()=>{handleDelete(e.id)}}/>
                                             </div>
                                         </td>
                                 }
@@ -198,7 +198,7 @@ function DeletedClients() {
                                 {userRole!=="Producer"&&
                                      <td className="ClientName" scope="row"  >
                                           <div style={{height:"auto",display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center" }}>
-                                            <AiOutlineDelete className='deleteIcon' size={"20px"} onClick={()=>{handleDelete(e.id)}}/>
+                                            <FiRefreshCcw className='deleteIcon' size={"20px"} onClick={()=>{handleDelete(e.id)}}/>
                                             </div>
                                         </td>
                                 }
@@ -222,7 +222,7 @@ function DeletedClients() {
             <Modal open={open} onClose={onCloseModal} center classNames={"modal"} >
                     <div className="modal" style={{minWidth:"250px", alignItems:"center"}}>
                     
-                    <AiOutlineDelete color="#FF4545" size={"50px"} style={{alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
+                    <FiRefreshCcw color="#14B8A6" size={"50px"} style={{alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
                     <p className="modalText">Type "reset" to confirm </p>
                     <input className='AQinput' onChange={(e)=>setDeleteConf(e.target.value)} style={{marginTop:"12px"}}/>
                 

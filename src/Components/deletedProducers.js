@@ -5,10 +5,12 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import "./CSS/css.css";
 import { useSelector } from "react-redux";
-import { AiOutlineDelete } from "react-icons/ai";
+
+import {FiRefreshCcw} from "react-icons/fi"
 import Modal from "react-responsive-modal";
-const Producer = () => {
+const DeletedProducers = () => {
   const [producers, setProducers] = useState([]);
+ 
   const [quotes, setQuotes] = useState([]);
   const [deleteConf, setDeleteConf] = useState("");
   const [deletedOne, setDeletedOne] = useState(null);
@@ -29,7 +31,7 @@ const Producer = () => {
   };
   const deleteProducer = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/deleteProducer`, {
+    fetch(`https://truewayagentbackend.com/undeleteProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +58,7 @@ const Producer = () => {
   };
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getProducer`)
+      .get(`https://truewayagentbackend.com/getDeletedProducer`)
       .then(function (response) {
         setProducers(response.data);
       })
@@ -128,7 +130,7 @@ const Producer = () => {
               </th>
               {userRole !== "Producer" && (
               <th scope="col" className="column1">
-                <p style={{color:"#FFFF"}} className="REPtype">Delete Producer</p>
+                <p style={{color:"#FFFF"}} className="REPtype">Reset Producer</p>
               </th>
             )}
             </tr>
@@ -138,24 +140,11 @@ const Producer = () => {
               return (
                 <tr>
                   <td scope="row">
-                    {
-                      <NavLink
-                        style={{
-                          textDecoration: "none",
-                          color: "#000",
-                          color: "black",
-                        }}
-                        to={{
-                          pathname:
-                            e.User.UserRole == "Manager"
-                              ? "/users/Manager/details"
-                              : "/users/producers/details",
-                          aboutProps: e,
-                        }}
-                      >
+                    
+                      
                         {e.name}
-                      </NavLink>
-                    }
+                     
+                    
                   </td>
 
                   <td scope="row">{e.email}</td>
@@ -190,13 +179,13 @@ const Producer = () => {
                               justifyContent: "center",
                             }}
                           >
-                            <AiOutlineDelete
-                              className="deleteIcon"
-                              size={"20px"}
-                              onClick={() => {
-                                handleDelete(e.id);
-                              }}
-                            />
+                            <FiRefreshCcw
+                          className="deleteIcon"
+                          size={"20px"}
+                          onClick={() => {
+                            handleDelete(e.id);
+                          }}
+                        />
                           </div>
                         </td>
                       )}
@@ -237,13 +226,13 @@ const Producer = () => {
         }}
         onClick={() => window.history.go(-1)}
       />
-       <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
+     <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div
           className="modal"
           style={{ minWidth: "250px", alignItems: "center" }}
         >
-          <AiOutlineDelete
-            color="#FF4545"
+          <FiRefreshCcw
+            color="#14B8A6"
             size={"50px"}
             style={{
               alignSelf: "center",
@@ -251,7 +240,7 @@ const Producer = () => {
               marginBottom: "10px",
             }}
           />
-          <p className="modalText">Type "delete" to confirm </p>
+          <p className="modalText">Type "reset" to confirm </p>
           <input
             className="AQinput"
             onChange={(e) => setDeleteConf(e.target.value)}
@@ -259,7 +248,7 @@ const Producer = () => {
           />
 
           <button
-            disabled={deleteConf == "delete" ? false : true}
+            disabled={deleteConf == "reset" ? false : true}
             className="modalButton"
             onClick={handleDeleteModal}
           >
@@ -271,4 +260,4 @@ const Producer = () => {
   );
 };
 
-export default Producer;
+export default DeletedProducers;
