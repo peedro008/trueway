@@ -64,7 +64,7 @@ function ProducerNav({onSearch}) {
         </Link>
         </div>
         <div className="NAcontainer">
-        <Link className="icons" to='/profile'>
+        <Link className="icons" to='/profile' >
          <FiUser className="NAicon" size="20px"  color="#969CBA"/>
        </Link></div>
        <span/>

@@ -21,7 +21,7 @@ const schema = yup
     name: yup.string().optional().min(6),
     email: yup.string().email().optional().min(6),
     phone: yup.number().optional(),
-    ClientId: yup.number().optional().default(10000),
+    ClientId: yup.number().optional().nullable(true),
     amount: yup.string().required(),
     type: yup.string().required(),
     method: yup.string().required(),
@@ -30,8 +30,10 @@ const schema = yup
     UserId: yup.number().required(),
     new: yup.bool().optional(),
     PIPvalue: yup.string().optional().default("0"),
-    NSDvalue: yup.string().optional().default("0"),
+    NSDamount: yup.string().optional().default("0"),
     MVRvalue: yup.string().optional().default("0"),
+    QuoteId: yup.number().optional().nullable(true),
+    CategoryId: yup.number().optional().nullable(true),
   })
   .required();
 const date = new Date();
@@ -45,7 +47,6 @@ function Payment(props) {
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const [method, setMethod] = useState("");
-  const [ERR, setERR] = useState({ ClientId: false });
   const [payment, setPayment] = useState({ creditCardFee: 0 });
   const [locations, setLocations] = useState([]);
   const userId = useSelector((state) => state.UserId);
@@ -54,6 +55,8 @@ function Payment(props) {
   const [newClient, setNewClient] = useState(false);
   const [form, setForm] = useState({ res: "res" });
   const [inputs, setInputs] = useState({});
+  const [quotes, setQuotes] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const {
     register,
@@ -64,7 +67,7 @@ function Payment(props) {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  
+
   const customStyles = {
     control: (base) => ({
       ...base,
@@ -90,17 +93,14 @@ function Payment(props) {
   const reload = () => {
     window.location.reload();
   };
-useEffect(()=>{
-  setValue("UserId", `${userId}`);
-},[userId])
-
+  useEffect(() => {
+    setValue("UserId", `${userId}`);
+  }, [userId]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clients`)
+      .get(`http://localhost:8080/getCategories`)
       .then(function (response) {
-        setClients(response.data);
-        
-        setValue("ClientId", `${ClientSelected}`);
+        setCategories(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -108,7 +108,37 @@ useEffect(()=>{
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getLocations`)
+      .get(`http://localhost:8080/clients`)
+      .then(function (response) {
+        setClients(response.data);
+
+        setValue("ClientId", `${ClientSelected}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    form.client&&
+    axios
+      .get(`http://localhost:8080/clientQuotes?client=${form.id}`)
+      .then(function (response) {
+        setQuotes(response.data);
+
+      
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [form]);
+
+
+
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/getLocations`)
       .then(function (response) {
         setLocations(response.data);
       })
@@ -120,13 +150,17 @@ useEffect(()=>{
     setPayment({ ...payment, UserId: userId });
   }, [userId]);
 
-  const temp = ()=>{
-    setNewClient(true)
-     setValue("ClientId", 1)
-  }
-
+  const temp = () => {
+    setNewClient(true);
+    setValue("ClientId", null);
+    setValue("QuoteId", null);
+  };
+useEffect(()=>{
+  
+  setValue("CategoryId", form.Category)
+},[form])
   const handleNewClient = () => {
-    !newClient ? temp(): reload();
+    !newClient ? temp() : reload();
   };
   const optionM = [
     { value: "credit/debit", label: "credit/debit" },
@@ -140,23 +174,20 @@ useEffect(()=>{
     { value: "Renew Down", label: "Renew Down" },
   ];
 
-  const onSubmit = (data) => {
-   
 
+  const onSubmit = (data) => {
     if (newClient == false) {
-       fetch(`https://truewayagentbackend.com/addPayment`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          })
-            .then((response) => response.json())
-            .then((data) => dispatch(addPay(data), onOpenModal()))
-        
+      fetch(`http://localhost:8080/addPayment`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => dispatch(addPay(data), onOpenModal()));
     } else {
-      
-      fetch(`https://truewayagentbackend.com/addClientPayment`, {
+      fetch(`http://localhost:8080/addClientPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -166,9 +197,12 @@ useEffect(()=>{
       onOpenModal();
     }
   };
+  const optionsCa = categories.map((e) => ({ value: e.id, label: e.name }));
   const optionsC = clients.map((e) => ({ value: e.id, label: e.name }));
   const optionsL = locations.map((e) => ({ value: e.id, label: e.name }));
-
+  const optionsQ = quotes.map((e) => ({ value: e.id, label: `${e.id}  |  ${e.Category.name}  |  ${e.date}`, Category:e.Category.id}));
+  console.log(optionsCa)
+  console.log(optionsQ)
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -200,7 +234,7 @@ useEffect(()=>{
                       value={optionsC.find((c) => c.value === ClientSelected)}
                       onChange={(val) => {
                         onChange(val.value);
-                        setForm({ ...form, client: val.label });
+                        setForm({ ...form, client: val.label, id:val.value });
                       }}
                       control={control}
                       options={clients.map((e) => ({
@@ -212,9 +246,8 @@ useEffect(()=>{
                     />
                   )}
                 />
-                {ERR.ClientId && (
-                  <p className="FORMerror">"Client is a required field"</p>
-                )}
+            
+                
               </>
             ) : (
               <>
@@ -223,7 +256,7 @@ useEffect(()=>{
               </>
             )}
           </div>
-          {newClient && (
+          {newClient ? (
             <div className="PAYBox" style={{ paddingTop: "25px" }}>
               <div className="PAYInputCont">
                 <p className="PAYtitle">Email</p>
@@ -254,9 +287,39 @@ useEffect(()=>{
               </div>
 
               {newClient && (
+                <>
+                <div
+                className="AQinputContainer"
+                
+              >
+                <p className="AQinputName">Category</p>
+                <div className="AQyesNoContainer">
+                  <div>
+                  <Controller
+              control={control}
+              name="CategoryId"
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <Select
+                  value={optionsCa.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val.value)}
+                  control={control}
+                  options={categories.map((e) => ({
+                    value: e.id,
+                    label: e.name,
+                  }))}
+                  name={"CategoryId"}
+                  className="PAYselect"
+                  placeholder="Select Category"
+                />
+                  )}
+                />
+                    </div></div></div>
+                
+                
+                
                 <div
                   className="AQinputContainer"
-                  style={{ marginLeft: "10px" }}
+                  style={{ marginLeft: "50px" }}
                 >
                   <p className="AQinputName">New client</p>
                   <div className="AQyesNoContainer">
@@ -277,9 +340,31 @@ useEffect(()=>{
                     </div>
                   </div>
                 </div>
-              )}
+                </> )}
             </div>
-          )}
+          ):
+          <div className="PAYInputCont" style={{ marginTop: "25px" }}>
+            <p className="PAYtitle">Quote</p>
+            <Controller
+              control={control}
+              name="QuoteId"
+             
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <Select
+                isDisabled={form.client?false:true}
+                  value={optionsQ.find((c) => c.value === value)}
+                  onChange={(val) => {onChange(val.value); setForm({...form, aa:val.value, Category: val.Category})}}
+                  control={control}
+                  options={optionsQ}
+                  name={"QuoteId"}
+                  className="PAYselectQ"
+                  placeholder="Select Quote"
+                />
+              )}
+            />
+
+            <p className="FORMerror">{errors.LocationId?.message}</p>
+          </div>}
         </div>
 
         <div className="PAYBox" style={{ marginTop: "25px" }}>
@@ -305,8 +390,6 @@ useEffect(()=>{
             />
 
             <p className="FORMerror">{errors.LocationId?.message}</p>
-
-          
           </div>
 
           <div className="PAYInputCont">
@@ -408,13 +491,13 @@ useEffect(()=>{
                   <input
                     className="AQinput2"
                     placeholder="How much?"
-                    key="NSDvalue"
-                    name="NSDvalue"
+                    key="NSDamount"
+                    name="NSDamount"
                     defaultValue={0}
-                    value={inputs.NSDvalue}
-                    {...register("NSDvalue")}
+                    value={inputs.NSDamount}
+                    {...register("NSDamount")}
                   />
-                  <p className="FORMerror">{errors.NSDvalue?.message}</p>
+                  <p className="FORMerror">{errors.NSDamount?.message}</p>
                   <p className="FORMerror">{errors.ClientId?.message}</p>
                 </>
               )}
@@ -452,7 +535,7 @@ useEffect(()=>{
                     value={inputs.MVRvalue}
                     {...register("MVRvalue")}
                   />
-                  <p className="FORMerror">{errors.NSDvalue?.message}</p>{" "}
+                  <p className="FORMerror">{errors.NSDamount?.message}</p>{" "}
                 </>
               )}
             </div>
@@ -489,7 +572,7 @@ useEffect(()=>{
                     name="dealerSalePerson"
                     {...register("PIPvalue")}
                   />
-                  <p className="FORMerror">{errors.NSDvalue?.message}</p>
+                  <p className="FORMerror">{errors.NSDamount?.message}</p>
                 </>
               )}
             </div>
@@ -518,10 +601,13 @@ useEffect(()=>{
                   <MyDocument
                     data={{
                       client: form.client,
-                      total: control._formValues.creditCardFee
-                        ? control._formValues.amount +
-                          control._formValues.creditCardFee
-                        : control._formValues.amount,
+                      total:
+                        parseFloat(control._formValues.creditCardFee) +
+                        parseFloat(control._formValues.amount) +
+                        parseFloat(control._formValues.NSDamount) +
+                        parseFloat(control._formValues.PIPvalue) +
+                        parseFloat(control._formValues.MVRvalue),
+
                       producer: userName,
                       date: DATE,
                     }}

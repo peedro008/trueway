@@ -41,7 +41,7 @@ const ProducerDash = ()=>{
      const [payments, setPayments] = useState([]) 
   
      useEffect (()=>{
-        axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
+        axios.get(`http://localhost:8080/producerQuotes?UserId=${userId}`)
         .then(function(response){
             setPquotes(response.data)
            
@@ -53,7 +53,7 @@ const ProducerDash = ()=>{
         })
     },[userId])
      useEffect(()=>{
-         axios.get(`https://truewayagentbackend.com/getUserPayment?UserId=${userId}`)
+         axios.get(`http://localhost:8080/getUserPayment?UserId=${userId}`)
              .then(function(response){
                  setPayments(response.data)
                  
@@ -67,7 +67,7 @@ const ProducerDash = ()=>{
      
      },[userId])
      useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getStatus`)
+        axios.get(`http://localhost:8080/getStatus`)
             .then(function(response){
                 setModify(response.data)
             
@@ -78,7 +78,7 @@ const ProducerDash = ()=>{
     
     },[])
         useEffect(()=>{
-            axios.get(`https://truewayagentbackend.com/getProducer`)
+            axios.get(`http://localhost:8080/getProducer`)
                 .then(function(response){
                     setProducers(response.data)
                 })
@@ -89,7 +89,7 @@ const ProducerDash = ()=>{
         },[])
      
         useEffect(()=>{
-            axios.get(`https://truewayagentbackend.com/quotes`)
+            axios.get(`http://localhost:8080/quotes`)
                 .then(function(response){
                    
                     setQuotes2(response.data)

@@ -42,8 +42,11 @@ const Manager=()=>{
              <NavLink to={"./manager/managerClient"}  style={{ textDecoration: 'none', color:"#000" }}>
                 <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd  color="white" size={"20px"} className="PAYbuttonIcon"/> <p className="PAYbuttonText"> Add Client</p></button>
             </NavLink>
+            <NavLink to={"./manager/managerDealer"}  style={{ textDecoration: 'none', color:"#000" }}>
+                <button className="PAYbutton" style={{    marginRight: "20px"}}><MdAdd color="white" size={"20px"}   className="PAYbuttonIcon"/> <p className="PAYbuttonText">Add Dealer</p></button>
+            </NavLink>
         </div>
-
+        
 
         <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"428px", opacity:"0.5"}}/>
 

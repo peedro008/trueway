@@ -6,16 +6,18 @@ import Modal from 'react-responsive-modal';
 import { NavLink } from 'react-router-dom';
 import Icon from "../assets/Icon.png"
 import Select from 'react-select'
+import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 function ClientEdit(props) {
   let Client = props.location.aboutProps
   const [inputs, setInputs]= useState({name:Client.name,email:Client.email, Tel:Client.Tel , ClientId: Client.id, new:Client.new, notes:Client.notes,address:Client.address,dateOfBirth:Client.dateOfBirth,CompanyId:Client.CompanyId})
   const [company, setCompany] = useState([])
   const [open, setOpen] = useState(false);
   const [neww, setNeww] = useState(false);
+  const [address, setAddress] = useState("")
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
  useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCompany`)
+        axios.get(`http://localhost:8080/getCompany`)
             .then(function(response){
                 setCompany(response.data)
                 
@@ -28,7 +30,7 @@ function ClientEdit(props) {
     
   const handleClick = () => {
     
-    fetch(`https://truewayagentbackend.com/modifyClient`, {
+    fetch(`http://localhost:8080/modifyClient`, {
             
       method: 'POST',
       headers: {
@@ -98,10 +100,7 @@ onOpenModal()
 
     </div>
     <div className="managerInputsubContainer" style={{width:"36%"}}>
-    <div className="inputDiv"> 
-            <p className="PAYtitle">Address</p>
-            <input placeholder={Client.address} value={inputs.address} onChange={(e)=>setInputs({...inputs, address:e.target.value})} className="PAYsub-title"></input>
-        </div>
+    
         <div className="inputDiv"> 
             <p className="PAYtitle">Company	</p>
         <Select defaultValue={options.find(c => c.value === inputs.CompanyId)} value={options.find(c => c.value === inputs.CompanyId)} onChange={e => setInputs({...inputs, CompanyId:e.value})} options={options} name={"CompanyId"} className="PAYselect"  placeholder="Select Company"/>
@@ -110,7 +109,20 @@ onOpenModal()
             <p className="PAYtitle">Date of Birth</p>
             <input type={"date"} placeholder={Client.tel} value={inputs.dateOfBirth} onChange={(e)=>setInputs({...inputs, dateOfBirth:e.target.value})} className="PAYsub-title"></input>
         </div>
-   
+        <div className="inputDiv"> 
+            <p className="PAYtitle">Address</p>
+            <div class="autocomplete-container" id="autocomplete-container">
+  <GeoapifyContext apiKey="fae2fbe3125e4b1d870dd3ab7c96f6b3">
+ <GeoapifyGeocoderAutocomplete
+        placeSelect={(value)=>{setInputs({...inputs, address:value.properties.formatted})}}
+        suggestionsChange={(value)=>{console.log(value)}}
+        
+        
+      />
+     
+
+    </GeoapifyContext></div>
+        </div>
     </div>
     <div className="managerInputsubContainer">
             <div className="MOBinputDiv">

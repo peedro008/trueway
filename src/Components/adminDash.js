@@ -41,7 +41,7 @@ const AdminDash = () => {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getProducer`)
+      .get(`http://localhost:8080/getProducer`)
       .then(function (response) {
         setProducers(response.data);
       })
@@ -51,7 +51,7 @@ const AdminDash = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getStatus`)
+      .get(`http://localhost:8080/getStatus`)
       .then(function (response) {
         let paz = response.data;
         paz
@@ -67,7 +67,7 @@ const AdminDash = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/quotes`)
+      .get(`http://localhost:8080/quotes`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -77,7 +77,7 @@ const AdminDash = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getpayments`)
+      .get(`http://localhost:8080/getpayments`)
       .then(function (response) {
         setPayments(response.data);
       })
@@ -87,7 +87,7 @@ const AdminDash = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getStatus`)
+      .get(`http://localhost:8080/getStatus`)
       .then(function (response) {
         setModify(response.data);
       })

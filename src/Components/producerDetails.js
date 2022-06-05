@@ -11,11 +11,14 @@ import ProducerPie from "../chart/ProducerPie";
 const ProducerDetails = (props) => {
     let Producer = props.location.aboutProps
     const [quotes, setQuotes] = useState([])
+    const [payments, setPayments] = useState([])
     const google = useGoogleCharts();
     const [mquotes, setMquotes] = useState([])
     const [modify, setModify]= useState([])
     const [mstat, setMstat] = useState([])
     const [yquotes, setYquotes] = useState([])
+    const [mpay, setMpay] = useState([])
+    const [ypay, setYpay] = useState([])
     const [ystat, setYstat] = useState([])
     const [dots1, setDots1] = useState(false)
     const [dots2, setDots2] = useState(false)
@@ -27,7 +30,7 @@ const ProducerDetails = (props) => {
     const [yNSD, setYNSD] = useState(0);
  
     useEffect (()=>{
-        axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${Producer.UserId}`)
+        axios.get(`http://localhost:8080/producerQuotes?UserId=${Producer.UserId}`)
         .then(function(response){
             setQuotes(response.data)
            
@@ -38,8 +41,20 @@ const ProducerDetails = (props) => {
           console.log(error)  
         })
     },[Producer])
+    useEffect (()=>{
+        axios.get(`http://localhost:8080/getUserPayment?UserId=${Producer.UserId}`)
+        .then(function(response){
+            setPayments(response.data)
+           
+            
+            
+        })
+        .catch(error=>{
+          console.log(error)  
+        })
+    },[Producer])
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getStatus`)
+        axios.get(`http://localhost:8080/getStatus`)
             .then(function(response){
                 let paz = response.data
 
@@ -65,19 +80,34 @@ const ProducerDetails = (props) => {
         let mq = quotes
         setYquotes(yq.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
         setMquotes(mq.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
-    }, [quotes, Producer, modify])
+
+
+        let yp = payments
+        let mp = payments
+        setYpay(yp.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
+        setMpay(mp.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
+    }, [quotes, Producer, modify, payments])
 
     useEffect(() => {
         let pes = 0
         let pas = 0
-        mstat.map(e=>{
-            if(e.Status!=="Quoted"&&e.status!=="Cancelled"){
-                pes+=parseFloat(e.Quote.NSDvalue)
+        console.log(ypay)
+        mpay.map(e=>{
+            if(e.Quote && e.Category.name=="HOMEOWNERS"){
+                pes+=10
+            }
+            if(e.NSDvalue!==""){
+                
+                pes+=5*e.NSDamount
             }
         })
-        ystat.map(e=>{
-            if(e.Status!=="Quoted"&&e.status!=="Cancelled"){
-                pas+=parseFloat(e.Quote.NSDvalue)
+        ypay.map(e=>{
+            if(e.Quote && e.Category.name=="HOMEOWNERS"){
+                pas+=10
+            }
+            if(e.NSDvalue!==""){
+                
+                pas+=5*e.NSDamount
             }
         })
         setNSD(pes)
@@ -144,9 +174,9 @@ const ProducerDetails = (props) => {
                     <div className="PRODrectB">
                     <div style={{display:"flex", flexDirection:"row"}}>
                         {dots3V==1?
-                         <p className="PRODrectQ">$&nbsp;{NSD*0.125} </p>
+                         <p className="PRODrectQ">$&nbsp;{NSD?NSD:0} </p>
                         :
-                        <p className="PRODrectQ">$&nbsp;{yNSD*0.125} </p>
+                        <p className="PRODrectQ">$&nbsp;{yNSD} </p>
                         }
                         
                         </div>

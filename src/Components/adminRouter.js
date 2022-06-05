@@ -45,6 +45,9 @@ import DeletedQuote from './deletedQuotes';
 import DeletedPayments from './deletedPayments';
 import DeletedManagers from './deletedManager';
 import DeletedProducers from './deletedProducers';
+import ManagerDealer from './managerDealer';
+import Deposits from './deposits';
+import DealerReport from './dealersReport';
  const AdminRouter=()=>{
 
     return (
@@ -61,6 +64,7 @@ import DeletedProducers from './deletedProducers';
           <Route exact path='/manager/managerP' component={ManagerP}/>
           <Route exact path='/manager/managerD' component={ManagerD}/>
           <Route exact path='/manager/managerCa' component={ManagerCa}/>
+          <Route exact path='/manager/ManagerDealer' component={ManagerDealer}/>
           <Route exact path='/manager/managerClient' component={ManagerClient}/>
           <Route exact path='/users/producers' component={Producer}/>
           <Route exact path='/users/manager' component={Managers}/>
@@ -74,6 +78,7 @@ import DeletedProducers from './deletedProducers';
           <Route exact path='/report/quoteReport' component={QuoteReport}/>
           <Route exact path='/report/dailyReport' component={DailyReReport}/>
           <Route exact path='/report/dailyReport/details' component={DailyDetails}/>
+          <Route exact path='/report/DealerReport' component={DealerReport}/>
           <Route exact path='/report/payReport' component={PayReport}/>
           <Route exact path='/report/quote' component={QuoteDetails}/>
           <Route exact path='/report/modifyquote' component={ModifyQuote}/>
@@ -87,6 +92,7 @@ import DeletedProducers from './deletedProducers';
           <Route exact path='/report/DeletedReport/payments' component={DeletedPayments}/>
           <Route exact path='/report/DeletedReport/Managers' component={DeletedManagers}/>
           <Route exact path='/report/DeletedReport/Producers' component={DeletedProducers}/>
+          <Route exact path='/report/depositReport' component={Deposits}/>
          {/*  <Route exact path='/producer/info' component={ProducerInfo}/>
           <Route exact path='/balances' component={Balances}/>
           <Route exact path='/filter' component={AdminFilter}/>

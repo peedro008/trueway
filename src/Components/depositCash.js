@@ -18,12 +18,13 @@ const DepositCash = () => {
     const [total, setTotal] = useState(0)
     const [id, setId] = useState([])
     
-    
+    const UserId= useSelector(state=>state.UserId)
     const LocationId= useSelector(state=>state.LocationId)
+    const [note, setNote] = useState("")
  
 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCashPayment?LocationId=${LocationId}`)
+        axios.get(`http://localhost:8080/getCashPayment?LocationId=${LocationId}`)
         .then(function(response){
             setDbPayments(response.data)
             
@@ -33,9 +34,10 @@ const DepositCash = () => {
         })
     
     },[])
+
     useEffect(()=>{
         let amount = 0  
-        dbPayments.map(e=>amount +=parseFloat(e.amount))
+        dbPayments.map(e=>amount +=parseFloat(e.amount)+parseFloat(e.creditCardFee)+parseFloat(e.PIPvalue)+parseFloat(e.MVRvalue)+parseFloat(e.NSDvalue))
         setTotal(amount)
         let ids = []
         dbPayments.map(e=>ids.push(e.id))
@@ -43,14 +45,15 @@ const DepositCash = () => {
     },[dbPayments])
 
     const submit = () =>{
+        let data = {id:id, UserId: UserId, LocationId: LocationId, note: note, total: total}
         onOpenModal()
-        fetch(`https://truewayagentbackend.com/deposit`, {
+        fetch(`http://localhost:8080/deposit`, {
                     
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 },
-            body: JSON.stringify({id:id}),
+            body: JSON.stringify(data),
             
         })
      
@@ -88,7 +91,7 @@ const DepositCash = () => {
                                         <td className="row1" scope="row">{e.type}</td>  
                                         <td className="row1" scope="row">{e.date}</td>
                                         
-                                        <td className="row1" scope="row">{e.amount}</td>     
+                                        <td className="row1" scope="row">{parseFloat(e.amount)+parseFloat(e.creditCardFee)+parseFloat(e.PIPvalue)+parseFloat(e.MVRvalue)+parseFloat(e.NSDvalue)}</td>     
                                     
                                     </tr>
                                 
@@ -106,7 +109,8 @@ const DepositCash = () => {
                     </tbody>
                 </table>
                 </div>
-        <div className="cash">
+                <div style={{display:"flex", flexDirection:"column"}}>
+                <div className="cash">
             
                 <div className="bilsContainer" >
                     <div className="inputCont" style={{ width:"50%"}}>   
@@ -145,19 +149,28 @@ const DepositCash = () => {
                    
                     </div>
                     
-
+                            
                 </div>
                 
             </div>
             
-                <button className="FITbutton" onClick={submit}>
-                    <div style={{display:"flex", flexDirection:"row"}}>
-                    <BiPencil size="20px" style={{display:"flex", color:"#2B4162", marginLeft:"8px", marginTop:"1px"}}/>
-                    <p className="FITbuttonText">Submit</p>
-                    </div>
-                </button>
+                 <div className="DEPnote">
+            <p className="PAYtitle">Notes</p>
+            <textarea className="DEPnoteInput" onChange={e=>setNote(e.target.value)}></textarea>
+        </div>
                
         </div>
+<button className="FITbutton" onClick={submit} disabled={id.length?false:true}>
+                    <div style={{display:"flex", flexDirection:"row"}}>
+                    <BiPencil size="20px" style={{display:"flex", color:id.length?"#2B4162":"#e5e5e5", marginLeft:"8px", marginTop:"1px"}}/>
+                    <p className="FITbuttonText" >Submit</p>
+                    </div>
+                </button>
+
+       
+
+        </div>                    
+
         <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
     <div className="modal">
         <img src={Icon} style={{width:"35px", alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>

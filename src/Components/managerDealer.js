@@ -15,16 +15,17 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 const schema = yup
   .object({
-    name: yup.string().required(),
-    email: yup.string().required().email(),
-    phone: yup.number().positive().integer().required(),
-    LocationId: yup.number().required(),
-    Password: yup.string().required().min(6),
-  })
+    ClientId: yup.number().required(),
+    DealerSalePersonId: yup.number().required(),
+    amount: yup.string().required(),
+    paid: yup.bool().required().default(false),
+    })
   .required();
 
-const ManagerM = () => {
-  const [locations, setLocations] = useState([]);
+const ManagerDealer = () => {
+  const [dealerSalePerson, setDealerSalePerson] = useState([]);
+  const [client, setClient] = useState([]);
+  const [neww, setNeww] = useState(false);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -41,9 +42,9 @@ const ManagerM = () => {
     window.location.reload();
   };
   const onSubmit = (data) => {
-    data && setinputs({ ...inputs, UserRole: "Producer" });
+    data && 
 
-    fetch(`http://localhost:8080/addManager`, {
+    fetch(`http://localhost:8080/addDealer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,102 +71,118 @@ const ManagerM = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getLocations`)
+      .get(`http://localhost:8080/getDealerSalePerson`)
       .then(function (response) {
-        setLocations(response.data);
+        setDealerSalePerson(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  const options = locations.map((e) => ({ value: e.id, label: e.name }));
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/clients`)
+      .then(function (response) {
+        setClient(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const optionsC = client.map((e) => ({ value: e.id, label: e.name }));
+  const optionsD = dealerSalePerson.map((e) => ({ value: e.id, label: e.name }));
 
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">Add Manager</p>
+        <p className="genericTitle">Add Dealer</p>
       </div>
 
       <div className="managerInputsContainer">
         <div className="managerInputsubContainer" style={{ width: "50vw" }}>
-          <div className="inputDiv">
-            <p className="PAYtitle">Name</p>
-            <input
-              {...register("name")}
-              placeholder="Name"
-              onChange={(e) => {
-                setinputs({ ...inputs, name: e.target.value });
-              }}
-              className="AQinput"
-            ></input>
-            <p className="FORMerror">{errors.name?.message}</p>
+        <div className="inputDiv">
+            <p className="PAYtitle">Client</p>
+            <Controller
+              control={control}
+              name="ClientId"
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <Select
+                  value={optionsC.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val.value)}
+                  control={control}
+                  options={client.map((e) => ({
+                    value: e.id,
+                    label: e.name,
+                  }))}
+                  name={"ClientId"}
+                  className="PAYselect"
+                  placeholder="Select Client"
+                />
+              )}
+            />
+            <p className="FORMerror">{errors.ClientId?.message}</p>
           </div>
           <div className="inputDiv">
-            <p className="PAYtitle">Email</p>
-            <input
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value:
-                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  message: "Please enter a valid email",
-                },
-              })}
-              placeholder="Email"
-              className="AQinput"
-            ></input>
-            <p className="FORMerror">{errors.email?.message}</p>
+            <p className="PAYtitle">Dealer Sale Person</p>
+            <Controller
+              control={control}
+              name="DealerSalePersonId"
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <Select
+                  value={optionsD.find((c) => c.value === value)}
+                  onChange={(val) => onChange(val.value)}
+                  control={control}
+                  options={dealerSalePerson.map((e) => ({
+                    value: e.id,
+                    label: e.name,
+                  }))}
+                  name={"DealerSalePersonId"}
+                  className="PAYselect"
+                  placeholder="Dealer Sale Person"
+                />
+              )}
+            />
+            <p className="FORMerror">{errors.DealerSalePersonId?.message}</p>
           </div>
           <div className="inputDiv">
-            <p className="PAYtitle">Phone</p>
+            <p className="PAYtitle">Amount</p>
             <input
-              {...register("phone")}
-              placeholder="Phone"
+              {...register("amount")}
+              placeholder="Insert Amount"
               onChange={(e) => {
                 setinputs({ ...inputs, phone: e.target.value });
               }}
               className="AQinput"
             ></input>
             <p className="FORMerror">
-              {errors.phone?.message.substring(0, 25)}
+              {errors.amount?.message.substring(0, 25)}
             </p>
           </div>
+          <div
+                  className="AQinputContainer"
+                 
+                >
+                  <p className="AQinputName">Paid</p>
+                  <div className="AQyesNoContainer">
+                    <div>
+                      <input
+                        className="AQcheckInput"
+                        type="checkbox"
+                        checked={neww}
+                        name="paid"
+                        {...register("paid")}
+                        onChange={(event) => setNeww(!neww)}
+                      />
+                      {neww ? (
+                        <p className="AQyesNoText">Yes</p>
+                      ) : (
+                        <p className="AQyesNoText">No</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+        </div>
         
-        </div>
-        <div className="managerInputsubContainer" style={{ width: "32.5vw" }}>
-          <div className="inputDiv">
-            <p className="PAYtitle">Password</p>
-            <input
-              type="password"
-              {...register("Password")}
-              placeholder="Password"
-              className="AQinput"
-            ></input>
-            <p className="FORMerror">{errors.Password?.message}</p>
-          </div>
-          <div className="inputDiv">
-            <p className="PAYtitle">Location</p>
-            <Controller
-              control={control}
-              name="LocationId"
-              render={({ field: { onChange, onBlur, value, ref } }) => (
-                <Select
-                  value={options.find((c) => c.value === value)}
-                  onChange={(val) => onChange(val.value)}
-                  control={control}
-                  options={locations.map((e) => ({
-                    value: e.id,
-                    label: e.name,
-                  }))}
-                  name={"LocationId"}
-                  className="PAYselect"
-                  placeholder="Select Location"
-                />
-              )}
-            />
-            <p className="FORMerror">{errors.LocationId?.message}</p>
-          </div>
-        </div>
       </div>
 
       <div
@@ -177,7 +194,7 @@ const ManagerM = () => {
         }}
       >
         <button className="PAYbutton" onClick={handleSubmit(onSubmit)}>
-          <p className="PAYbuttonText">Add Manager</p>
+          <p className="PAYbuttonText">Add Dealer</p>
         </button>
       </div>
       <Modal open={open} onClose={reload} center classNames={"modal"}>
@@ -192,7 +209,7 @@ const ManagerM = () => {
             }}
           />
 
-          <p className="modalText">Manager added successfully</p>
+          <p className="modalText">Dealer added successfully</p>
 
           <button onClick={reload} className="modalButton">
             {" "}
@@ -222,4 +239,4 @@ const ManagerM = () => {
     </div>
   );
 };
-export default ManagerM;
+export default ManagerDealer;

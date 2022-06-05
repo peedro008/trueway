@@ -22,7 +22,7 @@ function ClientsReport() {
   };
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clients`)
+      .get(`http://localhost:8080/clients`)
       .then(function (response) {
         setPayments(response.data);
       })
@@ -36,7 +36,7 @@ function ClientsReport() {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/deleteClient`, {
+    fetch(`http://localhost:8080/deleteClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ function ClientsReport() {
           />
         </div>
       </div>
-      <table class="table2" style={{ minWidth: "80vw" }}>
+      <table class="table2" style={{ minWidth: "88.3vw" }}>
         <tbody>
           <tr>
             <th scope="col" className="column1">
@@ -91,9 +91,12 @@ function ClientsReport() {
               <p className="REPtype">Client company</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">New</p>
+              <p className="REPtype">Cient address</p>
             </th>
             <th scope="col" className="column1">
+              <p className="REPtype">New</p>
+            </th>
+            <th scope="col" className="column1" style={{minWidth:"150px"}}>
               <p className="REPtype">Notes</p>
             </th>
             <th scope="col" className="column1">
@@ -128,6 +131,9 @@ function ClientsReport() {
                       </td>
                       <td className="ClientName" scope="row">
                         {e.Company ? e.Company.name : "-"}
+                      </td>
+                      <td className="ClientName" scope="row">
+                        {e.address ? e.address : "-"}
                       </td>
                       <td className="ClientName" scope="row">
                         {e.new ? "true" : "false"}

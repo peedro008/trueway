@@ -36,7 +36,7 @@ const ManagerD=()=>{
 
     const onSubmit = (data) => {
         data&&
-        fetch(`https://truewayagentbackend.com/addDealer`, {
+        fetch(`http://localhost:8080/addDealerSalePerson`, {
             
             method: 'POST',
             headers: {
@@ -71,7 +71,7 @@ const ManagerD=()=>{
         });
     }
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCompany`)
+        axios.get(`http://localhost:8080/getCompany`)
             .then(function(response){
                 setCompany(response.data)
                 

@@ -1,7 +1,7 @@
 /*AUTH---------------------------------------------*/
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
-
+@import "~@geoapify/geocoder-autocomplete/styles/minimal.css";
 @import url("https://fonts.googleapis.com/css?family=Inter");
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
@@ -347,6 +347,26 @@
   font-family: "Gilroy-Regular";
   font-weight: 700;
   font-size: 13px;
+  color: black;
+  border-width: 0;
+  background-color: #fbfbfb;
+  border-radius: 7px;
+  width: 190px;
+}
+.PAYselectQ {
+  font-family: "Gilroy-Regular";
+  font-weight: 700;
+  font-size: 11px;
+  color: black;
+  border-width: 0;
+  background-color: #fbfbfb;
+  border-radius: 7px;
+  width: 190px;
+}
+.PAYselectQ::placeholder{
+  font-family: "Gilroy-Regular";
+  font-weight: 700;
+  font-size: 15px;
   color: black;
   border-width: 0;
   background-color: #fbfbfb;
@@ -1775,6 +1795,26 @@
   text-align: left;
   color: #6e6b7b;
 }
+.DEPnote{
+  margin-top: 10px;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+}
+.DEPnoteInput{
+  font-family: "Gilroy-Regular";
+  font-weight: 700;
+  font-size: 12px;
+  color: black;
+  background-color: #fbfbfb;
+  border-radius: 7px;
+  width: 37.5vw;
+  height: 80px;
+  border-width: 1px;
+  border-color: rgb(212, 208, 208);
+  padding-left: 8px;
+  padding-top: 8px;
+}
 .bilsContainer {
   margin-left: 50px;
   display: flex;
@@ -2271,4 +2311,37 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+.autocomplete-container {
+
+ 
+  /*the container must be positioned relative:*/
+  position: relative;
+  width: 250px;
+
+ 
+  font-family: "Gilroy-Regular";
+  font-size: 12px;
+  
+}
+
+.autocomplete-container input  {
+
+  outline: none;
+  font-family: "Gilroy-Regular";
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  max-height: 30px;
+  border-radius: 2px;
+  font-size: 12px;
 }

@@ -31,6 +31,10 @@ import AddQuote from './addQuote';
 import ClientsReport from './clientsReport';
 import ClientEdit from './clientEdit';
 import ProducerDetails from './producerDetails';
+import Deposits from './deposits';
+import DailyDetails from './dailyDetails';
+import DailyReReport from './dailyReReport';
+
 // import MyQuotes from './myQuotes';
  const ProducerRouter=()=>{
 
@@ -40,7 +44,7 @@ import ProducerDetails from './producerDetails';
           <Route component={ProducerNav}/>
           <Route exact path='/' component={ProducerDash}/>
           <Route exact path='/payments' component={Payments}/>
-          
+         
           <Route exact path="/deposit" component={DepositCash}/>
           <Route exact path='/dailyReport' component={DailyReport}/>
           <Route exact path='/profile' component={ProducerPerfil}/>
@@ -49,6 +53,8 @@ import ProducerDetails from './producerDetails';
           <Route exact path='/report/quoteReport' component={QuoteReport}/>
           <Route exact path='/report/payReport' component={PayReport}/>
           <Route exact path='/report/quote' component={QuoteDetails}/>
+          <Route exact path='/report/dailyReport' component={DailyReReport}/>
+          <Route exact path='/report/dailyReport/details' component={DailyDetails}/>
           <Route exact path='/report/modifyquote' component={ModifyQuote}/>
           <Route exact path='/addquote' component={AddQuote}/>
           <Route exact path='/report/clients' component={ClientsReport}/>
@@ -59,6 +65,7 @@ import ProducerDetails from './producerDetails';
           <Route exact path='/payments/dailyReport' component={DailyReport}/>
           <Route exact path='/producers/details' component={ProducerDetails}/>
           <Route exact path='/addClient' component={ManagerClient}/> 
+          <Route exact path='/report/depositReport' component={Deposits}/>
           {/*<Route exact path='/myquotes' component={ProducerFilter}/>
           <Route exact path='/add' component={ProducerAddQuote}/>
           <Route exact path='/payments' component={Payments}/>

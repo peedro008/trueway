@@ -29,7 +29,7 @@ const ManagerDetails = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://truewayagentbackend.com/producerQuotes?UserId=${Producer.UserId}`
+        `http://localhost:8080/producerQuotes?UserId=${Producer.UserId}`
       )
       .then(function (response) {
         setQuotes(response.data);
@@ -42,7 +42,7 @@ const ManagerDetails = (props) => {
   }, [Producer]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getStatus`)
+      .get(`http://localhost:8080/getStatus`)
       .then(function (response) {
         let paz = response.data;
 

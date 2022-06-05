@@ -32,7 +32,7 @@ const DeletedManagers = () => {
   };
   const deleteManager = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/undeleteManager`, {
+    fetch(`http://localhost:8080/undeleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const DeletedManagers = () => {
   };
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDeletedManager`)
+      .get(`http://localhost:8080/getDeletedManager`)
       .then(function (response) {
         setManagers(response.data);
       })
@@ -69,7 +69,7 @@ const DeletedManagers = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/quotes`)
+      .get(`http://localhost:8080/quotes`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -79,7 +79,7 @@ const DeletedManagers = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getStatus`)
+      .get(`http://localhost:8080/getStatus`)
       .then(function (response) {
         setModify(response.data);
       })

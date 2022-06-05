@@ -10,7 +10,7 @@ function QuoteDetails(props) {
     const [quote, setQuote] = useState([])
     const history = useHistory()
     useEffect(() => {
-        axios.get(`https://truewayagentbackend.com/idquotes`,{ params: { id: id } })
+        axios.get(`http://localhost:8080/idquotes`,{ params: { id: id } })
         .then(function(response){
             setQuote(response.data)
         

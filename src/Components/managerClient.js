@@ -12,6 +12,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { BsChevronLeft } from "react-icons/bs";
+import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 
 const schema = yup.object({
     name: yup.string().required(),
@@ -35,6 +36,7 @@ const ManagerClient=()=>{
     const [company, setCompany] = useState([])
     const [open, setOpen] = useState(false);
     const [neww, setNeww] = useState(false);
+    const [address, setAddress] = useState("")
     const { register, handleSubmit,control,setValue, formState:{ errors } } = useForm({
         resolver: yupResolver(schema)
       });
@@ -46,7 +48,7 @@ const ManagerClient=()=>{
         data&&
         
         console.log(JSON.stringify(data))
-        fetch(`https://truewayagentbackend.com/addClient`, {
+        fetch(`http://localhost:8080/addClient`, {
             
             method: 'POST',
             headers: {
@@ -80,7 +82,10 @@ const ManagerClient=()=>{
         
     }
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCompany`)
+        setValue("address", `${address}`);
+    },[address])
+    useEffect(()=>{
+        axios.get(`http://localhost:8080/getCompany`)
             .then(function(response){
                 setCompany(response.data)
                 
@@ -135,11 +140,7 @@ const ManagerClient=()=>{
             </div>
            
             <div className="managerInputsubContainer" >
-            <div className="inputDiv"> 
-                    <p className="PAYtitle">Address</p>
-                    <input {...register("address")}   className="AQinput"></input>
-                    <p className="FORMerror">{errors.address?.message}</p>
-                </div>
+          
                 <div className="inputDiv" > 
                     <p className="PAYtitle">Company</p>
                     <Controller
@@ -151,11 +152,25 @@ const ManagerClient=()=>{
                     />
                  <p className="FORMerror">{errors.CompanyId?.message}</p>
                 </div>  
-                <div className="inputDiv"style={{marginRight:"52%"}}> 
+                <div className="inputDiv"> 
                     <p className="PAYtitle">Date of Birth</p>
                     <input type={"date"} {...register("dateOfBirth")}  placeholder="Date of Birth" className="AQinput"></input>
                     <p className="FORMerror">{errors.dateOfBirth?.message}</p>
                 </div>
+                <div className="inputDiv" style={{marginRight:"52%"}}> 
+            <p className="PAYtitle">Address</p>
+            <div class="autocomplete-container" id="autocomplete-container">
+  <GeoapifyContext apiKey="fae2fbe3125e4b1d870dd3ab7c96f6b3">
+ <GeoapifyGeocoderAutocomplete
+        placeSelect={(value)=>{setAddress(value.properties.formatted)}}
+        suggestionsChange={(value)=>{console.log(value)}}
+        
+        
+      />
+     
+
+    </GeoapifyContext></div>
+        </div>
             </div>
 
 
@@ -186,7 +201,7 @@ const ManagerClient=()=>{
         
         </div>
       </Modal>
-      <img src={Isologo_background} style={{position:"absolute",zIndex:0, right:0, bottom:-8, width:"528px", opacity:"0.5"}}/>
+      <img src={Isologo_background} style={{position:"absolute",zIndex:0, right:0, bottom:-8, width:"498px", opacity:"0.5"}}/>
       <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
         </div>
 

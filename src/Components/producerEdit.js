@@ -39,7 +39,7 @@ const ProducerEdit = (props) => {
       };
 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getLocations`)
+        axios.get(`http://localhost:8080/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -55,7 +55,7 @@ const ProducerEdit = (props) => {
     const onSubmit = (data) => {
  
        
-        fetch(`https://truewayagentbackend.com/modifyProducer`, {
+        fetch(`http://localhost:8080/modifyProducer`, {
             
             method: 'POST',
             headers: {

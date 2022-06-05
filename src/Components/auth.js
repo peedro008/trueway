@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import logo from "../assets/logored.svg"
 import {  useDispatch } from 'react-redux';
@@ -27,7 +27,11 @@ const Auth = ()=>{
     const [open, setOpen] = useState(false);
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
-  
+    useEffect(() => {
+        window.history.pushState("", "", "/");
+    
+    }, [])
+    
 
     const onSubmitHandler = () => {
      
@@ -35,7 +39,7 @@ const Auth = ()=>{
             UserName,
             Password,
         };
-        fetch(`https://truewayagentbackend.com/login`, {
+        fetch(`http://localhost:8080/login`, {
             
             method: 'POST',
             headers: {
@@ -60,7 +64,7 @@ const Auth = ()=>{
                     dispatch(user(payload.UserName));
                     dispatch(userName(jsonRes.Name));
                     dispatch(userId(jsonRes.userId));
-                    
+                  
                     
                       
                     
@@ -77,7 +81,7 @@ const Auth = ()=>{
             onOpenModal()
         });
 
-       
+
     };
    
 

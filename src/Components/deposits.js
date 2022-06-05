@@ -10,56 +10,43 @@ import moment from "moment";
 import close from "../assets/close.svg"
 import Select from 'react-select'
 import { Divider } from "@mui/material";
-import {FiRefreshCcw} from "react-icons/fi"
-import Modal from "react-responsive-modal";
-const DailyReReport = () => {
-    const [deleteConf, setDeleteConf] = useState("")
-    const [deletedOne, setDeletedOne] = useState(null)
-    const [paymentsDelete, setPaymentsDelete] = useState(null)
-    const [payments, setPayments] = useState([]) 
+const Deposits = () => {
     const [paymentsFil, setPaymentsFil] = useState([])
     const [openFilter, setOpenFilter] = useState(false)
+    const [payments, setPayments] = useState([]) 
+    const [search, setSearch] = useState("")
+    const [dateF, setDateF] = useState([])
+    const [filteredQuotes, setFilteredQuotes] = useState(false)
+    const [YYYY1, setYYYY1] = useState(0)
+    const [YYYY2, setYYYY2] = useState(0)
+    const [MM1, setMM1] = useState(0)
+    const [MM2, setMM2] = useState(0)
+    const [DD1, setDD1] = useState(0)
+    const [DD2, setDD2] = useState(0)
     const [locations, setLocations] = useState([])
-    const [open, setOpen] = useState(false);
-    const onOpenModal = () => setOpen(true);
-    const onCloseModal = () => setOpen(false);
+  
     const [filterValues, setFilterValues ] = useState({
         dateFrom:null,
          LocationId:null,
-       
-
     })
     const [filterCheck, setFilterCheck ] = useState({
         date:false,
         LocationId:false,
         
     })
-    const handleDelete = (e)=>{
-        setDeletedOne(e[0])
-        setPaymentsDelete(e[1])
-        onOpenModal()
-    }
-    const handleDeleteModal = (e)=>{
-        resetDaily({dailyID:deletedOne, Payments: paymentsDelete})
-        window.location.reload()
-
-    }
-    const resetDaily = (e) => {
-        let IDs = e.Payments.map(e=>{return e.id})
-        console.log({ IDs:IDs,dailyID: e.dailyID })
-        fetch(`http://localhost:8080/resetDailyReport`, {
-            
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                },
-            body: JSON.stringify({IDs:IDs,dailyID: e.dailyID}),
-            
-        })
-    }
-
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getDailyReports`)
+        axios.get(`http://localhost:8080/getLocations`)
+            .then(function(response){
+                setLocations(response.data)
+                
+            })
+            .catch(error=>{
+              console.log(error)  
+            })
+    
+    },[]) 
+    useEffect(()=>{
+        axios.get(`http://localhost:8080/getdeposit`)
             .then(function(response){
                 setPayments(response.data)
                 
@@ -99,7 +86,7 @@ const DailyReReport = () => {
         <div className="genericDiv1">
              
              <div className="genericHeader">
-                <p className="genericTitle">Daily reports</p>
+                <p className="genericTitle">Deposits</p>
             </div>
             <div className="REPcontrol">
             <div className="REPDate">
@@ -135,7 +122,9 @@ const DailyReReport = () => {
                 <th scope="col" className="column1"><p   className="REPtype">Total</p></th>
                 <th scope="col" className="column1"><p   className="REPtype">Date</p></th>
                 <th scope="col" className="column1"><p   className="REPtype">Payments amount</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Reset</p></th>
+                <th scope="col" className="column1"><p   className="REPtype">User</p></th>
+                <th scope="col" className="column1"><p   className="REPtype">Notes</p></th>
+                {/* <th scope="col" className="column1"><p   className="REPtype">PDF</p></th> */}
              
             </tr>
             {
@@ -147,15 +136,13 @@ const DailyReReport = () => {
                    return (
                         <tr>
                            
-                            <td className="ClientName" scope="row"><NavLink style={{textDecoration: 'none', color:"#000"}} to={{pathname:"/report/DailyReport/details",props:e}}>{e.Location.name}</NavLink></td>  
+                            <td className="ClientName" scope="row">{e.Location.name}</td>  
                             <td className="ClientName" scope="row">${e.total}</td>  
                             <td className="ClientName" scope="row">{e.date}</td>
                             <td className="ClientName" scope="row">{e.Payments.length} Payments</td> 
-                            <td className="ClientName" scope="row"  >
-                                          <div style={{height:"auto",display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center" }}>
-                                            <FiRefreshCcw className='deleteIcon' size={"20px"} onClick={()=>{handleDelete([e.id, e.Payments])}}/>
-                                            </div>
-                                        </td>
+                            <td className="ClientName" scope="row">{e.User.name}</td>
+                            <td className="ClientName" scope="row">{e.note}</td>
+                 
                         </tr>
                      
                      
@@ -200,8 +187,10 @@ const DailyReReport = () => {
           
             <div className="FilterComRow">
                 <input type={"checkbox"}checked={filterCheck.LocationId} onChange={(e)=>setFilterCheck({ 
-                     date:false,
-                     LocationId:!filterCheck.LocationId,})}/>
+                    
+                    LocationId:!filterCheck.LocationId,
+                    date:false,
+                    })}/>
                 <p className="FilterComText">Location</p>
             </div>
             {
@@ -214,22 +203,10 @@ const DailyReReport = () => {
             <div style={{width:"100%", display:"flex", flexDirection:"column", alignItems:"center"}}>
             <button onClick={()=>filterSubmit(filterValues)} className="FilterComButton">Apply Filters</button></div>
         </div>}
-        <Modal open={open} onClose={onCloseModal} center classNames={"modal"} >
-                    <div className="modal" style={{minWidth:"250px", alignItems:"center"}}>
-                    
-                    <FiRefreshCcw color="#14B8A6" size={"50px"} style={{alignSelf:"center", marginTop:"25px", marginBottom:"10px"}}/>
-                    <p className="modalText">Type "reset" to confirm </p>
-                    <input className='AQinput' onChange={(e)=>setDeleteConf(e.target.value)} style={{marginTop:"12px"}}/>
-                
-                    <button disabled={deleteConf=="reset"?false:true} className="modalButton" onClick={handleDeleteModal}>Continue</button>
-                
-                    
-                    </div>
-            </Modal>
         </div>
     )
 }
-export default DailyReReport
+export default Deposits
 
 {/* <PDFDownloadLink style={{textDecoration:"none", color:"black"}} document={<MyDocument data={{payments:e.Payments, producers:producers, date: e.date}}/>} fileName="Receipt"> 
 <VscFilePdf className='pdfIcon' size={"20px"} /></PDFDownloadLink></td>        */}

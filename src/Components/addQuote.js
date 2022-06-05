@@ -19,10 +19,10 @@ const schema = yup
     ClientId: yup.number().optional(),
     CompanyId: yup.number().required(),
     UserId: yup.number().required(),
-    DealerId: yup.number().optional().default(0),
+    DealerSalePersonId: yup.number().optional().nullable().default(null),
     down: yup.string().required(),
     monthlyPayment: yup.string().optional(),
-    NSDvalue: yup.string().optional().default("0"),
+    NSDamount: yup.string().optional().default("0"),
     Bound: yup.bool().required(),
     PIPvalue: yup.string().optional().default("0"),
     TotalPremium: yup.string().optional().default("0"),
@@ -61,7 +61,7 @@ const AddQuote = () => {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDealer`)
+      .get(`http://localhost:8080/getDealerSalePerson`)
       .then(function (response) {
         setDealers(response.data);
         setInputs({ ...inputs, ProducerId: 1 });
@@ -72,7 +72,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clients`)
+      .get(`http://localhost:8080/clients`)
       .then(function (response) {
         setClients(response.data);
       })
@@ -82,7 +82,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getLocations`)
+      .get(`http://localhost:8080/getLocations`)
       .then(function (response) {
         setLocations(response.data);
       })
@@ -92,7 +92,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getProducer`)
+      .get(`http://localhost:8080/getProducer`)
       .then(function (response) {
         setProducers(response.data);
       })
@@ -102,7 +102,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getCategories`)
+      .get(`http://localhost:8080/getCategories`)
       .then(function (response) {
         setCategories(response.data);
       })
@@ -112,7 +112,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getCompany`)
+      .get(`http://localhost:8080/getCompany`)
       .then(function (response) {
         setCompanies(response.data);
       })
@@ -156,7 +156,7 @@ const AddQuote = () => {
 
   const onSubmit = (data) => {
     (!data.PIPvalue || data.PIPvalue == "") && setValue("PIPvalue", "0");
-    (!data.NSDvalue || data.NSDvalue) == "" && setValue("NSDvalue", "0");
+    (!data.NSDamount || data.NSDamount) == "" && setValue("NSDamount", "0");
     (!data.MVRvalue || data.MVRvalue == "") && setValue("MVRvalue", "0");
     !data.Bound && setValue("Bound", false);
     !data.totalPremium ||
@@ -165,7 +165,7 @@ const AddQuote = () => {
       (data.monthlyPayments == "" && setValue("monthlyPayment", "0"));
     setValue("Bound", `${inputs.Bound}`);
     console.log(data);
-    fetch(`https://truewayagentbackend.com/addQuote`, {
+    fetch(`http://localhost:8080/addQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -384,13 +384,13 @@ const AddQuote = () => {
                   <input
                     className="AQcheckInput"
                     type="checkbox"
-                    checked={inputs.dealer}
-                    name="dealer"
+                    checked={inputs.DealerSalePerson}
+                    name="DealerSalePersonId"
                     onChange={(event) =>
-                      setInputs({ ...inputs, dealer: !inputs.dealer })
+                      setInputs({ ...inputs, DealerSalePerson: !inputs.dealer })
                     }
                   />
-                  {inputs.dealer ? (
+                  {inputs.DealerSalePerson ? (
                     <p className="AQyesNoText">Yes</p>
                   ) : (
                     <p className="AQyesNoText">No</p>
@@ -536,13 +536,13 @@ const AddQuote = () => {
                     <input
                       className="AQinput2"
                       placeholder="How much?"
-                      key="NSDvalue"
-                      name="NSDvalue"
-                      value={inputs.NSDvalue}
+                      key="NSDamount"
+                      name="NSDamount"
+                      value={inputs.NSDamount}
                       defaultValue={0}
-                      {...register("NSDvalue")}
+                      {...register("NSDamount")}
                     />
-                    <p className="FORMerror">{errors.NSDvalue?.message}</p>{" "}
+                    <p className="FORMerror">{errors.NSDamount?.message}</p>{" "}
                   </>
                 )}
               </div>
@@ -579,7 +579,7 @@ const AddQuote = () => {
                       value={inputs.MVRvalue}
                       {...register("MVRvalue")}
                     />
-                    <p className="FORMerror">{errors.NSDvalue?.message}</p>{" "}
+                    <p className="FORMerror">{errors.NSDamount?.message}</p>{" "}
                   </>
                 )}
               </div>
@@ -617,7 +617,7 @@ const AddQuote = () => {
                       name="dealerSalePerson"
                       {...register("PIPvalue")}
                     />
-                    <p className="FORMerror">{errors.NSDvalue?.message}</p>
+                    <p className="FORMerror">{errors.NSDamount?.message}</p>
                   </>
                 )}
               </div>
