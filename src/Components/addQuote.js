@@ -61,7 +61,7 @@ const AddQuote = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDealerSalePerson`)
+      .get(`https://truewayagentbackend.com/getDealerSalePerson`)
       .then(function (response) {
         setDealers(response.data);
         setInputs({ ...inputs, ProducerId: 1 });
@@ -72,7 +72,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/clients`)
+      .get(`https://truewayagentbackend.com/clients`)
       .then(function (response) {
         setClients(response.data);
       })
@@ -82,7 +82,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getLocations`)
+      .get(`https://truewayagentbackend.com/getLocations`)
       .then(function (response) {
         setLocations(response.data);
       })
@@ -92,7 +92,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getProducer`)
+      .get(`https://truewayagentbackend.com/getProducer`)
       .then(function (response) {
         setProducers(response.data);
       })
@@ -102,7 +102,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getCategories`)
+      .get(`https://truewayagentbackend.com/getCategories`)
       .then(function (response) {
         setCategories(response.data);
       })
@@ -112,7 +112,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getCompany`)
+      .get(`https://truewayagentbackend.com/getCompany`)
       .then(function (response) {
         setCompanies(response.data);
       })
@@ -165,7 +165,7 @@ const AddQuote = () => {
       (data.monthlyPayments == "" && setValue("monthlyPayment", "0"));
     setValue("Bound", `${inputs.Bound}`);
     console.log(data);
-    fetch(`http://localhost:8080/addQuote`, {
+    fetch(`https://truewayagentbackend.com/addQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -387,7 +387,7 @@ const AddQuote = () => {
                     checked={inputs.DealerSalePerson}
                     name="DealerSalePersonId"
                     onChange={(event) =>
-                      setInputs({ ...inputs, DealerSalePerson: !inputs.dealer })
+                      setInputs({ ...inputs, DealerSalePerson: !inputs.DealerSalePerson })
                     }
                   />
                   {inputs.DealerSalePerson ? (
@@ -396,7 +396,7 @@ const AddQuote = () => {
                     <p className="AQyesNoText">No</p>
                   )}
                 </div>
-                {inputs.dealer && (
+                {inputs.DealerSalePerson && (
                   <>
                     <Controller
                       control={control}
@@ -511,7 +511,7 @@ const AddQuote = () => {
 
           <div className="AQwhiteContainer10">
             <div className="AQinputContainer">
-              <p className="AQinputName">NRSD</p>
+              <p className="AQinputName">NSD</p>
               <div className="AQyesNoContainer">
                 <div>
                   <input

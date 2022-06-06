@@ -31,7 +31,7 @@ const ManagerCa=()=>{
 
     const onSubmit = (data) => {
         data&&
-        fetch(`http://localhost:8080/addCategories`, {
+        fetch(`https://truewayagentbackend.com/addCategories`, {
             
             method: 'POST',
             headers: {

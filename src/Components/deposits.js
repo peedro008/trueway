@@ -35,7 +35,7 @@ const Deposits = () => {
         
     })
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getLocations`)
+        axios.get(`https://truewayagentbackend.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -46,7 +46,7 @@ const Deposits = () => {
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getdeposit`)
+        axios.get(`https://truewayagentbackend.com/getdeposit`)
             .then(function(response){
                 setPayments(response.data)
                 

@@ -43,7 +43,7 @@ const DealerReport = () => {
 }
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDealerSalePerson`)
+      .get(`https://truewayagentbackend.com/getDealerSalePerson`)
       .then(function (response) {
         setDealerSalePerson(response.data);
        })
@@ -53,7 +53,7 @@ const DealerReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/clients`)
+      .get(`https://truewayagentbackend.com/clients`)
       .then(function (response) {
         setClients(response.data);
 
@@ -65,7 +65,7 @@ const DealerReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDealers`)
+      .get(`https://truewayagentbackend.com/getDealers`)
       .then(function (response) {
         setDealers(response.data);
       })
@@ -74,7 +74,7 @@ const DealerReport = () => {
       });
   }, []);
   const PayDealer = (data) => {
-    fetch(`http://localhost:8080/paidDealer`, {
+    fetch(`https://truewayagentbackend.com/paidDealer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -221,7 +221,7 @@ const DealerReport = () => {
                             display: "flex",
                             backgroundColor: "#14B8A6",
                             width: "100%",
-                            minWidth:"80px",
+                            minWidth:"50px",
                             height: "100%",
                           }}
                         ></div>
@@ -231,6 +231,7 @@ const DealerReport = () => {
                             display: "flex",
                             backgroundColor: "#D14343",
                             width: "100%",
+                            minWidth:"50px",
                             height: "100%",
                           }}
                         ></div>

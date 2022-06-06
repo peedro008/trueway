@@ -36,7 +36,7 @@ const ManagerP=()=>{
         data&&
         setinputs({...inputs, UserRole:"Producer"})
         
-        fetch(`http://localhost:8080/addProducer`, {
+        fetch(`https://truewayagentbackend.com/addProducer`, {
             
             method: 'POST',
             headers: {
@@ -69,7 +69,7 @@ const ManagerP=()=>{
         });
     }
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getLocations`)
+        axios.get(`https://truewayagentbackend.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -116,7 +116,7 @@ const ManagerP=()=>{
                 
 
             </div>
-            <div className="managerInputsubContainer" style={{width:"32.7vw"}}>
+            <div className="managerInputsubContainer" style={{width:"31.2vw"}}>
                 <div className="inputDiv"> 
                     <p className="PAYtitle">Password</p>
                     <input type="password" {...register("Password")} placeholder="Password"   className="AQinput"></input>

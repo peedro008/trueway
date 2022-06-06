@@ -41,7 +41,7 @@ const AdminDash = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getProducer`)
+      .get(`https://truewayagentbackend.com/getProducer`)
       .then(function (response) {
         setProducers(response.data);
       })
@@ -51,7 +51,7 @@ const AdminDash = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getStatus`)
+      .get(`https://truewayagentbackend.com/getStatus`)
       .then(function (response) {
         let paz = response.data;
         paz
@@ -67,7 +67,7 @@ const AdminDash = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/quotes`)
+      .get(`https://truewayagentbackend.com/quotes`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -77,7 +77,7 @@ const AdminDash = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getpayments`)
+      .get(`https://truewayagentbackend.com/getpayments`)
       .then(function (response) {
         setPayments(response.data);
       })
@@ -87,7 +87,7 @@ const AdminDash = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getStatus`)
+      .get(`https://truewayagentbackend.com/getStatus`)
       .then(function (response) {
         setModify(response.data);
       })
@@ -161,24 +161,15 @@ const AdminDash = () => {
 
   //NSD
   useEffect(() => {
-    let pes = 0;
+ 
 
-    quotes.map((e) => {
-      if (
-        e.QuoteStatuses.sort(function (a, b) {
-          return b.id - a.id;
-        })[0].Status !== "Quoted" &&
-        e.QuoteStatuses.sort(function (a, b) {
-          return b.id - a.id;
-        })[0].Status !== "Cancelled"
-      ) {
-        pes =
-          pes +
-          parseFloat(e.NSDvalue);
-      }
-    });
-    setNSD(pes)
-  }, [quotes]);
+    let temp = 0
+    payments.map(e=>{
+        temp=+parseFloat(e.NSDvalue)
+    })
+    setNSD(temp)
+ 
+  }, [payments]);
 
   const handleNext = (e) => {
     setNext(!next);

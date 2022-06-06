@@ -14,7 +14,7 @@ function ProducerPie ({aboutProps, google}) {
  useEffect (()=>{
       
       
-  axios.get(`http://localhost:8080/getStatus`)
+  axios.get(`https://truewayagentbackend.com/quotes`)
   .then(function(response){
       let paz = response.data
 
@@ -29,15 +29,16 @@ function ProducerPie ({aboutProps, google}) {
       let quoted = 0
       let cancelled = 0
       let sold = 0
-      quotes.map(e=>e.Status=="Cancelled"?
-      cancelled= cancelled+1
-      :e.Status=="Quoted"?
+      quotes.map(e=>e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted"?
       quoted=quoted+1:
-      sold=sold+1
+      e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Cancelled"?
+      cancelled= cancelled+1
+      :
+           sold=sold+1
       )
       setDato([["Quoted",quoted],["Cancelled",cancelled],["Sold",sold]])
   },[quotes])
-
+ console.log(quotes)
   useEffect(() => {
     setTimeout(()=>{
     if (google && !chart  ) {
@@ -52,7 +53,7 @@ function ProducerPie ({aboutProps, google}) {
       var options = {'title':'Sellers Average',
                   
                     pieHole: 0.4,
-                    "colors": ["#FFB800","#33D69F","#FF4C61"],
+                    "colors": ["#FFB800","#FF4C61","#33D69F"],
                    
                      'height':250,
                       "width":400,

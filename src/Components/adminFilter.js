@@ -283,7 +283,7 @@ const AdminFilter = () => {
                   name="NSD"
                   onChange={() => setColumns({ ...columns, NSD: !columns.NSD })}
                 />
-                <p className="FITtype">NRSD</p>
+                <p className="FITtype">NSD</p>
               </div>
               <div className="FITind">
                 <input

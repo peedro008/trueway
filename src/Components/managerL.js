@@ -36,7 +36,7 @@ const ManagerL=()=>{
         data&&
       
         
-        fetch(`http://localhost:8080/addLocation`, {
+        fetch(`https://truewayagentbackend.com/addLocation`, {
             
             method: 'POST',
             headers: {

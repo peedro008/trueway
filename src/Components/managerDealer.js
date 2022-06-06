@@ -44,7 +44,7 @@ const ManagerDealer = () => {
   const onSubmit = (data) => {
     data && 
 
-    fetch(`http://localhost:8080/addDealer`, {
+    fetch(`https://truewayagentbackend.com/addDealer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const ManagerDealer = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDealerSalePerson`)
+      .get(`https://truewayagentbackend.com/getDealerSalePerson`)
       .then(function (response) {
         setDealerSalePerson(response.data);
       })
@@ -81,7 +81,7 @@ const ManagerDealer = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/clients`)
+      .get(`https://truewayagentbackend.com/clients`)
       .then(function (response) {
         setClient(response.data);
       })

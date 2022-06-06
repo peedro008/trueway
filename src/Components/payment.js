@@ -98,7 +98,7 @@ function Payment(props) {
   }, [userId]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getCategories`)
+      .get(`https://truewayagentbackend.com/getCategories`)
       .then(function (response) {
         setCategories(response.data);
       })
@@ -108,7 +108,7 @@ function Payment(props) {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/clients`)
+      .get(`https://truewayagentbackend.com/clients`)
       .then(function (response) {
         setClients(response.data);
 
@@ -122,7 +122,7 @@ function Payment(props) {
   useEffect(() => {
     form.client&&
     axios
-      .get(`http://localhost:8080/clientQuotes?client=${form.id}`)
+      .get(`https://truewayagentbackend.com/clientQuotes?client=${form.id}`)
       .then(function (response) {
         setQuotes(response.data);
 
@@ -138,7 +138,7 @@ function Payment(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getLocations`)
+      .get(`https://truewayagentbackend.com/getLocations`)
       .then(function (response) {
         setLocations(response.data);
       })
@@ -177,7 +177,7 @@ useEffect(()=>{
 
   const onSubmit = (data) => {
     if (newClient == false) {
-      fetch(`http://localhost:8080/addPayment`, {
+      fetch(`https://truewayagentbackend.com/addPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -187,7 +187,7 @@ useEffect(()=>{
         .then((response) => response.json())
         .then((data) => dispatch(addPay(data), onOpenModal()));
     } else {
-      fetch(`http://localhost:8080/addClientPayment`, {
+      fetch(`https://truewayagentbackend.com/addClientPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -466,7 +466,7 @@ useEffect(()=>{
         </div>
         <div className="AQwhiteContainer11">
           <div className="AQinputContainer">
-            <p className="AQinputName">NRSD</p>
+            <p className="AQinputName">NSD</p>
             <div className="AQyesNoContainer">
               <div>
                 <input
@@ -594,30 +594,7 @@ useEffect(()=>{
             <p className="modalText">Payment added successfully</p>
 
             <button className="modalButton" onClick={reload}>
-              {" "}
-              <PDFDownloadLink
-                style={{ textDecoration: "none", color: "black" }}
-                document={
-                  <MyDocument
-                    data={{
-                      client: form.client,
-                      total:
-                        parseFloat(control._formValues.creditCardFee) +
-                        parseFloat(control._formValues.amount) +
-                        parseFloat(control._formValues.NSDamount) +
-                        parseFloat(control._formValues.PIPvalue) +
-                        parseFloat(control._formValues.MVRvalue),
-
-                      producer: userName,
-                      date: DATE,
-                    }}
-                  />
-                }
-                fileName="Receipt"
-              >
-                {" "}
-                Continue{" "}
-              </PDFDownloadLink>
+              Continue
             </button>
           </div>
         </Modal>

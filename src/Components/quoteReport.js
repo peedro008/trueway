@@ -63,7 +63,7 @@ const QuoteReport=(props)=>{
         DealerId:false
     })
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getDealerSalePerson`)
+        axios.get(`https://truewayagentbackend.com/getDealerSalePerson`)
             .then(function(response){
                 setDealers(response.data)
                 
@@ -74,7 +74,7 @@ const QuoteReport=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/clients`)
+        axios.get(`https://truewayagentbackend.com/clients`)
             .then(function(response){
                 setClients(response.data)
                 
@@ -85,7 +85,7 @@ const QuoteReport=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getProducer`)
+        axios.get(`https://truewayagentbackend.com/getProducer`)
             .then(function(response){
                 setProducers(response.data)
             })
@@ -95,7 +95,7 @@ const QuoteReport=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getCategories`)
+        axios.get(`https://truewayagentbackend.com/getCategories`)
             .then(function(response){
                 setCategories(response.data)
             })
@@ -105,7 +105,7 @@ const QuoteReport=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getCompany`)
+        axios.get(`https://truewayagentbackend.com/getCompany`)
             .then(function(response){
                 setCompanies(response.data)
             })
@@ -115,7 +115,7 @@ const QuoteReport=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getLocations`)
+        axios.get(`https://truewayagentbackend.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -126,7 +126,7 @@ const QuoteReport=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/quotes`)
+        axios.get(`https://truewayagentbackend.com/quotes`)
             .then(function(response){
                 setQuotes(response.data)
                 
@@ -196,7 +196,7 @@ const QuoteReport=(props)=>{
     const deleteClient = (data) => {
         data&&
         console.log(data)
-        fetch(`http://localhost:8080/deleteQuote`, {
+        fetch(`https://truewayagentbackend.com/deleteQuote`, {
             
             method: 'POST',
             headers: {
@@ -351,7 +351,7 @@ const QuoteReport=(props)=>{
             {columns.down&&<th scope="col" className="column1"><p className="REPtype">Down Payments</p></th>}
             {columns.monthlyPayment&&<th scope="col" className="column1"><p className="REPtype">Monthly Payments</p></th>}
             {columns.dealer&&<th scope="col" className="column1"><p className="REPtype">Dealer Name</p></th>}
-            {columns.NSD&&<th scope="col" className="column1"><p className="REPtype">NRSD</p></th>}
+            {columns.NSD&&<th scope="col" className="column1"><p className="REPtype">NSD</p></th>}
             {columns.PIP&&<th scope="col" className="column1"><p className="REPtype">PIP</p></th>}
             {columns.MVR&&<th scope="col" className="column1"><p className="REPtype">MVR</p></th>}
             {columns.location&&<th scope="col" className="column1"><p className="REPtype">Location</p></th>}

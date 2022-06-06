@@ -48,7 +48,7 @@ const ManagerClient=()=>{
         data&&
         
         console.log(JSON.stringify(data))
-        fetch(`http://localhost:8080/addClient`, {
+        fetch(`https://truewayagentbackend.com/addClient`, {
             
             method: 'POST',
             headers: {
@@ -85,7 +85,7 @@ const ManagerClient=()=>{
         setValue("address", `${address}`);
     },[address])
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getCompany`)
+        axios.get(`https://truewayagentbackend.com/getCompany`)
             .then(function(response){
                 setCompany(response.data)
                 

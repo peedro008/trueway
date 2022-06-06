@@ -60,7 +60,7 @@ const DeletedQuote=(props)=>{
         DealerId:false
     })
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getDealerSalePerson`)
+        axios.get(`https://truewayagentbackend.com/getDealerSalePerson`)
             .then(function(response){
                 setDealers(response.data)
                 
@@ -71,7 +71,7 @@ const DeletedQuote=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/clients`)
+        axios.get(`https://truewayagentbackend.com/clients`)
             .then(function(response){
                 setClients(response.data)
                 
@@ -82,7 +82,7 @@ const DeletedQuote=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getProducer`)
+        axios.get(`https://truewayagentbackend.com/getProducer`)
             .then(function(response){
                 setProducers(response.data)
             })
@@ -92,7 +92,7 @@ const DeletedQuote=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getCategories`)
+        axios.get(`https://truewayagentbackend.com/getCategories`)
             .then(function(response){
                 setCategories(response.data)
             })
@@ -102,7 +102,7 @@ const DeletedQuote=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getCompany`)
+        axios.get(`https://truewayagentbackend.com/getCompany`)
             .then(function(response){
                 setCompanies(response.data)
             })
@@ -112,7 +112,7 @@ const DeletedQuote=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getLocations`)
+        axios.get(`https://truewayagentbackend.com/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -123,7 +123,7 @@ const DeletedQuote=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getdeletedquotes`)
+        axios.get(`https://truewayagentbackend.com/getdeletedquotes`)
             .then(function(response){
                 setQuotes(response.data)
                 
@@ -190,7 +190,7 @@ const DeletedQuote=(props)=>{
     const deleteClient = (data) => {
         data&&
         console.log(data)
-        fetch(`http://localhost:8080/undeleteQuote`, {
+        fetch(`https://truewayagentbackend.com/undeleteQuote`, {
             
             method: 'POST',
             headers: {
@@ -345,7 +345,7 @@ const DeletedQuote=(props)=>{
             <th scope="col" className="column1"><p className="REPtype">Down Payments</p></th>
             <th scope="col" className="column1"><p className="REPtype">Monthly Payments</p></th>
             <th scope="col" className="column1"><p className="REPtype">Dealer Name</p></th>
-            <th scope="col" className="column1"><p className="REPtype">NRSD</p></th>
+            <th scope="col" className="column1"><p className="REPtype">NSD</p></th>
             <th scope="col" className="column1"><p className="REPtype">PIP</p></th>
             <th scope="col" className="column1"><p className="REPtype">MVR</p></th>
             <th scope="col" className="column1"><p className="REPtype">Location</p></th>

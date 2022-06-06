@@ -15,9 +15,6 @@ import { BsChevronLeft } from "react-icons/bs";
 
 const schema = yup.object({
     name: yup.string().required(),
-    email: yup.string().required().email(),
-    phone: yup.number().positive().integer().required(),
-    address: yup.string().required(),
     CategoryId: yup.number().required(),
 
 }).required();
@@ -39,7 +36,7 @@ const ManagerC=()=>{
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getCategories`)
+        axios.get(`https://truewayagentbackend.com/getCategories`)
             .then(function(response){
                 setCategories(response.data)
                 
@@ -52,7 +49,7 @@ const ManagerC=()=>{
     const onSubmit = (data) => {
         data&&
         console.log(JSON.stringify(data))
-        fetch(`http://localhost:8080/addCompany`, {
+        fetch(`https://truewayagentbackend.com/addCompany`, {
             
             method: 'POST',
             headers: {
@@ -100,31 +97,10 @@ const ManagerC=()=>{
                     <input {...register("name")}  placeholder="Company Name" className="AQinput"></input>
                     <p className="FORMerror">{errors.name?.message}</p>
                 </div>
-                <div className="inputDiv"> 
-                    <p className="PAYtitle">Email</p>
-                    <input {...register("email",{
-                        required: 'Email is required',
-                        pattern: {
-                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                            message: 'Please enter a valid email',
-                        }})}  placeholder="Email" className="AQinput"></input>
-                    <p className="FORMerror">{errors.email?.message}</p>
-                </div>
-                <div className="inputDiv"> 
-                    <p className="PAYtitle">Phone</p>
-                    <input  {...register("phone")}  placeholder="Phone" className="AQinput"></input>
-                    <p className="FORMerror">{errors.phone?.message.substring(0,25)}</p>
-                </div>
-                <div className="inputDiv"> 
-                    <p className="PAYtitle" >Address</p>
-                    <input {...register("address")}  placeholder="Address" className="AQinput"></input>
-                    <p className="FORMerror">{errors.address?.message}</p>
-                </div>
-               
-
-            </div>
-            <div className="managerInputsubContainer">
-            <div className="inputDiv" > 
+                
+           
+            
+            <div className="inputDiv" style={{marginRight:"66%"}} > 
                     <p className="PAYtitle">Category</p>
                     {/* <Select  control={control} options={categories.map(e=>({value:e.id,label:e.name}))} name={"CategoryId"} className="PAYselect"  placeholder="Select Company"/>
                     */}

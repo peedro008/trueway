@@ -25,7 +25,7 @@ import { addLocation } from "../redux/actions";
 
 const ProducerDash = ()=>{
     const userId = useSelector(state=> state.UserId) 
-    const [next, setNext] = useState(false)
+    const [NSD, setNSD] = useState(null)
     const [asd, setAsd] = useState([])
     const google = useGoogleCharts();
     const [producers, setProducers]= useState([])
@@ -41,7 +41,7 @@ const ProducerDash = ()=>{
      const [payments, setPayments] = useState([]) 
   
      useEffect (()=>{
-        axios.get(`http://localhost:8080/producerQuotes?UserId=${userId}`)
+        axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
         .then(function(response){
             setPquotes(response.data)
            
@@ -53,7 +53,7 @@ const ProducerDash = ()=>{
         })
     },[userId])
      useEffect(()=>{
-         axios.get(`http://localhost:8080/getUserPayment?UserId=${userId}`)
+         axios.get(`https://truewayagentbackend.com/getUserPayment?UserId=${userId}`)
              .then(function(response){
                  setPayments(response.data)
                  
@@ -67,7 +67,7 @@ const ProducerDash = ()=>{
      
      },[userId])
      useEffect(()=>{
-        axios.get(`http://localhost:8080/getStatus`)
+        axios.get(`https://truewayagentbackend.com/getStatus`)
             .then(function(response){
                 setModify(response.data)
             
@@ -78,7 +78,7 @@ const ProducerDash = ()=>{
     
     },[])
         useEffect(()=>{
-            axios.get(`http://localhost:8080/getProducer`)
+            axios.get(`https://truewayagentbackend.com/getProducer`)
                 .then(function(response){
                     setProducers(response.data)
                 })
@@ -89,7 +89,7 @@ const ProducerDash = ()=>{
         },[])
      
         useEffect(()=>{
-            axios.get(`http://localhost:8080/quotes`)
+            axios.get(`https://truewayagentbackend.com/quotes`)
                 .then(function(response){
                    
                     setQuotes2(response.data)
@@ -120,6 +120,13 @@ const ProducerDash = ()=>{
          
      },[pquotes])
  
+     useEffect(()=>{
+         let temp = 0
+         payments.map(e=>{
+             temp=+parseFloat(e.NSDvalue)
+         })
+         setNSD(temp)
+     },[payments])
  
         useEffect(() => {
          let pes = 0
@@ -175,7 +182,7 @@ const ProducerDash = ()=>{
                  <div className="DashSubCont1">
                  <div className="DashStatusCont1">
                      <div className="DashStatusHeader">
-                         <p className="DashPListTitle">Usold Quotes</p>
+                         <p className="DashPListTitle">Unsold Quotes</p>
                      </div>
                      <div className="DashStatusColumns">
                          <p className="dashListColumnT1">Client Name</p>
@@ -238,7 +245,7 @@ const ProducerDash = ()=>{
                              </div>
                              <div className="dashText" >
                                      <p className="dashCardTitle">{quotes2.filter(e=>e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Quoted").length}</p>
-                                     <p className="dashCardText">Usold quotes</p>
+                                     <p className="dashCardText">Unsold quotes</p>
                              </div>
                          </div>
                          <div className="dashCard" style={{marginLeft:"50px"}}>
@@ -257,7 +264,7 @@ const ProducerDash = ()=>{
                               
                              </div>
                              <div className="dashText">
-                                    <p className="dashCardTitle">{quotes2.filter(e=>e.NSDvalue!==0&&e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status=="Sold").length*5}</p>
+                                    <p className="dashCardTitle">${NSD}</p>
                                     <p className="dashCardText">Total NSD sales</p>
                             </div>
                          </div>

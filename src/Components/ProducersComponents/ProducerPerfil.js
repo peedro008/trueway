@@ -13,12 +13,15 @@ import { useSelector } from "react-redux";
 function ProducerPerfil(props) {
     const [prod, setProd] = useState([])
     const [quotes, setQuotes] = useState([])
+    const [payments, setPayments] = useState([])
     const google = useGoogleCharts();
     const [mquotes, setMquotes] = useState([])
     const [modify, setModify]= useState([])
     const [mstat, setMstat] = useState([])
     const [yquotes, setYquotes] = useState([])
     const [ystat, setYstat] = useState([])
+    const [mpay, setMpay] = useState([])
+    const [ypay, setYpay] = useState([])
     const [dots1, setDots1] = useState(false)
     const [dots2, setDots2] = useState(false)
     const [dots3, setDots3] = useState(false)
@@ -29,7 +32,7 @@ function ProducerPerfil(props) {
     const [yNSD, setYNSD] = useState(0);
     const UserId = useSelector(state=> state.UserId)
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getProuducerUser?UserId=${UserId}`)
+        axios.get(`https://truewayagentbackend.com/getProuducerUser?UserId=${UserId}`)
         .then(function(response){
             setProd(response.data[0])
            
@@ -40,9 +43,20 @@ function ProducerPerfil(props) {
         })
     },[UserId])
 
-
     useEffect (()=>{
-        axios.get(`http://localhost:8080/producerQuotes?UserId=${UserId}`)
+        axios.get(`https://truewayagentbackend.com/getUserPayment?UserId=${UserId}`)
+        .then(function(response){
+            setPayments(response.data)
+           
+            
+            
+        })
+        .catch(error=>{
+          console.log(error)  
+        })
+    },[UserId])
+    useEffect (()=>{
+        axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${UserId}`)
         .then(function(response){
             setQuotes(response.data)
            
@@ -54,7 +68,7 @@ function ProducerPerfil(props) {
         })
     },[UserId])
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getStatus`)
+        axios.get(`https://truewayagentbackend.com/getStatus`)
             .then(function(response){
                 let paz = response.data
 
@@ -80,20 +94,36 @@ function ProducerPerfil(props) {
         let mq = quotes
         setYquotes(yq.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
         setMquotes(mq.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
-    }, [quotes,  modify])
-
+    
+        
+        let yp = payments
+        let mp = payments
+        setYpay(yp.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
+        setMpay(mp.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
+    }, [quotes,  modify, payments])
     useEffect(() => {
         let pes = 0
         let pas = 0
-        mstat.map(e=>{
-            if(e.Status!=="Quoted"&&e.status!=="Cancelled"){
-                pes+=parseFloat(e.Quote.NSDvalue)
+      
+        mpay.map(e=>{
+            if(e.Category.name!=="HEALTH INSURANCE"){
+            if(e.Quote && e.Category.name=="HOMEOWNERS"){
+                pes+=10
             }
+            if(e.NSDvalue!==""){
+                
+                pes+=5*e.NSDamount
+            }}
         })
-        ystat.map(e=>{
-            if(e.Status!=="Quoted"&&e.status!=="Cancelled"){
-                pas+=parseFloat(e.Quote.NSDvalue)
+        ypay.map(e=>{
+            if(e.Category.name!=="HEALTH INSURANCE"){
+            if(e.Quote && e.Category.name=="HOMEOWNERS"){
+                pas+=10
             }
+            if(e.NSDvalue!==""){
+                
+                pas+=5*e.NSDamount
+            }}
         })
         setNSD(pes)
         setYNSD(pas)
@@ -159,9 +189,9 @@ function ProducerPerfil(props) {
                     <div className="PRODrectB">
                     <div style={{display:"flex", flexDirection:"row"}}>
                         {dots3V==1?
-                         <p className="PRODrectQ">$&nbsp;{NSD*0.125} </p>
+                         <p className="PRODrectQ">$&nbsp;{NSD} </p>
                         :
-                        <p className="PRODrectQ">$&nbsp;{yNSD*0.125} </p>
+                        <p className="PRODrectQ">$&nbsp;{yNSD} </p>
                         }
                         
                         </div>

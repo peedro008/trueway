@@ -30,7 +30,7 @@ const ProducerDetails = (props) => {
     const [yNSD, setYNSD] = useState(0);
  
     useEffect (()=>{
-        axios.get(`http://localhost:8080/producerQuotes?UserId=${Producer.UserId}`)
+        axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${Producer.UserId}`)
         .then(function(response){
             setQuotes(response.data)
            
@@ -42,7 +42,7 @@ const ProducerDetails = (props) => {
         })
     },[Producer])
     useEffect (()=>{
-        axios.get(`http://localhost:8080/getUserPayment?UserId=${Producer.UserId}`)
+        axios.get(`https://truewayagentbackend.com/getUserPayment?UserId=${Producer.UserId}`)
         .then(function(response){
             setPayments(response.data)
            
@@ -54,7 +54,7 @@ const ProducerDetails = (props) => {
         })
     },[Producer])
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getStatus`)
+        axios.get(`https://truewayagentbackend.com/getStatus`)
             .then(function(response){
                 let paz = response.data
 
@@ -91,24 +91,26 @@ const ProducerDetails = (props) => {
     useEffect(() => {
         let pes = 0
         let pas = 0
-        console.log(ypay)
+      
         mpay.map(e=>{
+            if(e.Category.name!=="HEALTH INSURANCE"){
             if(e.Quote && e.Category.name=="HOMEOWNERS"){
                 pes+=10
             }
             if(e.NSDvalue!==""){
                 
                 pes+=5*e.NSDamount
-            }
+            }}
         })
         ypay.map(e=>{
+            if(e.Category.name!=="HEALTH INSURANCE"){
             if(e.Quote && e.Category.name=="HOMEOWNERS"){
                 pas+=10
             }
             if(e.NSDvalue!==""){
                 
                 pas+=5*e.NSDamount
-            }
+            }}
         })
         setNSD(pes)
         setYNSD(pas)

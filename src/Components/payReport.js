@@ -59,7 +59,7 @@ const PayReport = () => {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deletePayment`, {
+    fetch(`https://truewayagentbackend.com/deletePayment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const PayReport = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getPayments`)
+      .get(`https://truewayagentbackend.com/getPayments`)
       .then(function (response) {
         setPayments(response.data);
       })
@@ -98,7 +98,7 @@ const PayReport = () => {
   }, [setPayments]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getLocations`)
+      .get(`https://truewayagentbackend.com/getLocations`)
       .then(function (response) {
         setLocations(response.data);
       })
@@ -108,7 +108,7 @@ const PayReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/clients`)
+      .get(`https://truewayagentbackend.com/clients`)
       .then(function (response) {
         setClients(response.data);
       })
@@ -118,7 +118,7 @@ const PayReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getProducer`)
+      .get(`https://truewayagentbackend.com/getProducer`)
       .then(function (response) {
         setProducers(response.data);
       })

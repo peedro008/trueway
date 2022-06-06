@@ -22,7 +22,7 @@ function ClientsReport() {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/clients`)
+      .get(`https://truewayagentbackend.com/clients`)
       .then(function (response) {
         setPayments(response.data);
       })
@@ -36,7 +36,7 @@ function ClientsReport() {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deleteClient`, {
+    fetch(`https://truewayagentbackend.com/deleteClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

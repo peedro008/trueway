@@ -49,7 +49,7 @@ const ManagerEdit = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getLocations`)
+      .get(`https://truewayagentbackend.com/getLocations`)
       .then(function (response) {
         setLocations(response.data);
       })
@@ -59,7 +59,7 @@ const ManagerEdit = (props) => {
   }, []);
 
   const onSubmit = (data) => {
-    fetch(`http://localhost:8080/modifyManager`, {
+    fetch(`https://truewayagentbackend.com/modifyManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
