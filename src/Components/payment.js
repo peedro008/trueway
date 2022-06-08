@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import "./CSS/css.css";
@@ -41,7 +41,8 @@ const DATE =
   date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
 
 function Payment(props) {
-  const ClientSelected = props.location.aboutProps;
+  const ClientSelected = props.location.aboutProps?.id;
+  const clientName = props.location.aboutProps?.name
   const dispatch = useDispatch();
   const [neww, setNeww] = useState(false);
   const [open, setOpen] = useState(false);
@@ -111,25 +112,25 @@ function Payment(props) {
       .get(`https://truewayagentbackend.com/clients`)
       .then(function (response) {
         setClients(response.data);
-
-        setValue("ClientId", `${ClientSelected}`);
+        if(ClientSelected){
+        setForm({...form, client: clientName, id: ClientSelected})
+        setValue("ClientId", `${ClientSelected}`)};
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [ClientSelected]);
 
   useEffect(() => {
-    form.client&&
     axios
       .get(`https://truewayagentbackend.com/clientQuotes?client=${form.id}`)
       .then(function (response) {
-        setQuotes(response.data);
 
+        setQuotes(response.data)
       
       })
       .catch((error) => {
-        console.log(error);
+        setQuotes([])
       });
   }, [form]);
 
@@ -247,7 +248,7 @@ useEffect(()=>{
                   )}
                 />
             
-                
+         
               </>
             ) : (
               <>
@@ -343,6 +344,7 @@ useEffect(()=>{
                 </> )}
             </div>
           ):
+          <>
           <div className="PAYInputCont" style={{ marginTop: "25px" }}>
             <p className="PAYtitle">Quote</p>
             <Controller
@@ -364,7 +366,36 @@ useEffect(()=>{
             />
 
             <p className="FORMerror">{errors.LocationId?.message}</p>
-          </div>}
+          </div>
+           <div
+           className="AQinputContainer"
+           style={{ marginTop: "29px" }}
+         >
+           <p className="AQinputName">Category</p>
+           <div className="AQyesNoContainer">
+             <div>
+             <Controller
+         control={control}
+         name="CategoryId"
+         render={({ field: { onChange, onBlur, value, ref } }) => (
+           <Select
+           defaultValue={optionsCa.find(
+            (c) => c.value === form.Category
+          )}
+             value={optionsCa.find((c) => c.value === value)}
+             onChange={(val) => onChange(val.value)}
+             control={control}
+             options={categories.map((e) => ({
+               value: e.id,
+               label: e.name,
+             }))}
+             name={"CategoryId"}
+             className="PAYselect"
+             placeholder="Select Category"
+           />
+             )}
+           />
+               </div></div></div></>}
         </div>
 
         <div className="PAYBox" style={{ marginTop: "25px" }}>

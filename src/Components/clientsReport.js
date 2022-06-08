@@ -158,7 +158,7 @@ function ClientsReport() {
                           }}
                           to={{
                             pathname: "/payments/pay",
-                            aboutProps: e.id,
+                            aboutProps: e,
                           }}
                         >
                           <div
@@ -235,53 +235,20 @@ function ClientsReport() {
                   return (
                     <tr>
                       <td className="ClientName" scope="row">
-                        <NavLink
-                          style={{
-                            textDecoration: "none",
-                            color: "#000",
-                            color: "black",
-                          }}
-                          to={{
-                            pathname: "/report/clientedit",
-                            aboutProps: e,
-                          }}
-                        >
-                          {e.name}
-                        </NavLink>
+                        {e.name}
                       </td>
                       <td className="ClientName" scope="row">
-                        {" "}
-                        <NavLink
-                          style={{
-                            textDecoration: "none",
-                            color: "#000",
-                            color: "black",
-                          }}
-                          to={{
-                            pathname: "/report/clientedit",
-                            aboutProps: e,
-                          }}
-                        >
-                          {e.email}
-                        </NavLink>
+                        {e.email}
                       </td>
+
                       <td className="ClientName" scope="row">
-                        <NavLink
-                          style={{
-                            textDecoration: "none",
-                            color: "#000",
-                            color: "black",
-                          }}
-                          to={{
-                            pathname: "/report/clientedit",
-                            aboutProps: e,
-                          }}
-                        >
-                          {e.tel}
-                        </NavLink>
+                        {e.tel}
                       </td>
                       <td className="ClientName" scope="row">
                         {e.Company ? e.Company.name : "-"}
+                      </td>
+                      <td className="ClientName" scope="row">
+                        {e.address ? e.address : "-"}
                       </td>
                       <td className="ClientName" scope="row">
                         {e.new ? "true" : "false"}
@@ -306,7 +273,7 @@ function ClientsReport() {
                           }}
                           to={{
                             pathname: "/payments/pay",
-                            aboutProps: e.id,
+                            aboutProps: e,
                           }}
                         >
                           <div
