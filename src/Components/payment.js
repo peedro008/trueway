@@ -99,7 +99,7 @@ function Payment(props) {
   }, [userId]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getCategories`)
+      .get(`http://localhost:8080/getCategories`)
       .then(function (response) {
         setCategories(response.data);
       })
@@ -109,7 +109,7 @@ function Payment(props) {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clients`)
+      .get(`http://localhost:8080/clients`)
       .then(function (response) {
         setClients(response.data);
         if(ClientSelected){
@@ -123,7 +123,7 @@ function Payment(props) {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clientQuotes?client=${form.id}`)
+      .get(`http://localhost:8080/clientQuotes?client=${form.id}`)
       .then(function (response) {
 
         setQuotes(response.data)
@@ -139,7 +139,7 @@ function Payment(props) {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getLocations`)
+      .get(`http://localhost:8080/getLocations`)
       .then(function (response) {
         setLocations(response.data);
       })
@@ -178,7 +178,7 @@ useEffect(()=>{
 
   const onSubmit = (data) => {
     if (newClient == false) {
-      fetch(`https://truewayagentbackend.com/addPayment`, {
+      fetch(`http://localhost:8080/addPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -188,7 +188,7 @@ useEffect(()=>{
         .then((response) => response.json())
         .then((data) => dispatch(addPay(data), onOpenModal()));
     } else {
-      fetch(`https://truewayagentbackend.com/addClientPayment`, {
+      fetch(`http://localhost:8080/addClientPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -26,6 +26,7 @@ const ManagerDealer = () => {
   const [dealerSalePerson, setDealerSalePerson] = useState([]);
   const [client, setClient] = useState([]);
   const [neww, setNeww] = useState(false);
+
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -44,7 +45,7 @@ const ManagerDealer = () => {
   const onSubmit = (data) => {
     data && 
 
-    fetch(`https://truewayagentbackend.com/addDealer`, {
+    fetch(`http://localhost:8080/addDealer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +72,7 @@ const ManagerDealer = () => {
   };
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDealerSalePerson`)
+      .get(`http://localhost:8080/getDealerSalePerson`)
       .then(function (response) {
         setDealerSalePerson(response.data);
       })
@@ -81,7 +82,7 @@ const ManagerDealer = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clients`)
+      .get(`http://localhost:8080/clients`)
       .then(function (response) {
         setClient(response.data);
       })
@@ -108,7 +109,7 @@ const ManagerDealer = () => {
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Select
                   value={optionsC.find((c) => c.value === value)}
-                  onChange={(val) => onChange(val.value)}
+                  onChange={(val) =>{ onChange(val.value)}}
                   control={control}
                   options={client.map((e) => ({
                     value: e.id,

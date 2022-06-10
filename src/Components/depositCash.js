@@ -24,7 +24,7 @@ const DepositCash = () => {
  
 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCashPayment?LocationId=${LocationId}`)
+        axios.get(`http://localhost:8080/getCashPayment?LocationId=${LocationId}`)
         .then(function(response){
             setDbPayments(response.data)
             
@@ -47,7 +47,7 @@ const DepositCash = () => {
     const submit = () =>{
         let data = {id:id, UserId: UserId, LocationId: LocationId, note: note, total: total}
         onOpenModal()
-        fetch(`https://truewayagentbackend.com/deposit`, {
+        fetch(`http://localhost:8080/deposit`, {
                     
             method: 'POST',
             headers: {

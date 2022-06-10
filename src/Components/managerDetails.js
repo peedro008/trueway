@@ -13,6 +13,7 @@ const ManagerDetails = (props) => {
   const [quotes, setQuotes] = useState([]);
   const google = useGoogleCharts();
   const [mquotes, setMquotes] = useState([]);
+  const [payments, setPayments] = useState([])
   const [modify, setModify] = useState([]);
   const [mstat, setMstat] = useState([]);
   const [ystat, setYstat] = useState([]);
@@ -25,11 +26,13 @@ const ManagerDetails = (props) => {
   const [dots3V, setDots3V] = useState(1);
   const [NSD, setNSD] = useState(0);
   const [yNSD, setYNSD] = useState(0);
+  const [mpay, setMpay] = useState([])
+  const [ypay, setYpay] = useState([])
 
   useEffect(() => {
     axios
       .get(
-        `https://truewayagentbackend.com/producerQuotes?UserId=${Producer.UserId}`
+        `http://localhost:8080/producerQuotes?UserId=${Producer.UserId}`
       )
       .then(function (response) {
         setQuotes(response.data);
@@ -42,7 +45,7 @@ const ManagerDetails = (props) => {
   }, [Producer]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getStatus`)
+      .get(`http://localhost:8080/getStatus`)
       .then(function (response) {
         let paz = response.data;
 
@@ -52,6 +55,18 @@ const ManagerDetails = (props) => {
         console.log(error);
       });
   }, []);
+  useEffect (()=>{
+    axios.get(`http://localhost:8080/getUserPayment?UserId=${Producer.UserId}`)
+    .then(function(response){
+        setPayments(response.data)
+       
+        
+        
+    })
+    .catch(error=>{
+      console.log(error)  
+    })
+},[Producer])
 
   useEffect(() => {
     const date = new Date();
@@ -79,24 +94,41 @@ const ManagerDetails = (props) => {
         let mq = quotes
         setYquotes(yq.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
         setMquotes(mq.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
+
+        let yp = payments
+        let mp = payments
+        setYpay(yp.filter(e=>e.date.substring(0,4)==DATE.substring(0,4)))
+        setMpay(mp.filter(e=>e.date.substring(0,7)==DATE.substring(0,7)))
   }, [mquotes]);
 
   useEffect(() => {
-    let pes = 0;
-    let pas = 0;
-    mstat.map((e) => {
-      if (e.Status !== "Quoted" && e.status !== "Cancelled") {
-        pes += parseFloat(e.Quote.NSDvalue);
-      }
-    });
-    ystat.map((e) => {
-      if (e.Status !== "Quoted" && e.status !== "Cancelled") {
-        pas += parseFloat(e.Quote.NSDvalue);
-      }
-    });
-    setNSD(pes);
-    setYNSD(pas);
-  },  [ystat, mstat, quotes, Producer, modify]);
+    let pes = 0
+    let pas = 0
+  
+    mpay.map(e=>{
+        if(e.Category.name!=="HEALTH INSURANCE"){
+        if(e.Quote && e.Category.name=="HOMEOWNERS"){
+            pes+=10
+        }
+        if(e.NSDvalue!==""){
+            
+            pes+=5*e.NSDamount
+        }}
+    })
+    ypay.map(e=>{
+        if(e.Category.name!=="HEALTH INSURANCE"){
+        if(e.Quote && e.Category.name=="HOMEOWNERS"){
+            pas+=10
+        }
+        if(e.NSDvalue!==""){
+            
+            pas+=5*e.NSDamount
+        }}
+    })
+    setNSD(pes)
+    setYNSD(pas)
+}, [quotes, Producer, modify,ystat, mstat])
+  
 
   return (
     <div className="genericDiv">
@@ -246,9 +278,9 @@ const ManagerDetails = (props) => {
           <div className="PRODrectB">
             <div style={{ display: "flex", flexDirection: "row" }}>
               {dots3V == 1 ? (
-                <p className="PRODrectQ">$&nbsp;{NSD * 0.125} </p>
+                <p className="PRODrectQ">$&nbsp;{NSD} </p>
               ) : (
-                <p className="PRODrectQ">$&nbsp;{yNSD * 0.125} </p>
+                <p className="PRODrectQ">$&nbsp;{yNSD} </p>
               )}
             </div>
             <div className="PRODrectP"></div>

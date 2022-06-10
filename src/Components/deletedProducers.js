@@ -31,7 +31,7 @@ const DeletedProducers = () => {
   };
   const deleteProducer = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/undeleteProducer`, {
+    fetch(`http://localhost:8080/undeleteProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const DeletedProducers = () => {
   };
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDeletedProducer`)
+      .get(`http://localhost:8080/getDeletedProducer`)
       .then(function (response) {
         setProducers(response.data);
       })
@@ -68,7 +68,7 @@ const DeletedProducers = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/quotes`)
+      .get(`http://localhost:8080/quotes`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -78,7 +78,7 @@ const DeletedProducers = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getStatus`)
+      .get(`http://localhost:8080/getStatus`)
       .then(function (response) {
         setModify(response.data);
       })

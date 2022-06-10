@@ -36,7 +36,7 @@ const ManagerP=()=>{
         data&&
         setinputs({...inputs, UserRole:"Producer"})
         
-        fetch(`https://truewayagentbackend.com/addProducer`, {
+        fetch(`http://localhost:8080/addProducer`, {
             
             method: 'POST',
             headers: {
@@ -69,7 +69,7 @@ const ManagerP=()=>{
         });
     }
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getLocations`)
+        axios.get(`http://localhost:8080/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 

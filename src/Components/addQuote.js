@@ -49,6 +49,7 @@ const AddQuote = () => {
   const [locations, setLocations] = useState([]);
   const [ERR, setERR] = useState({ ClientId: false });
   const [dealers, setDealers] = useState([]);
+  const [dealerData, setDealerData] = useState({ClientId:null, DealerSalePersonId:null,  amount: 0, paid: false})
   const {
     register,
     handleSubmit,
@@ -61,7 +62,7 @@ const AddQuote = () => {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDealerSalePerson`)
+      .get(`http://localhost:8080/getDealerSalePerson`)
       .then(function (response) {
         setDealers(response.data);
         setInputs({ ...inputs, ProducerId: 1 });
@@ -72,7 +73,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clients`)
+      .get(`http://localhost:8080/clients`)
       .then(function (response) {
         setClients(response.data);
       })
@@ -82,7 +83,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getLocations`)
+      .get(`http://localhost:8080/getLocations`)
       .then(function (response) {
         setLocations(response.data);
       })
@@ -92,7 +93,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getProducer`)
+      .get(`http://localhost:8080/getProducer`)
       .then(function (response) {
         setProducers(response.data);
       })
@@ -102,7 +103,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getCategories`)
+      .get(`http://localhost:8080/getCategories`)
       .then(function (response) {
         setCategories(response.data);
       })
@@ -112,7 +113,7 @@ const AddQuote = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getCompany`)
+      .get(`http://localhost:8080/getCompany`)
       .then(function (response) {
         setCompanies(response.data);
       })
@@ -165,17 +166,19 @@ const AddQuote = () => {
       (data.monthlyPayments == "" && setValue("monthlyPayment", "0"));
     setValue("Bound", `${inputs.Bound}`);
     console.log(data);
-    fetch(`https://truewayagentbackend.com/addQuote`, {
+    fetch(`http://localhost:8080/addQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
+   
       .then(async (res) => {
         try {
+          handleDealer()
           const jsonRes = await res.json();
-
+         
           if (res.status !== 200) {
             console.log("error");
           } else {
@@ -191,7 +194,36 @@ const AddQuote = () => {
         console.log(err);
       });
   };
+  const handleDealer = ()=>{
+   
+    inputs.DealerSalePerson&&
+    
+    fetch(`http://localhost:8080/addDealer`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dealerData),
+    })
+      .then(async (res) => {
+        try {
+          const jsonRes = await res.json();
 
+          if (res.status !== 200) {
+            console.log("error");
+          } else {
+            console.log(jsonRes);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+  }
   const handleNewClient = () => {
     !newClient ? setNewClient(true) : reload();
   };
@@ -228,7 +260,7 @@ const AddQuote = () => {
                     render={({ field: { onChange, onBlur, value, ref } }) => (
                       <Select
                         value={optionsC.find((c) => c.value === value)}
-                        onChange={(val) => onChange(val.value)}
+                        onChange={(val) => {onChange(val.value); setDealerData({...dealerData, ClientId: val.value})}}
                         control={control}
                         options={clients.map((e) => ({
                           value: e.id,
@@ -397,14 +429,16 @@ const AddQuote = () => {
                   )}
                 </div>
                 {inputs.DealerSalePerson && (
-                  <>
+                  <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"240px"}}>
                     <Controller
                       control={control}
                       name="DealerId"
                       render={({ field: { onChange, onBlur, value, ref } }) => (
                         <Select
                           value={optionsD.find((c) => c.value === value)}
-                          onChange={(val) => onChange(val.value)}
+                          onChange={(val) => {
+                            onChange(val.value)
+                           setDealerData({...dealerData, DealerSalePersonId: val.value})}}
                           control={control}
                           options={dealers.map((e) => ({
                             value: e.id,
@@ -414,12 +448,25 @@ const AddQuote = () => {
                           className="PAYselect"
                           placeholder="Select Dealer"
                         />
+                        
                       )}
+                      
+                    />
+                       <input
+                      className="AQinput2"
+                      style={{width:"60px", marginLeft:"20px"}}
+                      placeholder="Amount"
+                      key="amount"
+                      name="amount"
+                      type="number"
+                      value={dealerData.amount}
+                      onChange={(e)=>{setDealerData({...dealerData, amount:e.target.value})}}
+                    
                     />
                     {ERR.DealerId && (
                       <p className="FORMerror">"Client is a required field"</p>
                     )}
-                  </>
+                  </div>
                 )}
               </div>
             </div>

@@ -60,7 +60,7 @@ const DeletedQuote=(props)=>{
         DealerId:false
     })
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getDealerSalePerson`)
+        axios.get(`http://localhost:8080/getDealerSalePerson`)
             .then(function(response){
                 setDealers(response.data)
                 
@@ -71,7 +71,7 @@ const DeletedQuote=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/clients`)
+        axios.get(`http://localhost:8080/clients`)
             .then(function(response){
                 setClients(response.data)
                 
@@ -82,7 +82,7 @@ const DeletedQuote=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getProducer`)
+        axios.get(`http://localhost:8080/getProducer`)
             .then(function(response){
                 setProducers(response.data)
             })
@@ -92,7 +92,7 @@ const DeletedQuote=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCategories`)
+        axios.get(`http://localhost:8080/getCategories`)
             .then(function(response){
                 setCategories(response.data)
             })
@@ -102,7 +102,7 @@ const DeletedQuote=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCompany`)
+        axios.get(`http://localhost:8080/getCompany`)
             .then(function(response){
                 setCompanies(response.data)
             })
@@ -112,7 +112,7 @@ const DeletedQuote=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getLocations`)
+        axios.get(`http://localhost:8080/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -123,7 +123,7 @@ const DeletedQuote=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getdeletedquotes`)
+        axios.get(`http://localhost:8080/getdeletedquotes`)
             .then(function(response){
                 setQuotes(response.data)
                 
@@ -190,7 +190,7 @@ const DeletedQuote=(props)=>{
     const deleteClient = (data) => {
         data&&
         console.log(data)
-        fetch(`https://truewayagentbackend.com/undeleteQuote`, {
+        fetch(`http://localhost:8080/undeleteQuote`, {
             
             method: 'POST',
             headers: {

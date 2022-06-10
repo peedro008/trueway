@@ -32,7 +32,7 @@ function ProducerPerfil(props) {
     const [yNSD, setYNSD] = useState(0);
     const UserId = useSelector(state=> state.UserId)
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getProuducerUser?UserId=${UserId}`)
+        axios.get(`http://localhost:8080/getProuducerUser?UserId=${UserId}`)
         .then(function(response){
             setProd(response.data[0])
            
@@ -44,7 +44,7 @@ function ProducerPerfil(props) {
     },[UserId])
 
     useEffect (()=>{
-        axios.get(`https://truewayagentbackend.com/getUserPayment?UserId=${UserId}`)
+        axios.get(`http://localhost:8080/getUserPayment?UserId=${UserId}`)
         .then(function(response){
             setPayments(response.data)
            
@@ -56,7 +56,7 @@ function ProducerPerfil(props) {
         })
     },[UserId])
     useEffect (()=>{
-        axios.get(`https://truewayagentbackend.com/producerQuotes?UserId=${UserId}`)
+        axios.get(`http://localhost:8080/producerQuotes?UserId=${UserId}`)
         .then(function(response){
             setQuotes(response.data)
            
@@ -68,7 +68,7 @@ function ProducerPerfil(props) {
         })
     },[UserId])
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getStatus`)
+        axios.get(`http://localhost:8080/getStatus`)
             .then(function(response){
                 let paz = response.data
 

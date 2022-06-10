@@ -36,7 +36,7 @@ const ManagerC=()=>{
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCategories`)
+        axios.get(`http://localhost:8080/getCategories`)
             .then(function(response){
                 setCategories(response.data)
                 
@@ -49,7 +49,7 @@ const ManagerC=()=>{
     const onSubmit = (data) => {
         data&&
         console.log(JSON.stringify(data))
-        fetch(`https://truewayagentbackend.com/addCompany`, {
+        fetch(`http://localhost:8080/addCompany`, {
             
             method: 'POST',
             headers: {

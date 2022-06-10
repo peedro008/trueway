@@ -43,7 +43,7 @@ const DealerReport = () => {
 }
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDealerSalePerson`)
+      .get(`http://localhost:8080/getDealerSalePerson`)
       .then(function (response) {
         setDealerSalePerson(response.data);
        })
@@ -53,7 +53,7 @@ const DealerReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clients`)
+      .get(`http://localhost:8080/clients`)
       .then(function (response) {
         setClients(response.data);
 
@@ -65,7 +65,7 @@ const DealerReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDealers`)
+      .get(`http://localhost:8080/getDealers`)
       .then(function (response) {
         setDealers(response.data);
       })
@@ -74,7 +74,7 @@ const DealerReport = () => {
       });
   }, []);
   const PayDealer = (data) => {
-    fetch(`https://truewayagentbackend.com/paidDealer`, {
+    fetch(`http://localhost:8080/paidDealer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

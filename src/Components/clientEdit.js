@@ -17,7 +17,7 @@ function ClientEdit(props) {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
  useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCompany`)
+        axios.get(`http://localhost:8080/getCompany`)
             .then(function(response){
                 setCompany(response.data)
                 
@@ -30,7 +30,7 @@ function ClientEdit(props) {
     
   const handleClick = () => {
     
-    fetch(`https://truewayagentbackend.com/modifyClient`, {
+    fetch(`http://localhost:8080/modifyClient`, {
             
       method: 'POST',
       headers: {

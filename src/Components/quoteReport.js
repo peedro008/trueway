@@ -63,7 +63,7 @@ const QuoteReport=(props)=>{
         DealerId:false
     })
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getDealerSalePerson`)
+        axios.get(`http://localhost:8080/getDealerSalePerson`)
             .then(function(response){
                 setDealers(response.data)
                 
@@ -74,7 +74,7 @@ const QuoteReport=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/clients`)
+        axios.get(`http://localhost:8080/clients`)
             .then(function(response){
                 setClients(response.data)
                 
@@ -85,7 +85,7 @@ const QuoteReport=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getProducer`)
+        axios.get(`http://localhost:8080/getProducer`)
             .then(function(response){
                 setProducers(response.data)
             })
@@ -95,7 +95,7 @@ const QuoteReport=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCategories`)
+        axios.get(`http://localhost:8080/getCategories`)
             .then(function(response){
                 setCategories(response.data)
             })
@@ -105,7 +105,7 @@ const QuoteReport=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getCompany`)
+        axios.get(`http://localhost:8080/getCompany`)
             .then(function(response){
                 setCompanies(response.data)
             })
@@ -115,7 +115,7 @@ const QuoteReport=(props)=>{
     
     },[])
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/getLocations`)
+        axios.get(`http://localhost:8080/getLocations`)
             .then(function(response){
                 setLocations(response.data)
                 
@@ -126,7 +126,7 @@ const QuoteReport=(props)=>{
     
     },[]) 
     useEffect(()=>{
-        axios.get(`https://truewayagentbackend.com/quotes`)
+        axios.get(`http://localhost:8080/quotes`)
             .then(function(response){
                 setQuotes(response.data)
                 
@@ -196,7 +196,7 @@ const QuoteReport=(props)=>{
     const deleteClient = (data) => {
         data&&
         console.log(data)
-        fetch(`https://truewayagentbackend.com/deleteQuote`, {
+        fetch(`http://localhost:8080/deleteQuote`, {
             
             method: 'POST',
             headers: {
@@ -275,7 +275,7 @@ const QuoteReport=(props)=>{
              {
                  filterValues.SoldBy&&
                  <div className="cloudFilter">
-                     <p className="cloudFilterText">Sold By:{producers.find(c => c.id ==  filterValues.ProducerId).name}
+                     <p className="cloudFilterText">Sold By:{producers.find(c => c.id ==  filterValues.ProducerId)?.name}
                      </p>
                      <img src={close} style={{marginLeft:"5px"}} onClick={()=>{closeCloud({...filterValues,SoldBy:null})}}/>
                      </div>
@@ -283,7 +283,7 @@ const QuoteReport=(props)=>{
               {
                  filterValues.ProducerId&&
                  <div className="cloudFilter">
-                     <p className="cloudFilterText">Producer name:{producers.find(c => c.id ==  filterValues.ProducerId).name}
+                     <p className="cloudFilterText">Producer name:{producers.find(c => c.id ==  filterValues.ProducerId)?.name}
                     </p>
                     <img src={close} style={{marginLeft:"5px"}} onClick={()=>{closeCloud({...filterValues,ProducerId:null})}}/>
                     </div>
@@ -291,7 +291,7 @@ const QuoteReport=(props)=>{
               {
                  filterValues.LocationId&&
                  <div className="cloudFilter">
-                     <p className="cloudFilterText">Location:{locations.find(c => c.id ==  filterValues.LocationId).name}
+                     <p className="cloudFilterText">Location:{locations.find(c => c.id ==  filterValues.LocationId)?.name}
                      </p>
                      <img src={close} style={{marginLeft:"5px"}} onClick={()=>{closeCloud({...filterValues,LocationId:null})}}/>
                      </div>
@@ -299,7 +299,7 @@ const QuoteReport=(props)=>{
               {
                  filterValues.CompanyId&&
                  <div className="cloudFilter">
-                     <p className="cloudFilterText">Company:{companies.find(c => c.id ==  filterValues.CompanyId).name}
+                     <p className="cloudFilterText">Company:{companies.find(c => c.id ==  filterValues.CompanyId)?.name}
                      </p> 
                      <img src={close} style={{marginLeft:"5px"}} onClick={()=>{closeCloud({...filterValues,CompanyId:null})}}/>
                      </div>
@@ -307,7 +307,7 @@ const QuoteReport=(props)=>{
                {
                  filterValues.CategoryId&&
                  <div className="cloudFilter">
-                     <p className="cloudFilterText">Category:{categories.find(c => c.id ==  filterValues.CategoryId).name}
+                     <p className="cloudFilterText">Category:{categories.find(c => c.id ==  filterValues.CategoryId)?.name}
                      </p>
                      <img src={close} style={{marginLeft:"5px"}} onClick={()=>{closeCloud({...filterValues,CategoryId:null})}}/>
                      </div>
@@ -322,7 +322,7 @@ const QuoteReport=(props)=>{
               {
                  filterValues.DealerId&&
                  <div className="cloudFilter">
-                     <p className="cloudFilterText">Location:{dealers.find(c => c.id ==  filterValues.DealerId).name}
+                     <p className="cloudFilterText">Location:{dealers.find(c => c.id ==  filterValues.DealerId)?.name}
                      </p>
                      <img src={close} style={{marginLeft:"5px"}}onClick={()=>{closeCloud({...filterValues,DealerId:null})}}/>
                      </div>

@@ -9,7 +9,7 @@ function PizzaChart ({google}) {
   const [quotes, setQuotes]= useState([])
   
   useEffect(()=>{
-    axios.get(`https://truewayagentbackend.com/quotes`)
+    axios.get(`http://localhost:8080/quotes`)
         .then(function(response){
             setQuotes(response.data)
             
@@ -23,7 +23,7 @@ function PizzaChart ({google}) {
 
 },[])
       useEffect(()=>{
-          axios.get(`https://truewayagentbackend.com/getProducer`)
+          axios.get(`http://localhost:8080/getProducer`)
               .then(function(response){
                   setProducers(response.data)
               })
@@ -33,7 +33,7 @@ function PizzaChart ({google}) {
       
       },[])
       useEffect(()=>{
-          axios.get(`https://truewayagentbackend.com/getStatus`)
+          axios.get(`http://localhost:8080/getStatus`)
               .then(function(response){
                   setModify(response.data)
               })
