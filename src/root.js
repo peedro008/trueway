@@ -1,25 +1,26 @@
 import React from 'react';
 import {  useSelector } from 'react-redux';
-import Auth from './Components/auth';
+import Auth from './Controllers/auth';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
-import AdminRouter from './Components/adminRouter';
+import AdminRouter from './Routers/adminRouter';
 
-import ProducerRouter from './Components/producersRouter';
+import ProducerRouter from './Routers/producersRouter';
 
-
+import { FetchAll}  from './Logic/Fetch';
+import LoginRouter from './Routers/LoginRouter';
 
 function Root ({ store }) {
-
+FetchAll()
 const state= useSelector(state=>state.userRole)
 
-if(state===null){
+if(!state){
   return (
       
     
 
     
-      <Auth/>
+      <LoginRouter/>
        
      
    )

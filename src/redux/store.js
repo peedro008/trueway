@@ -1,17 +1,14 @@
-import { applyMiddleware } from 'redux'
-import { composeWithDevTools} from 'redux-devtools-extension';
-import thunk from 'redux-thunk'
-import reducer from "./reducer"
-import {compose, createStore} from 'redux';
-
+import { applyMiddleware, compose, createStore } from 'redux'
 import persistState from 'redux-localstorage'
- 
-const enhancer = compose(
-  composeWithDevTools(applyMiddleware(thunk)),
-  persistState(/*paths, config*/),
-)
- 
-const store = createStore(reducer, enhancer)
+import logger from 'redux-logger'
+import thunk from 'redux-thunk'
+import promise from 'redux-promise-middleware'
 
+import reducer from './reducer'
 
+const middleware = compose(applyMiddleware(promise, logger, thunk ),
+persistState()
+);
+
+ const store = createStore(reducer, middleware)
 export default store

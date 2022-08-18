@@ -11,7 +11,7 @@ export function loadState() {
 
 export async function saveState(state) {
   try {
-    const serializedState = JSON.stringify(state);
+    const serializedState = JSON.stringify(state.UserRole, state.UserName, state.UserId, state.user);
     localStorage.setItem(KEY, serializedState);
   } catch (e) {
     // Ignore

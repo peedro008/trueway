@@ -1,7 +1,7 @@
 
 
 const NSDcalculator = (category, amount=0) => {
-  console.log(category, amount)
+ 
   if(category==1){
       return amount*40
   }
@@ -30,4 +30,6 @@ const NSDcalculator = (category, amount=0) => {
     return 25
   }
 }
-export default  NSDcalculator
+
+
+export default NSDcalculator

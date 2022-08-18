@@ -1,15 +1,14 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "Gilroy-Regular";
-}
-
 @import url(    'https://fonts.googleapis.com/css?family=Montserrat');
 
 @import url(    'https://fonts.googleapis.com/css?family=Inter');
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 @import url('http://fonts.googleapis.com/css?family=Lato:400,700');
 
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Gilroy-Regular";
+}
 /* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -17,9 +16,9 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-} */
+}
 
-/* code {
+code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
