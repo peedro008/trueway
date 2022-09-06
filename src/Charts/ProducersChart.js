@@ -13,7 +13,7 @@ function PizzaChart ({google}) {
     date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
   useEffect(()=>{
 
-    axios.get(` https://truewayagentBackend.com/quotes`)
+    axios.get(`https://truewayagentBackend.com/quotes`)
         .then(function(response){
             setQuotes(response.data.filter((e) => e.date.substring(0, 7) == DATE.substring(0, 7)))
             
@@ -27,7 +27,7 @@ function PizzaChart ({google}) {
 
 },[DATE])
       useEffect(()=>{
-          axios.get(` https://truewayagentBackend.com/getProducer`)
+          axios.get(`https://truewayagentBackend.com/getProducer`)
               .then(function(response){
                   setProducers(response.data)
               })
@@ -37,7 +37,7 @@ function PizzaChart ({google}) {
       
       },[])
       useEffect(()=>{
-          axios.get(` https://truewayagentBackend.com/getStatus`)
+          axios.get(`https://truewayagentBackend.com/getStatus`)
               .then(function(response){
                   setModify(response.data.filter((e) => e.Quote.date.substring(0, 7) == DATE.substring(0, 7)))
               })
@@ -52,7 +52,7 @@ function PizzaChart ({google}) {
           producers.map((e, index)=>{
             
             pes.push(
-              [e.name, modify.filter(f=>f.User.name==e.name&&f.Status=="Sold").length,
+              [e.name, quotes.filter(f=>f.User.name==e.name&&f.QuoteStatuses[0].Status=="Sold").length,
                quotes.filter(f=>f.User.name==e.name&&f.QuoteStatuses.sort(function (a, b) {return  b.id - a.id;})[0].Status=="Quoted").length])
           })
           setDato(pes)

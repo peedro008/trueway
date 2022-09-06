@@ -44,7 +44,7 @@ const PaymentReport = () => {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(` https://truewayagentBackend.com/deletePayment`, {
+    fetch(`https://truewayagentBackend.com/deletePayment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,7 +81,7 @@ const PaymentReport = () => {
       params.append(e[0]=="ProducerId"?"UserId":`${e[0]}`, e[1]);
     });
     axios
-      .get(` https://truewayagentBackend.com/getPaymentsReport`, { params })
+      .get(`https://truewayagentBackend.com/getPaymentsReport`, { params })
       .then(function (response) {
         setPayments(response.data);
       })

@@ -25,7 +25,7 @@ const ManagerReport = () => {
   };
   const deleteManager = (data) => {
     data && console.log(data);
-    fetch(` https://truewayagentBackend.com/deleteManager`, {
+    fetch(`https://truewayagentBackend.com/deleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const ManagerReport = () => {
   };
   useEffect(() => {
     axios
-      .get(` https://truewayagentBackend.com/getManager`)
+      .get(`https://truewayagentBackend.com/getManager`)
       .then(function (response) {
         setManagers(response.data);
       })
@@ -62,7 +62,7 @@ const ManagerReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(` https://truewayagentBackend.com/quotes`)
+      .get(`https://truewayagentBackend.com/quotes`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -72,7 +72,7 @@ const ManagerReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(` https://truewayagentBackend.com/getStatus`)
+      .get(`https://truewayagentBackend.com/getStatus`)
       .then(function (response) {
         setModify(response.data);
       })

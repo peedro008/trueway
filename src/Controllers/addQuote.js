@@ -44,7 +44,7 @@ const AddQuote = () => {
   const userId = useSelector((state) => state.UserId);
   const [newClient, setNewClient] = useState(false);
   const [inputs, setInputs] = useState({ Bound: false });
-
+  const [CategoAux, setCategoAux] = useState(false);
   const [ERR, setERR] = useState({ ClientId: false });
   const [dealerData, setDealerData] = useState({
     ClientId: null,
@@ -116,7 +116,7 @@ const AddQuote = () => {
       (data.monthlyPayments == "" && setValue("monthlyPayment", "0"));
     setValue("Bound", `${inputs.Bound}`);
 
-    fetch(` https://truewayagentBackend.com/addQuote`, {
+    fetch(`https://truewayagentBackend.com/addQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -135,7 +135,7 @@ const AddQuote = () => {
   const handleDealer = (x=null) => {
     inputs.DealerSalePerson &&
     !x?
-      fetch(` https://truewayagentBackend.com/addDealer`, {
+      fetch(`https://truewayagentBackend.com/addDealer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -159,7 +159,7 @@ const AddQuote = () => {
           console.log(err);
         })
         :
-        fetch(` https://truewayagentBackend.com/addDealer`, {
+        fetch(`https://truewayagentBackend.com/addDealer`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -226,6 +226,8 @@ const AddQuote = () => {
       dealerData={dealerData}
       setValue={setValue}
       setDealerData={setDealerData}
+CategoAux={CategoAux}
+      setCategoAux={setCategoAux}
     />
   );
 };

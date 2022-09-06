@@ -30,12 +30,15 @@ import QuoteDetails from '../Controllers/quoteDetails';
 import QuoteModify from '../Controllers/quoteModify';
 import DepositReport from '../Controllers/depositReport';
 import PaymentDetails from "../Controllers/paymentDetails";
+import Stadistic from '../Controllers/stadistic';
+import GenericReport from '../Controllers/genericReport';
  const ProducerRouter=()=>{
 
 
     return (
         <Router>
-          <Route component={ProducerNav}/>
+          <Route component={ProducerNav}/>     
+          <Route exact path='/stadistic' component={Stadistic}/>
           <Route exact path="/" component={ProducerDashboard}/>
           <Route exact path="/management" component={Management} />
           <Route exact path="/report" component={ReportsLobby} />
@@ -60,6 +63,7 @@ import PaymentDetails from "../Controllers/paymentDetails";
           <Route exact path='/report/depositReport' component={DepositReport}/> 
           <Route exact path='/addquote' component={AddQuote}/>
           <Route exact path='/report/payment/details' component={PaymentDetails}/>
+          <Route exact path='/report/genericReport' component={GenericReport}/>
           
         </Router>
       );

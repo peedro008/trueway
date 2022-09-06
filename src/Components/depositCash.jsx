@@ -52,7 +52,7 @@ onCloseModal
                                         <td className="row1" scope="row">{e.type}</td>  
                                         <td className="row1" scope="row">{e.date}</td>
                                         
-                                        <td className="row1" scope="row">{parseFloat(e.amount)+parseFloat(e.creditCardFee)+parseFloat(e.PIPvalue)+parseFloat(e.MVRvalue)+parseFloat(e.NSDvalue)}</td>     
+                                        <td className="row1" scope="row">{parseFloat(e.amount)+(e.creditCardFee.length?parseFloat(e.creditCardFee):0)+parseFloat(e.PIPvalue)+parseFloat(e.MVRvalue)+parseFloat(e.NSDvalue)}</td>     
                                     
                                     </tr>
                                 

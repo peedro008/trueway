@@ -20,7 +20,7 @@ import {
 const FetchAll = () => {
   const dispatch = useDispatch();
   axios
-    .get(` https://truewayagentBackend.com/getCategories`)
+    .get(`https://truewayagentBackend.com/getCategories`)
     .then(function (response) {
       dispatch(getCategories(response.data));
     })
@@ -28,7 +28,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/Quotes`)
+    .get(`https://truewayagentBackend.com/Quotes`)
     .then(function (response) {
       dispatch(getQuotes(response.data));
     })
@@ -36,7 +36,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getLocations`)
+    .get(`https://truewayagentBackend.com/getLocations`)
     .then(function (response) {
       dispatch(getLocations(response.data));
     })
@@ -44,7 +44,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getCompany`)
+    .get(`https://truewayagentBackend.com/getCompany`)
     .then(function (response) {
       dispatch(getCompanies(response.data));
     })
@@ -52,7 +52,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/clients`)
+    .get(`https://truewayagentBackend.com/clients`)
     .then(function (response) {
       dispatch(getClients(response.data));
     })
@@ -60,7 +60,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getProducer`)
+    .get(`https://truewayagentBackend.com/getProducer`)
     .then(function (response) {
       dispatch(getProducers(response.data));
     })
@@ -68,7 +68,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getManager`)
+    .get(`https://truewayagentBackend.com/getManager`)
     .then(function (response) {
       dispatch(getManagers(response.data));
     })
@@ -76,7 +76,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getStatus`)
+    .get(`https://truewayagentBackend.com/getStatus`)
     .then(function (response) {
       dispatch(getQuoteStatuses(response.data));
     })
@@ -84,7 +84,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getDeposit`)
+    .get(`https://truewayagentBackend.com/getDeposit`)
     .then(function (response) {
       dispatch(getDeposits(response.data));
     })
@@ -92,7 +92,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getDailyReports`)
+    .get(`https://truewayagentBackend.com/getDailyReports`)
     .then(function (response) {
       dispatch(getDailyReports(response.data));
     })
@@ -100,7 +100,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getPayments`)
+    .get(`https://truewayagentBackend.com/getPayments`)
     .then(function (response) {
       dispatch(getPayments(response.data));
     })
@@ -108,7 +108,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/Users`)
+    .get(`https://truewayagentBackend.com/Users`)
     .then(function (response) {
       dispatch(getUsers(response.data));
     })
@@ -116,7 +116,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getDealers`)
+    .get(`https://truewayagentBackend.com/getDealers`)
     .then(function (response) {
       dispatch(getDealers(response.data));
     })
@@ -124,7 +124,7 @@ const FetchAll = () => {
       console.log(error);
     });
   axios
-    .get(` https://truewayagentBackend.com/getDealerSalePerson`)
+    .get(`https://truewayagentBackend.com/getDealerSalePerson`)
     .then(function (response) {
       dispatch(getDealerSalePerson(response.data));
     })
@@ -135,7 +135,7 @@ const FetchAll = () => {
 
 const GetCategories = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getCategories`)
+    .get(`https://truewayagentBackend.com/getCategories`)
     .then(function (response) {
       dispatch(getCategories(response.data));
     })
@@ -146,7 +146,7 @@ const GetCategories = (dispatch) => {
 
 const GetQuotes = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/Quotes`)
+    .get(`https://truewayagentBackend.com/Quotes`)
     .then(function (response) {
       dispatch(getQuotes(response.data));
     })
@@ -157,7 +157,7 @@ const GetQuotes = (dispatch) => {
 
 const GetLocations = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getLocations`)
+    .get(`https://truewayagentBackend.com/getLocations`)
     .then(function (response) {
       dispatch(getLocations(response.data));
     })
@@ -168,7 +168,7 @@ const GetLocations = (dispatch) => {
 
 const GetCompany = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getCompany`)
+    .get(`https://truewayagentBackend.com/getCompany`)
     .then(function (response) {
       dispatch(getCompanies(response.data));
     })
@@ -179,7 +179,7 @@ const GetCompany = (dispatch) => {
 
 const GetClients = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/clients`)
+    .get(`https://truewayagentBackend.com/clients`)
     .then(function (response) {
       dispatch(getClients(response.data));
     })
@@ -190,7 +190,7 @@ const GetClients = (dispatch) => {
 
 const GetProducer = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getProducer`)
+    .get(`https://truewayagentBackend.com/getProducer`)
     .then(function (response) {
       dispatch(getProducers(response.data));
     })
@@ -201,7 +201,7 @@ const GetProducer = (dispatch) => {
 
 const GetManager = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getManager`)
+    .get(`https://truewayagentBackend.com/getManager`)
     .then(function (response) {
       dispatch(getManagers(response.data));
     })
@@ -212,7 +212,7 @@ const GetManager = (dispatch) => {
 
 const GetQuoteStatuses = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getStatus`)
+    .get(`https://truewayagentBackend.com/getStatus`)
     .then(function (response) {
       dispatch(getQuoteStatuses(response.data));
     })
@@ -223,7 +223,7 @@ const GetQuoteStatuses = (dispatch) => {
 
 const GetDeposit = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getDeposit`)
+    .get(`https://truewayagentBackend.com/getDeposit`)
     .then(function (response) {
       dispatch(getDeposits(response.data));
     })
@@ -234,7 +234,7 @@ const GetDeposit = (dispatch) => {
 
 const GetDailyReports = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getDailyReports`)
+    .get(`https://truewayagentBackend.com/getDailyReports`)
     .then(function (response) {
       dispatch(getDailyReports(response.data));
     })
@@ -245,7 +245,7 @@ const GetDailyReports = (dispatch) => {
 
 const GetPayments = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getPayments`)
+    .get(`https://truewayagentBackend.com/getPayments`)
     .then(function (response) {
       dispatch(getPayments(response.data));
     })
@@ -256,7 +256,7 @@ const GetPayments = (dispatch) => {
 
 const GetUsers = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/Users`)
+    .get(`https://truewayagentBackend.com/Users`)
     .then(function (response) {
       dispatch(getUsers(response.data));
     })
@@ -267,7 +267,7 @@ const GetUsers = (dispatch) => {
 
 const GetDealers = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getDealers`)
+    .get(`https://truewayagentBackend.com/getDealers`)
     .then(function (response) {
       dispatch(getDealers(response.data));
     })
@@ -278,7 +278,7 @@ const GetDealers = (dispatch) => {
 
 const GetDealerSalePerson = (dispatch) => {
   axios
-    .get(` https://truewayagentBackend.com/getDealerSalePerson`)
+    .get(`https://truewayagentBackend.com/getDealerSalePerson`)
     .then(function (response) {
       dispatch(getDealerSalePerson(response.data));
     })

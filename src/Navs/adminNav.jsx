@@ -14,6 +14,7 @@ import { AiOutlineFile } from "react-icons/ai";
 import { MdAdd } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Redux/actions";
+import { BiStats } from "react-icons/bi";
 
 function AdminNav() {
   const dispatch = useDispatch();
@@ -95,6 +96,12 @@ function AdminNav() {
         <div className="NAcontainer">
           <NavLink className="icons" to="/report" activeClassName="NAavtive">
             <VscGraph className="NAicon" size="20px" color="#868ba5" />
+          </NavLink>
+        </div>
+        <span />
+        <div className="NAcontainer">
+          <NavLink className="icons" to="/stadistic" activeClassName="NAavtive">
+            <BiStats className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
       </div>

@@ -42,12 +42,15 @@ import ProducerEdit from "../Controllers/producerEdit";
 import ManagerEdit from "../Controllers/managerEdit";
 import ClientEdit from "../Controllers/clientEdit";
 import PaymentDetails from "../Controllers/paymentDetails";
+import Stadistic from "../Controllers/stadistic";
+import GenericReport from "../Controllers/genericReport";
 
 const AdminRouter = () => {
   return (
     <Router>
       <Route component={AdminNav} />
       <Route exact path='/' component={AdminDashboard}/>
+      <Route exact path='/stadistic' component={Stadistic}/>
       <Route exact path="/management" component={Management} />
       <Route exact path="/report" component={ReportsLobby} />
       <Route exact path="/report/Deleted" component={DeletedLobby} />
@@ -88,6 +91,7 @@ const AdminRouter = () => {
       <Route exact path='/users/producers/edit' component={ProducerEdit}/>
       <Route exact path='/users/manager/edit' component={ManagerEdit}/>
       <Route exact path='/report/payment/details' component={PaymentDetails}/>
+      <Route exact path='/report/genericReport' component={GenericReport}/>
     </Router>
   );
 };

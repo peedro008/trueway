@@ -7,7 +7,7 @@ import { FiGrid } from "react-icons/fi";
 
 import { FiUser } from "react-icons/fi";
 import { VscGraph } from "react-icons/vsc";
-
+import { BiStats } from "react-icons/bi";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineFile } from "react-icons/ai";
@@ -97,7 +97,12 @@ function ProducerNav({ onSearch }) {
             <FiUser className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
-        
+        <span />
+        <div className="NAcontainer">
+          <NavLink className="icons" to="/stadistic" activeClassName="NAavtive">
+            <BiStats className="NAicon" size="20px" color="#868ba5" />
+          </NavLink>
+        </div>
         
       </div>
     </div>

@@ -8,7 +8,7 @@ function PaymentDetails(props) {
     const id = props.location.aboutProps
     const [payment, setPayment] = useState([])
     useEffect(() => {
-        axios.get(` https://truewayagentBackend.com/idPayment?id=${id}`)
+        axios.get(`https://truewayagentBackend.com/idPayment?id=${id}`)
         .then(function(response){
             setPayment(response.data)
         

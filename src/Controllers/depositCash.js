@@ -32,7 +32,7 @@ const DepositCash = () => {
 
     useEffect(()=>{
         let amount = 0  
-        dbPayments.map(e=>amount +=parseFloat(e.amount)+parseFloat(e.creditCardFee)+parseFloat(e.PIPvalue)+parseFloat(e.MVRvalue)+parseFloat(e.NSDvalue))
+        dbPayments.map(e=>amount +=parseFloat(e.amount)+(e.creditCardFee.length?parseFloat(e.creditCardFee):0)+parseFloat(e.PIPvalue)+parseFloat(e.MVRvalue)+parseFloat(e.NSDvalue))
         setTotal(amount)
         let ids = []
         dbPayments.map(e=>ids.push(e.id))
@@ -42,7 +42,7 @@ const DepositCash = () => {
     const submit = () =>{
         let data = {id:id, UserId: UserId, LocationId: LocationId, note: note, total: total}
         onOpenModal()
-        fetch(` https://truewayagentBackend.com/deposit`, {
+        fetch(`https://truewayagentBackend.com/deposit`, {
                     
             method: 'POST',
             headers: {

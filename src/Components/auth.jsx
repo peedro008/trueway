@@ -56,7 +56,7 @@ setReset
                 backgroundColor: "#FFFFFF",
                 width: "300px",
                 display: "flex",
-                height: "180px",
+                height: "200px",
                 flexDirection: "column",
                 justifyContent: "space-between",
                 borderRadius: "8px",
@@ -103,7 +103,7 @@ setReset
                   <p className="buttonT">Sign In</p>{" "}
                 </button>
               </div>
-        <p onClick={setOpen1} style={{fontSize:"13px",color:"green", textAlign:"right", alignSelf:"flex-end", marginRight:"5px", cursor:"pointer", fontFamily:"Montserrat" }}>forgott?</p>
+        <p onClick={setOpen1} style={{fontSize:"13px",color:"green", textAlign:"right", alignSelf:"flex-end", marginBlock:"10px", marginRight:"5px", cursor:"pointer", fontFamily:"Montserrat" }}>forgott?</p>
             </div>
           </div>
         </div>

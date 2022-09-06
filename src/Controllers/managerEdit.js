@@ -43,7 +43,7 @@ const ManagerEdit = (props) => {
   setValue("ProducerId", `${Producer.id}`);
 
   const onSubmit = (data) => {
-    fetch(` https://truewayagentBackend.com/modifyManager`, {
+    fetch(`https://truewayagentBackend.com/modifyManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

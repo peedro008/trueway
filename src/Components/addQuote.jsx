@@ -14,6 +14,8 @@ import { Controller } from "react-hook-form";
 
 const AddQuoteComponent = ({
     reset,
+CategoAux,
+    setCategoAux,
     onSubmit,
     handleNewClient,
     register,
@@ -186,7 +188,9 @@ const AddQuoteComponent = ({
                   <Select
                     value={optionsCa.find((c) => c.value === value)}
                     onChange={(val) =>{ onChange(val.value)
-                      setValue("CategoryNsd", optionsCa.find((c) => c.value === val.value).NSD)}}
+                      setValue("CategoryNsd", optionsCa.find((c) => c.value === val.value).NSD)
+                      setCategoAux(true)
+                    }}
                     control={control}
                     options={categories.map((e) => ({
                       value: e.id,
@@ -401,7 +405,7 @@ const AddQuoteComponent = ({
                   <input
                     className="AQcheckInput"
                     type="checkbox"
-                                    disabled={control._formValues.CategoryId?false:true}
+                                    disabled={CategoAux?false:true}
                     checked={inputs.NSD}
                     value={inputs.NSD}
                     key="NSD"

@@ -24,7 +24,7 @@ const ProducerReport = () => {
   };
   const deleteProducer = (data) => {
     data && console.log(data);
-    fetch(` https://truewayagentBackend.com/deleteProducer`, {
+    fetch(`https://truewayagentBackend.com/deleteProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const ProducerReport = () => {
   };
   useEffect(() => {
     axios
-      .get(` https://truewayagentBackend.com/getProducer`)
+      .get(`https://truewayagentBackend.com/getProducer`)
       .then(function (response) {
         setProducers(response.data);
       })
@@ -61,7 +61,7 @@ const ProducerReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(` https://truewayagentBackend.com/quotes`)
+      .get(`https://truewayagentBackend.com/quotes`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -71,7 +71,7 @@ const ProducerReport = () => {
   }, []);
   useEffect(() => {
     axios
-      .get(` https://truewayagentBackend.com/getStatus`)
+      .get(`https://truewayagentBackend.com/getStatus`)
       .then(function (response) {
         setModify(response.data);
       })

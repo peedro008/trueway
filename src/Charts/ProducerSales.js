@@ -15,7 +15,7 @@ function ProducerSales ( {aboutProps ,google}) {
   useEffect (()=>{
       
       
-    axios.get(` https://truewayagentBackend.com/getStatus`)
+    axios.get(`https://truewayagentBackend.com/getStatus`)
     .then(function(response){
         let paz = response.data
 
@@ -27,7 +27,7 @@ function ProducerSales ( {aboutProps ,google}) {
 },[])
 
 useEffect (()=>{
-    axios.get(` https://truewayagentBackend.com/producerQuotes?UserId=${userId}`)
+    axios.get(`https://truewayagentBackend.com/producerQuotes?UserId=${userId}`)
     .then(function(response){
         setQuotes(response.data)
        

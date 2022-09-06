@@ -25,7 +25,7 @@ const DRreport = () => {
      const [payments, setPayments ]= useState([])
     useEffect(()=>{
         axios
-        .get(` https://truewayagentBackend.com/getDailyReports`)
+        .get(`https://truewayagentBackend.com/getDailyReports`)
         .then(function (response) {
           setPayments(response.data);
         })
@@ -52,7 +52,7 @@ const DRreport = () => {
     const resetDaily = (e) => {
         let IDs = e.Payments.map(e=>{return e.id})
         console.log({ IDs:IDs,dailyID: e.dailyID })
-        fetch(` https://truewayagentBackend.com/resetDailyReport`, {
+        fetch(`https://truewayagentBackend.com/resetDailyReport`, {
             
             method: 'POST',
             headers: {

@@ -114,7 +114,7 @@ function AddPayment(props) {
 
   useEffect(() => {
     axios
-      .get(` https://truewayagentBackend.com/clientQuotes?client=${form.id}`)
+      .get(`https://truewayagentBackend.com/clientQuotes?client=${form.id}`)
       .then(function (response) {
 
         setQuotes(response.data)
@@ -151,12 +151,13 @@ const handleNewClient = () => {
     { value: "Down Payment", label: "Down Payment" },
     { value: "Endorsement", label: "Endorsement" },
     { value: "Renew Down", label: "Renew Down" },
+    { value: "Full Premium", label: "Full Premium" },
   ];
 
 
   const onSubmit = (data) => {
     if (newClient == false) {
-      fetch(` https://truewayagentBackend.com/addPayment`, {
+      fetch(`https://truewayagentBackend.com/addPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -166,7 +167,7 @@ const handleNewClient = () => {
         .then((response) => response.json())
         .then((data) => onOpenModal());
     } else {
-      fetch(` https://truewayagentBackend.com/addClientPayment`, {
+      fetch(`https://truewayagentBackend.com/addClientPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

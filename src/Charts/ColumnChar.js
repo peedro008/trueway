@@ -10,7 +10,7 @@ function PozzaChart ({google}) {
   const [time, setTime]= useState(false)
     useEffect (()=>{
      
-    axios.get(` https://truewayagentBackend.com/quotes`)
+    axios.get(`https://truewayagentBackend.com/quotes`)
     .then(function(response){
         setQuotes(response.data)
        
