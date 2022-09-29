@@ -148,7 +148,9 @@ const search = () => {
     let pes = 0;
 
     if(quotes.length)  {quotes.map((e) => {
-      if ( e.CategoryId== 2&&!e.Payment&& e.QuoteStatuses[0].Status=="Sold") {
+      if ( e.CategoryId== 2&&!e.Payment&& e.QuoteStatuses.sort(function (a, b) {
+        return b.id - a.id ;
+      })[0].Status=="Sold") {
         pes += 10;
       }
     })}
@@ -161,8 +163,8 @@ const search = () => {
      
           pes +=
             5 *
-            (e.NSDamount.length?
-               parseFloat(e.NSDamount):0
+            (e.NSDvalue.length?
+               parseFloat(e.NSDvalue)/parseFloat(e.Category.NSDvalue):0
               );
    
       }

@@ -32,7 +32,10 @@ const schema = yup
     email: yup.string().optional().email().min(1),
     tel: yup.string().optional().min(6),
     new: yup.bool().optional(),
-    CategoryNsd: yup.number().optional().nullable(false)
+    CategoryNsd: yup.number().optional().nullable(false),
+    address: yup.string().optional().min(1),
+    date: yup.string().optional().nullable().default(null),
+
   })
   .required();
 
@@ -45,6 +48,7 @@ const AddQuote = () => {
   const [newClient, setNewClient] = useState(false);
   const [inputs, setInputs] = useState({ Bound: false });
   const [CategoAux, setCategoAux] = useState(false);
+  const [show, setShow] = useState(true);
   const [ERR, setERR] = useState({ ClientId: false });
   const [dealerData, setDealerData] = useState({
     ClientId: null,
@@ -60,6 +64,7 @@ const AddQuote = () => {
     setValue,
   } = useForm({
     resolver: yupResolver(schema),
+    delayError:5
   });
   const categories = useSelector((state) => state.Categories);
   const companies = useSelector((state) => state.Companies);
@@ -228,6 +233,8 @@ const AddQuote = () => {
       setDealerData={setDealerData}
 CategoAux={CategoAux}
       setCategoAux={setCategoAux}
+show={show}
+      setShow={setShow}
     />
   );
 };

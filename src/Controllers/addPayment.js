@@ -16,6 +16,7 @@ const schema = yup
     phone: yup.number().optional(),
     ClientId: yup.number().optional().nullable(true),
     amount: yup.string().required(),
+    amount2: yup.string().optional().nullable(true),
     type: yup.string().required(),
     method: yup.string().required(),
     creditCardFee: yup.string().optional().default("0"),
@@ -28,6 +29,7 @@ const schema = yup
     QuoteId: yup.number().optional().nullable(true),
     CategoryId: yup.number().optional(),
     CategoryNsd: yup.number().optional().nullable(false),
+    percent: yup.number().optional().nullable(true),
   })
   .required();
 
@@ -40,6 +42,7 @@ function AddPayment(props) {
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const [method, setMethod] = useState("");
+  const [method2, setMethod2] = useState(null);
   const [payment, setPayment] = useState({ creditCardFee: 0 });
   const userId = useSelector((state) => state.UserId);
  
@@ -48,21 +51,41 @@ function AddPayment(props) {
   const [inputs, setInputs] = useState({});
   const [quotes, setQuotes] = useState([]);
   const [total, setTotal] = useState(0)
+  const [total2, setTotal2] = useState(0)
   const [totalValues, setTotalValues] = useState({})
+  const [percent, setPercent] = useState(0)
+  const [MultiMethod, setMultiMethod] = useState(false)
   const  categories  = useSelector(state=>state.Categories)
   const  locations  = useSelector(state=>state.Locations)
   const  clients  = useSelector(state=>state.Clients)
 
   useEffect(() => {
+    !method2?
 
-
-    setTotal((totalValues.amount?parseFloat(totalValues.amount):0)+
+    setTotal(
+      (totalValues.amount?parseFloat(totalValues.amount):0)+
     (totalValues.PIPamount?10*parseFloat(totalValues.PIPamount):0)+
     (totalValues.MVRamount?9*parseFloat(totalValues.MVRamount):0)+
     (totalValues.creditCardFee?parseFloat(totalValues.creditCardFee):0)+
     (totalValues.NSDamount?(totalValues.CategoryNsd*totalValues.NSDamount):0))
+    :
+    setTotal(
+      ((totalValues.amount?parseFloat(totalValues.amount):0)+
+    (totalValues.PIPamount?10*parseFloat(totalValues.PIPamount):0)+
+    (totalValues.MVRamount?9*parseFloat(totalValues.MVRamount):0)+
+    (totalValues.creditCardFee?parseFloat(totalValues.creditCardFee):0)+
+    (totalValues.NSDamount?(totalValues.CategoryNsd*totalValues.NSDamount):0))*(percent/100))
+
+    setTotal2(
+      (
+        (totalValues.amount?parseFloat(totalValues.amount):0)+
+        (totalValues.PIPamount?10*parseFloat(totalValues.PIPamount):0)+
+        (totalValues.MVRamount?9*parseFloat(totalValues.MVRamount):0)+
+        (totalValues.creditCardFee?parseFloat(totalValues.creditCardFee):0)+
+        (totalValues.NSDamount?(totalValues.CategoryNsd*totalValues.NSDamount):0))
+      *(1-(percent/100)))
  
-  }, [totalValues])
+  }, [totalValues, method2])
   
   const {
     register,
@@ -112,6 +135,11 @@ function AddPayment(props) {
       
   }, [ClientSelected]);
 
+
+  useEffect(()=>{
+    setValue("percent", `${percent/100}`);
+  },[percent])
+
   useEffect(() => {
     axios
       .get(`https://truewayagentBackend.com/clientQuotes?client=${form.id}`)
@@ -145,6 +173,7 @@ const handleNewClient = () => {
     { value: "credit/debit", label: "credit/debit" },
     { value: "EFT", label: "EFT" },
     { value: "Cash", label: "Cash" },
+
   ];
   const optionT = [
     { value: "Monthly Payment", label: "Monthly Payment" },
@@ -156,8 +185,33 @@ const handleNewClient = () => {
 
 
   const onSubmit = (data) => {
+
+
+    if(!MultiMethod){
+      if (newClient == false) {
+        fetch(`https://truewayagentBackend.com/addPayment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((data) => onOpenModal());
+      } else {
+        fetch(`https://truewayagentBackend.com/addClientPayment`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        onOpenModal();
+      }
+  }
+  else{
     if (newClient == false) {
-      fetch(`https://truewayagentBackend.com/addPayment`, {
+      fetch(`https://truewayagentBackend.com/addMultiPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -167,7 +221,7 @@ const handleNewClient = () => {
         .then((response) => response.json())
         .then((data) => onOpenModal());
     } else {
-      fetch(`https://truewayagentBackend.com/addClientPayment`, {
+      fetch(`https://truewayagentBackend.com/ClientMultiPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -176,6 +230,9 @@ const handleNewClient = () => {
       });
       onOpenModal();
     }
+  }
+  
+  
   };
   const optionsCa = categories?.map((e) => ({ value: e.id, label: e.name, NSD:e.NSDvalue}));
   const optionsC = clients?.map((e) => ({ value: e.id, label: e.name }));
@@ -221,6 +278,14 @@ setTotal={setTotal}
 totalValues={totalValues}
 setTotalValues={setTotalValues}
 setValue={setValue}
+MultiMethod={MultiMethod}
+setMultiMethod={setMultiMethod}
+total2={total2}
+setTotal2={setTotal2}
+percent={percent}
+setPercent={setPercent}
+method2={method2}
+setMethod2={setMethod2}
   />
  
 }

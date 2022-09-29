@@ -250,22 +250,22 @@ setPaginator
                     {e.time.substring(11, 16)}
                   </td>
                   <td className="ClientName" scope="row">
-                    ${e.amount}
+                    ${parseFloat(e.amount).toFixed(2)}
                   </td>
                   <td className="ClientName" scope="row">
                     {e.method}
                   </td>
                   <td className="ClientName" scope="row">
-                    ${e.creditCardFee}
+                    ${parseFloat(e.creditCardFee).toFixed(2)}
                   </td>
                   <td className="ClientName" scope="row">
-                    ${e.PIPvalue}
+                    ${parseFloat(e.PIPvalue).toFixed(2)}
                   </td>
                   <td className="ClientName" scope="row">
-                    ${e.NSDvalue?e.NSDvalue:0}
+                    ${(e.NSDvalue?parseFloat(e.NSDvalue).toFixed(2):0)}
                   </td>
                   <td className="ClientName" scope="row">
-                    ${e.MVRvalue}
+                    ${parseFloat(e.MVRvalue).toFixed(2)}
                   </td>
                   <td className="ClientName" scope="row">
                     $

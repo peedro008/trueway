@@ -19,26 +19,19 @@ export const GET_DEPOSITS = "GET_DEPOSITS";
 export const GET_DAILYREPORTS = "GET_DAILYREPORTS";
 export const GET_LOCATIONS = "GET_LOCATIONS";
 export const GET_USERS = "GET_USERS";
+export const SESSION_DATE = "SESSION_DATE";
 
-
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
-// : [],
 
 export function example() {
   return {
     type: EXAMPLE,
+    
+  };
+}
+export function sessionDate(date) {
+  return {
+    type: SESSION_DATE,
+    payload: date,
   };
 }
 export function logout() {

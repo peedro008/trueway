@@ -129,6 +129,7 @@ setAddress,
                     onChange={(e)=>{setAddress(e.target.value)}}
                   placeholder="Address"
                   className="AQinput"
+                  defaultValue={address}
                 ></input>
               )}
             </div>

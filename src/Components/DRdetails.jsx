@@ -173,11 +173,11 @@ function DRdetailsComponent({
                       </td>
                       <td className="ClientName" scope="row">
                         $
-                        {parseFloat(e.amount) +
+                        {(parseFloat(e.amount) +
                           parseFloat(e.PIPvalue) +
                           parseFloat(e.NSDvalue) +
                           parseFloat(e.MVRvalue) +
-                          parseFloat(e.creditCardFee)}
+                          parseFloat(e.creditCardFee)).toFixed(2)}
                       </td>
                     </tr>
                   );
@@ -187,13 +187,13 @@ function DRdetailsComponent({
 
       <div className="DAItotalCont">
         <div className="DAItotal">
-          <p className="DEPtotalT">TOTAL CASH $ {cash}</p>
+          <p className="DEPtotalT">TOTAL CASH $ {cash.toFixed(2)}</p>
         </div>
         <div className="DAItotal">
-          <p className="DEPtotalT">TOTAL EFT $ {EFT}</p>
+          <p className="DEPtotalT">TOTAL EFT $ {EFT.toFixed(2)}</p>
         </div>
         <div className="DAItotal">
-          <p className="DEPtotalT">TOTAL CREDIT CARD $ {credit}</p>
+          <p className="DEPtotalT">TOTAL CREDIT CARD $ {credit.toFixed(2)}</p>
         </div>
       </div>
 

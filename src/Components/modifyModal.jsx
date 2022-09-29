@@ -3,8 +3,9 @@ import { BiPencil } from "react-icons/bi";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
+import { Controller } from "react-hook-form";
 
-
+import Select from "react-select";
 const ModifyModalComponent = ({
     quoteM,
     quote,
@@ -33,6 +34,7 @@ const ModifyModalComponent = ({
     checkReinstall,
     checkBound,
     checkCancel,
+    optionsCo,
     submit,}) => {
   
   return (
@@ -80,8 +82,18 @@ const ModifyModalComponent = ({
                   <p className="REPtype">Quoted by</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Sold by</p>
+                  <p className="REPtype">Status</p>
                 </th>
+                
+                {
+                  quoteM.QuoteStatuses[0].Status=="Sold"
+                &&<>
+                <th scope="col" className="column1">
+                  <p className="REPtype">Sold date</p>
+                </th>
+                <th scope="col" className="column1">
+                  <p className="REPtype">Sold by</p>
+                </th></>}
               </tr>
 
               <tr>
@@ -112,8 +124,17 @@ const ModifyModalComponent = ({
                   {quoteM.User.name}
                 </td>
                 <td className="row1" scope="row">
-                  {quoteM.User.name}
+                  {quoteM.QuoteStatuses[0].Status}
                 </td>
+                {
+                  quoteM.QuoteStatuses[0].Status=="Sold"
+                &&<>
+                <td className="row1" scope="row">
+                  {quoteM.QuoteStatuses[0].date}
+                </td>
+                <td className="row1" scope="row">
+                  {quoteM.QuoteStatuses[0].User.name}
+                </td></>}
               </tr>
             </tbody>
           </table>
@@ -217,7 +238,7 @@ const ModifyModalComponent = ({
             </div>
 
             {(renew || bound || reInstall) && (
-              <div style={{ width: "max-content" }}>
+              <div style={{  }}>
                 <div className="MOBmainInput">
                   <div className="MOBinputDiv">
                     <p className="MOBinputText">Down amount</p>
@@ -226,7 +247,7 @@ const ModifyModalComponent = ({
                         setInputs({ ...inputs, down: e.target.value });
                       }}
                       placeholder="down"
-                      className="MOBinput"
+                      className="AQinput"
                     ></input>
                   </div>
                   <div className="MOBinputDiv">
@@ -236,9 +257,43 @@ const ModifyModalComponent = ({
                         setInputs({ ...inputs, monthly: e.target.value });
                       }}
                       placeholder="monthly"
-                      className="MOBinput"
+                      className="AQinput"
                     ></input>
                   </div>
+                  </div>
+                  <div className="MOBmainInput">
+                  <div className="MOBinputDiv">
+                    <p className="MOBinputText">Company</p>
+                    
+                  <Select
+                    
+                    onChange={(val) => setInputs({ ...inputs,CompanyId:val.value})}
+                       options={optionsCo}
+               
+                    className="PAYselect"
+                    placeholder="Select Company"
+                  />
+             
+                  </div>
+                  <div
+              className="MOBinputDiv"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "start",
+              }}
+            >
+              <p className="MOBinputText">Date?</p>
+              <input
+              type={"date"}
+                className="AQinput"
+             
+              
+                onChange={(val) => setInputs({ ...inputs,date:val.target.value})}
+              />
+             
+            </div>
+              
                 </div>
               </div>
             )}

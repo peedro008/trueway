@@ -74,9 +74,7 @@ deleteClient
           </tr>
           {!search
             ? clients
-                .sort(function (a, b) {
-                  return b.id - a.id;
-                })
+                .filter(e=>((e.Quotes.filter(e=>e.QuoteStatuses[e.QuoteStatuses.length-1].Status=="Sold").length)>0))
                 .map((e) => {
                   return (
                     <tr>

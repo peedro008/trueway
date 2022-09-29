@@ -3,6 +3,9 @@ import { NavLink } from "react-router-dom";
 import spinnerr from "../assets/spinnerr.gif"
 import { BsChevronLeft, BsInfoCircle } from "react-icons/bs";
 const GenericReportComponent = ({ items, type, title, producer }) => {
+  let pes = 0
+ 
+  console.log(pes)
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -247,6 +250,9 @@ const GenericReportComponent = ({ items, type, title, producer }) => {
                 <p className="REPtype">Location</p>
               </th>
               <th scope="col" className="column1">
+                <p className="REPtype">Category</p>
+              </th>
+              <th scope="col" className="column1">
                 <p className="REPtype">Type</p>
               </th>
               <th scope="col" className="column1">
@@ -307,6 +313,9 @@ const GenericReportComponent = ({ items, type, title, producer }) => {
                     {e.Location.name}
                   </td>
                   <td className="ClientName" scope="row">
+                    {e.Category.name}
+                  </td>
+                  <td className="ClientName" scope="row">
                     {e.type}
                   </td>
 
@@ -331,6 +340,7 @@ const GenericReportComponent = ({ items, type, title, producer }) => {
                   <td className="ClientName" scope="row">
                     ${e.NSDvalue ? e.NSDvalue : 0}
                   </td>
+         
                   <td className="ClientName" scope="row">
                     ${e.MVRvalue}
                   </td>

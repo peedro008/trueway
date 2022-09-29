@@ -198,7 +198,7 @@ setPaginator
                             {columns.ProducerId&&<td className="row1" scope="row">{e.User.name}</td>}
                             <td className="row1" scope="row">$             {((e.down?parseFloat(e.down):0) + (e.PIPvalue?parseFloat(e.PIPvalue):0) +
                       (e.NSDvalue?parseFloat(e.NSDvalue):0) +
-                      (e.MVRvalue?parseFloat(e.MVRvalue):0) +
+                      (parseFloat(e.MVRvalue)?parseFloat(e.MVRvalue):0) +
                       (e.creditCardFee?parseFloat(e.creditCardFee):0)).toFixed(2)}</td>
                             {columns.bound&&<td className="row1" scope="row">{e.QuoteStatuses?.sort(function (a, b) {return b.id - a.id})[0]?.Status}</td>}
                             <td className="row1" scope="row">{e.date}</td>

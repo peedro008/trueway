@@ -44,8 +44,10 @@ import ClientEdit from "../Controllers/clientEdit";
 import PaymentDetails from "../Controllers/paymentDetails";
 import Stadistic from "../Controllers/stadistic";
 import GenericReport from "../Controllers/genericReport";
+import { FetchAll } from "../Logic/Fetch";
 
 const AdminRouter = () => {
+   FetchAll()
   return (
     <Router>
       <Route component={AdminNav} />

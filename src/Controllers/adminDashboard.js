@@ -95,10 +95,10 @@ const AdminDashboard = () => {
     userRole=="Admin"?
     payments?.filter(e=>e.date.substring(0, 7) == DATE.substring(0, 7))?.map((e,i) => {
     
-      temp +=  parseFloat(e.NSDvalue);
+      temp +=   parseFloat(e.NSDvalue)?parseFloat(e.NSDvalue):0
     }):
     payments?.filter(f=>(f.UserId==UserId&&f.date.substring(0, 7) == DATE.substring(0, 7))).map((e) => {
-      temp += parseFloat(e.NSDvalue);
+      temp += parseFloat(e.NSDvalue)?parseFloat(e.NSDvalue):0
     })
     setNSD(temp);
   }, [payments, userRole]);

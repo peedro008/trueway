@@ -854,6 +854,7 @@
 }
 .MOBinputDiv {
   margin-top: 10px;
+  margin-right: 20px;
 }
 .MOBmainInput {
   display: flex;
@@ -1179,7 +1180,7 @@
   color: black;
   background-color: #fbfbfb;
   border-radius: 7px;
-  width: 50vw;
+  width: 30vw;
   height: 80px;
   border-width: 1px;
   border-color: rgb(212, 208, 208);
@@ -1862,8 +1863,8 @@
 }
 .DEPtotal {
   height: 35px;
-  max-width: 358px;
-  width: 198px;
+  max-width: 388px;
+  width: 220px;
   display: flex;
   align-items: "center";
   justify-content: center;
@@ -1872,7 +1873,7 @@
   border-radius: 0px;
   border-radius: 5px;
   margin-top: 65%;
-  padding: 0px 7px;
+
   background-color: #e3e3e3;
 }
 .DEPtotal1 {

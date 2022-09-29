@@ -119,7 +119,7 @@ function StadisticComponent({
                     title: `NSD Sold ${yearLabel}`,
                     producer: e.name,
                     items: payments.filter(
-                      (f) => f.UserId == e.UserId && f.NSDvalue !== "0"
+                      (f) => f.UserId == e.UserId && f.NSDamount&&f.NSDamount !== "0"
                     ),
                   },
                 }}
@@ -129,7 +129,7 @@ function StadisticComponent({
                   <p className="StadBoxVal">
                     {
                       getComission(
-                        payments.filter((f) => f.UserId == e.UserId),
+                        payments.filter((f) => f.UserId == e.UserId&& f.NSDvalue !== "0"),
                         quotes.filter((f) => f.UserId == e.UserId)
                       )}
                   </p>
@@ -145,8 +145,10 @@ function StadisticComponent({
                     producer: e.name,
                     items: quotes.filter(
                       (f) =>
-                        f.UserId == e.UserId &&
-                        f.QuoteStatuses[0].Status == "Sold"
+                        f.QuoteStatuses[0].UserId == e.UserId &&
+                        f.QuoteStatuses.sort(function (a, b) {
+                          return b.id - a.id ;
+                        })[0].Status == "Sold"
                     ),
                   },
                 }}
@@ -157,8 +159,10 @@ function StadisticComponent({
                     {
                       quotes.filter(
                         (f) =>
-                          f.UserId == e.UserId &&
-                          f.QuoteStatuses[0].Status == "Sold"
+                          f.QuoteStatuses[0].UserId == e.UserId &&
+                          f.QuoteStatuses.sort(function (a, b) {
+                            return b.id - a.id ;
+                          })[0].Status == "Sold"
                       ).length
                     }
                   </p>

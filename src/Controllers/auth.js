@@ -9,6 +9,7 @@ import {
   userName,
   user,
   userId,
+  sessionDate,
 } from "../Redux/actions";
 import AuthComponent from "../Components/auth";
 import "react-responsive-modal/styles.css";
@@ -28,6 +29,8 @@ const Auth = () => {
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+  const date = new Date();
+  const DATE = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
   useEffect(() => {
     window.history.pushState("", "", "/");
   }, []);
@@ -56,11 +59,13 @@ const Auth = () => {
             setIsError(false);
             setMessage(jsonRes.message);
             console.log(jsonRes)
+            dispatch(sessionDate(DATE))
             dispatch(userRole(jsonRes.UserRole));
             dispatch(user(payload.UserName));
             dispatch(userName(jsonRes.Name));
             dispatch(userId(jsonRes.userId));
             dispatch(addLocation(producers.filter(e=>e.UserId==jsonRes.userId).LocatioId?producers.filter(e=>e.UserId==jsonRes.userId).LocatioId:1));
+            
           }
         } catch (err) {
           onOpenModal();

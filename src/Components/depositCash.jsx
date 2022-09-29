@@ -98,13 +98,13 @@ onCloseModal
                     </div>
                     
                     <div className="inputCont"  style={{width:"100%", height:"100%", paddingLeft:"30px", alignItems:"flex-start", flexDirection:"column", display:"flex"}}>
-                    <p  className="PAYtitle"  style={{marginBottom:"20px"}}>Difference</p>
+                    <p  className="PAYtitle"  style={{marginBottom:"20px"}}>Cash</p>
                     <div className="DEPboxy">
-                    <p  className="PAYsub-title" style={{}}>{total&&box?(+((Number(box.pay1))+(Number(box.pay5)*5)+(Number(box.pay10)*10)+(Number(box.pay20)*20)+(Number(box.pay50)*50)+(Number(box.pay100)*100)-total)):0}</p>
+                    <p  className="PAYsub-title" style={{}}>{total&&box?(+((Number(box.pay1))+(Number(box.pay5)*5)+(Number(box.pay10)*10)+(Number(box.pay20)*20)+(Number(box.pay50)*50)+(Number(box.pay100)*100))):0}</p>
                    
                     </div>
                     <div className="DEPtotal">
-                        <p className="DEPtotalT">TOTAL DEPOSIT $ {total}</p>
+                        <p className="DEPtotalT">TOTAL DEPOSIT $ {total.toFixed(2)}</p>
                     </div>
                    
                    

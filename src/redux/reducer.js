@@ -1,5 +1,6 @@
 import {
   USER,
+  SESSION_DATE,
   USER_ROLE,
   USER_NAME,
   USER_ID,
@@ -42,6 +43,7 @@ const initialState = {
   Deposits: [],
   Managers: [],
   QuoteStatuses: [],
+  SessionDate: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -55,6 +57,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         userRole: action.payload,
+      };
+      case SESSION_DATE:
+      return {
+        ...state,
+        SessionDate: action.payload,
       };
     case USER_NAME:
       return {

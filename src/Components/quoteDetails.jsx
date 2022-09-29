@@ -99,7 +99,7 @@ function QuoteDetailsComponent({
                            
 
                             }
-<NavLink to={"/report"}>
+<NavLink to={"/report/quoteReport"}>
 <BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} />
                        </NavLink>
                     </div>
@@ -124,7 +124,7 @@ function QuoteDetailsComponent({
                     </div> */}
             </div>
         </div>}
-        <NavLink to={{
+        {/* <NavLink to={{
                     pathname:("/report/modifyquote"),
                     aboutProps:id
                 }}>
@@ -134,7 +134,7 @@ function QuoteDetailsComponent({
                     <p className="FITbuttonText">Modify quote</p>
                     </div>
                 </button>
-                </NavLink>
+                </NavLink> */}
         </div>
     )
 }

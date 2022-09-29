@@ -17,10 +17,10 @@ function ClientEdit(props) {
     dateOfBirth: Client.dateOfBirth,
     CompanyId: Client.CompanyId,
   });
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [open, setOpen] = useState(false);
   const [neww, setNeww] = useState(false);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState(Client.address);
   const company = useSelector((state) => state.Companies);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);

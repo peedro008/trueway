@@ -1,5 +1,5 @@
-import React from 'react';
-import {  useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import {  useDispatch, useSelector } from 'react-redux';
 import Auth from './Controllers/auth';
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
@@ -9,12 +9,21 @@ import ProducerRouter from './Routers/producersRouter';
 
 import { FetchAll}  from './Logic/Fetch';
 import LoginRouter from './Routers/LoginRouter';
+import { logout } from './Redux/actions';
 
 function Root ({ store }) {
-FetchAll()
-const state= useSelector(state=>state.userRole)
+  const dispatch = useDispatch()
+  const SessionDate= useSelector(state=>state.SessionDate)
+  const date = new Date();
+  const DATE = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
+  useEffect(() => {
+    if(DATE!==SessionDate) dispatch(logout())
+  }, [])
+  
+  const userRole= useSelector(state=>state.userRole)
 
-if(!state){
+
+if(!userRole){
   return (
       
     
@@ -27,7 +36,7 @@ if(!state){
   
   }
 
- if (state==="Admin"||state=="Manager"){
+ if (userRole==="Admin"||userRole=="Manager"){
   return (
 
     
@@ -39,7 +48,7 @@ if(!state){
 
 }
 
-if (state==="Producer"){
+if (userRole==="Producer"){
   return (
 
     <ProducerRouter/>
