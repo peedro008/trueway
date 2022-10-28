@@ -213,7 +213,7 @@ const ProducerDashboardComponent = ({
             </div>
             <div className="dashText">
               <p className="dashCardTitle">${NSD}</p>
-              <p className="dashCardText">Total NSD sales</p>
+              <p className="dashCardText">Total NSD commision</p>
             </div>
           </div>
           <div className="dashCard" style={{ marginLeft: "50px" }}>

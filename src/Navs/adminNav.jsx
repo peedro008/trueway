@@ -5,6 +5,7 @@ import "../Css/css.css"
 import logo from "../assets/logo.png";
 import { FiGrid } from "react-icons/fi";
 
+import { BsInfoCircle } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { VscGraph } from "react-icons/vsc";
 // import Manager from "./manager"
@@ -19,7 +20,7 @@ import { BiStats } from "react-icons/bi";
 function AdminNav() {
   const dispatch = useDispatch();
 
-  const Name = useSelector((state) => state.userName);
+  const Name = useSelector((state) => state.User.Name);
   const Role = useSelector((state) => state.userRole);
 
   const logOut = () => {
@@ -103,6 +104,11 @@ function AdminNav() {
           <NavLink className="icons" to="/stadistic" activeClassName="NAavtive">
             <BiStats className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
+        </div>
+        <div className="NAcontainer" style={{cursor:"help"}} onClick={()=>{ window.open('https://wa.me/5493515330625');
+              return null}}>
+             <BsInfoCircle className="NAicon" size="20px" color="#868ba5" />
+        
         </div>
       </div>
     </div>

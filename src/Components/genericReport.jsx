@@ -2,7 +2,20 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import spinnerr from "../assets/spinnerr.gif"
 import { BsChevronLeft, BsInfoCircle } from "react-icons/bs";
-const GenericReportComponent = ({ items, type, title, producer }) => {
+import { Checkbox } from "@material-ui/core";
+const GenericReportComponent = ({ items, type, title, producer, paymentsFil,total,
+  setTotal,
+  checkCash,
+  checkEFT,
+  checkCDC,
+  cash,
+  setCash,
+  credit,
+  setCredit,
+  EFT,
+  setEFT,
+  checkbox,
+  setCheckbox, }) => {
   let pes = 0
  
   console.log(pes)
@@ -10,8 +23,15 @@ const GenericReportComponent = ({ items, type, title, producer }) => {
     <div className="genericDiv1">
       <div className="genericHeader">
         <p className="genericTitle">{title}</p>
-        <p className="subTitt">{producer}</p>
+        <p className="subTitt">{producer?producer:" "}</p>
       </div>
+      {type == "Q" ?<></>:
+      <div className="REPcontrol" style={{width:"25vw", display:"flex", justifyContent:"space-between"}}>
+      <div style={{display:"flex", flexDirection:"row"}}><Checkbox checked={checkbox.Cash} onClick={checkCash}  size="small"  color="#2b4162"/><p className="genericTitle" style={{fontSize:"15px", fontWeight:"600" }}>Cash</p></div>
+      <div style={{display:"flex", flexDirection:"row"}}>   <Checkbox checked={checkbox.EFT} onClick={checkEFT}   size="small"  color="#2b4162"/><p className="genericTitle" style={{fontSize:"15px", fontWeight:"600" }}>EFT</p></div>
+      <div style={{display:"flex", flexDirection:"row"}}>    <Checkbox checked={checkbox.CDC}  onClick={checkCDC}   size="small" color="#2b4162"/><p className="genericTitle" style={{fontSize:"15px", fontWeight:"600" }}>Credit/Debit</p></div>
+      </div>
+      }
       {type == "Q" ? (
         <table class="table1">
           <tbody>
@@ -234,6 +254,7 @@ const GenericReportComponent = ({ items, type, title, producer }) => {
           </tbody>
         </table>
       ) : (
+        <>
         <table class="table1">
           <tbody>
             <tr>
@@ -285,7 +306,7 @@ const GenericReportComponent = ({ items, type, title, producer }) => {
                 <p className="REPtype">Total</p>
               </th>
             </tr>
-            {items.map((e) => {
+            {paymentsFil.map((e) => {
               return (
                 <tr>
                   <td className="ClientName" scope="row">
@@ -338,7 +359,7 @@ const GenericReportComponent = ({ items, type, title, producer }) => {
                     ${e.PIPvalue}
                   </td>
                   <td className="ClientName" scope="row">
-                    ${e.NSDvalue ? e.NSDvalue : 0}
+                    ${e.NSDvalue ? Number(e.NSDvalue).toFixed(2) : 0}
                   </td>
          
                   <td className="ClientName" scope="row">
@@ -359,6 +380,17 @@ const GenericReportComponent = ({ items, type, title, producer }) => {
             })}
           </tbody>
         </table>
+         <div className="DAItotalCont">
+         <div className="DAItotal">
+           <p className="DEPtotalT">TOTAL CASH $ {cash.toFixed(2)}</p>
+         </div>
+         <div className="DAItotal">
+           <p className="DEPtotalT">TOTAL EFT $ {EFT.toFixed(2)}</p>
+         </div>
+         <div className="DAItotal">
+           <p className="DEPtotalT">TOTAL CREDIT CARD $ {credit.toFixed(2)}</p>
+         </div>
+       </div></>
       )}
       <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
     </div>

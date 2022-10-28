@@ -15,7 +15,8 @@ function Root ({ store }) {
   const dispatch = useDispatch()
   const SessionDate= useSelector(state=>state.SessionDate)
   const date = new Date();
-  const DATE = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
+ const DATE =
+    date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
   useEffect(() => {
     if(DATE!==SessionDate) dispatch(logout())
   }, [])

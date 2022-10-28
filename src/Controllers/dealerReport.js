@@ -39,7 +39,7 @@ const DealerReport = () => {
 }
 
   const PayDealer = (data) => {
-    fetch(`https://truewayagentBackend.com/paidDealer`, {
+    fetch(`https://truewayAgentbackend.com/paidDealer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const DealerReport = () => {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentBackend.com/getDealers`)
+      .get(`https://truewayAgentbackend.com/getDealers`)
       .then(function (response) {
         setDealers(response.data);
       })

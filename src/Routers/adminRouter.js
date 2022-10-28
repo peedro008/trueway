@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AdminNav from "../Navs/adminNav";
 import Management from "../Components/management";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -45,9 +45,43 @@ import PaymentDetails from "../Controllers/paymentDetails";
 import Stadistic from "../Controllers/stadistic";
 import GenericReport from "../Controllers/genericReport";
 import { FetchAll } from "../Logic/Fetch";
+import { useDispatch, useSelector } from "react-redux";
+import { addLocation } from "../Redux/actions";
 
 const AdminRouter = () => {
-   FetchAll()
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    FetchAll(dispatch)
+  },[])
+  
+   const User = useSelector(state=>state.User)
+   const UserRole = useSelector(state=>state.userRole)
+ useEffect(() => {
+  UserRole=="Manager"&&
+  fetch(`https://truewayAgentbackend.com/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`, {
+     method: "GET",
+     headers: {
+       "Content-Type": "application/json",
+     },
+    
+   })
+     .then(async (res) => {
+      
+         const jsonRes = await res.json();
+ 
+       
+           dispatch(addLocation(jsonRes[0].LocationId));
+         
+          
+           
+      
+       })
+ 
+     .catch((err) => {
+       console.log(err);
+ 
+     });
+ }, [User,UserRole])
   return (
     <Router>
       <Route component={AdminNav} />

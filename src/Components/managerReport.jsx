@@ -72,7 +72,7 @@ const ManagerReportComponent = ({
             </tr>
           </thead>
           <tbody>
-            {managers.map((e) => {
+            {managers?.map((e) => {
               return (
                 <tr>
                   <td scope="row">
@@ -96,27 +96,15 @@ const ManagerReportComponent = ({
                   <td scope="row">{e.email}</td>
                   <td scope="row">{e.phone}</td>
                   <td scope="row">
-                    {
-                  quotes.filter(
-                    (f) => f.UserId == e.UserId && f.QuoteStatuses.sort(function (a, b) {
-                      return b.id - a.id;
-                    })[0].Status == "Sold"
-                  ).length
+                  {
+                      quotes.filter(
+                        (f) =>f.id == e.UserId)[0]?.sold
                     }
                   </td>
                   <td scope="row">
-                    {
+                  {
                       quotes
-                        .filter((f) => f.UserId == e.UserId)
-                        .filter(
-                          (g) =>
-                            g.QuoteStatuses.sort(function (a, b) {
-                              return a.id - b.id;
-                            }).reverse()[0].Status == "Cancelled" ||
-                            g.QuoteStatuses.sort(function (a, b) {
-                              return a.id - b.id;
-                            }).reverse()[0].Status == "Quoted"
-                        ).length
+                        .filter((f) =>f.id == e.UserId)[0]?.unsold
                     }
                   </td>
                   {userRole !== "Producer" && (

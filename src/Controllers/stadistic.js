@@ -12,7 +12,8 @@ function Stadistic() {
   const [quotes, setQuotes] = useState([])
   const [payments, setPayments] = useState([])
   const [defMonth, setDefMonth] = useState([])
-
+  const userRole = useSelector((state) => state.userRole);
+  const UserId = useSelector((state) => state.UserId);
   const google = useGoogleCharts();
 
   
@@ -47,7 +48,7 @@ const search = () => {
     });
     setPayments([])
     axios
-      .get(`https://truewayagentBackend.com/getPaymentsStats`, { params })
+      .get(`https://truewayAgentbackend.com/getPaymentsStats`, { params })
       .then(function (response) {
         setPayments(response.data);
       })
@@ -69,7 +70,7 @@ const search = () => {
     })
     setQuotes([])
     axios
-      .get(`https://truewayagentBackend.com/getQuotesStats`, { params })
+      .get(`https://truewayAgentbackend.com/getQuotesStats`, { params })
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -107,9 +108,9 @@ const search = () => {
       dateTo:
         (parseFloat(temp.substring(0, 2)) == 12
           ? "01"
-          : parseFloat(temp.substring(0, 2)).toString().length == 2
-          ? parseFloat(temp.substring(0, 2)) + 1
-          : "0" + (parseFloat(temp.substring(0, 2)) + 1)) +
+          : parseFloat(temp.substring(0, 2)).toString().length >1
+          ? Number(temp.substring(0, 2)) + 1
+          : "0" + (Number(temp.substring(0, 2)) + 1)) +
         (parseFloat(temp.substring(0, 2)) == 12
           ? temp.substring(2, 6) +
             (parseFloat(temp.substring(6, 10)) + 1)
@@ -163,8 +164,8 @@ const search = () => {
      
           pes +=
             5 *
-            (e.NSDvalue.length?
-               parseFloat(e.NSDvalue)/parseFloat(e.Category.NSDvalue):0
+            (e?.NSDvalue?.length?
+               parseFloat(e.NSDvalue)/parseFloat(e.Category?.NSDvalue):0
               );
    
       }
@@ -189,6 +190,8 @@ const search = () => {
       dateReq={dateReq}
       defMonth={defMonth}
       google={google}
+      userRole={userRole}
+UserId={UserId}
     />
   );
 }

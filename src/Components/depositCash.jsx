@@ -77,22 +77,22 @@ onCloseModal
                     <div className="inputCont" style={{ width:"50%"}}>   
                     <p  className="PAYtitle" style={{marginBottom:"20px"}}>Cash</p>
                     <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"200px"}}>
-                    <p className="DEPbils">Bills $1</p><input type="number"  class="DEPinput" value={box.pay1} onChange={(event)=>{setBox({...box, pay1:event.target.value})}} />
+                    <p className="DEPbils">Bills $1</p><input type="number"  class="DEPinput" defaultValue={0} value={box.pay1} onChange={(event)=>{setBox({...box, pay1:event.target.value})}} />
                     </div>
                     <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"200px"}}>
-                    <p className="DEPbils">Bills $5   </p><input  type="number" class="DEPinput" value={box.pay5} onChange={(event)=>{setBox({...box, pay5:event.target.value})}} />
+                    <p className="DEPbils">Bills $5   </p><input  type="number" class="DEPinput" defaultValue={0} value={box.pay5} onChange={(event)=>{setBox({...box, pay5:event.target.value})}} />
                     </div>
                     <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"200px"}}>
-                    <p className="DEPbils">Bills $10 </p><input type="number" class="DEPinput" value={box.pay10} onChange={(event)=>{setBox({...box, pay10:event.target.value})}} />
+                    <p className="DEPbils">Bills $10 </p><input type="number" class="DEPinput" defaultValue={0} value={box.pay10} onChange={(event)=>{setBox({...box, pay10:event.target.value})}} />
                     </div>
                     <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"200px"}}>
-                    <p className="DEPbils">Bills $20 </p><input type="number" class="DEPinput" value={box.pay20} onChange={(event)=>{setBox({...box, pay20:event.target.value})}} />
+                    <p className="DEPbils">Bills $20 </p><input type="number" class="DEPinput" defaultValue={0} value={box.pay20} onChange={(event)=>{setBox({...box, pay20:event.target.value})}} />
                     </div>
                     <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"200px"}}>
-                    <p className="DEPbils">Bills $50 </p><input type="number" class="DEPinput" value={box.pay50} onChange={(event)=>{setBox({...box, pay50:event.target.value})}} />
+                    <p className="DEPbils">Bills $50 </p><input type="number" class="DEPinput" defaultValue={0} value={box.pay50} onChange={(event)=>{setBox({...box, pay50:event.target.value})}} />
                     </div>
                     <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"200px"}}>
-                    <p className="DEPbils">Bills $100</p><input type="number" class="DEPinput" value={box.pay100} onChange={(event)=>{setBox({...box, pay100:event.target.value})}} />
+                    <p className="DEPbils">Bills $100</p><input type="number" class="DEPinput" defaultValue={0} value={box.pay100} onChange={(event)=>{setBox({...box, pay100:event.target.value})}} />
                     </div>
 
                     </div>
@@ -117,7 +117,7 @@ onCloseModal
             
                  <div className="DEPnote">
             <p className="PAYtitle">Notes</p>
-            <textarea className="DEPnoteInput" onChange={e=>setNote(e.target.value)}></textarea>
+            <textarea className="DEPnoteInput" onChange={e=>setBox({...box, note:e.target.value})}></textarea>
         </div>
                
         </div>

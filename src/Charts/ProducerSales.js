@@ -15,7 +15,7 @@ function ProducerSales ( {aboutProps ,google}) {
   useEffect (()=>{
       
       
-    axios.get(`https://truewayagentBackend.com/getStatus`)
+    axios.get(`https://truewayAgentbackend.com/getStatus`)
     .then(function(response){
         let paz = response.data
 
@@ -27,7 +27,7 @@ function ProducerSales ( {aboutProps ,google}) {
 },[])
 
 useEffect (()=>{
-    axios.get(`https://truewayagentBackend.com/producerQuotes?UserId=${userId}`)
+    axios.get(`https://truewayAgentbackend.com/producerQuotes?UserId=${userId}`)
     .then(function(response){
         setQuotes(response.data)
        
@@ -42,7 +42,8 @@ useEffect (()=>{
 useEffect(()=>{
     
     const date =  new Date()
-    const DATE = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
+    const DATE =
+    date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
     const Ymodify = modify.filter(e=>e.date.substring(0,4)==DATE.substring(0,4))
     const Yquotes = quotes.filter(e=>e.date.substring(0,4)==DATE.substring(0,4))
     let m0 = 0

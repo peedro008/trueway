@@ -8,16 +8,16 @@ import DRdetailsComponent from "../Components/DRdetails";
 function DRdetails(props) {
   let papa = props.location.props.Payments;
   const [payments, setPayments] = useState(papa);
-  const [paymentsFil, setPaymentsFil] = useState(papa);
-  const [cash, setCash] = useState(0);
-  const [credit, setCredit] = useState(0);
-  const [EFT, setEFT] = useState(0);
   const [producers, setProducers] = useState([]);
   const [search, setSearch] = useState("");
   const [date, setDate] = useState("");
   const UserId = useSelector((state) => state.UserId);
   const LocationId = useSelector((state) => state.LocationId);
   const [total, setTotal] = useState(0);
+  const [paymentsFil, setPaymentsFil] = useState(papa);
+  const [cash, setCash] = useState(0);
+  const [credit, setCredit] = useState(0);
+  const [EFT, setEFT] = useState(0);
   const [checkbox, setCheckbox] = useState({
       Cash: false,
       EFT: false,
@@ -104,6 +104,19 @@ const checkCDC = () => {
     setCredit(CR);
     setEFT(EF);
   }, [paymentsFil]);
+  useEffect(() => {
+    let TOTAL = 0;
+    paymentsFil.map((h) => {
+      TOTAL =
+        TOTAL +
+        (parseFloat(h.amount) +
+          parseFloat(h.creditCardFee) +
+          parseFloat(h.NSDvalue) +
+          parseFloat(h.MVRvalue) +
+          parseFloat(h.PIPvalue));
+    });
+    setTotal(TOTAL);
+  }, [paymentsFil]);
   let pes = [];
   let DATE = "";
   useEffect(() => {
@@ -120,19 +133,6 @@ const checkCDC = () => {
       }
       setDate(DATE);
     });
-  }, [paymentsFil]);
-  useEffect(() => {
-    let TOTAL = 0;
-    paymentsFil.map((h) => {
-      TOTAL =
-        TOTAL +
-        (parseFloat(h.amount) +
-          parseFloat(h.creditCardFee) +
-          parseFloat(h.NSDvalue) +
-          parseFloat(h.MVRvalue) +
-          parseFloat(h.PIPvalue));
-    });
-    setTotal(TOTAL);
   }, [paymentsFil]);
 
   return (

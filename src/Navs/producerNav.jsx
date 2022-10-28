@@ -5,6 +5,7 @@ import "../Css/css.css";
 import logo from "../assets/logo.png";
 import { FiGrid } from "react-icons/fi";
 
+import { BsInfoCircle } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { VscGraph } from "react-icons/vsc";
 import { BiStats } from "react-icons/bi";
@@ -17,7 +18,8 @@ import { logout } from "../Redux/actions";
 function ProducerNav({ onSearch }) {
   const dispatch = useDispatch();
 
-  const Name = useSelector((state) => state.userName);
+  const Name = useSelector((state) => state.User);
+
   const Role = useSelector((state) => state.userRole);
 
   const logOut = () => {
@@ -32,10 +34,10 @@ function ProducerNav({ onSearch }) {
       <div className="topbar">
         <div style={{ paddingRight: "40px", display: "flex" }}>
           <div className="circle">
-            <p className="initial">{Name && Name.substring(0, 1)}</p>
+            <p className="initial">{Name.Name && Name.Name.substring(0, 1)}</p>
           </div>
           <div className="ANusercontainer">
-            <p className="NAname">{Name}</p>
+            <p className="NAname">{Name.Name}</p>
             <p className="NArole">{Role}</p>
           </div>
           <button
@@ -103,7 +105,11 @@ function ProducerNav({ onSearch }) {
             <BiStats className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
+        <div className="NAcontainer" style={{cursor:"help"}} onClick={()=>{ window.open('https://wa.me/5493515330625');
+              return null}}>
+             <BsInfoCircle className="NAicon" size="20px" color="#868ba5" />
         
+        </div>
       </div>
     </div>
   );

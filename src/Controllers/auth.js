@@ -30,7 +30,8 @@ const Auth = () => {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const date = new Date();
-  const DATE = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
+ const DATE =
+    date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
   useEffect(() => {
     window.history.pushState("", "", "/");
   }, []);
@@ -40,7 +41,7 @@ const Auth = () => {
       UserName,
       Password,
     };
-    fetch(`https://truewayagentBackend.com/login`, {
+    fetch(`https://truewayAgentbackend.com/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,12 +60,12 @@ const Auth = () => {
             setIsError(false);
             setMessage(jsonRes.message);
             console.log(jsonRes)
-            dispatch(sessionDate(DATE))
+            dispatch(user(jsonRes));
             dispatch(userRole(jsonRes.UserRole));
-            dispatch(user(payload.UserName));
-            dispatch(userName(jsonRes.Name));
-            dispatch(userId(jsonRes.userId));
-            dispatch(addLocation(producers.filter(e=>e.UserId==jsonRes.userId).LocatioId?producers.filter(e=>e.UserId==jsonRes.userId).LocatioId:1));
+            dispatch(sessionDate(DATE))
+            dispatch(userId(jsonRes.userId))
+          
+           
             
           }
         } catch (err) {
@@ -81,7 +82,7 @@ const Auth = () => {
      email: reset,
    
     };
-    fetch(`https://truewayagentBackend.com/send`, {
+    fetch(`https://truewayAgentbackend.com/send`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

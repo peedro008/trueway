@@ -32,7 +32,7 @@ const ManagerCategory = () => {
 
   const onSubmit = (data) => {
     data &&
-      fetch(`https://truewayagentBackend.com/addCategories`, {
+      fetch(`https://truewayAgentbackend.com/addCategories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

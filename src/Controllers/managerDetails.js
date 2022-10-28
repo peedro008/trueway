@@ -42,7 +42,7 @@ const ManagerDetails = (props) => {
   }, [userId]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentBackend.com/producerQuotes?UserId=${Producer?.UserId}`)
+      .get(`https://truewayAgentbackend.com/producerQuotes?UserId=${Producer?.UserId}`)
       .then(function (response) {
         setQuotes(response.data);
 
@@ -54,7 +54,7 @@ const ManagerDetails = (props) => {
   }, [Producer]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentBackend.com/getUserPayment?UserId=${Producer?.UserId}`)
+      .get(`https://truewayAgentbackend.com/getUserPayment?UserId=${Producer?.UserId}`)
       .then(function (response) {
         setPayments(response.data);
       })
@@ -64,7 +64,7 @@ const ManagerDetails = (props) => {
   }, [Producer]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentBackend.com/getStatus`)
+      .get(`https://truewayAgentbackend.com/getStatus`)
       .then(function (response) {
         let paz = response.data;
 
@@ -78,7 +78,7 @@ const ManagerDetails = (props) => {
   useEffect(() => {
     const date = new Date();
     const DATE =
-      date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
+    date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
     let MY = date.getFullYear() + "-0" + (date.getMonth() + 1);
     let LMY = date.getFullYear() + "-0" + (date.getMonth() );
 

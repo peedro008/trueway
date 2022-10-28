@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
     BrowserRouter as Router,
@@ -33,9 +33,39 @@ import PaymentDetails from "../Controllers/paymentDetails";
 import Stadistic from '../Controllers/stadistic';
 import GenericReport from '../Controllers/genericReport';
 import { FetchAll } from '../Logic/Fetch';
+import { useDispatch, useSelector } from 'react-redux';
+import { addLocation } from '../Redux/actions';
  const ProducerRouter=()=>{
+  const dispatch = useDispatch()
+  const User = useSelector(state=>state.User)
+  const UserRole = useSelector(state=>state.userRole)
+useEffect(() => {
+  console.log(User)
+  fetch(`https://truewayAgentbackend.com/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+   
+  })
+    .then(async (res) => {
+     
+        const jsonRes = await res.json();
 
- FetchAll()
+      
+          dispatch(addLocation(jsonRes[0].LocationId));
+        
+         
+          
+     
+      })
+
+    .catch((err) => {
+      console.log(err);
+
+    });
+}, [User,UserRole])
+ FetchAll(dispatch)
     return (
         <Router>
           <Route component={ProducerNav}/>     

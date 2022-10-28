@@ -14,7 +14,7 @@ function ProducerPie ({aboutProps, google}) {
  useEffect (()=>{
       
       
-  axios.get(`https://truewayagentBackend.com/quotes`)
+  axios.get(`https://truewayAgentbackend.com/quotes`)
   .then(function(response){
       let paz = response.data
 

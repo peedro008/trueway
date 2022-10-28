@@ -30,10 +30,10 @@ const schema = yup
     MVRamount: yup.string().optional().default("0"),
     name: yup.string().optional().min(1),
     email: yup.string().optional().email().min(1),
-    tel: yup.string().optional().min(6),
+    tel: yup.string().optional().nullable().default(null).min(6),
     new: yup.bool().optional(),
     CategoryNsd: yup.number().optional().nullable(false),
-    address: yup.string().optional().min(1),
+    address: yup.string().optional().nullable().default(null),
     date: yup.string().optional().nullable().default(null),
 
   })
@@ -44,7 +44,7 @@ const AddQuote = () => {
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
-  const userId = useSelector((state) => state.UserId);
+  const User = useSelector((state) => state.User);
   const [newClient, setNewClient] = useState(false);
   const [inputs, setInputs] = useState({ Bound: false });
   const [CategoAux, setCategoAux] = useState(false);
@@ -72,8 +72,13 @@ const AddQuote = () => {
 
   const dealers = useSelector((state) => state.DealerSalesPersons);
   const locations = useSelector((state) => state.Locations);
+
+  const date = new Date();
+ const DATE =
+    date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
   useEffect(() => {
-    setValue("UserId", parseInt(userId));
+    setValue("UserId", parseInt(User.userId));
+    setValue("date", DATE);
   }, []);
   const customStyles = {
     control: (base) => ({
@@ -98,7 +103,7 @@ const AddQuote = () => {
   };
 
   const reload = () => {
-    window.location.reload();
+    window.history.go(-1)
   };
 
   const reset = (event) => {
@@ -121,26 +126,29 @@ const AddQuote = () => {
       (data.monthlyPayments == "" && setValue("monthlyPayment", "0"));
     setValue("Bound", `${inputs.Bound}`);
 
-    fetch(`https://truewayagentBackend.com/addQuote`, {
+    fetch(`https://truewayAgentbackend.com/addQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then((response) => {response.json()
+      
+     
+    
         
         handleDealer(data.ClientId);
         
-      })
+      
 
-      onOpenModal();
+        onOpenModal();
+      })
   };
   const handleDealer = (x=null) => {
     inputs.DealerSalePerson &&
     !x?
-      fetch(`https://truewayagentBackend.com/addDealer`, {
+      fetch(`https://truewayAgentbackend.com/addDealer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -164,7 +172,7 @@ const AddQuote = () => {
           console.log(err);
         })
         :
-        fetch(`https://truewayagentBackend.com/addDealer`, {
+        fetch(`https://truewayAgentbackend.com/addDealer`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -189,8 +197,15 @@ const AddQuote = () => {
             }) 
   };
   const handleNewClient = () => {
-    setValue("ClientId", null);
-    setNewClient(!newClient);
+
+    setValue("ClientId", null)
+    setValue("email", null);
+    setValue("name", null);
+    setValue("phone", null);
+    setValue("address", null);
+    setNewClient(!newClient)
+  
+    
   };
   const optionsCa = categories?.map((e) => ({ value: e.id, label: e.name, NSD:e.NSDvalue}));
   const optionsCo = companies?.map((e) => ({ value: e.id, label: e.name }));

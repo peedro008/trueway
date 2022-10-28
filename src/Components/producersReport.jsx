@@ -12,7 +12,7 @@ const ProducerReportComponent = ({
   deletedOne,
   sold,
   unSold,
-  modify,
+
   onCloseModal,
   open,
   handleDelete,
@@ -100,22 +100,13 @@ const ProducerReportComponent = ({
                   <td scope="row">
                     {
                       quotes.filter(
-                        (f) => f.UserId == e.UserId && f.QuoteStatuses.sort(function (a, b) {
-                          return b.id - a.id;
-                        })[0].Status == "Sold"
-                      ).length
+                        (f) =>f.id == e.UserId)[0]?.sold
                     }
                   </td>
                   <td scope="row">
                     {
                       quotes
-                        .filter((f) => f.UserId == e.UserId)
-                        .filter(
-                          (g) =>
-                            g.QuoteStatuses.sort(function (a, b) {
-                              return b.id - a.id;
-                            })[0].Status == "Quoted"
-                        ).length
+                        .filter((f) =>f.id == e.UserId)[0]?.unsold
                     }
                   </td>
                   {userRole !== "Producer" && (

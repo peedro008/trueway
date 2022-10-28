@@ -160,7 +160,7 @@ const DealerReportComponent = ({
                     ${e.amount}
                   </td>
                   <td className="ClientName" scope="row">
-                    {e.datePaid ? e.datePaid : "Unpaid"}
+                    {e.datePaid ? e.datePaid.substring(0,10) : "Unpaid"}
                   </td>
                   <td
                     className="ClientName"

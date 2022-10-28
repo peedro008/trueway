@@ -26,7 +26,7 @@ function ClientReport() {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentBackend.com/deleteClient`, {
+    fetch(`https://truewayAgentbackend.com/deleteClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

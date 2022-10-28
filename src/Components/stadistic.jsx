@@ -6,6 +6,8 @@ import StatsSold from "../Charts/stadisticsChartSold";
 function StadisticComponent({
   Producers,
   yearLabel,
+  userRole,
+  UserId,
   yearOptions,
   monthOptions,
   setDateSelected,
@@ -72,14 +74,15 @@ function StadisticComponent({
         </button>
       </div>
       <div className="StadisticRowName">
-        {Producers.map((e, i) => {
-          return (
+       { userRole=="Producer"?
+       
+         
             <div>
               <p
-                style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
+                style={{ color: "#6F52ED" }}
                 className="StadisticProdName"
               >
-                {e.name}
+                {Producers.filter(e=>e.UserId==UserId)[0].name}
               </p>
               <NavLink
                 style={{ textDecoration: "none" }}
@@ -88,9 +91,9 @@ function StadisticComponent({
                   aboutProps: {
                     type: "P",
                     title: `NSD Sold ${yearLabel}`,
-                    producer: e.name,
+                    producer: Producers.filter(e=>UserId==UserId)[0].name,
                     items: payments.filter(
-                      (f) => f.UserId == e.UserId && f.NSDvalue !== "0"
+                      (f) => f.UserId == UserId && f.NSDvalue !== "0"
                     ),
                   },
                 }}
@@ -98,15 +101,10 @@ function StadisticComponent({
                 <div className="StadBox">
                   <p className="StadBoxTitle">NSD Sold</p>
                   <p className="StadBoxVal">
-                    {payments
-                      .filter((f) => f.UserId == e.UserId)
-                      .map((item) =>
-                        item.NSDamount.length ? item.NSDamount : "0"
-                      )
-                      .reduce(
-                        (prev, curr) => parseFloat(prev) + parseFloat(curr),
-                        0
-                      )}
+                    {payments.filter(
+                      (f) => f.UserId ==UserId && f.NSDvalue !== "0"
+                    ).length
+        }
                   </p>
                 </div>
               </NavLink>
@@ -117,9 +115,9 @@ function StadisticComponent({
                   aboutProps: {
                     type: "P",
                     title: `NSD Sold ${yearLabel}`,
-                    producer: e.name,
+                    producer: Producers.filter(e=>UserId==UserId)[0].name,
                     items: payments.filter(
-                      (f) => f.UserId == e.UserId && f.NSDamount&&f.NSDamount !== "0"
+                      (f) => f.UserId == UserId && f.NSDvalue !== "0"
                     ),
                   },
                 }}
@@ -129,8 +127,8 @@ function StadisticComponent({
                   <p className="StadBoxVal">
                     {
                       getComission(
-                        payments.filter((f) => f.UserId == e.UserId&& f.NSDvalue !== "0"),
-                        quotes.filter((f) => f.UserId == e.UserId)
+                        payments.filter((f) => f.UserId == UserId&& f.NSDvalue !== "0"),
+                        quotes.filter((f) => f.UserId == UserId)
                       )}
                   </p>
                 </div>
@@ -142,14 +140,14 @@ function StadisticComponent({
                   aboutProps: {
                     type: "Q",
                     title: `New Polizas ${yearLabel}`,
-                    producer: e.name,
+                    producer: Producers.filter(e=>UserId==UserId)[0].name,
                     items: quotes.filter(
-                      (f) =>
-                        f.QuoteStatuses[0].UserId == e.UserId &&
-                        f.QuoteStatuses.sort(function (a, b) {
-                          return b.id - a.id ;
-                        })[0].Status == "Sold"
-                    ),
+                        (f) =>
+                         ( f.QuoteStatuses[0].UserId == UserId)&&
+                          f.QuoteStatuses.sort(function (a, b) {
+                            return b.id - a.id ;
+                          })[0].Status == "Sold"
+                      ),
                   },
                 }}
               >
@@ -159,7 +157,7 @@ function StadisticComponent({
                     {
                       quotes.filter(
                         (f) =>
-                          f.QuoteStatuses[0].UserId == e.UserId &&
+                         ( f.QuoteStatuses[0].UserId == UserId)&&
                           f.QuoteStatuses.sort(function (a, b) {
                             return b.id - a.id ;
                           })[0].Status == "Sold"
@@ -175,15 +173,15 @@ function StadisticComponent({
                   aboutProps: {
                     type: "Q",
                     title: `Quotes ${yearLabel}`,
-                    producer: e.name,
-                    items: quotes.filter((f) => f.UserId == e.UserId),
+                    producer: Producers.filter(e=>UserId==UserId)[0].name,
+                    items: quotes.filter((f) => f.UserId == UserId),
                   },
                 }}
               >
                 <div className="StadBox">
                   <p className="StadBoxTitle">Quotes</p>
                   <p className="StadBoxVal">
-                    {quotes.filter((f) => f.UserId == e.UserId).length}
+                    {quotes.filter((f) => f.UserId == UserId).length}
                   </p>
                 </div>
               </NavLink>
@@ -194,10 +192,10 @@ function StadisticComponent({
                   aboutProps: {
                     type: "Q",
                     title: `Cancelations ${yearLabel}`,
-                    producer: e.name,
+                    producer: Producers.filter(e=>UserId==UserId)[0].name,
                     items: quotes.filter(
                       (f) =>
-                        f.UserId == e.UserId &&
+                        f.UserId == UserId &&
                         f.QuoteStatuses[0].Status == "Cancelled"
                     ),
                   },
@@ -209,7 +207,7 @@ function StadisticComponent({
                     {
                       quotes.filter(
                         (f) =>
-                          f.UserId == e.UserId &&
+                          f.UserId == UserId &&
                           f.QuoteStatuses[0].Status == "Cancelled"
                       ).length
                     }
@@ -217,14 +215,158 @@ function StadisticComponent({
                 </div>
               </NavLink>
             </div>
-          );
-        })}
+       
+      :
+      Producers.map((e, i) => {
+        return (
+          <div>
+            <p
+              style={{ color: i % 2 ? "#6F52ED" : "#FF7A00" }}
+              className="StadisticProdName"
+            >
+              {e.name}
+            </p>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/report/genericReport",
+                aboutProps: {
+                  type: "P",
+                  title: `NSD Sold ${yearLabel}`,
+                  producer: e.name,
+                  items: payments.filter(
+                    (f) => f.UserId == e.UserId && f.NSDvalue !== "0"
+                  ),
+                },
+              }}
+            >
+              <div className="StadBox">
+                <p className="StadBoxTitle">NSD Sold</p>
+                <p className="StadBoxVal">
+                  {payments.filter(
+                    (f) => f.UserId == e.UserId && f.NSDvalue !== "0"
+                  ).length
+      }
+                </p>
+              </div>
+            </NavLink>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/report/genericReport",
+                aboutProps: {
+                  type: "P",
+                  title: `NSD Sold ${yearLabel}`,
+                  producer: e.name,
+                  items: payments.filter(
+                    (f) => f.UserId == e.UserId && f.NSDvalue !== "0"
+                  ),
+                },
+              }}
+            >
+              <div className="StadBox">
+                <p className="StadBoxTitle">NSD Commision</p>
+                <p className="StadBoxVal">
+                  {
+                    getComission(
+                      payments.filter((f) => f.UserId == e.UserId&& f.NSDvalue !== "0"),
+                      quotes.filter((f) => f.UserId == e.UserId)
+                    )}
+                </p>
+              </div>
+            </NavLink>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/report/genericReport",
+                aboutProps: {
+                  type: "Q",
+                  title: `New Polizas ${yearLabel}`,
+                  producer: e.name,
+                  items: quotes.filter(
+                      (f) =>
+                       ( f.QuoteStatuses[0].UserId == e.UserId)&&
+                        f.QuoteStatuses.sort(function (a, b) {
+                          return b.id - a.id ;
+                        })[0].Status == "Sold"
+                    ),
+                },
+              }}
+            >
+              <div className="StadBox">
+                <p className="StadBoxTitle">New Polizas</p>
+                <p className="StadBoxVal">
+                  {
+                    quotes.filter(
+                      (f) =>
+                       ( f.QuoteStatuses[0].UserId == e.UserId)&&
+                        f.QuoteStatuses.sort(function (a, b) {
+                          return b.id - a.id ;
+                        })[0].Status == "Sold"
+                    ).length
+                  }
+                </p>
+              </div>
+            </NavLink>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/report/genericReport",
+                aboutProps: {
+                  type: "Q",
+                  title: `Quotes ${yearLabel}`,
+                  producer: e.name,
+                  items: quotes.filter((f) => f.UserId == e.UserId),
+                },
+              }}
+            >
+              <div className="StadBox">
+                <p className="StadBoxTitle">Quotes</p>
+                <p className="StadBoxVal">
+                  {quotes.filter((f) => f.UserId == e.UserId).length}
+                </p>
+              </div>
+            </NavLink>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/report/genericReport",
+                aboutProps: {
+                  type: "Q",
+                  title: `Cancelations ${yearLabel}`,
+                  producer: e.name,
+                  items: quotes.filter(
+                    (f) =>
+                      f.UserId == e.UserId &&
+                      f.QuoteStatuses[0].Status == "Cancelled"
+                  ),
+                },
+              }}
+            >
+              <div className="StadBox">
+                <p className="StadBoxTitle">Cancelations</p>
+                <p className="StadBoxVal">
+                  {
+                    quotes.filter(
+                      (f) =>
+                        f.UserId == e.UserId &&
+                        f.QuoteStatuses[0].Status == "Cancelled"
+                    ).length
+                  }
+                </p>
+              </div>
+            </NavLink>
+          </div>
+        );
+      })
+      }
       </div>
+      { userRole!=="Producer"?
       <div style={{flexDirection:"row", display:"flex", justifyContent:"space-between"}}>
               {(google && quotes.length)? <StatsSold google={google} quotes={quotes} producers={Producers}/>:<></>}
           
               {(google && quotes.length)? <StatsQuoted google={google} quotes={quotes} producers={Producers}/>:<></>}
-            </div>
+            </div>:<></>}
     </div>
   );
 }

@@ -14,8 +14,18 @@ function StatsSold ({google, quotes, producers}) {
         let pes = []
           producers.map((e, index)=>{
             
+
+
+
+            
             pes.push(
-              [e.name, quotes.filter(f=>f.User.name==e.name&&f.QuoteStatuses[0].Status=="Sold").length])
+              [e.name,        quotes.filter(
+                (f) =>
+                 ( f.QuoteStatuses[0].UserId == e.UserId)&&
+                  f.QuoteStatuses.sort(function (a, b) {
+                    return b.id - a.id ;
+                  })[0].Status == "Sold"
+              ).length])
           })
           setDato(pes)
       }, [quotes, producers])

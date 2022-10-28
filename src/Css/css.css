@@ -1995,6 +1995,26 @@
 
   justify-content: space-between;
 }
+.DRyesterday{
+  background-color: transparent;
+  border-radius: 8px;
+  border: 1px solid #FF4C61;
+  display: flex;
+  align-items: center;
+  cursor:pointer;
+  background-color: #FFF;
+}
+.DRyesterdayT{
+  font-family: Montserrat;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+ color:#FF4C61;
+ margin-inline: 10px;
+}
 .DAItotal {
   width: max-content;
   padding-left: 20px;
@@ -2026,6 +2046,7 @@
   color: #2b4162;
   margin-top: 5px;
 }
+
 /*---------------PRDUCERDETAILS----------------------------*/
 .PRODcont1 {
   min-height: 30vh;

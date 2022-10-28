@@ -11,7 +11,6 @@ import { Controller } from "react-hook-form";
 
 import { FiDivide } from "react-icons/fi";
 import { BsChevronLeft } from "react-icons/bs";
-import NSDcalculator from "../Logic/NSDcalculator";
 
 function AddPaymentComponent({
   onOpenModal,
@@ -25,6 +24,10 @@ function AddPaymentComponent({
   locations,
   optionsQ,
   optionT,
+  t1,
+setT1,
+t2,
+setT2,
   optionM,
   quotes,
   control,
@@ -413,131 +416,7 @@ percent,
             </div>
           )}
         </div>
-        {MultiMethod ? (
-          <div className="PAYBox" style={{ marginTop: "25px" }}>
-            <div className="PAYInputCont">
-              <div
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p className="PAYtitle">1° method</p>
-                <FiDivide
-                  size="20"
-                  color="#2b4162"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setMultiMethod(!MultiMethod)}
-                />
-              </div>
-              <Controller
-                control={control}
-                name="method"
-                render={({ field: { onChange, onBlur, value, ref } }) => (
-                  <Select
-                    value={optionM.find((c) => c.value === value)}
-                    onChange={(val) => {
-                      onChange(val.value);
-                      setMethod(val.value);
-                    }}
-                    control={control}
-                    options={optionM.map((e) => ({
-                      value: e.value,
-                      label: e.label,
-                    }))}
-                    name={"method"}
-                    className="PAYselect"
-                    placeholder="Select method"
-                  />
-                )}
-              />
-
-              <p className="FORMerror">{errors.method?.message}</p>
-            </div>
-            <div className="PAYInputCont">
-              <div
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                  justifyContent: "center",
-                  
-               
-                }}
-              >
-                <p className="PAYtitle" style={{textAlign:"center"}}>Percent</p>
-              </div><input
-                    className="AQinput2"
-                    placeholder="How much?"
-                    key="NSDamount"
-                    name="NSDamount"
-                    value={percent}
-                    onChange={(e)=>setPercent(e.target.value)}
-                   style={{maxWidth:"50px",}}
-                  />
-              
-              </div>
-            <div className="PAYInputCont">
-              <div
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <p className="PAYtitle">2° method</p>
-              </div>
-              <Controller
-                control={control}
-                name="method2"
-                render={({ field: { onChange, onBlur, value, ref } }) => (
-                  <Select
-                    value={optionM.find((c) => c.value === value)}
-                    onChange={(val) => {
-                      onChange(val.value);
-                      setMethod2(val.value);
-                    }}
-                    control={control}
-                    options={optionM.map((e) => ({
-                      value: e.value,
-                      label: e.label,
-                    }))}
-                    name={"method2"}
-                    className="PAYselect"
-                    placeholder="Select 2° method"
-                  />
-                )}
-              />
-
-              <p className="FORMerror">{errors.method?.message}</p>
-            </div>
-            <div className="PAYInputCont">
-              <div
-                style={{
-                  flexDirection: "row",
-                  display: "flex",
-                  justifyContent: "center",
-                  
-               
-                }}
-              >
-                <p className="PAYtitle" style={{textAlign:"center"}}>Percent</p>
-              </div><input
-                    className="AQinput2"
-                    placeholder="How much?"
-                    key="NSDamount"
-                    name="NSDamount"
-                    value={percent?(100-parseFloat(percent)):0}
-                    disabled={true}
-                   style={{maxWidth:"50px",}}
-                  />
-              
-              </div>
-          </div>
-        ) : (
-          <></>
-        )}
-
+      
         <div className="AQwhiteContainer11">
           <div className="AQinputContainer">
             <p className="AQinputName">NSD</p>
@@ -671,22 +550,135 @@ percent,
             </div>
           </div>
         </div>
-        {!method2?
+        {MultiMethod ? (
+          <div className="PAYBox" style={{ marginTop: "25px" }}>
+            <div className="PAYInputCont">
+              <div
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p className="PAYtitle">1° method</p>
+                <FiDivide
+                  size="20"
+                  color="#2b4162"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setMultiMethod(!MultiMethod)}
+                />
+              </div>
+              <Controller
+                control={control}
+                name="method"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <Select
+                    value={optionM.find((c) => c.value === value)}
+                    onChange={(val) => {
+                      onChange(val.value);
+                      setMethod(val.value);
+                    }}
+                    control={control}
+                    options={optionM.map((e) => ({
+                      value: e.value,
+                      label: e.label,
+                    }))}
+                    name={"method"}
+                    className="PAYselect"
+                    placeholder="Select method"
+                  />
+                )}
+              />
+
+              <p className="FORMerror">{errors.method?.message}</p>
+            </div>
+            <div className="PAYInputCont">
+              <div
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  justifyContent: "center",
+                  
+               
+                }}
+              >
+                <p className="PAYtitle" style={{textAlign:"center"}}>Amount</p>
+              </div><input
+                    className="AQinput2"
+                    placeholder="$$$"
+                    key="NSDamount"
+                    name="NSDamount"
+                   
+                    onChange={(e)=>setT1(e.target.value)}
+                   style={{maxWidth:"50px",}}
+                  />
+              
+              </div>
+            <div className="PAYInputCont">
+              <div
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p className="PAYtitle">2° method</p>
+              </div>
+              <Controller
+                control={control}
+                name="method2"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <Select
+                    value={optionM.find((c) => c.value === value)}
+                    onChange={(val) => {
+                      onChange(val.value);
+                      setMethod2(val.value);
+                    }}
+                    control={control}
+                    options={optionM.map((e) => ({
+                      value: e.value,
+                      label: e.label,
+                    }))}
+                    name={"method2"}
+                    className="PAYselect"
+                    placeholder="Select 2° method"
+                  />
+                )}
+              />
+
+              <p className="FORMerror">{errors.method?.message}</p>
+            </div>
+            <div className="PAYInputCont">
+              <div
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  justifyContent: "center",
+                  
+               
+                }}
+              >
+                <p className="PAYtitle" style={{textAlign:"center"}}>Amount</p>
+              </div><input
+                    className="AQinput2"
+                    placeholder="$$$"
+                    key="NSDamount"
+                    name="NSDamount"
+                    value={t2}
+                    disabled={true}
+                   style={{maxWidth:"50px",}}
+                  />
+              
+              </div>
+          </div>
+        ) : (
+          <></>
+        )}
+
         <div className="DEPtotal1">
           <p className="DEPtotalT">TOTAL $ {total ? total.toFixed(2) : 0}</p>
         </div>
-        :
-        <div style={{display:"flex", flexDirection:"row", width:"40vw"}}>
-                <div className="DEPtotal1" style={{width:"220px", marginRight:"40px"}}>
-          <p className="DEPtotalT">{method} TOTAL $ {total ? total.toFixed(2) : 0}</p>
-        </div>
-        <div className="DEPtotal1" style={{width:"220px"}}>
-          <p className="DEPtotalT">{method2} TOTAL $ {total2 ? total2.toFixed(2) : 0}</p>
-        </div>
-        </div>
-          }
-
-
+      
 
         <Modal open={open} onClose={reload} center classNames={"modal"}>
           <div className="modal">

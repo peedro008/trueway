@@ -7,7 +7,7 @@ import ProducerDashboardComponent from "../Components/producerDashboard";
 const ProducerDashboard = () => {
   const date = new Date();
   const DATE =
-    date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
+    date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
   const [NSD, setNSD] = useState(null);
   const [asd, setAsd] = useState([]);
   const [pquotes, setPquotes] = useState([]);
@@ -18,26 +18,36 @@ const ProducerDashboard = () => {
   const [payments, setPayments] = useState([]);
   const dispatch = useDispatch();
   const google = useGoogleCharts();
-  const userId = useSelector((state) => state.UserId);
+  const user = useSelector((state) => state.User);
   const producers = useSelector((state) => state.Producers);
   const UserId = useSelector((state) => state.UserId);
-  const modify = useSelector((state) => state.QuoteStatuses)?.filter(e=>e.UserId==userId);
+  //const modify = useSelector((state) => state.QuoteStatuses)?.filter(e=>e.UserId==user.userId);
+  const [modify, setModify] = useState([]);
   const quotes2 = useSelector((state) => state.Quotes);
-
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentBackend.com/producerQuotes?UserId=${userId}`)
+      .get(`https://truewayAgentbackend.com/GetUserStatus?UserId=${user.userId}`)
+      .then(function (response) {
+        setModify(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [user]);
+  useEffect(() => {
+    axios
+      .get(`https://truewayAgentbackend.com/producerQuotes?UserId=${user.userId}`)
       .then(function (response) {
         setPquotes(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [userId]);
+  }, [user]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentBackend.com/getUserPayment?UserId=${userId}`)
+      .get(`https://truewayAgentbackend.com/getUserPayment?UserId=${user.userId}`)
       .then(function (response) {
         setPayments(response.data.filter(e=>e.date.substring(0, 7) == DATE.substring(0, 7)));
       })
@@ -45,7 +55,7 @@ const ProducerDashboard = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [userId, DATE]);
+  }, [user]);
 
 
 
@@ -53,12 +63,8 @@ const ProducerDashboard = () => {
     let pes = quotes2;
     let pas = pes&&pes.filter(
       (e) =>
-        e.QuoteStatuses.sort(function (a, b) {
-          return a.id - b.id;
-        }).reverse()[0].Status == "Quoted" ||
-        e.QuoteStatuses.sort(function (a, b) {
-          return a.id - b.id;
-        }).reverse()[0].Status == "Cancelled"
+        e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status == "Quoted" ||
+        e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status == "Cancelled"
     );
     setStatus(pas);
   }, [quotes2]);
@@ -75,9 +81,27 @@ const ProducerDashboard = () => {
 
   useEffect(() => {
     let temp = 0;
-    payments?.filter(f=>f.User.id==UserId).map((e) => {
-      temp +=parseFloat(e.NSDvalue);
-    });
+    payments?.map((e) => {
+      if (e.Category.name !== "HEALTH INSURANCE") {
+        if ( e.Category.id == 2) {
+          temp += 10;
+        }
+        if (e.NSDvalue !== "") {
+          temp +=
+            5 *
+            (e.NSDamount
+              ? parseFloat(e.NSDamount)
+              : parseFloat(e.NSDvalue) / parseFloat(e.Category.NSDvalue));
+        }
+      }
+    })
+    pquotes.map((e) => {
+    if ( e.Category.id == 2&&!e.Payment&& e.QuoteStatuses.sort(function (a, b) {
+      return b.id - a.id;
+    })[0].Status=="Sold") {
+      temp += 10;
+    }
+  })
     setNSD(temp);
   }, [payments]);
 
@@ -126,7 +150,7 @@ const ProducerDashboard = () => {
       : 0 );
     }));
     
-  }, [modify, producers, quotes2]);
+  }, [ quotes2]);
 
 
 
@@ -154,7 +178,7 @@ const ProducerDashboard = () => {
       UserId={UserId}
       modify={modify}
       quotes2={quotes2}
-      userId={userId}
+      userId={user.userId}
     />
   );
 };
