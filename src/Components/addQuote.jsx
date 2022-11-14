@@ -189,7 +189,7 @@ show,
           {newClient && 
  <div className="AQrowContainer">
   <div className="AQinputContainer"> 
-  <div style={{flexDirection:"row", display:"flex"}}> <p className="PAYtitle">Address</p><GrCircleQuestion onClick={()=>setShow(!show)}/></div>
+  <div style={{flexDirection:"row", display:"flex"}}> <p className="PAYtitle">Address</p></div>
               {!show ? (
                 <div class="autocomplete-container" id="autocomplete-container">
                    <Controller

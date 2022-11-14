@@ -147,7 +147,7 @@ function AddPayment(props) {
 
 
   useEffect(()=>{
-    setValue("percent", `${percent/100}`);
+    percent&&setValue("percent", `${percent/100}`);
   },[percent])
 
   useEffect(() => {

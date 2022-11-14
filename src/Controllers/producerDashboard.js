@@ -82,6 +82,7 @@ const ProducerDashboard = () => {
   useEffect(() => {
     let temp = 0;
     payments?.map((e) => {
+      if(e.Category){
       if (e.Category.name !== "HEALTH INSURANCE") {
         if ( e.Category.id == 2) {
           temp += 10;
@@ -93,10 +94,10 @@ const ProducerDashboard = () => {
               ? parseFloat(e.NSDamount)
               : parseFloat(e.NSDvalue) / parseFloat(e.Category.NSDvalue));
         }
-      }
+      }}
     })
     pquotes.map((e) => {
-    if ( e.Category.id == 2&&!e.Payment&& e.QuoteStatuses.sort(function (a, b) {
+    if ( e.Categorye&&e.Category.id == 2&&!e.Payment&& e.QuoteStatuses.sort(function (a, b) {
       return b.id - a.id;
     })[0].Status=="Sold") {
       temp += 10;
