@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import GenericReportComponent from "../Components/genericReport";
 
 function GenericReport(props) {
@@ -16,6 +17,7 @@ function GenericReport(props) {
     EFT: false,
     CDC: false,
   });
+  const users = useSelector(e=>e.Users)
   const checkCash = () => {
     if (data.type == "P") {
       if (checkbox.Cash) {
@@ -140,6 +142,7 @@ function GenericReport(props) {
       setCheckbox={setCheckbox}
       total={total}
       setTotal={setTotal}
+      users={users}
     />
   );
 }

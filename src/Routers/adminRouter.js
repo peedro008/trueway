@@ -58,7 +58,7 @@ const AdminRouter = () => {
    const UserRole = useSelector(state=>state.userRole)
  useEffect(() => {
   UserRole=="Manager"&&
-  fetch(`https://truewayAgentbackend.com/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`, {
+  fetch(`http://localhost:8080/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`, {
      method: "GET",
      headers: {
        "Content-Type": "application/json",

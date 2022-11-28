@@ -17,7 +17,7 @@ function DeletedClients() {
   };
   useEffect(() => {
     axios
-      .get(`https://truewayAgentbackend.com/getDeletedClients`)
+      .get(`http://localhost:8080/getDeletedClients`)
       .then(function (response) {
         setClients(response.data);
       })
@@ -31,7 +31,7 @@ function DeletedClients() {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`https://truewayAgentbackend.com/undeleteClient`, {
+    fetch(`http://localhost:8080/undeleteClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

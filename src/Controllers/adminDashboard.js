@@ -59,7 +59,7 @@ setUnSold(tempU)
 
   useEffect(() => {
     axios
-      .get(`https://truewayAgentbackend.com/getUserPayment?UserId=${UserId}`)
+      .get(`http://localhost:8080/getUserPayment?UserId=${UserId}`)
       .then(function (response) {
         setPayments(response.data);
       })

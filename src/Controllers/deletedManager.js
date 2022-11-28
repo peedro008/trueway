@@ -25,7 +25,7 @@ const DeletedManagers = () => {
   };
   const deleteManager = (data) => {
     data && console.log(data);
-    fetch(`https://truewayAgentbackend.com/undeleteManager`, {
+    fetch(`http://localhost:8080/undeleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const DeletedManagers = () => {
   };
   useEffect(() => {
     axios
-      .get(`https://truewayAgentbackend.com/getDeletedManager`)
+      .get(`http://localhost:8080/getDeletedManager`)
       .then(function (response) {
         setManagers(response.data);
       })

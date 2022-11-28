@@ -14,6 +14,7 @@ import {AiOutlineDelete, AiOutlineCloseCircle, AiOutlineLeft, AiOutlineRight} fr
 
 import Modal from 'react-responsive-modal';
 import spinnerr from "../assets/spinnerr.gif"
+import { useSelector } from "react-redux";
 const QuoteReportComponent=({
     handleDelete,
 deleteClient,
@@ -56,7 +57,7 @@ producers,
 paginator,
 setPaginator
 })=>{
-    
+    const users = useSelector(e=>e.Users)
     return(
         <div className="genericDiv1">
              
@@ -162,9 +163,19 @@ setPaginator
             {columns.category&&<th scope="col" className="column1"><p className="REPtype">Category</p></th>}
             {columns.CompanyId&&<th scope="col" className="column1"><p className="REPtype">Company</p></th>}
             {columns.ProducerId&&<th scope="col" className="column1"><p className="REPtype">Producer</p></th>}
+            { (
+                <th scope="col" className="column1">
+                  <p className="REPtype">Sold By</p>
+                </th>
+              )}
             <th scope="col" className="column1"><p className="REPtype">Total</p></th>
             {columns.bound&&<th scope="col" className="column1"><p className="REPtype">Status</p></th>}
             {<th scope="col" className="column1"><p className="REPtype">Date</p></th>}
+            {
+                <th scope="col" className="column1">
+                  <p className="REPtype">Closing date</p>
+                </th>
+              }
             {<th scope="col" className="column1"><p className="REPtype">Time</p></th>}
             {columns.down&&<th scope="col" className="column1"><p className="REPtype">Down Payments</p></th>}
             {columns.monthlyPayment&&<th scope="col" className="column1"><p className="REPtype">Monthly Payments</p></th>}
@@ -196,12 +207,20 @@ setPaginator
                             {columns.category&&<td className="row1" scope="row">{e.Category.name}</td>}
                             {columns.CompanyId&&<td className="row1" scope="row">{e.Company.name}</td>}
                             {columns.ProducerId&&<td className="row1" scope="row">{e.User.name}</td>}
+                            { (
+                      <td className="row1" scope="row">
+                        {users.find(f=>f.id==e.SoldBy)?.name}
+                      </td>
+                    )}
                             <td className="row1" scope="row">$             {((e.down?parseFloat(e.down):0) + (e.PIPvalue?parseFloat(e.PIPvalue):0) +
                       (e.NSDvalue?parseFloat(e.NSDvalue):0) +
                       (parseFloat(e.MVRvalue)?parseFloat(e.MVRvalue):0) +
                       (e.creditCardFee?parseFloat(e.creditCardFee):0)).toFixed(2)}</td>
                             {columns.bound&&<td className="row1" scope="row">{e.QuoteStatuses?.sort(function (a, b) {return b.id - a.id})[0]?.Status}</td>}
                             <td className="row1" scope="row">{e.date}</td>
+                            <td className="row1" scope="row">
+                      {e.closingDate}
+                    </td>
                             <td className="row1" scope="row">{e.time.substring(11,16)}</td>
                             {columns.down&&<td className="row1" scope="row">${e.down}</td>}
                             {columns.monthlyPayment&&<td className="row1" scope="row">${e.monthlyPayment}</td>}

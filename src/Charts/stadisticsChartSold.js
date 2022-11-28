@@ -20,12 +20,7 @@ function StatsSold ({google, quotes, producers}) {
             
             pes.push(
               [e.name,        quotes.filter(
-                (f) =>
-                 ( f.QuoteStatuses[0].UserId == e.UserId)&&
-                  f.QuoteStatuses.sort(function (a, b) {
-                    return b.id - a.id ;
-                  })[0].Status == "Sold"
-              ).length])
+                (f) =>( f.SoldBy == e.UserId)).length])
           })
           setDato(pes)
       }, [quotes, producers])

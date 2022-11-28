@@ -15,10 +15,9 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
   EFT,
   setEFT,
   checkbox,
-  setCheckbox, }) => {
-  let pes = 0
+  setCheckbox, users}) => {
+
  
-  console.log(pes)
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -67,7 +66,12 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
               )}
               { (
                 <th scope="col" className="column1">
-                  <p className="REPtype">Producer</p>
+                  <p className="REPtype">Quoted By</p>
+                </th>
+              )}
+                  { (
+                <th scope="col" className="column1">
+                  <p className="REPtype">Sold By</p>
                 </th>
               )}
               <th scope="col" className="column1">
@@ -80,7 +84,12 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
               )}
               {
                 <th scope="col" className="column1">
-                  <p className="REPtype">Date</p>
+                  <p className="REPtype">Quoted date</p>
+                </th>
+              }
+                   {
+                <th scope="col" className="column1">
+                  <p className="REPtype">Closing date</p>
                 </th>
               }
               {
@@ -187,6 +196,11 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
                         {e.User.name}
                       </td>
                     )}
+                       { (
+                      <td className="row1" scope="row">
+                        {users.find(f=>f.id==e.SoldBy)?.name}
+                      </td>
+                    )}
                     <td className="row1" scope="row">
                       ${" "}
                       {(
@@ -208,6 +222,9 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
                     )}
                     <td className="row1" scope="row">
                       {e.date}
+                    </td>
+                    <td className="row1" scope="row">
+                      {e.closingDate}
                     </td>
                     <td className="row1" scope="row">
                       {e.time.substring(11, 16)}
