@@ -7,6 +7,7 @@ import useGoogleCharts from "../Charts/useGoogleCharts";
 function Stadistic() {
   const Producers = useSelector((state) => state.Producers);
   const [dateReq, setDateReq] = useState({});
+  const [loader, setLoader] = useState(true)
   const [yearLabel, setYearLabel] = useState("");
   const [dateSelected, setDateSelected] = useState("");
   const [quotes, setQuotes] = useState([])
@@ -48,7 +49,7 @@ const search = () => {
     });
     setPayments([])
     axios
-      .get(`http://localhost:8080/getPaymentsStats`, { params })
+      .get(`https://truewayagentbackend.com//getPaymentsStats`, { params })
       .then(function (response) {
         setPayments(response.data);
       })
@@ -60,7 +61,9 @@ const search = () => {
   },[dateReq])
   
   useEffect(()=>{
+    setLoader(true)
     if(dateReq.dateFrom){
+      setLoader(true)
     let params = new URLSearchParams();
 
     let temp = Object.entries(dateReq)
@@ -70,14 +73,16 @@ const search = () => {
     })
     setQuotes([])
     axios
-      .get(`http://localhost:8080/getQuotesStats`, { params })
+      .get(`https://truewayagentbackend.com//getQuotesStats`, { params })
       .then(function (response) {
         setQuotes(response.data);
+        setLoader(false)
       })
 
       .catch((error) => {
         setQuotes([]);
         console.log(error);
+        setLoader(false)
       })}
   },[dateReq])
 
@@ -192,6 +197,7 @@ const search = () => {
       google={google}
       userRole={userRole}
 UserId={UserId}
+loader={loader}
     />
   );
 }

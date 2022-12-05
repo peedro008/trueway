@@ -18,9 +18,9 @@ const Management = () => {
         <div className="managerContainer">
           <NavLink
             to={"./management/Company"}
-            style={{ textDecoration: "none", color: "#000" }}
+            style={{ textDecoration: "none", color: "#000"}}
           >
-            <button className="PAYbutton" style={{ marginRight: "20px" }}>
+            <button className="PAYbuttonAdd" style={{ marginRight: "20px"}}>
               <MdAdd color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
               <p className="PAYbuttonText"> Add Company</p>
             </button>
@@ -30,7 +30,7 @@ const Management = () => {
             to={"./management/Producer"}
             style={{ textDecoration: "none", color: "#000" }}
           >
-            <button className="PAYbutton" style={{ marginRight: "20px" }}>
+            <button className="PAYbuttonAdd" style={{ marginRight: "20px" }}>
               <MdAdd color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
               <p className="PAYbuttonText"> Add Producer</p>
             </button>
@@ -39,7 +39,7 @@ const Management = () => {
             to={"./management/Manager"}
             style={{ textDecoration: "none", color: "#000" }}
           >
-            <button className="PAYbutton" style={{ marginRight: "20px" }}>
+            <button className="PAYbuttonAdd" style={{ marginRight: "20px" }}>
               <MdAdd color="white" size={"20px"} className="PAYbuttonIcon" />
               <p className="PAYbuttonText"> Add Manager</p>
             </button>
@@ -51,7 +51,7 @@ const Management = () => {
           to={"./management/Client"}
           style={{ textDecoration: "none", color: "#000" }}
         >
-          <button className="PAYbutton" style={{ marginRight: "20px" }}>
+          <button className="PAYbuttonAdd" style={{ marginRight: "20px" }}>
             <MdAdd color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
             <p className="PAYbuttonText"> Add Client</p>
           </button>
@@ -60,7 +60,7 @@ const Management = () => {
           to={"./management/Dealer"}
           style={{ textDecoration: "none", color: "#000" }}
         >
-          <button className="PAYbutton" style={{ marginRight: "20px" }}>
+          <button className="PAYbuttonAdd" style={{ marginRight: "20px" }}>
             <MdAdd color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
             <p className="PAYbuttonText">Add Dealer</p>
           </button>
@@ -71,9 +71,9 @@ const Management = () => {
           to={"./management/DealerSalePerson"}
           style={{ textDecoration: "none", color: "#000" }}
         >
-          <button className="PAYbutton" style={{ marginRight: "20px" }}>
+          <button className="PAYbuttonAdd" style={{ marginRight: "20px" }}>
             <MdAdd color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
-            <p className="PAYbuttonText">Add Dealer sale person</p>
+            <p className="PAYbuttonText">Add Dealer S.P.</p>
           </button>
         </NavLink>
       </div>
@@ -83,7 +83,7 @@ const Management = () => {
             to={"./management/Location"}
             style={{ textDecoration: "none", color: "#000" }}
           >
-            <button className="PAYbutton" style={{ marginRight: "20px" }}>
+            <button className="PAYbuttonAdd" style={{ marginRight: "20px" }}>
               <MdAdd color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
               <p className="PAYbuttonText">Add Location</p>
             </button>
@@ -95,7 +95,7 @@ const Management = () => {
             to={"./management/Category"}
             style={{ textDecoration: "none", color: "#000" }}
           >
-            <button className="PAYbutton" style={{ marginRight: "20px" }}>
+            <button className="PAYbuttonAdd" style={{ marginRight: "20px" }}>
               <MdAdd color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
               <p className="PAYbuttonText">Add Category</p>
             </button>

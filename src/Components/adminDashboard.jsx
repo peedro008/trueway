@@ -1,4 +1,4 @@
-import React  from "react";
+import React, { useState } from "react";
 import error from "../assets/error.png";
 import wbill from "../assets/wbill.png";
 import bbill from "../assets/bbill.png";
@@ -7,194 +7,263 @@ import mask from "../assets/mask.png";
 import PizzaChart from "../Charts/ProducersChart";
 import PozzaChart from "../Charts/ColumnChar";
 import { NavLink } from "react-router-dom";
-import { duration } from "moment/moment";
-
+import Select from "react-select";
+import PizzaChartBig from "../Charts/ProducersChartBig";
 
 const AdminDashboardComponent = ({
-    next,
-setNext,
-DATE,
-mquotes,
-quotex,
-userRole,
-setAsd,
-status,
-setStatus,
-dataList,
-setDataList,
-sold,
-setSold,
-unSold,
-mModify,
-modifiedList,
-setModifiedList,
-NSD,
-setNSD,
-producers,
-google,
-UserId,
-Payment,
-modify,
-quotes,
-payments,
-handleNext,
-mpayments
+  next,
+  setNext,
+  DATE,
+  mquotes,
+  quotex,
+  userRole,
+  setAsd,
+  status,
+  setStatus,
+  dataList,
+  setDataList,
+  sold,
+  setSold,
+  unSold,
+  mModify,
+  modifiedList,
+  setModifiedList,
+  NSD,
+  setNSD,
+  producers,
+  google,
+  UserId,
+  Payment,
+  modify,
+  quotes,
+  payments,
+  handleNext,
+  mpayments,
 }) => {
-  
+  const [graficType, setGraficType] = useState();
+  const [graficMultiple, setGraficMultiple] = useState(true);
+
+  const options = [
+    { value: "All", label: "All" },
+    { value: "Sold", label: "Sold" },
+    { value: "Unsold", label: "Unsold" },
+  ];
   return (
     <div className="genericDiv">
-      <div className="genericHeader">
-        <p className="genericTitle">Dashboard</p>
+      <div className="genericHeader" style={{display: "flex"}}>
+        <p className="genericTitle">Trueway Agents </p>
+        {!next && <Select
+        options={options}
+        onChange={(e) => {
+          setGraficType(e.value);
+          if (e.value !== "All") {
+            setGraficMultiple(false);
+          } else {
+            setGraficMultiple(true);
+          }
+        }}
+        className="StadSelectGrafic"
+        placeholder="Type"
+      /> }
       </div>
+
+
+     
+    
       {!next ? (
         <div className="DashContainer">
           <div className="DashSubCont">
             <div style={{ marginLeft: "-100px" }}>
-              {google&&quotex && quotex.length  &&<PizzaChart google={google} quotex={quotex}  producers={producers}/>}
-            </div> 
-            <div className="DashPList1" >
+              {google &&
+                quotex &&
+                quotex.length &&
+                (graficMultiple ? (
+                  <PizzaChart google={google} producers={producers} />
+                ) : (
+                  <PizzaChartBig
+                    google={google}
+                    producers={producers}
+                    graficType={graficType}
+                  />
+                ))}
+            </div>
+            <div className="DashPList1">
               <div className="DashPListHeader">
                 <p className="DashPListTitle">Producers average sale</p>
-                <p className="DashPListSTitle">Descending</p>
+                <p className="DashPListSTitle">Desc.</p>
               </div>
               <div className="DashPListDivider" />
-              {quotex?.sort(function (a, b) {
-        return Number(b.avg) - Number(a.avg);
-      }).map((e) => {
-                return (
-                  <div
-                    className="DashPListRow1"
-                    style={{ marginBottom: "7px" }}
-                  >
+              {quotex
+                ?.sort(function (a, b) {
+                  return Number(b.avg) - Number(a.avg);
+                })
+                .map((e) => {
+                  return (
                     <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                      }}
+                      className="DashPListRow1"
+                      style={{ marginBottom: "7px" }}
                     >
-                      <div className="DashPListCircle">
-                        <NavLink
-                          style={{
-                            textDecoration: "none",
-                            color: "#000",
-                            color: "black",
-                          }}
-                          to={{
-                            pathname: "/users/producers/details",
-                            aboutProps: e.id,
-                          }}
-                        >
-                          <img src={mask} />
-                        </NavLink>
-                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div className="DashPListCircle">
+                          <NavLink
+                            style={{
+                              textDecoration: "none",
+                              color: "#000",
+                              color: "black",
+                            }}
+                            to={{
+                              pathname: "/users/producers/details",
+                              aboutProps: e.id,
+                            }}
+                          >
+                            <img src={mask} />
+                          </NavLink>
+                        </div>
 
-                      <p className="DashPListItemText">
-                        <NavLink
-                          style={{
-                            textDecoration: "none",
-                            color: "#000",
-                            color: "black",
-                          }}
-                          to={{
-                            pathname: "/users/producers/details",
-                            aboutProps: e.id,
-                          }}
-                        >
-                          {e.name}
-                        </NavLink>
-                      </p>
+                        <p className="DashPListItemText">
+                          <NavLink
+                            style={{
+                              textDecoration: "none",
+                              color: "#000",
+                              color: "black",
+                            }}
+                            to={{
+                              pathname: "/users/producers/details",
+                              aboutProps: e.id,
+                            }}
+                          >
+                            {e.name}
+                          </NavLink>
+                        </p>
+                      </div>
+                      <div className="DashNumberDiv">
+                        <p className="DashNumber">{e.avg}%</p>
+                      </div>
                     </div>
-                    <div className="DashNumberDiv">
-                      <p className="DashNumber">
-                        {e.avg}%
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </div>
           <div className="dashContCard">
-      
-            <div className="dashCard">
+            <div
+              className="dashCard"
+              style={{
+                marginLeft: "50px",
+                backgroundColor: " rgba(255, 122, 0, 0.15)",
+              }}
+            >
               <div
                 className="dashCircle"
-                style={{ backgroundColor: " rgba(255, 184, 0, 0.07)" }}
+                style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
               >
                 <img src={error} />
               </div>
               <div className="dashText">
-                <p className="dashCardTitle">
-                  {
-                    unSold
-                  }
-                </p>
+                <p className="dashCardTitle">{unSold}</p>
                 <p className="dashCardText">Unsold quotes</p>
               </div>
             </div>
-            <div className="dashCard" style={{ marginLeft: "50px" }}>
+            <div
+              className="dashCard"
+              style={{
+                marginLeft: "50px",
+                backgroundColor: " rgba(111, 82, 237, 0.15)",
+              }}
+            >
               <div
                 className="dashCircle"
-                style={{ backgroundColor: " rgba(76, 184, 255, 0.07)" }}
+                style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
               >
                 <img src={wbill} />
               </div>
               <div className="dashText">
-                <p className="dashCardTitle">
-                  {sold}
-                </p>
-                <p className="dashCardText">Total quotes sold per month</p>
+                <p className="dashCardTitle">{sold}</p>
+                <p className="dashCardText">Sold quotes</p>
               </div>
             </div>
             <NavLink
-                style={{ textDecoration: "none" }}
-                to={{
-                  pathname: "/report/genericReport",
-                  aboutProps: {
-                    type: "P",
-                    title: `NSD Sold`,
-                    items: userRole=="Manager"? mpayments: Payment?.filter(e=>e.date.substring(0, 7) == DATE.substring(0, 7)&&parseFloat(e.NSDvalue))
-                    
-                  },
-                }}>
-            <div className="dashCard" style={{ marginLeft: "50px" }}>
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/report/genericReport",
+                aboutProps: {
+                  type: "P",
+                  title: `NSD Sold`,
+                  items:
+                    userRole == "Manager"
+                      ? mpayments
+                      : Payment?.filter(
+                          (e) =>
+                            e.date.substring(0, 7) == DATE.substring(0, 7) &&
+                            parseFloat(e.NSDvalue)
+                        ),
+                },
+              }}
+            >
               <div
-                className="dashCircle"
-                style={{ backgroundColor: " rgba(76, 184, 255, 0.07)" }}
+                className="dashCard"
+                style={{
+                  marginLeft: "50px",
+                  backgroundColor: "rgba(51, 214, 159 ,0.15)",
+                }}
               >
-                <img src={wbill} />
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                >
+                  <img src={wbill} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">${NSD}</p>
+                  <p className="dashCardText">Total NSD sales</p>
+                </div>
               </div>
-              <div className="dashText">
-                <p className="dashCardTitle">
-                  ${NSD}
-                </p>
-                <p className="dashCardText">Total NSD sales</p>
-              </div>
-            </div></NavLink>
+            </NavLink>
             <NavLink
-                style={{ textDecoration: "none" }}
-                to={{
-                  pathname: "/report/genericReport",
-                  aboutProps: {
-                    type: "P",
-                    title: `Payments this Month`,
-                    items: userRole=="Manager"? mpayments: Payment?.filter(e=>e.date.substring(0, 7) == DATE.substring(0, 7))
-                    
-                  },
-                }}>
-            <div className="dashCard" style={{ marginLeft: "50px" }}>
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/report/genericReport",
+                aboutProps: {
+                  type: "P",
+                  title: `Payments this Month`,
+                  items:
+                    userRole == "Manager"
+                      ? mpayments
+                      : Payment?.filter(
+                          (e) => e.date.substring(0, 7) == DATE.substring(0, 7)
+                        ),
+                },
+              }}
+            >
               <div
-                className="dashCircle"
-                style={{ backgroundColor: " rgba(8, 76, 97, 0.07)" }}
+                className="dashCard"
+                style={{
+                  marginLeft: "50px",
+                  backgroundColor: "rgba(204, 234, 59 ,0.15)",
+                }}
               >
-                <img src={bbill} />
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: " rgba(8, 76, 97, 0.07)" }}
+                >
+                  <img src={bbill} />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle">
+                    {
+                      Payment?.filter(
+                        (e) => e.date.substring(0, 7) == DATE.substring(0, 7)
+                      ).length
+                    }
+                  </p>
+                  <p className="dashCardText">Total payments</p>
+                </div>
               </div>
-              <div className="dashText">
-                <p className="dashCardTitle">{Payment?.filter(e=>e.date.substring(0, 7) == DATE.substring(0, 7)).length}</p>
-                <p className="dashCardText">Total payments per month</p>
-              </div>
-            </div>
             </NavLink>
           </div>
         </div>
@@ -267,7 +336,10 @@ mpayments
                             {e.date}
                           </NavLink>
                         </p>
-                        <div className="DashStatusItem" style={{maxHeight:"40px"}}>
+                        <div
+                          className="DashStatusItem"
+                          style={{ maxHeight: "40px" }}
+                        >
                           <div
                             className="DashStatusColor"
                             style={{
@@ -323,6 +395,7 @@ mpayments
         />
       ) : (
         <BsChevronLeft
+          cursor="pointer"
           color="grey"
           style={{
             minWidth: "40px",

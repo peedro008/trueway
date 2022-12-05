@@ -1,14 +1,7 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import Select from "react-select";
-import { BsChevronLeft } from "react-icons/bs";
-import Isologo_background from "../assets/Isologo_background.png";
+import React, {  useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useForm, Controller } from "react-hook-form";
-import Modal from "react-responsive-modal";
-import Icon from "../assets/Icon.png";
-import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import ProducerEditComponent from "../Components/producerEdit";
 import { GetProducer } from "../Logic/Fetch";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,7 +43,7 @@ const ProducerEdit = (props) => {
   };
 
   const onSubmit = (data) => {
-    fetch(`http://localhost:8080/modifyProducer`, {
+    fetch(`https://truewayagentbackend.com//modifyProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -126,5 +119,3 @@ const ProducerEdit = (props) => {
 };
 
 export default ProducerEdit;
-
-//onChange={event => setInputs({...inputs,down:event.target.value})}

@@ -241,6 +241,7 @@ function DailyReportComponent({
       </div>
       {/* </PDFDownloadLink> */}
       <BsChevronLeft
+          cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",

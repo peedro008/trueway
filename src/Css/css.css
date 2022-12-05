@@ -1,7 +1,6 @@
 /*AUTH---------------------------------------------*/
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
-@import "~@geoapify/geocoder-autocomplete/styles/minimal.css";
 @import url("https://fonts.googleapis.com/css?family=Inter");
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
@@ -298,14 +297,27 @@
   height: 40px;
   width: auto;
   cursor: pointer;
-  justify-content: center;
+  justify-content: space-between;
+  padding-right: 20px;
+  padding-left: 16px;
+  box-shadow: 2px 2px 2px rgb(165, 162, 162);
+}
+.PAYbuttonAdd {
+  background-color: #2b4162;
+  border-radius: 5px;
+  border-width: 0px;
+  display: flex;
+  height: 40px;
+  width: 180px;
+  cursor: pointer;
+  justify-content: space-between;
   padding-right: 20px;
   padding-left: 16px;
   box-shadow: 2px 2px 2px rgb(165, 162, 162);
 }
 .PAYbuttonText {
   font-family: "Gilroy-Regular";
-  font-weight: 500;
+  font-weight: 800;
   font-size: 15px;
   color: #ffffff;
   margin-top: 11px;
@@ -1263,7 +1275,7 @@
 }
 
 .DashPListHeader {
-  height: 20px;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -1277,10 +1289,11 @@
   margin-top: 7px;
 }
 .DashPListSTitle {
-  font-size: 11px;
+  font-size: 12px;
+ align-self: end;
   color: #a6acbe;
   font-family: "Gilroy-Regular";
-  font-weight: 500;
+  font-weight: 800;
 }
 .DashPListDivider {
   background-color: white;
@@ -1318,7 +1331,7 @@
   font-family: "Gilroy-Regular";
   font-size: 14px;
   color: #a6acbe;
-  font-weight: 500;
+  font-weight: 800;
 }
 .DashPListCircle {
   width: 25px;
@@ -1339,6 +1352,19 @@
   margin-bottom: 5px;
   justify-content: space-between;
 }
+
+.CardsGrafics {
+  background-color: white;
+  width: 300px;
+  max-width: 250px;
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .dashCard {
   background-color: white;
   width: 270px;
@@ -1384,11 +1410,11 @@
   font-family: "Gilroy-Regular";
   font-size: 14px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 800;
   line-height: 19px;
   letter-spacing: 0.01em;
   text-align: left;
-  color: #a6acbe;
+  color: 'black';
   margin-top: 5px;
   padding-right: 20px;
 }
@@ -1540,7 +1566,7 @@
   font-family: "Gilroy-Regular";
   font-size: 14px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 800;
   line-height: 16px;
   letter-spacing: 0.01em;
   max-width: 30px;
@@ -2482,7 +2508,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   border: 1px solid #eaeaea;
   border-radius: 10px;
 }
@@ -2514,6 +2539,7 @@
 }
 .StadisticRowName{
   padding-inline: 50px;
+  margin-right: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -2528,10 +2554,11 @@ text-shadow: 10px 10px 10px rgb(199, 199, 199);
 
 }
 .StadCalendarDiv{
-  align-self: center;
+  /* align-self: center; */
   height:max-content;
   width: 25vw;
- 
+  margin-top: 20px;
+ margin-left: 130px;
   display: flex;
   flex-direction: column;
 }
@@ -2554,6 +2581,19 @@ margin-top: 4%;
   border-radius: 7px;
   width: 45%;
 }
+.StadSelectGrafic {
+ 
+  font-family: "Gilroy-Regular";
+  font-weight: 700;
+  font-size: 13px;
+  color: black;
+  border-width: 0;
+  background-color: #fbfbfb;
+  border-radius: 7px;
+  width: 175px;
+  margin-top: 1vh;
+  margin-left: 40px;
+}
 .StadSelectCont{
   display: flex;
   margin-top: 10px;
@@ -2561,11 +2601,13 @@ margin-top: 4%;
   justify-content: space-evenly;
 }
 .StadBox{
-  background-color: #d8e2f1;
+  /* background-color: #d8e2f1; */
+  background-color: #2b4162;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
   margin-bottom: 12px;
+  margin-inline: 10px;
   justify-content: center;
   align-items: center;
   padding-block: 5px;
@@ -2574,21 +2616,38 @@ margin-top: 4%;
   cursor: pointer;
 }
 .StadBox:hover{
-  background-color: #bbc4d3;
+  background-color: #6183b6cb;
+  /* background-color: #2b4162; */
 }
 .StadBoxTitle{
   font-family: "Gilroy-Regular";
   font-weight: 700;
   font-size: 13px;
-  color:#2b4162;
+  color:#ffffff;
   margin-bottom: 5px;
 
 }
 .StadBoxVal{
-    font-family: "Gilroy-Regular";
-  font-weight: 700;
-  font-size: 15px;
- color:#171e27;
-  
+  font-family: "Gilroy-Regular";
+font-weight: 700;
+font-size: 15px;
+color:#ffffff;
+}
 
+.circleLink {
+  align-self: center;
+  justify-content: center;
+  margin-right: 10px;
+  height: 43px;
+  width: 43px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.imageLink {
+  background-color: #ffffff;
+  width: 40px;
+  height: 40px;
+  /* margin-bottom: 20px; */
 }

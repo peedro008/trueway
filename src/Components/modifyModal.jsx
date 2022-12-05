@@ -283,7 +283,7 @@ const ModifyModalComponent = ({
                 backgroundColor: "start",
               }}
             >
-              <p className="MOBinputText">Date?</p>
+              <p className="MOBinputText">Payment Date (optional)</p>
               <input
               type={"date"}
                 className="AQinput"

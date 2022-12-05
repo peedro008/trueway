@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import GenericReportComponent from "../Components/genericReport";
 
 function GenericReport(props) {
-  let data = props.location.aboutProps;
+  let data = props.location?.aboutProps;
+  console.log(data)
   const [paymentsFil, setPaymentsFil] = useState(data.items);
   const [cash, setCash] = useState(0);
   const [credit, setCredit] = useState(0);

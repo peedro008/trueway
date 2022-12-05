@@ -47,7 +47,7 @@ const DeletedPayments = () => {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/undeletePayment`, {
+    fetch(`https://truewayagentbackend.com//undeletePayment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const DeletedPayments = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDeletedPayment`)
+      .get(`https://truewayagentbackend.com//getDeletedPayment`)
       .then(function (response) {
         setPayments(response.data);
       })

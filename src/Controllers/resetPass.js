@@ -42,7 +42,7 @@ const ResetPass = () => {
       Password:Password,
    
     };
-    fetch(`http://localhost:8080/resetPass`, {
+    fetch(`https://truewayagentbackend.com//resetPass`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

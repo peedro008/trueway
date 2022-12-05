@@ -47,6 +47,7 @@ import GenericReport from "../Controllers/genericReport";
 import { FetchAll } from "../Logic/Fetch";
 import { useDispatch, useSelector } from "react-redux";
 import { addLocation } from "../Redux/actions";
+import PolicyList from "../Controllers/policyNumberList";
 
 const AdminRouter = () => {
   const dispatch = useDispatch()
@@ -58,7 +59,7 @@ const AdminRouter = () => {
    const UserRole = useSelector(state=>state.userRole)
  useEffect(() => {
   UserRole=="Manager"&&
-  fetch(`http://localhost:8080/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`, {
+  fetch(`https://truewayagentbackend.com//getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`, {
      method: "GET",
      headers: {
        "Content-Type": "application/json",
@@ -128,6 +129,7 @@ const AdminRouter = () => {
       <Route exact path='/users/manager/edit' component={ManagerEdit}/>
       <Route exact path='/report/payment/details' component={PaymentDetails}/>
       <Route exact path='/report/genericReport' component={GenericReport}/>
+      <Route exact path='/policyNumberReport' component={PolicyList}/>
     </Router>
   );
 };

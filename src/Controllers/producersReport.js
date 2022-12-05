@@ -24,7 +24,7 @@ const ProducerReport = () => {
   };
   const deleteProducer = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deleteProducer`, {
+    fetch(`https://truewayagentbackend.com//deleteProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

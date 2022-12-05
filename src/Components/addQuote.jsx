@@ -8,74 +8,40 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
 import { Controller } from "react-hook-form";
-import { GrCircleQuestion } from "react-icons/gr";
-import { GeoapifyContext, GeoapifyGeocoderAutocomplete } from "@geoapify/react-geocoder-autocomplete";
-
-
-
 
 const AddQuoteComponent = ({
-    reset,
-CategoAux,
-    setCategoAux,
-    onSubmit,
-    handleNewClient,
-    register,
-    handleSubmit,
-    control,
-    errors,
-    reload,
-    optionsCa,
-    optionsCo,
-    optionsL,
-    optionsD,
-    optionsC,
-    neww,
-    open,
-    setValue,
-    setNeww,
-    setOpen,
-    onCloseModal,
-    newClient,
-    setNewClient,
-    inputs,
-    ERR,
-    setInputs,
-    categories,
-    companies,
-    clients,
-    dealers,
-    locations,
-    dealerData,
-    setDealerData,
-show,
-    setShow,
+  CategoAux,
+  setCategoAux,
+  onSubmit,
+  handleNewClient,
+  register,
+  handleSubmit,
+  control,
+  errors,
+  reload,
+  optionsCa,
+  optionsCo,
+  optionsL,
+  optionsD,
+  optionsC,
+  neww,
+  open,
+  setValue,
+  setNeww,
+  newClient,
+  inputs,
+  ERR,
+  setInputs,
+  categories,
+  companies,
+  clients,
+  dealers,
+  locations,
+  dealerData,
+  setDealerData,
+  show,
 }) => {
-
-    const customStyles = {
-        control: (base) => ({
-          ...base,
-          height: 30,
-          minHeight: 30,
-        }),
-        placeholder: (defaultStyles) => {
-          return {
-            ...defaultStyles,
-            marginTop: "-5px",
-          };
-        },
-        indicatorSeparator: (base) => ({
-          ...base,
-          height: "0px",
-        }),
-        dropdownIndicator: (base) => ({
-          ...base,
-          marginTop: "-4px",
-        }),
-      };
-      
   return (
-   
     <div className="genericDiv">
       <div className="genericHeader">
         <p className="genericTitle">Add quote</p>
@@ -83,7 +49,7 @@ show,
 
       <div className="AQcontainer">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="AQrowContainer2" >
+          <div className="AQrowContainer2">
             <div className="AQinputContainer">
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <p className="AQinputName">Client Name</p>
@@ -102,7 +68,10 @@ show,
                     render={({ field: { onChange, onBlur, value, ref } }) => (
                       <Select
                         value={optionsC?.find((c) => c.value === value)}
-                        onChange={(val) => {onChange(val.value); setDealerData({...dealerData, ClientId: val.value})}}
+                        onChange={(val) => {
+                          onChange(val.value);
+                          setDealerData({ ...dealerData, ClientId: val.value });
+                        }}
                         control={control}
                         options={clients?.map((e) => ({
                           value: e.id,
@@ -129,7 +98,7 @@ show,
                     value={inputs.clientName}
                     {...register("name")}
                   />
-                  <p className="FORMerror">{errors.name?.message}</p>
+                  <p className="FORMerror">Client's name is required</p>
                 </>
               )}
             </div>
@@ -142,7 +111,7 @@ show,
                   value={inputs.clientEmail}
                   {...register("email")}
                 />
-                <p className="FORMerror">{errors.email?.message}</p>
+                <p className="FORMerror">Client's email is required</p>
               </div>
             )}
             {newClient && (
@@ -157,9 +126,6 @@ show,
                 <p className="FORMerror">{errors.tel?.message}</p>
               </div>
             )}
-
-
-           
 
             {newClient && (
               <div className="AQinputContainer">
@@ -185,49 +151,50 @@ show,
             )}
           </div>
 
-
-          {newClient && 
- <div className="AQrowContainer">
-  <div className="AQinputContainer"> 
-  <div style={{flexDirection:"row", display:"flex"}}> <p className="PAYtitle">Address</p></div>
-              {!show ? (
-                <div class="autocomplete-container" id="autocomplete-container">
-                   <Controller
-                control={control}
-                name="address"
-                render={({ field: { onChange, onBlur, value, ref } }) => (
-                   <GeoapifyContext apiKey="fae2fbe3125e4b1d870dd3ab7c96f6b3">
-                    <GeoapifyGeocoderAutocomplete
-                      placeSelect={(value) => {
-                     
-                        onChange(value.properties.formatted);
-                      }}
-                      suggestionsChange={(value) => {
-                        console.log(value);
-                      }}
-                    />
-                  </GeoapifyContext>
-                )}
-                />
-                 
+          {newClient && (
+            <div className="AQrowContainer">
+              <div className="AQinputContainer">
+                <div style={{ flexDirection: "row", display: "flex" }}>
+                  <p className="PAYtitle">Address</p>
                 </div>
-              ) : (
-                <input
-               
-                {...register("address")}
-                  placeholder="Address"
-                  className="AQinput"
-                ></input>
-              )}
-          <p className="FORMerror">{errors.address?.message}</p></div>
- 
+                {!show ? (
+                  <div
+                    class="autocomplete-container"
+                    id="autocomplete-container"
+                  >
+                    <Controller
+                      control={control}
+                      name="address"
+                      render={({ field: { onChange, onBlur, value, ref } }) => (
+                        <></>
+                        //  <GeoapifyContext apiKey="fae2fbe3125e4b1d870dd3ab7c96f6b3">
+                        //   <GeoapifyGeocoderAutocomplete
+                        //     placeSelect={(value) => {
 
+                        //       onChange(value.properties.formatted);
+                        //     }}
+                        //     suggestionsChange={(value) => {
+                        //       console.log(value);
+                        //     }}
+                        //   />
+                        // </GeoapifyContext>
+                      )}
+                    />
+                  </div>
+                ) : (
+                  <input
+                    {...register("address")}
+                    placeholder="Address"
+                    className="AQinput"
+                  ></input>
+                )}
+                <p className="FORMerror">{errors.address?.message}</p>
+              </div>
 
-            <div  className="AQinputContainer"></div>
-            <div  className="AQinputContainer"></div>
- </div>
-
-}
+              <div className="AQinputContainer"></div>
+              <div className="AQinputContainer"></div>
+            </div>
+          )}
 
           <div className="AQrowContainer">
             <div className="AQinputContainer">
@@ -238,9 +205,13 @@ show,
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <Select
                     value={optionsCa.find((c) => c.value === value)}
-                    onChange={(val) =>{ onChange(val.value)
-                      setValue("CategoryNsd", optionsCa.find((c) => c.value === val.value).NSD)
-                      setCategoAux(true)
+                    onChange={(val) => {
+                      onChange(val.value);
+                      setValue(
+                        "CategoryNsd",
+                        optionsCa.find((c) => c.value === val.value).NSD
+                      );
+                      setCategoAux(true);
                     }}
                     control={control}
                     options={categories.map((e) => ({
@@ -311,7 +282,10 @@ show,
                     checked={inputs.DealerSalePerson}
                     name="DealerSalePersonId"
                     onChange={(event) =>
-                      setInputs({ ...inputs, DealerSalePerson: !inputs.DealerSalePerson })
+                      setInputs({
+                        ...inputs,
+                        DealerSalePerson: !inputs.DealerSalePerson,
+                      })
                     }
                   />
                   {inputs.DealerSalePerson ? (
@@ -321,7 +295,14 @@ show,
                   )}
                 </div>
                 {inputs.DealerSalePerson && (
-                  <div style={{display:"flex", flexDirection:"row", justifyContent:"space-between", width:"240px"}}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      width: "240px",
+                    }}
+                  >
                     <Controller
                       control={control}
                       name="DealerId"
@@ -329,8 +310,12 @@ show,
                         <Select
                           value={optionsD?.find((c) => c.value === value)}
                           onChange={(val) => {
-                            onChange(val.value)
-                           setDealerData({...dealerData, DealerSalePersonId: val.value})}}
+                            onChange(val.value);
+                            setDealerData({
+                              ...dealerData,
+                              DealerSalePersonId: val.value,
+                            });
+                          }}
                           control={control}
                           options={dealers?.map((e) => ({
                             value: e.id,
@@ -340,20 +325,22 @@ show,
                           className="PAYselect"
                           placeholder="Select Dealer"
                         />
-                        
                       )}
-                      
                     />
-                       <input
+                    <input
                       className="AQinput2"
-                      style={{width:"60px", marginLeft:"20px"}}
+                      style={{ width: "60px", marginLeft: "20px" }}
                       placeholder="Amount"
                       key="amount"
                       name="amount"
                       type="number"
                       value={dealerData.amount}
-                      onChange={(e)=>{setDealerData({...dealerData, amount:e.target.value})}}
-                    
+                      onChange={(e) => {
+                        setDealerData({
+                          ...dealerData,
+                          amount: e.target.value,
+                        });
+                      }}
                     />
                     {ERR.DealerId && (
                       <p className="FORMerror">"Client is a required field"</p>
@@ -367,6 +354,7 @@ show,
             <div className="AQinputContainer">
               <p className="AQinputName">Down payment</p>
               <input
+                type='number'
                 className="AQinput"
                 placeholder="Down payment"
                 key="down"
@@ -388,6 +376,7 @@ show,
             >
               <p className="AQinputName">Monthly payment</p>
               <input
+              type='number'
                 className="AQinput"
                 placeholder="Monthly payment"
                 key="monthlyPayment"
@@ -408,6 +397,7 @@ show,
             >
               <p className="AQinputName">Total premium</p>
               <input
+              type='number'
                 className="AQinput"
                 placeholder="Total premium"
                 key="totalPremium"
@@ -427,7 +417,6 @@ show,
               }}
             >
               <div>
-                {" "}
                 <p className="AQinputName">Bound</p>
                 <input
                   className="AQcheckInput"
@@ -456,7 +445,7 @@ show,
                   <input
                     className="AQcheckInput"
                     type="checkbox"
-                                    disabled={CategoAux?false:true}
+                    disabled={CategoAux ? false : true}
                     checked={inputs.NSD}
                     value={inputs.NSD}
                     key="NSD"
@@ -474,6 +463,7 @@ show,
                 {inputs.NSD && (
                   <>
                     <input
+                    type='number'
                       className="AQinput2"
                       placeholder="How much?"
                       key="NSDamount"
@@ -511,6 +501,7 @@ show,
                 {inputs.MVR && (
                   <>
                     <input
+                    type='number'
                       className="AQinput2"
                       placeholder="How much"
                       defaultValue={0}
@@ -534,7 +525,6 @@ show,
                     type="checkbox"
                     checked={inputs.PIP}
                     value={inputs.PIP}
-                    
                     key="PIP"
                     name="PIP"
                     onChange={(event) =>
@@ -550,6 +540,7 @@ show,
                 {inputs.PIP && (
                   <>
                     <input
+                    type='number'
                       className="AQinput2"
                       placeholder="PIP value"
                       defaultValue={0}
@@ -563,19 +554,21 @@ show,
               </div>
             </div>
           </div>
-<div style={{flexDirection:"row", display:"flex", width:"80%"}}>         <div className="AQinputContainer" >
-            <p className="AQinputName">Notes</p>
-            <textarea
-              className="AQtextarea"
-              placeholder="Notes"
-              key="notes"
-              name="notes"
-              value={inputs.notes}
-              {...register("notes")}
-            />
-            <p className="FORMerror">{errors.notes?.message}</p>
-          </div>
-          <div
+          <div style={{ flexDirection: "row", display: "flex", width: "80%" }}>
+            {" "}
+            <div className="AQinputContainer">
+              <p className="AQinputName">Notes</p>
+              <textarea
+                className="AQtextarea"
+                placeholder="Notes"
+                key="notes"
+                name="notes"
+                value={inputs.notes}
+                {...register("notes")}
+              />
+              <p className="FORMerror">{errors.notes?.message}</p>
+            </div>
+            <div
               className="AQinputContainer"
               style={{
                 display: "flex",
@@ -583,9 +576,9 @@ show,
                 backgroundColor: "start",
               }}
             >
-              <p className="AQinputName">Date?</p>
+              <p className="AQinputName">Payment Date (optional)</p>
               <input
-              type={"date"}
+                type={"date"}
                 className="AQinput"
                 placeholder="Monthly payment"
                 key="monthlyPayment"
@@ -596,8 +589,7 @@ show,
                 {errors.monthlyPayment?.message.substring(0, 24)}
               </p>
             </div>
-              
-            </div>  
+          </div>
         </form>
       </div>
 

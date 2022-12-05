@@ -30,7 +30,7 @@ function ManagementLocation() {
   });
   const onSubmit = (data) => {
     data &&
-      fetch(`http://localhost:8080/addLocation`, {
+      fetch(`https://truewayagentbackend.com//addLocation`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

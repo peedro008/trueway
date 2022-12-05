@@ -132,7 +132,7 @@ const ProducerDashboardComponent = ({
           <div className="DashPList1">
             <div className="DashPListHeader">
               <p className="DashPListTitle">Sellers average sale</p>
-              <p className="DashPListSTitle">Descending</p>
+              <p className="DashPListSTitle">Desc.</p>
             </div>
             <div className="DashPListDivider" />
             {dataList.map((e) => {

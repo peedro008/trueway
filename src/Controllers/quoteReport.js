@@ -56,7 +56,7 @@ const QuoteReport = (props) => {
       params.append(e[0]=="ProducerId"?"UserId":`${e[0]}`, e[1]);
     })
     axios
-      .get(`http://localhost:8080/getQuotesReport`, { params })
+      .get(`https://truewayagentbackend.com//getQuotesReport`, { params })
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -94,7 +94,7 @@ const QuoteReport = (props) => {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deleteQuote`, {
+    fetch(`https://truewayagentbackend.com//deleteQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

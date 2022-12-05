@@ -408,6 +408,7 @@ const QuoteFilter = () => {
         </button>
       </NavLink>
       <BsChevronLeft
+      cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",

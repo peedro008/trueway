@@ -11,11 +11,10 @@ const AdminDashboard = () => {
   const DATE =
     date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
 
-    const [mModify, setMModify]=useState([])
+  const [mModify, setMModify]=useState([])
   const [mquotes, setMQuotes]=useState([])
   const [next, setNext] = useState(false);
   const [asd, setAsd] = useState(false);
-
   const [dataList, setDataList] = useState([]);
   const [sold, setSold] = useState([]);
   const [unSold, setUnSold] = useState([]);
@@ -59,7 +58,7 @@ setUnSold(tempU)
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getUserPayment?UserId=${UserId}`)
+      .get(`https://truewayagentbackend.com//getUserPayment?UserId=${UserId}`)
       .then(function (response) {
         setPayments(response.data);
       })

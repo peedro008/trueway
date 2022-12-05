@@ -165,6 +165,7 @@ deleteManager,
         }}
       ></div>
       <BsChevronLeft
+          cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",

@@ -335,6 +335,7 @@ setPaginator
         </tbody>
       </table>
       <BsChevronLeft
+          cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",
@@ -352,10 +353,10 @@ setPaginator
                 <AiOutlineLeft  color="#858585" size={"20px"}/>
             </div>
             <div className="PaginatorNum">{paginator}</div>
-            <div className="PaginatorRight" onClick={()=>{payments.length>19&&setPaginator(paginator+1)}}>
+            <div className="PaginatorRight" onClick={()=>{payments.length>19 && setPaginator(paginator+1)}}>
                 <AiOutlineRight color="#858585" size={"20px"}/>
             </div>
-        </div>
+      </div>
       {openFilter && (
         <div className="FilterCom">
           <div className="FilterComTitleD">

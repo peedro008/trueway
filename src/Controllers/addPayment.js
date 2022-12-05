@@ -152,7 +152,7 @@ function AddPayment(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/clientQuotes?client=${form.id}`)
+      .get(`https://truewayagentbackend.com//clientQuotes?client=${form.id}`)
       .then(function (response) {
 
         setQuotes(response.data)
@@ -202,7 +202,7 @@ const handleNewClient = () => {
 
     if(!MultiMethod){
       if (newClient == false) {
-        fetch(`http://localhost:8080/addPayment`, {
+        fetch(`https://truewayagentbackend.com//addPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -212,7 +212,7 @@ const handleNewClient = () => {
           .then((response) => response.json())
           .then((data) => onOpenModal());
       } else {
-        fetch(`http://localhost:8080/addClientPayment`, {
+        fetch(`https://truewayagentbackend.com//addClientPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -224,7 +224,7 @@ const handleNewClient = () => {
   }
   else{
     if (newClient == false) {
-      fetch(`http://localhost:8080/addMultiPayment`, {
+      fetch(`https://truewayagentbackend.com//addMultiPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -234,7 +234,7 @@ const handleNewClient = () => {
         .then((response) => response.json())
         .then((data) => onOpenModal());
     } else {
-      fetch(`http://localhost:8080/ClientMultiPayment`, {
+      fetch(`https://truewayagentbackend.com//ClientMultiPayment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,21 +1,24 @@
 import React from "react";
 import {  NavLink } from "react-router-dom";
 import "../Css/css.css"
-
 import logo from "../assets/logo.png";
 import { FiGrid } from "react-icons/fi";
-
 import { BsInfoCircle } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { VscGraph } from "react-icons/vsc";
 // import Manager from "./manager"
-import { FaRegMoneyBillAlt } from "react-icons/fa";
+import { FaCoins, FaRegMoneyBillAlt } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { AiOutlineFile } from "react-icons/ai";
 import { MdAdd } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../Redux/actions";
 import { BiStats } from "react-icons/bi";
+import vertafore from "../assets/vertafore.png";
+import agencyZoom from "../assets/agencyZoom.jpg";
+import qqcatalyst from "../assets/qqcatalyst.png";
+import kvCore from "../assets/kvCore.png";
+
 
 function AdminNav() {
   const dispatch = useDispatch();
@@ -32,6 +35,40 @@ function AdminNav() {
   return (
     <div style={{ display: "flex" }}>
       <div className="topbar">
+      <div style={{ paddingRight: "40px", display: "flex" }}>
+      
+      <div className="circleLink">
+      <a href="https://login.apps.vertafore.com/idp/prp.wsf?wa=wsignin1.0&wtrealm=https%3a%2f%2frating.vertafore.com%2fUserInterface%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252fUserInterface%252fmain%252fvim.aspx&wct=2022-11-29T14%3a24%3a52Z" target='_blank'>
+
+        <img
+          className="imageLink"
+          src={vertafore}
+          alt={"logo"}
+          />
+          </a>
+ 
+      </div>
+      <div className="circleLink">
+      <a href="https://app.agencyzoom.com/login" target='_blank'>
+        <img
+          className="imageLink"
+          src={agencyZoom}
+          alt={"logo"}
+          
+        />
+            </a>
+      </div>
+      <div className="circleLink">
+      <a href="https://login.qqcatalyst.com/Login.aspx?ReturnUrl=%2fOAuthAuthorize.aspx%3fClientApp%3dQQCatalyst%2bWeb%26ClientIdentifier%3dDC152CD1-F653-4DF0-9E39-2337A7F9C887%26Callback%3dhttps%3a%2f%2fapp.qqcatalyst.com%2fAccount%2fLoginNew%26State%3dZige4fJSkNB9CzHBC9WjvQ%26Scope%3dTimestamp112922142356%26ResponseType%3dcode%26OverrideBrowserCheck%3d&ClientApp=QQCatalyst+Web&ClientIdentifier=DC152CD1-F653-4DF0-9E39-2337A7F9C887&Callback=https://app.qqcatalyst.com/Account/LoginNew&State=Zige4fJSkNB9CzHBC9WjvQ&Scope=Timestamp112922142356&ResponseType=code&OverrideBrowserCheck=" target='_blank'>
+        <img
+          className="imageLink"
+          src={qqcatalyst}
+          alt={"logo"}
+          style={{ width: '50px' }}
+        />
+            </a>
+      </div>
+    </div>
         <div style={{ paddingRight: "40px", display: "flex" }}>
           <div className="circle">
             <p className="initial">{Name && Name.substring(0, 1)}</p>
@@ -45,6 +82,7 @@ function AdminNav() {
             style={{ backgroundColor: "transparent", borderWidth: "0px" }}
           >
             <FiLogOut
+            cursor='pointer'
               size="20px"
               className="NAicon"
               style={{ alignSelf: "center" }}
@@ -58,6 +96,7 @@ function AdminNav() {
         <div className="NAcontainer">
           <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
             <FiGrid
+              cursor='pointer'
               className="NAicon"
               color="#868ba5"
               activeClassName="NAactive"
@@ -86,6 +125,11 @@ function AdminNav() {
         <div className="NAcontainer">
           <NavLink className="icons" to="/payments" activeClassName="NAavtive">
             <FaRegMoneyBillAlt className="NAicon" color="#868ba5" />
+          </NavLink>
+        </div>
+        <div className="NAcontainer">
+          <NavLink className="icons" to="/policyNumberReport" activeClassName="NAavtive">
+            <FaCoins className="NAicon" color="#868ba5" />
           </NavLink>
         </div>
         <div className="NAcontainer">

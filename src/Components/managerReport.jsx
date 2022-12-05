@@ -75,7 +75,7 @@ const ManagerReportComponent = ({
             {managers?.map((e) => {
               return (
                 <tr>
-                  <td scope="row">
+                  <td scope="row" style={{fontWeight: 'bold'}}>
                     {
                       <NavLink
                         style={{
@@ -93,15 +93,15 @@ const ManagerReportComponent = ({
                     }
                   </td>
 
-                  <td scope="row">{e.email}</td>
-                  <td scope="row">{e.phone}</td>
-                  <td scope="row">
+                  <td scope="row" style={{fontWeight: 'bold'}}>{e.email}</td>
+                  <td scope="row" style={{fontWeight: 'bold'}}>{e.phone}</td>
+                  <td scope="row" style={{fontWeight: 'bold'}}>
                   {
                       quotes.filter(
                         (f) =>f.id == e.UserId)[0]?.sold
                     }
                   </td>
-                  <td scope="row">
+                  <td scope="row" style={{fontWeight: 'bold'}}>
                   {
                       quotes
                         .filter((f) =>f.id == e.UserId)[0]?.unsold
@@ -153,6 +153,7 @@ const ManagerReportComponent = ({
         </NavLink>
       </div>
       <BsChevronLeft
+          cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",

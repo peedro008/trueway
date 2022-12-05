@@ -119,6 +119,7 @@ const ManagementLocationComponent = ({
             }}
         />
         <BsChevronLeft
+            cursor='pointer'
             color="grey"
             style={{
             minWidth: "25px",

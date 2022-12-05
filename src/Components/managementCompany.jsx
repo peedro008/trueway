@@ -67,7 +67,7 @@ const ManagementCompanyComponent = ({
                     }))}
                     name={"CategoryId"}
                     className="PAYselect"
-                    placeholder="Select Company"
+                    placeholder="Select Category"
                   />
                 )}
               />
@@ -128,6 +128,7 @@ const ManagementCompanyComponent = ({
         }}
       />
       <BsChevronLeft
+          cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",

@@ -98,6 +98,7 @@ setReset
               <div className="buttonC">
                 <button
                   className="button"
+                  style={{cursor: 'pointer'}}
                   onClick={() => onSubmitHandler(UserName, Password)}
                 >
                   <p className="buttonT">Sign In</p>{" "}

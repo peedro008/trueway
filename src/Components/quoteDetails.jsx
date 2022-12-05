@@ -100,7 +100,7 @@ function QuoteDetailsComponent({
 
                             }
 <NavLink to={"/report/quoteReport"}>
-<BsChevronLeft color="grey" style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} />
+<BsChevronLeft color="grey"    cursor='pointer' style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} />
                        </NavLink>
                     </div>
                     

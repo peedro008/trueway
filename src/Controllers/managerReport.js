@@ -26,7 +26,7 @@ const ManagerReport = () => {
   };
   const deleteManager = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deleteManager`, {
+    fetch(`https://truewayagentbackend.com//deleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -4,10 +4,6 @@ import Modal from "react-responsive-modal";
 import { NavLink } from "react-router-dom";
 import Icon from "../assets/Icon.png";
 import Select from "react-select";
-import {
-  GeoapifyGeocoderAutocomplete,
-  GeoapifyContext,
-} from "@geoapify/react-geocoder-autocomplete";
 import { GrCircleQuestion } from "react-icons/gr";
 function ClientEditComponent({
   Client,
@@ -111,19 +107,19 @@ setAddress,
           </div>
           <div className="inputDiv" style={{ marginRight: "52%" }}>
             <div style={{flexDirection:"row", display:"flex"}}> <p className="PAYtitle">Address</p><GrCircleQuestion onClick={()=>setShow(!show)}/></div>
-              {!show ? (
-                <div class="autocomplete-container" id="autocomplete-container">
-                  <GeoapifyContext apiKey="fae2fbe3125e4b1d870dd3ab7c96f6b3">
-                    <GeoapifyGeocoderAutocomplete
-                      placeSelect={(value) => {
-                        setAddress(value.properties.formatted);
-                      }}
-                      suggestionsChange={(value) => {
-                        console.log(value);
-                      }}
-                    />
-                  </GeoapifyContext>
-                </div>
+              {!show ? (<></>
+                // <div class="autocomplete-container" id="autocomplete-container">
+                //   <GeoapifyContext apiKey="fae2fbe3125e4b1d870dd3ab7c96f6b3">
+                //     <GeoapifyGeocoderAutocomplete
+                //       placeSelect={(value) => {
+                //         setAddress(value.properties.formatted);
+                //       }}
+                //       suggestionsChange={(value) => {
+                //         console.log(value);
+                //       }}
+                //     />
+                //   </GeoapifyContext>
+                // </div>
               ) : (
                 <input
                     onChange={(e)=>{setAddress(e.target.value)}}
@@ -149,6 +145,7 @@ setAddress,
         </div>
       </div>
       <BsChevronLeft
+          cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",

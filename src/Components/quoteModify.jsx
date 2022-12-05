@@ -178,7 +178,7 @@ function QuoteModifyComponent({id,
         
         </div>
       </Modal>
-      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
+      <BsChevronLeft color="grey"  cursor='pointer' style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-3)}/>
         </div>
     )
 }

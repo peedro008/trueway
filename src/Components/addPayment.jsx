@@ -416,7 +416,18 @@ percent,
             </div>
           )}
         </div>
-      
+        <div className="PAYInputCont">
+            <p className="PAYtitle">Policy Number (optional)</p>
+            <input
+              placeholder="Policy Number"
+              className="AQinput"
+              value={payment.policyNumber}
+              {...register("policyNumber")}
+              onChange={(e) => {
+                setTotalValues({ ...totalValues, policyNumber: e.target.value });
+              }}
+            />
+          </div>
         <div className="AQwhiteContainer11">
           <div className="AQinputContainer">
             <p className="AQinputName">NSD</p>
@@ -701,6 +712,7 @@ percent,
         </Modal>
 
         <BsChevronLeft
+        cursor='pointer'
           color="grey"
           style={{
             minWidth: "25px",

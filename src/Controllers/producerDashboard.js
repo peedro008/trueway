@@ -27,7 +27,7 @@ const ProducerDashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/GetUserStatus?UserId=${user.userId}`)
+      .get(`https://truewayagentbackend.com//GetUserStatus?UserId=${user.userId}`)
       .then(function (response) {
         setModify(response.data);
       })
@@ -37,7 +37,7 @@ const ProducerDashboard = () => {
   }, [user]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/producerQuotes?UserId=${user.userId}`)
+      .get(`https://truewayagentbackend.com//producerQuotes?UserId=${user.userId}`)
       .then(function (response) {
         setPquotes(response.data);
       })
@@ -47,7 +47,7 @@ const ProducerDashboard = () => {
   }, [user]);
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getUserPayment?UserId=${user.userId}`)
+      .get(`https://truewayagentbackend.com//getUserPayment?UserId=${user.userId}`)
       .then(function (response) {
         setPayments(response.data.filter(e=>e.date.substring(0, 7) == DATE.substring(0, 7)));
       })

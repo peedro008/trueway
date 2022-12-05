@@ -98,6 +98,7 @@ const ManagementCategoryComponent = ({
         }}
       />
       <BsChevronLeft
+          cursor='pointer'
         color="grey"
         style={{
           minWidth: "25px",

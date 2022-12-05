@@ -20,6 +20,7 @@ const ProducerReportComponent = ({
   userRole,
   setDeleteConf,
 }) => {
+  console.log(quotes)
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -34,12 +35,6 @@ const ProducerReportComponent = ({
         }}
       >
         <p className="PRsubtitle">Producer list</p>
-      </div>
-
-      <div>
-        {/* <NavLink to="/managerP">
-            <button style={{width:40, height:40, alignContent:"center", display:"flex"}}>+</button>
-        </NavLink> */}
       </div>
 
       <div style={{ paddingLeft: "60px" }}>
@@ -71,10 +66,10 @@ const ProducerReportComponent = ({
             </tr>
           </thead>
           <tbody>
-            {producers.map((e) => {
+            {producers?.map((e) => {
               return (
                 <tr>
-                  <td scope="row">
+                  <td scope="row" style={{fontWeight: 'bold'}}>
                     {
                       <NavLink
                         style={{
@@ -95,18 +90,17 @@ const ProducerReportComponent = ({
                     }
                   </td>
 
-                  <td scope="row">{e.email}</td>
-                  <td scope="row">{e.phone}</td>
-                  <td scope="row">
+                  <td scope="row" style={{fontWeight: 'bold'}}>{e.email}</td>
+                  <td scope="row" style={{fontWeight: 'bold'}}>{e.phone}</td>
+                  <td scope="row" style={{fontWeight: 'bold'}}>
                     {
-                      quotes.filter(
+                      quotes?.filter(
                         (f) =>f.id == e.UserId)[0]?.sold
                     }
                   </td>
-                  <td scope="row">
+                  <td scope="row" style={{fontWeight: 'bold'}}>
                     {
-                      quotes
-                        .filter((f) =>f.id == e.UserId)[0]?.unsold
+                      quotes?.filter((f) =>f.id == e.UserId)[0]?.unsold
                     }
                   </td>
                   {userRole !== "Producer" && (
@@ -155,6 +149,7 @@ const ProducerReportComponent = ({
         </NavLink>
       </div>
       <BsChevronLeft
+      cursor='pointer'
         color="grey"
         style={{
           minWidth: "30px",

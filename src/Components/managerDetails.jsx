@@ -49,7 +49,7 @@ const ManagerDetailsComponent = ({
   google,
 }) => {
   const userRole = useSelector((state) => state.userRole);
-  
+
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -59,8 +59,17 @@ const ManagerDetailsComponent = ({
         <div className="PRODrect">
           <div className="PRODrectH">
             <div className="container1111">
-            <p className="PRODrectT" style={{flexDirection:"column"}}>Sold Quotes</p>
-            {dots1V == 1 ? <p className="PRODRECTheader">This Month</p>:dots1V == 2 ?<p className="PRODRECTheader">Last Month</p>:<p className="PRODRECTheader">This Year</p>}</div>
+              <p className="PRODrectT" style={{ flexDirection: "column" }}>
+                Sold Quotes
+              </p>
+              {dots1V == 1 ? (
+                <p className="PRODRECTheader">This Month</p>
+              ) : dots1V == 2 ? (
+                <p className="PRODRECTheader">Last Month</p>
+              ) : (
+                <p className="PRODRECTheader">This Year</p>
+              )}
+            </div>
             <BiDotsHorizontalRounded
               style={{ cursor: "pointer" }}
               size={30}
@@ -70,36 +79,44 @@ const ManagerDetailsComponent = ({
           </div>
           <div className="PRODrectB">
             <div style={{ display: "flex", flexDirection: "row" }}>
-              
-            {dots1V == 1 ? (
-          
-          <p className="PRODrectQ">
-            
-            {mquotes.filter((e) => e.QuoteStatuses.sort(function (a, b) {
-                    return b.id - a.id;
-                  })[0].Status == "Sold")?.length
-              }
-            &nbsp;{" "}
-          </p>
-        ) : dots1V == 2? (
-          
-          <p className="PRODrectQ">
-            {lmquotes.filter((e) => e.QuoteStatuses.sort(function (a, b) {
-                    return b.id - a.id;
-                  })[0].Status == "Sold")?.length}
-            &nbsp;
-          </p>
-        )
-        : (
-          
-          <p className="PRODrectQ">
-            {yquotes.filter((e) => e.QuoteStatuses.sort(function (a, b) {
-                    return b.id - a.id;
-                  })[0].Status == "Sold")?.length}
-            &nbsp;
-          </p>
-        )}
-              
+              {dots1V == 1 ? (
+                <p className="PRODrectQ">
+                  {
+                    mquotes.filter(
+                      (e) =>
+                        e.QuoteStatuses.sort(function (a, b) {
+                          return b.id - a.id;
+                        })[0].Status == "Sold"
+                    )?.length
+                  }
+                  &nbsp;{" "}
+                </p>
+              ) : dots1V == 2 ? (
+                <p className="PRODrectQ">
+                  {
+                    lmquotes.filter(
+                      (e) =>
+                        e.QuoteStatuses.sort(function (a, b) {
+                          return b.id - a.id;
+                        })[0].Status == "Sold"
+                    )?.length
+                  }
+                  &nbsp;
+                </p>
+              ) : (
+                <p className="PRODrectQ">
+                  {
+                    yquotes.filter(
+                      (e) =>
+                        e.QuoteStatuses.sort(function (a, b) {
+                          return b.id - a.id;
+                        })[0].Status == "Sold"
+                    )?.length
+                  }
+                  &nbsp;
+                </p>
+              )}
+
               <p className="PRODrectQ">Sold</p>
             </div>
             <div className="PRODrectP"></div>
@@ -107,7 +124,6 @@ const ManagerDetailsComponent = ({
         </div>
         {dots1 && (
           <div className="PRODdotsCont1">
-          
             <p
               className="PRODdotT"
               style={{ color: dots1V == 0 ? "black" : "#979797" }}
@@ -142,9 +158,18 @@ const ManagerDetailsComponent = ({
         )}
         <div className="PRODrect">
           <div className="PRODrectH">
-          <div className="container1111">
-            <p className="PRODrectT" style={{flexDirection:"column"}}>Unsold Quotes</p>
-            {dots2V == 1 ? <p className="PRODRECTheader">This Month</p>:dots2V == 2 ?<p className="PRODRECTheader">Last Month</p>:<p className="PRODRECTheader">This Year</p>}</div>
+            <div className="container1111">
+              <p className="PRODrectT" style={{ flexDirection: "column" }}>
+                Unsold Quotes
+              </p>
+              {dots2V == 1 ? (
+                <p className="PRODRECTheader">This Month</p>
+              ) : dots2V == 2 ? (
+                <p className="PRODRECTheader">Last Month</p>
+              ) : (
+                <p className="PRODRECTheader">This Year</p>
+              )}
+            </div>
             <BiDotsHorizontalRounded
               style={{ cursor: "pointer" }}
               size={30}
@@ -171,7 +196,7 @@ const ManagerDetailsComponent = ({
                     : 0}
                   &nbsp;
                 </p>
-              ): dots2V == 2 ?(
+              ) : dots2V == 2 ? (
                 <p className="PRODrectQ">
                   {lmquotes.filter(
                     (e) =>
@@ -248,10 +273,19 @@ const ManagerDetailsComponent = ({
         )}
         <div className="PRODrect">
           <div className="PRODrectH">
-          <div className="container1111">
-            <p className="PRODrectT" style={{flexDirection:"column"}}>NSD commission</p>
-            
-            {dots3V == 1 ? <p className="PRODRECTheader">This Month</p>:dots3V == 2 ?<p className="PRODRECTheader">Last Month</p>:<p className="PRODRECTheader">This Year</p>}</div>
+            <div className="container1111">
+              <p className="PRODrectT" style={{ flexDirection: "column" }}>
+                NSD commission
+              </p>
+
+              {dots3V == 1 ? (
+                <p className="PRODRECTheader">This Month</p>
+              ) : dots3V == 2 ? (
+                <p className="PRODRECTheader">Last Month</p>
+              ) : (
+                <p className="PRODRECTheader">This Year</p>
+              )}
+            </div>
             <BiDotsHorizontalRounded
               style={{ cursor: "pointer" }}
               size={30}
@@ -263,12 +297,11 @@ const ManagerDetailsComponent = ({
             <div style={{ display: "flex", flexDirection: "row" }}>
               {dots3V == 1 ? (
                 <p className="PRODrectQ">$&nbsp;{NSD ? NSD : 0} </p>
-              ) : dots3V==2? (
+              ) : dots3V == 2 ? (
                 <p className="PRODrectQ">$&nbsp;{LmNSD} </p>
-              )
-            :
-            <p className="PRODrectQ">$&nbsp;{yNSD} </p>
-            }
+              ) : (
+                <p className="PRODrectQ">$&nbsp;{yNSD} </p>
+              )}
             </div>
             <div className="PRODrectP"></div>
           </div>
@@ -317,28 +350,31 @@ const ManagerDetailsComponent = ({
           </>
         )}
       </div>
-      {userRole !== "Producer" && 
-      <NavLink
-        to={{
-          pathname: "/users/producers/edit",
-          props: Producer,
-        }}
-      >
-        <button className="FITbutton">
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <BiPencil
-              size="20px"
-              style={{
-                display: "flex",
-                color: "#2B4162",
-                marginLeft: "8px",
-                marginTop: "1px",
-              }}
-            />
-            <p className="FITbuttonText">Edit</p>
-          </div>
-        </button>
-      </NavLink>}      <BsChevronLeft
+      {userRole !== "Producer" && (
+        <NavLink
+          to={{
+            pathname: "/users/producers/edit",
+            props: Producer,
+          }}
+        >
+          <button className="FITbutton">
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <BiPencil
+                size="20px"
+                style={{
+                  display: "flex",
+                  color: "#2B4162",
+                  marginLeft: "8px",
+                  marginTop: "1px",
+                }}
+              />
+              <p className="FITbuttonText">Edit</p>
+            </div>
+          </button>
+        </NavLink>
+      )}
+      <BsChevronLeft
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",

@@ -36,7 +36,7 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
           <tbody>
             <tr>
               <th scope="col" className="column1">
-                <p className="REPtype">&nbsp;</p>
+                {/* <p className="REPtype">&nbsp;</p> */}
               </th>
           
               { (
@@ -144,7 +144,7 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
                 }}
               />
             ) : (
-              items.map((e) => {
+              items?.map((e) => {
                 return (
                   <tr>
                     <td className="ClientName" scope="row">
@@ -167,7 +167,7 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
                             aboutProps: e.Client,
                           }}
                         >
-                          {e.Client.name}
+                          {e.Client?.name}
                         </NavLink>
                       </td>
                     )}
@@ -183,17 +183,17 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
                     )}
                     { (
                       <td className="row1" scope="row">
-                        {e.Category.name}
+                        {e.Category?.name}
                       </td>
                     )}
                     { (
                       <td className="row1" scope="row">
-                        {e.Company.name}
+                        {e.Company?.name}
                       </td>
                     )}
                     { (
                       <td className="row1" scope="row">
-                        {e.User.name}
+                        {e.User?.name}
                       </td>
                     )}
                        { (
@@ -241,7 +241,7 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
                     )}
                     { (
                       <td className="row1" scope="row">
-                        {e.Dealer ? e.Dealer.name : "false"}
+                        {e.Dealer ? e.Dealer?.name : "false"}
                       </td>
                     )}
                     { (
@@ -261,7 +261,7 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
                     )}
                     { (
                       <td className="row1" scope="row">
-                        {e.Location.name}
+                        {e.Location?.name}
                       </td>
                     )}
                   </tr>
@@ -342,16 +342,16 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
                     </NavLink>
                   </td>
                   <td className="ClientName" scope="row">
-                    {e.Client.name}
+                    {e.Client?.name}
                   </td>
                   <td className="ClientName" scope="row">
-                    {e.User.name}
+                    {e.User?.name}
                   </td>
                   <td className="ClientName" scope="row">
-                    {e.Location.name}
+                    {e.Location?.name}
                   </td>
                   <td className="ClientName" scope="row">
-                    {e.Category.name}
+                    {e.Category?.name}
                   </td>
                   <td className="ClientName" scope="row">
                     {e.type}
@@ -409,7 +409,7 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
          </div>
        </div></>
       )}
-      <BsChevronLeft color="grey" style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
+      <BsChevronLeft color="grey"     cursor='pointer' style={{minWidth:"30px", minHeight:"30px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} onClick={()=>window.history.go(-1)}/>
     </div>
   );
 };
