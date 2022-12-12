@@ -63,13 +63,9 @@ const ProducerDetailsComponent = ({
               <p className="PRODrectT" style={{ flexDirection: "column" }}>
                 Sold Quotes
               </p>
-              {dots1V == 1 ? (
-                <p className="PRODRECTheader">This Month</p>
-              ) : dots1V == 2 ? (
-                <p className="PRODRECTheader">Last Month</p>
-              ) : (
+             
                 <p className="PRODRECTheader">This Year</p>
-              )}
+    
             </div>
             <BiDotsHorizontalRounded
               style={{ cursor: "pointer" }}
@@ -80,96 +76,29 @@ const ProducerDetailsComponent = ({
           </div>
           <div className="PRODrectB">
             <div style={{ display: "flex", flexDirection: "row" }}>
-              {dots1V == 1 ? (
+      
                 <p className="PRODrectQ">
                   {
-                    mquotes.filter(
-                      (e) =>
-                        e.QuoteStatuses.sort(function (a, b) {
-                          return b.id - a.id;
-                        })[0].Status == "Sold"
-                    )?.length
-                  }
-                  &nbsp;{" "}
-                </p>
-              ) : dots1V == 2 ? (
-                <p className="PRODrectQ">
-                  {
-                    lmquotes.filter(
-                      (e) =>
-                        e.QuoteStatuses.sort(function (a, b) {
-                          return b.id - a.id;
-                        })[0].Status == "Sold"
-                    )?.length
+                    yquotes.sold
                   }
                   &nbsp;
                 </p>
-              ) : (
-                <p className="PRODrectQ">
-                  {
-                    yquotes.filter(
-                      (e) =>
-                        e.QuoteStatuses.sort(function (a, b) {
-                          return b.id - a.id;
-                        })[0].Status == "Sold"
-                    )?.length
-                  }
-                  &nbsp;
-                </p>
-              )}
+           
 
               <p className="PRODrectQ">Sold</p>
             </div>
             <div className="PRODrectP"></div>
           </div>
         </div>
-        {dots1 && (
-          <div className="PRODdotsCont1">
-            <p
-              className="PRODdotT"
-              style={{ color: dots1V == 0 ? "black" : "#979797" }}
-              onClick={() => {
-                setDots1V(0);
-                setDots1(!dots1);
-              }}
-            >
-              This year
-            </p>
-            <p
-              className="PRODdotT"
-              style={{ color: dots1V == 1 ? "black" : "#979797" }}
-              onClick={() => {
-                setDots1V(1);
-                setDots1(!dots1);
-              }}
-            >
-              This month
-            </p>
-            <p
-              className="PRODdotT"
-              style={{ color: dots1V == 2 ? "black" : "#979797" }}
-              onClick={() => {
-                setDots1V(2);
-                setDots1(!dots1);
-              }}
-            >
-              Last month
-            </p>
-          </div>
-        )}
         <div className="PRODrect">
           <div className="PRODrectH">
             <div className="container1111">
               <p className="PRODrectT" style={{ flexDirection: "column" }}>
                 Unsold Quotes
               </p>
-              {dots2V == 1 ? (
-                <p className="PRODRECTheader">This Month</p>
-              ) : dots2V == 2 ? (
-                <p className="PRODRECTheader">Last Month</p>
-              ) : (
+              
                 <p className="PRODRECTheader">This Year</p>
-              )}
+              
             </div>
             <BiDotsHorizontalRounded
               style={{ cursor: "pointer" }}
@@ -180,98 +109,18 @@ const ProducerDetailsComponent = ({
           </div>
           <div className="PRODrectB">
             <div style={{ display: "flex", flexDirection: "row" }}>
-              {dots2V == 1 ? (
+           
                 <p className="PRODrectQ">
-                  {mquotes.filter(
-                    (e) =>
-                      e.QuoteStatuses.sort(function (a, b) {
-                        return b.id - a.id;
-                      })[0].Status == "Quoted"
-                  ).length
-                    ? mquotes.filter(
-                        (e) =>
-                          e.QuoteStatuses.sort(function (a, b) {
-                            return b.id - a.id;
-                          })[0].Status == "Quoted"
-                      ).length
-                    : 0}
+                  {yquotes.unsold}
                   &nbsp;
                 </p>
-              ) : dots2V == 2 ? (
-                <p className="PRODrectQ">
-                  {lmquotes.filter(
-                    (e) =>
-                      e.QuoteStatuses.sort(function (a, b) {
-                        return b.id - a.id;
-                      })[0].Status == "Quoted"
-                  ).length
-                    ? yquotes.filter(
-                        (e) =>
-                          e.QuoteStatuses.sort(function (a, b) {
-                            return b.id - a.id;
-                          })[0].Status == "Quoted"
-                      ).length
-                    : 0}
-                  &nbsp;
-                </p>
-              ) : (
-                <p className="PRODrectQ">
-                  {yquotes.filter(
-                    (e) =>
-                      e.QuoteStatuses.sort(function (a, b) {
-                        return b.id - a.id;
-                      })[0].Status == "Quoted"
-                  ).length
-                    ? yquotes.filter(
-                        (e) =>
-                          e.QuoteStatuses.sort(function (a, b) {
-                            return b.id - a.id;
-                          })[0].Status == "Quoted"
-                      ).length
-                    : 0}
-                  &nbsp;
-                </p>
-              )}
+  
               <p className="PRODrectQ">Quotes</p>
             </div>
 
             <div className="PRODrectP"></div>
           </div>
         </div>
-        {dots2 && (
-          <div className="PRODdotsCont2">
-            <p
-              className="PRODdotT"
-              style={{ color: dots2V == 0 ? "black" : "#979797" }}
-              onClick={() => {
-                setDots2V(0);
-                setDots2(!dots2);
-              }}
-            >
-              This year
-            </p>
-            <p
-              className="PRODdotT"
-              style={{ color: dots2V == 1 ? "black" : "#979797" }}
-              onClick={() => {
-                setDots2V(1);
-                setDots2(!dots2);
-              }}
-            >
-              This month
-            </p>
-            <p
-              className="PRODdotT"
-              style={{ color: dots2V == 2 ? "black" : "#979797" }}
-              onClick={() => {
-                setDots2V(2);
-                setDots2(!dots2);
-              }}
-            >
-              Last month
-            </p>
-          </div>
-        )}
         <div className="PRODrect">
           <div className="PRODrectH">
             <div className="container1111">
@@ -279,13 +128,9 @@ const ProducerDetailsComponent = ({
                 NSD commission
               </p>
 
-              {dots3V == 1 ? (
-                <p className="PRODRECTheader">This Month</p>
-              ) : dots3V == 2 ? (
-                <p className="PRODRECTheader">Last Month</p>
-              ) : (
+             
                 <p className="PRODRECTheader">This Year</p>
-              )}
+              
             </div>
             <BiDotsHorizontalRounded
               style={{ cursor: "pointer" }}
@@ -296,58 +141,19 @@ const ProducerDetailsComponent = ({
           </div>
           <div className="PRODrectB">
             <div style={{ display: "flex", flexDirection: "row" }}>
-              {dots3V == 1 ? (
-                <p className="PRODrectQ">$&nbsp;{NSD ? NSD : 0} </p>
-              ) : dots3V == 2 ? (
-                <p className="PRODrectQ">$&nbsp;{LmNSD} </p>
-              ) : (
+       
                 <p className="PRODrectQ">$&nbsp;{yNSD} </p>
-              )}
+         
             </div>
             <div className="PRODrectP"></div>
           </div>
         </div>
-        {dots3 && (
-          <div className="PRODdotsCont3">
-            <p
-              className="PRODdotT"
-              style={{ color: dots3V == 0 ? "black" : "#979797" }}
-              onClick={() => {
-                setDots3V(0);
-                setDots3(!dots3);
-              }}
-            >
-              This year
-            </p>
-            <p
-              className="PRODdotT"
-              style={{ color: dots3V == 1 ? "black" : "#979797" }}
-              onClick={() => {
-                setDots3V(1);
-                setDots3(!dots3);
-              }}
-            >
-              This month
-            </p>
-            <p
-              className="PRODdotT"
-              style={{ color: dots3V == 2 ? "black" : "#979797" }}
-              onClick={() => {
-                setDots3V(2);
-                setDots3(!dots3);
-              }}
-            >
-              Last month
-            </p>
-          </div>
-        )}
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         {google && (
           <>
-            {" "}
             <ProducerSales aboutProps={Producer.UserId} google={google} />
-            <ProducerPie aboutProps={Producer.UserId} google={google} />
+            {/* <ProducerPie aboutProps={Producer.UserId} google={google} /> */}
           </>
         )}
       </div>

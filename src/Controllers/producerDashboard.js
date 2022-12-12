@@ -27,7 +27,7 @@ const ProducerDashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com//GetUserStatus?UserId=${user.userId}`)
+      .get(`http://localhost:8080/GetUserStatus?UserId=${user.userId}`)
       .then(function (response) {
         setModify(response.data);
       })
@@ -37,7 +37,7 @@ const ProducerDashboard = () => {
   }, [user]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com//producerQuotes?UserId=${user.userId}`)
+      .get(`http://localhost:8080/producerQuotes?UserId=${user.userId}`)
       .then(function (response) {
         setPquotes(response.data);
       })
@@ -47,7 +47,7 @@ const ProducerDashboard = () => {
   }, [user]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com//getUserPayment?UserId=${user.userId}`)
+      .get(`http://localhost:8080/getUserPayment?UserId=${user.userId}`)
       .then(function (response) {
         setPayments(response.data.filter(e=>e.date.substring(0, 7) == DATE.substring(0, 7)));
       })
@@ -61,17 +61,17 @@ const ProducerDashboard = () => {
 
   useEffect(() => {
     let pes = quotes2;
-    let pas = pes&&pes.filter(
+    let pas = pes&&pes?.filter(
       (e) =>
-        e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status == "Quoted" ||
-        e.QuoteStatuses.sort(function(a,b){return b.id-a.id})[0].Status == "Cancelled"
+        e.QuoteStatuses?.sort(function(a,b){return b.id-a.id})[0].Status == "Quoted" ||
+        e.QuoteStatuses?.sort(function(a,b){return b.id-a.id})[0].Status == "Cancelled"
     );
     setStatus(pas);
   }, [quotes2]);
   useEffect(() => {
     let pes = [];
-    pquotes.map((e) => {
-      let a = e.QuoteStatuses.sort(function (a, b) {
+    pquotes?.map((e) => {
+      let a = e.QuoteStatuses?.sort(function (a, b) {
         return a.id - b.id;
       }).reverse()[0].Status;
       pes.push(a);
@@ -83,7 +83,7 @@ const ProducerDashboard = () => {
     let temp = 0;
     payments?.map((e) => {
       if(e.Category){
-      if (e.Category.name !== "HEALTH INSURANCE") {
+      if (e.Category?.name !== "HEALTH INSURANCE") {
         if ( e.Category.id == 2) {
           temp += 10;
         }
@@ -97,7 +97,7 @@ const ProducerDashboard = () => {
       }}
     })
     pquotes.map((e) => {
-    if ( e.Categorye&&e.Category.id == 2&&!e.Payment&& e.QuoteStatuses.sort(function (a, b) {
+    if ( e.Categorye&&e.Category.id == 2&&!e.Payment&& e.QuoteStatuses?.sort(function (a, b) {
       return b.id - a.id;
     })[0].Status=="Sold") {
       temp += 10;
@@ -128,7 +128,7 @@ const ProducerDashboard = () => {
     producers?.map((e) =>
       pes.push([
         e.name,
-        quo?.filter((f) => f.User.name == e.name && f.QuoteStatuses.sort(function (a, b) {
+        quo?.filter((f) => f.User.name == e.name && f.QuoteStatuses?.sort(function (a, b) {
           return b.id - a.id ;
         })[0].Status == "Sold").length,
         quo?.filter(
@@ -139,7 +139,7 @@ const ProducerDashboard = () => {
       ])
     );
     
-    setDataList(pes.sort(function (a, b) {
+    setDataList(pes?.sort(function (a, b) {
       return (b[1] / b[2]
       ? b[1] / b[2] > 1
         ? 100

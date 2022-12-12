@@ -8,7 +8,7 @@ function PizzaChart({ google, producers }) {
   const [dato, setDato] = useState([]);
 
   const [time, setTime] = useState(false);
-  const prod = producers.filter(e => e[1] !== 0 && e[2] !== 0)
+  const prod = producers?.filter(e => e[1] !== 0 && e[2] !== 0)
   useEffect(() => {
     console.log(prod)
     let pes = [];

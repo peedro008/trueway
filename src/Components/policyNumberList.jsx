@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsChevronLeft } from "react-icons/bs";
+import { AiOutlineDelete, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import "../Css/css.css";
 
-const PolicyNumberList = ({ payments }) => {
+const PolicyNumberList = ({ payments, paginator,
+  setPaginator }) => {
+  console.log(payments.length)
+
+  const [disabled, setDisabled] = useState();
+ 
+  useEffect(() => {
+
+      
+      payments.length < 9 ? setDisabled() : setDisabled({ pointerEvents: "none", opacity: "0.5" });
+
+
+  }, [paginator]);
+
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
-        <p className="genericTitle">Policy List</p>
+        <p className="genericTitle">Bainder 2</p>
       </div>
 
-      <div style={{ paddingLeft: "60px" }}>
+      <div style={{ paddingLeft: "60px", marginBottom: '100px' }}>
         <table className="table">
           <thead>
             <tr>
@@ -20,10 +34,19 @@ const PolicyNumberList = ({ payments }) => {
                 <p className="tableTitle">Date</p>
               </th>
               <th scope="col">
+                <p className="tableTitle">Time</p>
+              </th>
+              <th scope="col">
                 <p className="tableTitle">Company</p>
               </th>
               <th scope="col">
-                <p className="tableTitle">Sold By</p>
+                <p className="tableTitle">Company Address</p>
+              </th>
+              <th scope="col">
+                <p className="tableTitle">Expiration Date</p>
+              </th>
+              <th scope="col">
+                <p className="tableTitle">Coverage (NSD)</p>
               </th>
             </tr>
           </thead>
@@ -39,16 +62,35 @@ const PolicyNumberList = ({ payments }) => {
                     {e.date}
                   </td>
                   <td scope="row" style={{ fontWeight: "bold" }}>
+                    {e.time.slice(11,16)}
+                  </td>
+                  <td scope="row" style={{ fontWeight: "bold" }}>
                     {e.Client.name}
                   </td>
                   <td scope="row" style={{ fontWeight: "bold" }}>
-                    {e.User.name}
+                    {e.Client.address}
+                  </td>
+                  <td scope="row" style={{ fontWeight: "bold" }}>
+                    {/* {e.User.name} */}
+                  </td>
+                  <td scope="row" style={{ fontWeight: "bold" }}>
+                    {e.NSDvalue}
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
+      </div>
+      <div className="PaginatorBox">
+            <div className="PaginatorLeft"  onClick={()=>{paginator === 1 && setPaginator(paginator-1);      setDisabled(); }}>
+                <AiOutlineLeft  color="#858585" size={"20px"}/>
+            </div>
+            <div className="PaginatorNum">{paginator + 1}</div>
+            <div  className="PaginatorRight"
+        style={disabled} onClick={()=>{payments.length>9 && setPaginator(paginator+1)}}>
+                <AiOutlineRight color="#858585" size={"20px"}/>
+            </div>
       </div>
     </div>
   );

@@ -74,6 +74,7 @@ function QuoteDetailsComponent({
 
                         {quote[0].QuoteStatuses[0]&& 
                         (quote[0].QuoteStatuses.sort(function(a,b){return a.id-b.id}).reverse()).map(e=>{
+                         
                             return(<div className='DETcontainer'>
                                <div className='DETsBox'>
                                 <p className="DETtitle" >Status</p>
@@ -103,38 +104,9 @@ function QuoteDetailsComponent({
 <BsChevronLeft color="grey"    cursor='pointer' style={{minWidth:"25px", minHeight:"25px", position:"fixed",zIndex:9, left:"80px",top:"17px", alignSelf:"flex-start"}} />
                        </NavLink>
                     </div>
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    {/* <div className='DETbBox'>
-                        <p className="DETtitle">Notes</p>
-                        <p className="DETtext">{quote[0].notes}</p>
-                    </div> */}
             </div>
         </div>}
-        {/* <NavLink to={{
-                    pathname:("/report/modifyquote"),
-                    aboutProps:id
-                }}>
-                <button className="FITbutton">
-                    <div style={{display:"flex", flexDirection:"row"}}>
-                    <BiPencil size="20px" style={{display:"flex", color:"#2B4162", marginLeft:"8px", marginTop:"1px"}}/>
-                    <p className="FITbuttonText">Modify quote</p>
-                    </div>
-                </button>
-                </NavLink> */}
+       
         </div>
     )
 }

@@ -10,9 +10,6 @@ const ProducerReportComponent = ({
   quotes,
   deleteConf,
   deletedOne,
-  sold,
-  unSold,
-
   onCloseModal,
   open,
   handleDelete,

@@ -38,7 +38,7 @@ const ManagementManager = () => {
   const onSubmit = (data) => {
     data && setinputs({ ...inputs, UserRole: "Producer" });
 
-    fetch(`https://truewayagentbackend.com//addManager`, {
+    fetch(`http://localhost:8080/addManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

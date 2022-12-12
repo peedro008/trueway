@@ -227,7 +227,7 @@ const GenericReportComponent = ({ items, type, title, producer, paymentsFil,tota
                       {e.closingDate}
                     </td>
                     <td className="row1" scope="row">
-                      {e.time.substring(11, 16)}
+                      {e.time?.substring(11, 16)}
                     </td>
                     { (
                       <td className="row1" scope="row">

@@ -42,7 +42,7 @@ const ManagerDetails = (props) => {
   }, [userId]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com//producerQuotes?UserId=${Producer?.UserId}`)
+      .get(`http://localhost:8080/producerQuotes?UserId=${Producer?.UserId}`)
       .then(function (response) {
         setQuotes(response.data);
 
@@ -54,7 +54,7 @@ const ManagerDetails = (props) => {
   }, [Producer]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com//getUserPayment?UserId=${Producer?.UserId}`)
+      .get(`http://localhost:8080/getUserPayment?UserId=${Producer?.UserId}`)
       .then(function (response) {
         setPayments(response.data);
       })
@@ -64,7 +64,7 @@ const ManagerDetails = (props) => {
   }, [Producer]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com//getStatus`)
+      .get(`http://localhost:8080/getStatus`)
       .then(function (response) {
         let paz = response.data;
 
@@ -96,17 +96,35 @@ const ManagerDetails = (props) => {
     );
 
     setYquotes(
-      quotes.filter((e) => e.date.substring(0, 4) == DATE.substring(0, 4))
+      {
+        sold:quotes[1]?.filter((e) => e.date.substring(0, 4) == DATE.substring(0, 4)).length,
+        unsold:quotes[0]?.filter((e) => e.date.substring(0, 4) == DATE.substring(0, 4)).length
+      }
     );
     setMquotes(
-      quotes.filter((e) => e.date.substring(0, 7) == DATE.substring(0, 7))
+      {
+        sold:quotes[1]?.filter((e) => {
+       
+          return e.date.indexOf(MY) !== -1;
+        }).length,
+        unsold:quotes[0]?.filter((e) => {
+       
+          return e.date.indexOf(MY) !== -1;
+        }).length
+      }
     );
 
     setLmquotes(
-      quotes.filter((e) => {
+      {
+        sold:quotes[1]?.filter((e) => {
        
-        return e.date.indexOf(LMY) !== -1;
-      })
+          return e.date.indexOf(LMY) !== -1;
+        }).length,
+        unsold:quotes[0]?.filter((e) => {
+       
+          return e.date.indexOf(LMY) !== -1;
+        }).length
+      }
     
     );
 
@@ -128,37 +146,41 @@ const ManagerDetails = (props) => {
   }, [payments, quotes, modify]);
 
   useEffect(() => {
+    const date = new Date();
+    const DATE =
+  date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
+    let MY = date.getFullYear() + "-0" + (date.getMonth() + 1);
+    let LMY = date.getFullYear() + "-0" + (date.getMonth() );
     let pes = 0;
     let pas = 0;
     let pos = 0
     let pis = 0
 
-    mquotes.map((e) => {
-      if ( e.Category.id == 2&&!e.Payment&& e.QuoteStatuses.sort(function (a, b) {
-        return b.id - a.id;
-      })[0].Status=="Sold") {
+
+    quotes[1]?.filter((e) => {
+       
+      return e.date.indexOf(MY) !== -1;
+    }).map((e) => {
+      if ( e.Category.id == 2&&!e.Payment) {
         pes += 10;
       }
     })
-    yquotes.map((e) => {
-      if ( e.Category.id == 2&&!e.Payment&& e.QuoteStatuses.sort(function (a, b) {
-        return b.id - a.id;
-      })[0].Status=="Sold") {
+    quotes?.filter((e) => e.date?.substring(0, 4) == DATE.substring(0, 4)).map((e) => {
+      if ( e.Category.id == 2&&!e.Payment) {
         pas += 10;
       }
     })
-    lmquotes.map((e) => {
-      if ( e.Category.id == 2&&!e.Payment&& e.QuoteStatuses.sort(function (a, b) {
-        return b.id - a.id;
-      })[0].Status=="Sold") {
+    quotes[1]?.filter((e) => {
+       
+      return e.date.indexOf(LMY) !== -1;
+    }).map((e) => {
+      if ( e.Category.id == 2&&!e.Payment) {
         pos += 10;
       }
     })
-
     mpay?.map((e) => {
       if (e.Category.name !== "HEALTH INSURANCE") {
         if ( e.Category.id == 2) {
-          console.log("AAA")
           pes += 10;
         }
         if (e.NSDvalue !== "") {

@@ -31,10 +31,13 @@ const[payments, setPayments]=useState([])
 const quotex = useSelector(s=>s.AVG)
 const A_AVG = useSelector(s=>s.A_AVG)
 const Payment = useSelector((state) => state.Payments);
+
+const quotexWithoutDeleted = quotex?.filter(e => e.deleted == false)
+const A_AVGWithoutDeleted = A_AVG?.filter(e => e.deleted == false)
 useEffect(()=>{
   let tempS = 0
   let tempU = 0
-A_AVG?.map(e=>{
+  A_AVGWithoutDeleted?.map(e=>{
   tempS += e.sold
   tempU += e.unsold
 })
@@ -58,7 +61,7 @@ setUnSold(tempU)
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com//getUserPayment?UserId=${UserId}`)
+      .get(`http://localhost:8080/getUserPayment?UserId=${UserId}`)
       .then(function (response) {
         setPayments(response.data);
       })
@@ -139,7 +142,7 @@ setUnSold(tempU)
       producers={producers}
       google={google}
       UserId={UserId}
-      quotex={quotex}
+      quotex={quotexWithoutDeleted}
       modify={modify}
       quotes={quotes}
       payments={payments}
@@ -149,7 +152,7 @@ setUnSold(tempU)
       mpayments={mpayments}
       Payment={Payment}
       DATE={DATE}
-      A_AVG={A_AVG}
+      A_AVG={A_AVGWithoutDeleted}
     />
   );
 };

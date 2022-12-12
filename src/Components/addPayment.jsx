@@ -64,6 +64,7 @@ setTotal2,
 percent,
   setPercent,
 }) {
+
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -421,7 +422,7 @@ percent,
             <input
               placeholder="Policy Number"
               className="AQinput"
-              value={payment.policyNumber}
+              value={payment?.policyNumber}
               {...register("policyNumber")}
               onChange={(e) => {
                 setTotalValues({ ...totalValues, policyNumber: e.target.value });
@@ -455,6 +456,7 @@ percent,
                 <>
                   <input
                     className="AQinput2"
+                    type='number'
                     placeholder="How much?"
                     key="NSDamount"
                     name="NSDamount"

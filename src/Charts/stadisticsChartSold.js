@@ -12,7 +12,7 @@ function StatsSold ({google, quotes, producers}) {
       useEffect(()=>{
         
         let pes = []
-          producers.map((e, index)=>{
+          producers?.map((e, index)=>{
             
 
 

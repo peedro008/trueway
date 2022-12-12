@@ -66,6 +66,7 @@ const AddQuote = () => {
     resolver: yupResolver(schema),
     delayError:5
   });
+
   const categories = useSelector((state) => state.Categories);
   const companies = useSelector((state) => state.Companies);
   const clients = useSelector((state) => state.Clients);
@@ -126,7 +127,7 @@ const AddQuote = () => {
       (data.monthlyPayments == "" && setValue("monthlyPayment", "0"));
     setValue("Bound", `${inputs.Bound}`);
 
-    fetch(`https://truewayagentbackend.com//addQuote`, {
+    fetch(`http://localhost:8080/addQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -148,7 +149,7 @@ const AddQuote = () => {
   const handleDealer = (x=null) => {
     inputs.DealerSalePerson &&
     !x?
-      fetch(`https://truewayagentbackend.com//addDealer`, {
+      fetch(`http://localhost:8080/addDealer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -172,7 +173,7 @@ const AddQuote = () => {
           console.log(err);
         })
         :
-        fetch(`https://truewayagentbackend.com//addDealer`, {
+        fetch(`http://localhost:8080/addDealer`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

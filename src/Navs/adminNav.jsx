@@ -35,7 +35,7 @@ function AdminNav() {
   return (
     <div style={{ display: "flex" }}>
       <div className="topbar">
-      <div style={{ paddingRight: "40px", display: "flex" }}>
+      <div style={{ paddingRight: "50px", display: "flex" }}>
       
       <div className="circleLink">
       <a href="https://login.apps.vertafore.com/idp/prp.wsf?wa=wsignin1.0&wtrealm=https%3a%2f%2frating.vertafore.com%2fUserInterface%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252fUserInterface%252fmain%252fvim.aspx&wct=2022-11-29T14%3a24%3a52Z" target='_blank'>
@@ -48,23 +48,23 @@ function AdminNav() {
           </a>
  
       </div>
-      <div className="circleLink">
+      <div className="circleLink" style={{marginBottom: '10px'}}>
       <a href="https://app.agencyzoom.com/login" target='_blank'>
         <img
           className="imageLink"
           src={agencyZoom}
           alt={"logo"}
-          
+          style={{height: '48px', width: '48px'}}
         />
             </a>
       </div>
-      <div className="circleLink">
+      <div className="circleLink" style={{marginLeft: '6px'}}>
       <a href="https://login.qqcatalyst.com/Login.aspx?ReturnUrl=%2fOAuthAuthorize.aspx%3fClientApp%3dQQCatalyst%2bWeb%26ClientIdentifier%3dDC152CD1-F653-4DF0-9E39-2337A7F9C887%26Callback%3dhttps%3a%2f%2fapp.qqcatalyst.com%2fAccount%2fLoginNew%26State%3dZige4fJSkNB9CzHBC9WjvQ%26Scope%3dTimestamp112922142356%26ResponseType%3dcode%26OverrideBrowserCheck%3d&ClientApp=QQCatalyst+Web&ClientIdentifier=DC152CD1-F653-4DF0-9E39-2337A7F9C887&Callback=https://app.qqcatalyst.com/Account/LoginNew&State=Zige4fJSkNB9CzHBC9WjvQ&Scope=Timestamp112922142356&ResponseType=code&OverrideBrowserCheck=" target='_blank'>
         <img
           className="imageLink"
           src={qqcatalyst}
           alt={"logo"}
-          style={{ width: '50px' }}
+          
         />
             </a>
       </div>

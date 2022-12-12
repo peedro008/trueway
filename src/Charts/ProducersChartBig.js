@@ -9,8 +9,8 @@ function PizzaChartBig({ google, producers, graficType }) {
   const [color, setColor] = useState("#2b4162")
   const [time, setTime] = useState(false);
 
+  console.log(quotex)
   useEffect(() => {
-    console.log(graficType)
     let sold = [];
     let unsold = [];
     producers?.map((e, index) => {

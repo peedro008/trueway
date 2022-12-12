@@ -427,7 +427,7 @@ const QuoteReportComponent = ({
                       {e.closingDate}
                     </td>
                     <td className="row1" scope="row">
-                      {e.time.substring(11, 16)}
+                      {e.time?.substring(11, 16)}
                     </td>
                     {columns.down && (
                       <td className="row1" scope="row">

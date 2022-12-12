@@ -14,10 +14,10 @@ function ProducerPie ({aboutProps, google}) {
  useEffect (()=>{
       
       
-  axios.get(`https://truewayagentbackend.com//quotes`)
+  axios.get(`http://localhost:8080/quotes`)
   .then(function(response){
       let paz = response.data
-
+      console.log(userId)
       setQuotes(paz.filter(e=>e.UserId==userId))
   })
   .catch(error=>{

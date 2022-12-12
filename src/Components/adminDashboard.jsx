@@ -12,31 +12,16 @@ import PizzaChartBig from "../Charts/ProducersChartBig";
 
 const AdminDashboardComponent = ({
   next,
-  setNext,
   DATE,
-  mquotes,
   quotex,
   userRole,
-  setAsd,
-  status,
-  setStatus,
-  dataList,
-  setDataList,
   sold,
-  setSold,
   unSold,
-  mModify,
   modifiedList,
-  setModifiedList,
   NSD,
-  setNSD,
   producers,
   google,
-  UserId,
   Payment,
-  modify,
-  quotes,
-  payments,
   handleNext,
   mpayments,
 }) => {
@@ -48,28 +33,28 @@ const AdminDashboardComponent = ({
     { value: "Sold", label: "Sold" },
     { value: "Unsold", label: "Unsold" },
   ];
+
   return (
     <div className="genericDiv">
-      <div className="genericHeader" style={{display: "flex"}}>
+      <div className="genericHeader" style={{ display: "flex" }}>
         <p className="genericTitle">Trueway Agents </p>
-        {!next && <Select
-        options={options}
-        onChange={(e) => {
-          setGraficType(e.value);
-          if (e.value !== "All") {
-            setGraficMultiple(false);
-          } else {
-            setGraficMultiple(true);
-          }
-        }}
-        className="StadSelectGrafic"
-        placeholder="Type"
-      /> }
+        {!next && (
+          <Select
+            options={options}
+            onChange={(e) => {
+              setGraficType(e.value);
+              if (e.value !== "All") {
+                setGraficMultiple(false);
+              } else {
+                setGraficMultiple(true);
+              }
+            }}
+            className="StadSelectGrafic"
+            placeholder="Type"
+          />
+        )}
       </div>
 
-
-     
-    
       {!next ? (
         <div className="DashContainer">
           <div className="DashSubCont">

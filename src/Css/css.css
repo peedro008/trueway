@@ -2483,47 +2483,47 @@
 .PaginatorBox {
   display: flex;
   flex-direction: row;
-  position: relative;
-  margin-left: 82vw;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  position: fixed;
+  align-self: center;
+  bottom: 20px;
 }
 .PaginatorLeft {
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background: #ffffff;
+  background-color: #2b4162;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border: 1px solid #eaeaea;
   border-radius: 10px;
 }
 .PaginatorRight {
+  background-color: #2b4162;
   width: 30px;
   height: 30px;
   cursor: pointer;
-  background: #ffffff;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #eaeaea;
   border-radius: 10px;
 }
 
 .PaginatorNum {
+  background-color: #2b4162;
   width: 30px;
   height: 30px;
-  background: #ffffff;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 5px;
   margin-left: 5px;
-  border: 1px solid #eaeaea;
   border-radius: 10px;
-  font-family: Lato;
+  font-size: large;
+  font-weight: 800;
+  font-family: "Gilroy-Regular";
 }
 
 .PRODRECTheader{
@@ -2649,5 +2649,13 @@ color:#ffffff;
   background-color: #ffffff;
   width: 40px;
   height: 40px;
+  /* margin-bottom: 20px; */
+}
+
+.imageLink2 {
+  background-color: #ffffff;
+  width: auto;
+  height: 35px;
+  margin-top: 5px;
   /* margin-bottom: 20px; */
 }
