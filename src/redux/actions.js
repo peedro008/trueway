@@ -10,6 +10,7 @@ export const ADD_LOCATION = "ADD_LOCATION";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_COMPANIES = "GET_COMPANIES";
 export const GET_CLIENTS = "GET_CLIENTS";
+export const GET_CLIENTS_ID = "GET_CLIENTS_ID";
 export const GET_DEALERS = "GET_DEALERS";
 export const GET_DEALERSALEPERSON = "GET_DEALERSALEPERSON";
 export const GET_PRODUCERS = "GET_PRODUCERS";
@@ -114,6 +115,13 @@ export function getCompanies(data) {
 export function getClients(data) {
   return {
     type: GET_CLIENTS,
+    payload: data,
+  };
+}
+
+export function getClientsID(data) {
+  return {
+    type: GET_CLIENTS_ID,
     payload: data,
   };
 }

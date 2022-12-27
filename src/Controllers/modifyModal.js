@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "react-responsive-modal/styles.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ModifyModalComponent from "../Components/modifyModal";
+import { GetA_AVG } from "../Logic/Fetch";
 
 const ModifyModal = (props) => {
+  const dispatch = useDispatch()
   const { quoteM, open, onCloseModal } = props;
   const [quote, setQuote] = useState([]);
   const [renew, setRenew] = useState(false);
@@ -51,6 +53,10 @@ const ModifyModal = (props) => {
     setNotes(false);
   };
 
+  const reload = () => {
+    window.history.go(-1);
+  };
+
   const checkCancel = () => {
     setBound(false);
     setInputs({ ...inputs, Status: "Cancelled" });
@@ -64,20 +70,20 @@ const ModifyModal = (props) => {
   }, [props, userId]);
   const submit = () => {
     inputs.Status
-      ? fetch(`http://localhost:8080/modifyQuote`, {
+      ? fetch(`https://truewayagentbackend.com/modifyQuote`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(inputs),
-        }).then(onOpenModal1())
-      : fetch(`http://localhost:8080/addNotes`, {
+        }).then(onOpenModal1()).then( reload()).then(GetA_AVG(dispatch))
+      : fetch(`https://truewayagentbackend.com/addNotes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(inputs),
-      }).then(onOpenModal1())
+      }).then(onOpenModal1()).then( reload())
   };
 
   return (

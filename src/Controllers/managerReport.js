@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ManagerReportComponent from "../Components/managerReport";
+import { GetManager } from "../Logic/Fetch";
 
 const ManagerReport = () => {
   const Manager= useSelector(s=>s.Managers)
   const quotes = useSelector(s=>s.AVG)
-
+  const dispatch = useDispatch();
   const [sold, setSold] = useState(0);
   const [unSold, setUnSold] = useState(0);
   const [modify, setModify] = useState([]);
@@ -22,11 +23,11 @@ const ManagerReport = () => {
   };
   const handleDeleteModal = (e) => {
     deleteManager({ ManagerId: deletedOne });
-    window.location.reload();
+    // window.location.reload();
   };
   const deleteManager = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deleteManager`, {
+    fetch(`https://truewayagentbackend.com/deleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,6 +42,7 @@ const ManagerReport = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
+            GetManager(dispatch)
           }
         } catch (err) {
           console.log(err);

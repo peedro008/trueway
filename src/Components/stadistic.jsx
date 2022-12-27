@@ -30,7 +30,7 @@ function StadisticComponent({
     date.setDate(date.getDate() + dias);
     return date;
   }
-  console.log(sumarDias(dateReq.dateTo, -1)) 
+  
   return (
     <div className="genericDiv1">
       <div className="StadCalendarDiv">
@@ -88,7 +88,7 @@ function StadisticComponent({
         loader ?  <img
         src={spinnerr}
         style={{
-          width: "150px",
+          width: "100px",
           position: "absolute",
           marginLeft: '180px',
           top: "40vh",

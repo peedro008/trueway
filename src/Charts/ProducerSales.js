@@ -8,15 +8,15 @@ function ProducerSales({ aboutProps, google }) {
   const [quotes, setQuotes] = useState([]);
   const [dato, setDato] = useState([]);
   const [year, setYear] = useState([]);
-  const [time, setTime] = useState(true);
   const [showLoading, setShowLoading] = useState(true);
-  let timer1 = setTimeout(() => setShowLoading(true), 1000);
+  const [time, setTime] = useState(false);
 
+  let timer1 = setTimeout(() => setShowLoading(true), 1000);
   let userId = aboutProps;
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/producerQuotes?UserId=${userId}`)
+      .get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -26,7 +26,6 @@ function ProducerSales({ aboutProps, google }) {
   }, [userId]);
 
   useEffect(() => {
-    console.log(quotes);
     const date = new Date();
     const DATE =
       date.getFullYear() +
@@ -138,6 +137,7 @@ function ProducerSales({ aboutProps, google }) {
 
   useEffect(() => {
       setTimeout(() => {
+        setTime(true);
         if (google && !chart && dato.length) {
         const data = new google.visualization.DataTable();
         data.addColumn("string", "Topping");
@@ -171,17 +171,29 @@ function ProducerSales({ aboutProps, google }) {
       
         setChart(newChart);
       }
-    }, 3000);
+    }, 4000);
   }, [chart, dato]);
 
   return (
     <>
       {!google && <p>Google 404</p>}
-  
+      {!time ? (
+        <img
+          src={spinnerr}
+          style={{
+            width: "100px",
+            position: "absolute",
+            right: "65vw",
+            top: "50vh",
+          }}
+        />
+      ) : (
         <div
-          style={{ minHeight: "400px", minWidth: "66vw" }}
-          id="producerSales"
-        ></div>
+        style={{ minHeight: "400px", minWidth: "66vw" }}
+        id="producerSales"
+      ></div>
+      )}
+
     
     </>
   );

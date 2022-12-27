@@ -22,7 +22,7 @@ const ReportsLobby = () => {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <button
-            className="PAYbutton"
+            className="PAYbuttonAdd"
             style={{ width: "150px", marginRight: "20px" }}
           >
             <AiOutlineFile
@@ -38,7 +38,7 @@ const ReportsLobby = () => {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <button
-            className="PAYbutton"
+            className="PAYbuttonAdd"
             style={{ width: "150px", marginRight: "20px" }}
           >
             <CgImport color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
@@ -50,7 +50,7 @@ const ReportsLobby = () => {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <button
-            className="PAYbutton"
+            className="PAYbuttonAdd"
             style={{ width: "150px", marginRight: "20px" }}
           >
             <FiUser color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
@@ -62,7 +62,7 @@ const ReportsLobby = () => {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <button
-            className="PAYbutton"
+            className="PAYbuttonAdd"
             style={{ width: "150px", marginRight: "20px" }}
           >
             <FaRegMoneyBillAlt
@@ -80,7 +80,7 @@ const ReportsLobby = () => {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <button
-            className="PAYbutton"
+            className="PAYbuttonAdd"
             style={{ width: "150px", marginRight: "20px" }}
           >
             <CgImport color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
@@ -93,7 +93,7 @@ const ReportsLobby = () => {
           style={{ textDecoration: "none", color: "#000" }}
         >
           <button
-            className="PAYbutton"
+            className="PAYbuttonAdd"
             style={{ width: "150px", marginRight: "20px" }}
           >
             <BsBank2 color="white" size={"20px"} className="PAYbuttonIcon" />{" "}
@@ -107,7 +107,7 @@ const ReportsLobby = () => {
             style={{ textDecoration: "none", color: "#000" }}
           >
             <button
-              className="PAYbutton"
+              className="PAYbuttonAdd"
               style={{ width: "150px", marginRight: "20px" }}
             >
               <AiOutlineDelete

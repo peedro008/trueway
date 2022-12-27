@@ -29,7 +29,10 @@ const ProducerDashboardComponent = ({
   modify,
   quotes2,
   userId,
+  companies,
+  avg
 }) => {
+  // console.log(quotes2)
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -40,88 +43,49 @@ const ProducerDashboardComponent = ({
         <div className="DashSubCont1">
           <div className="DashStatusCont1">
             <div className="DashStatusHeader">
-              <p className="DashPListTitle">Unsold Quotes</p>
+              <p className="DashPListTitle">Unsold Quotes This Month</p>
             </div>
             <div className="DashStatusColumns">
-              <p className="dashListColumnT">Client Name</p>
-              <p className="dashListColumnT">Company</p>
-              <p className="dashListColumnT">Monthly Payments</p>
-              <p className="dashListColumnT">Down</p>
-              <p className="dashListColumnT">Date</p>
-              <p className="dashListColumnT">Quoted by</p>
+              <p className="dashListTitle">Client Name</p>
+              <p className="dashListTitle">Company</p>
+              <p className="dashListTitle">Monthly Paym.</p>
+              <p className="dashListTitle">Down</p>
+              <p className="dashListTitle">Date</p>
+              <p className="dashListTitle">Quoted by</p>
             </div>
             <div className="DastStatusBody">
-              {status?.length ? (
-                status.map((e) => {
+              {pquotes?.length ? (
+                pquotes.filter(e => e.Status !== 'Sold')[0]?.map((e) => {
                   return (
+                    <NavLink
+                    style={{ textDecoration: "none", color: "#000" }}
+                    to={{
+                      pathname: "report/quote",
+                      aboutProps: { ID: e.id },
+                    }}
+                  >
+                  
                     <div className="DashStatusRow">
-                      <p className="DashStatusItem">
-                        <NavLink
-                          style={{ textDecoration: "none", color: "#000" }}
-                          to={{
-                            pathname: "report/quote",
-                            aboutProps: { ID: e.id },
-                          }}
-                        >
-                          {e.Client.name.substring(0, 15)}
-                        </NavLink>
+                      <p className="infoDashboardProducer">
+                      {e.Client.name}
                       </p>
-                      <p className="DashStatusItem">
-                        <NavLink
-                          style={{ textDecoration: "none", color: "#000" }}
-                          to={{
-                            pathname: "report/quote",
-                            aboutProps: { ID: e.id },
-                          }}
-                        >
-                          {e.Company.name}
-                        </NavLink>
+                      <p className="infoDashboardProducer">
+                      {e.Company.name}
                       </p>
-                      <p className="DashStatusItem">
-                        <NavLink
-                          style={{ textDecoration: "none", color: "#000" }}
-                          to={{
-                            pathname: "report/quote",
-                            aboutProps: { ID: e.id },
-                          }}
-                        >
-                          {e.monthlyPayment}
-                        </NavLink>
+                      <p className="infoDashboardProducer">
+                     {e.monthlyPayment}
                       </p>
-                      <p className="DashStatusItem">
-                        <NavLink
-                          style={{ textDecoration: "none", color: "#000" }}
-                          to={{
-                            pathname: "report/quote",
-                            aboutProps: { ID: e.id },
-                          }}
-                        >
-                          {e.down}
-                        </NavLink>
+                      <p className="infoDashboardProducer">
+                      {e.down}
                       </p>
-                      <p className="DashStatusItem">
-                        <NavLink
-                          style={{ textDecoration: "none", color: "#000" }}
-                          to={{
-                            pathname: "report/quote",
-                            aboutProps: { ID: e.id },
-                          }}
-                        >
-                          {e.date}
-                        </NavLink>
+                      <p className="infoDashboardProducer">
+                      {e.date}
                       </p>
-                      <p className="DashStatusItem">
-                        <NavLink
-                          style={{ textDecoration: "none", color: "#000" }}
-                          to={{
-                            pathname: "report/quote",
-                            aboutProps: { ID: e.id },
-                          }}
-                        >
-                          {e.User.name}
-                        </NavLink>
+                      <p className="infoDashboardProducer">
+                       {e.User.name}
                       </p>
                     </div>
+                    </NavLink>
                   );
                 })
               ) : (
@@ -129,85 +93,103 @@ const ProducerDashboardComponent = ({
               )}
             </div>
           </div>
-          <div className="DashPList1">
-            <div className="DashPListHeader">
-              <p className="DashPListTitle">Sellers average sale</p>
-              <p className="DashPListSTitle">Desc.</p>
+          <div className="DashStatusCont1" style={{marginLeft: '20px'}}>
+            <div className="DashStatusHeader">
+              <p className="DashPListTitle">Sold Quotes This Month</p>
             </div>
-            <div className="DashPListDivider" />
-            {dataList.map((e) => {
-              return (
-                <div className="DashPListRow1" style={{ marginBottom: "7px" }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
+            <div className="DashStatusColumns">
+              <p className="dashListTitle">Client Name</p>
+              <p className="dashListTitle">Company</p>
+              <p className="dashListTitle">Monthly Paym.</p>
+              <p className="dashListTitle">Down</p>
+              <p className="dashListTitle">Closing Date</p>
+              <p className="dashListTitle">Quoted by</p>
+            </div>
+            <div className="DastStatusBody">
+              {pquotes?.length ? (
+                pquotes.filter(e => e.Status !== 'Sold')[1]?.map((e) => {
+                  return (
+                    <NavLink
+                    style={{ textDecoration: "none", color: "#000" }}
+                    to={{
+                      pathname: "report/quote",
+                      aboutProps: { ID: e.id },
                     }}
                   >
-                    <div className="DashPListCircle">
-                      <img src={mask} />
+                  
+                    <div className="DashStatusRow">
+                      <p className="infoDashboardProducer">
+                      {e.Client?.name}
+                      </p>
+                      <p className="infoDashboardProducer">
+                      {e.Company.name}
+                      </p>
+                      <p className="infoDashboardProducer">
+                     {e.monthlyPayment}
+                      </p>
+                      <p className="infoDashboardProducer">
+                      {e.down}
+                      </p>
+                      <p className="infoDashboardProducer">
+                      {e?.closingDate}
+                      </p>
+                      <p className="infoDashboardProducer">
+                       {e.User?.name}
+                      </p>
                     </div>
-
-                    <p className="DashPListItemText">{e[0]}</p>
-                  </div>
-                  <div className="DashNumberDiv">
-                    <p className="DashNumber">
-                    {e[1] / e[2]
-                          ? e[1] / e[2] > 1
-                            ? 100
-                            : ((e[1] / e[2]) * 100).toFixed(0)
-                          : 0}
-                      %
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+                    </NavLink>
+                  );
+                })
+              ) : (
+                <div></div>
+              )}
+            </div>
           </div>
         </div>
         <div className="dashContCard">
-          <div className="dashCard">
-            <div
-              className="dashCircle"
-              style={{ backgroundColor: " rgba(255, 184, 0, 0.07)" }}
-            >
-              <img src={error} />
-            </div>
+          <div className="dashCard" style={{
+                marginLeft: "50px",
+                backgroundColor: " rgba(255, 122, 0, 0.15)",
+              }}>
+          <div
+                className="dashCircle"
+                style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+              >
+                <img src={error} />
+              </div>
             <div className="dashText">
               <p className="dashCardTitle">
                 {
-                  quotes2?.filter(
-                    (e) =>
-                      e.QuoteStatuses.sort(function (a, b) {
-                        return b.id - a.id;
-                      })[0].Status == "Quoted"
-                  ).length
+                  pquotes[0]?.length
                 }
               </p>
-              <p className="dashCardText">Unsold quotes</p>
+              <p className="dashCardText">Unsold quotes this month</p>
             </div>
           </div>
-          <div className="dashCard" style={{ marginLeft: "50px" }}>
-            <div
-              className="dashCircle"
-              style={{ backgroundColor: " rgba(76, 184, 255, 0.07)" }}
-            >
+          <div className="dashCard" style={{
+                marginLeft: "50px",
+                backgroundColor: " rgba(111, 82, 237, 0.15)",
+              }}>
+             <div
+                className="dashCircle"
+                style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+              >
               <img src={wbill} />
             </div>
             <div className="dashText">
               <p className="dashCardTitle">
-                {modify?.filter((e) => e.Status == "Sold").length
-                  ? modify.filter((e) => e.Status == "Sold").length
-                  : 0}
+                {pquotes[1]?.length}
               </p>
-              <p className="dashCardText">Total quotes sold per month</p>
+              <p className="dashCardText">Total quotes sold this month</p>
             </div>
           </div>
-          <div className="dashCard" style={{ marginLeft: "50px" }}>
+          <div className="dashCard" style={{
+                  marginLeft: "50px",
+                  backgroundColor: "rgba(51, 214, 159 ,0.15)",
+                }}>
             <div
               className="dashCircle"
-              style={{ backgroundColor: " rgba(76, 184, 255, 0.07)" }}
+              style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
             >
               <img src={wbill} />
             </div>
@@ -216,16 +198,19 @@ const ProducerDashboardComponent = ({
               <p className="dashCardText">Total NSD commision</p>
             </div>
           </div>
-          <div className="dashCard" style={{ marginLeft: "50px" }}>
+          <div className="dashCard" style={{
+                  marginLeft: "50px",
+                  backgroundColor: "rgba(204, 234, 59 ,0.15)",
+                }}>
             <div
-              className="dashCircle"
-              style={{ backgroundColor: " rgba(8, 76, 97, 0.07)" }}
-            >
+                  className="dashCircle"
+                  style={{ backgroundColor: " rgba(8, 76, 97, 0.07)" }}
+                >
               <img src={bbill} />
             </div>
             <div className="dashText">
-              <p className="dashCardTitle">{payments.length}</p>
-              <p className="dashCardText">Total payments per month</p>
+              <p className="dashCardTitle">{payments?.length}</p>
+              <p className="dashCardText">Total payments this month</p>
             </div>
           </div>
         </div>

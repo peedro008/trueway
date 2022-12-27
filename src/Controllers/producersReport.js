@@ -9,7 +9,6 @@ const ProducerReport = () => {
   const [deletedOne, setDeletedOne] = useState(null);
   const [sold, setSold] = useState(0);
   const [unSold, setUnSold] = useState(0);
-
   const userRole = useSelector((state) => state.userRole);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -24,7 +23,7 @@ const ProducerReport = () => {
   };
   const deleteProducer = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deleteProducer`, {
+    fetch(`https://truewayagentbackend.com/deleteProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

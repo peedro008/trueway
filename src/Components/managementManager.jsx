@@ -25,7 +25,7 @@ const ManagementManagerComponenet = ({
   onSubmit,
   register,
   errors,
-  reload,
+  onClo,
   schema,
 }) => {
   
@@ -129,7 +129,7 @@ const ManagementManagerComponenet = ({
           <p className="PAYbuttonText">Add Manager</p>
         </button>
       </div>
-      <Modal open={open} onClose={reload} center classNames={"modal"}>
+      <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div className="modal">
           <img
             src={Icon}
@@ -143,7 +143,7 @@ const ManagementManagerComponenet = ({
 
           <p className="modalText">Manager added successfully</p>
 
-          <button onClick={reload} className="modalButton">
+          <button onClick={onCloseModal} className="modalButton">
             {" "}
             <NavLink
               style={{ textDecoration: "none", color: "#000" }}

@@ -67,12 +67,7 @@ const ProducerDetailsComponent = ({
                 <p className="PRODRECTheader">This Year</p>
     
             </div>
-            <BiDotsHorizontalRounded
-              style={{ cursor: "pointer" }}
-              size={30}
-              color={"#979797"}
-              onClick={() => setDots1(!dots1)}
-            />
+      
           </div>
           <div className="PRODrectB">
             <div style={{ display: "flex", flexDirection: "row" }}>
@@ -100,12 +95,7 @@ const ProducerDetailsComponent = ({
                 <p className="PRODRECTheader">This Year</p>
               
             </div>
-            <BiDotsHorizontalRounded
-              style={{ cursor: "pointer" }}
-              size={30}
-              color={"#979797"}
-              onClick={() => setDots2(!dots2)}
-            />
+      
           </div>
           <div className="PRODrectB">
             <div style={{ display: "flex", flexDirection: "row" }}>
@@ -132,12 +122,7 @@ const ProducerDetailsComponent = ({
                 <p className="PRODRECTheader">This Year</p>
               
             </div>
-            <BiDotsHorizontalRounded
-              style={{ cursor: "pointer" }}
-              size={30}
-              color={"#979797"}
-              onClick={() => setDots3(!dots3)}
-            />
+          
           </div>
           <div className="PRODrectB">
             <div style={{ display: "flex", flexDirection: "row" }}>

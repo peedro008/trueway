@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../Css/css.css";
 import { BiPencil } from "react-icons/bi";
-import { BsChevronLeft } from "react-icons/bs";
+import { BsChevronLeft, BsFilter } from "react-icons/bs";
 
 const QuoteFilter = () => {
   const [columns, setColumns] = useState({});
@@ -39,16 +39,12 @@ const QuoteFilter = () => {
       down: e,
       monthlyPayment: e,
       dealer: e,
-
       NSD: e,
-
       PIP: e,
-
       MVR: e,
       location: e,
       bound: e,
       notes: e,
-
       category: e,
     });
   };
@@ -56,11 +52,11 @@ const QuoteFilter = () => {
   return (
     <div className="genericDiv">
       <div className="genericHeader">
-        <p className="genericTitle">Reportes</p>
+        <p className="genericTitle">Quote Report</p>
       </div>
 
       <div className="FITcontainer">
-        <p className="FITfilter">Filtrar por:</p>
+        <p className="FITfilter"  style={{ fontWeight: 800, fontSize: '20px' }}>Filter by:</p>
 
         <div
           style={{
@@ -76,7 +72,7 @@ const QuoteFilter = () => {
               style={{
                 display: "flex",
                 marginRight: "15px",
-                marginBottom: "3px",
+                marginBottom: 0,
               }}
               type="checkbox"
               defaultChecked={true}
@@ -85,8 +81,8 @@ const QuoteFilter = () => {
               onChange={(e)=>selectAll(e.target.checked)}
             />
             <div>
-              <p className="FITtype" style={{ fontWeight: 700 }}>
-                Select all
+              <p className="FITtype" style={{ fontWeight: 800, fontSize: '20px' }}>
+                All
               </p>
             </div>
           </div>
@@ -112,7 +108,7 @@ const QuoteFilter = () => {
                 style={{
                   display: "flex",
                   marginRight: "15px",
-                  marginBottom: "3px",
+                  marginBottom: 0,
                 }}
                 type="checkbox"
                 checked={columns.clientName}
@@ -129,7 +125,7 @@ const QuoteFilter = () => {
             <div className="FITind">
               <input
                 class="checkbox"
-                style={{ display: "flex", marginRight: "15px" }}
+                style={{ display: "flex", marginRight: "15px", marginBottom: 0}}
                 type="checkbox"
                 checked={columns.clientEmail}
                 key="clientEmail"
@@ -147,7 +143,7 @@ const QuoteFilter = () => {
                 style={{
                   display: "flex",
                   marginRight: "15px",
-                  marginBottom: "3px",
+                  marginBottom: 0,
                 }}
                 type="checkbox"
                 checked={columns.clientTel}
@@ -165,7 +161,7 @@ const QuoteFilter = () => {
                 style={{
                   display: "flex",
                   marginRight: "15px",
-                  marginBottom: "3px",
+                  marginBottom: 0,
                 }}
                 type="checkbox"
                 checked={columns.CompanyId}
@@ -183,7 +179,7 @@ const QuoteFilter = () => {
                 style={{
                   display: "flex",
                   marginRight: "15px",
-                  marginBottom: "3px",
+                  marginBottom: 0,
                 }}
                 type="checkbox"
                 checked={columns.ProducerId}
@@ -201,7 +197,7 @@ const QuoteFilter = () => {
                 style={{
                   display: "flex",
                   marginRight: "15px",
-                  marginBottom: "3px",
+                  marginBottom: 0,
                 }}
                 type="checkbox"
                 checked={columns.monthlyPayment}
@@ -238,7 +234,7 @@ const QuoteFilter = () => {
                   style={{
                     display: "flex",
                     marginRight: "15px",
-                    marginBottom: "3px",
+                    marginBottom: 0,
                   }}
                   type="checkbox"
                   checked={columns.down}
@@ -257,7 +253,7 @@ const QuoteFilter = () => {
                   style={{
                     display: "flex",
                     marginRight: "15px",
-                    marginBottom: "3px",
+                    marginBottom: 0,
                   }}
                   type="checkbox"
                   checked={columns.dealer}
@@ -275,7 +271,7 @@ const QuoteFilter = () => {
                   style={{
                     display: "flex",
                     marginRight: "15px",
-                    marginBottom: "3px",
+                    marginBottom: 0,
                   }}
                   type="checkbox"
                   checked={columns.NSD}
@@ -291,7 +287,7 @@ const QuoteFilter = () => {
                   style={{
                     display: "flex",
                     marginRight: "15px",
-                    marginBottom: "3px",
+                    marginBottom: 0,
                   }}
                   type="checkbox"
                   checked={columns.PIP}
@@ -307,7 +303,7 @@ const QuoteFilter = () => {
                   style={{
                     display: "flex",
                     marginRight: "15px",
-                    marginBottom: "3px",
+                    marginBottom: 0,
                   }}
                   type="checkbox"
                   checked={columns.MVR}
@@ -323,7 +319,7 @@ const QuoteFilter = () => {
                   style={{
                     display: "flex",
                     marginRight: "15px",
-                    marginBottom: "3px",
+                    marginBottom: 0,
                   }}
                   type="checkbox"
                   checked={columns.location}
@@ -351,7 +347,7 @@ const QuoteFilter = () => {
                 style={{
                   display: "flex",
                   marginRight: "15px",
-                  marginBottom: "3px",
+                  marginBottom: 0,
                 }}
                 type="checkbox"
                 checked={columns.bound}
@@ -370,7 +366,7 @@ const QuoteFilter = () => {
                 style={{
                   display: "flex",
                   marginRight: "15px",
-                  marginBottom: "3px",
+                  marginBottom: 0,
                 }}
                 type="checkbox"
                 checked={columns.category}
@@ -394,16 +390,8 @@ const QuoteFilter = () => {
       >
         <button className="FITbutton">
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <BiPencil
-              size="20px"
-              style={{
-                display: "flex",
-                color: "#2B4162",
-                marginLeft: "8px",
-                marginTop: "1px",
-              }}
-            />
-            <p className="FITbuttonText">Submit</p>
+            <BsFilter size={'28px'}/>
+            <p className="FITbuttonText">Filter</p>
           </div>
         </button>
       </NavLink>

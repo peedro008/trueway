@@ -17,7 +17,7 @@ function Stadistic() {
   const UserId = useSelector((state) => state.UserId);
   const google = useGoogleCharts();
 
-
+console.log(payments)
 const search = () => {
   dateSelected.substring(0,2)!=="00"?
     setDateReq({
@@ -49,11 +49,10 @@ const search = () => {
     });
     setPayments([])
     axios
-      .get(`http://localhost:8080/getPaymentsStats`, { params })
+      .get(`https://truewayagentbackend.com/getPaymentsStats`, { params })
       .then(function (response) {
         setPayments(response.data);
       })
-
       .catch((error) => {
         setPayments([]);
         console.log(error);
@@ -73,7 +72,7 @@ const search = () => {
     })
     setQuotes([])
     axios
-      .get(`http://localhost:8080/getQuotesStats`, { params })
+      .get(`https://truewayagentbackend.com/getQuotesStats`, { params })
       .then(function (response) {
         setQuotes(response.data);
         setLoader(false)
@@ -152,11 +151,12 @@ const search = () => {
   useEffect(()=>{setDefMonth(monthOptions.find(e=>e.label==yearLabel.substring(0,3)))}, [yearLabel])
   const getComission =(payments,quotes )=>{
     let pes = 0;
-
-    if(quotes.length)  {quotes.map((e) => {
-      if ( e.CategoryId== 2&&!e.Payment&& e.QuoteStatuses.sort(function (a, b) {
-        return b.id - a.id ;
-      })[0].Status=="Sold") {
+    console.log(quotes)
+    if(quotes.length) {quotes.map((e) => {
+      if ( e.CategoryId === 2 && e.SoldBy) {
+        pes += 10;
+      }
+      if ( e.CategoryId === 7 && e.SoldBy) {
         pes += 10;
       }
     })}
@@ -166,15 +166,13 @@ const search = () => {
         if ( e.CategoryId == 2) {
           pes += 10;
         }
-     
           pes +=
             5 *
             (e?.NSDvalue?.length?
                parseFloat(e.NSDvalue)/parseFloat(e.Category?.NSDvalue):0
               );
-   
       }
-    });}
+    })}
     return pes
   }
   /////

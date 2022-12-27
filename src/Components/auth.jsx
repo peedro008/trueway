@@ -14,14 +14,14 @@ const AuthComponent = ({
   isError,
   message,
   message1,
-setMessage1,
+  setMessage1,
   open1,
-setOpen1,
-onOpenModal1,
-onCloseModal1,
-onResetHandler,
-reset,
-setReset
+  setOpen1,
+  onOpenModal1,
+  onCloseModal1,
+  onResetHandler,
+  reset,
+  setReset,
 }) => {
   const [UserName, setUserName] = useState("");
   const [Password, setPassword] = useState("");
@@ -47,64 +47,98 @@ setReset
       <div className="loginContainer">
         <div className="box">
           <div>
-            <p className="par">Sign In</p>
-            <p className="par2">Sign in to your account</p>
+            <p className="par">Trueway Insurance</p>
+            <p className="par2" style={{ fontWeight: "bold" }}>
+              Sign in to your account
+            </p>
             <div
               style={{
-                paddingBottom: "25px",
+                paddingBottom: "35px",
                 alignItems: "center",
                 backgroundColor: "#FFFFFF",
                 width: "300px",
                 display: "flex",
-                height: "200px",
+                height: "220px",
                 flexDirection: "column",
                 justifyContent: "space-between",
                 borderRadius: "8px",
+                paddingInline: '10px'
               }}
             >
               <div>
-                <p className="par3">Email address</p>
+                <p
+                  className="par3"
+                  style={{ fontWeight: "bold", fontSize: "15px" }}
+                >
+                  Email address
+                </p>
                 <input
                   className="loginInput"
                   style={{
                     width: "270px",
-                    height: "25px",
+                    height: "28px",
                     borderWidth: "0px",
-                    borderRadius: "8px",
-                    backgroundColor: "#E5E5E5",
+                    // borderRadius: "8px",
+                    borderBottom: "2px solid #2b4162",
+                    // backgroundColor: "#E5E5E5",
                     paddingX: "5px",
+                    
                   }}
-                  placeholder="  Email"
+                  placeholder="Email or Username"
                   onChange={(event) => setUserName(event.target.value)}
                 />
               </div>
               <div>
-                <p className="par3">Password</p>
+                <p
+                  className="par3"
+                  style={{ fontWeight: "bold", fontSize: "15px" }}
+                >
+                  Password
+                </p>
                 <input
                   className="loginInput"
                   style={{
                     width: "270px",
-                    height: "25px",
+                    height: "28px",
                     borderWidth: "0px",
-                    borderRadius: "8px",
-                    backgroundColor: "#E5E5E5",
+                    // borderRadius: "8px",
+                    borderBottom: "2px solid #2b4162",
+                    // backgroundColor: "#E5E5E5",
                     paddingX: "5px",
                   }}
                   type="password"
-                  placeholder="  Password"
+                  placeholder="Your Password"
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </div>
               <div className="buttonC">
                 <button
-                  className="button"
-                  style={{cursor: 'pointer'}}
+                  className="buttonSign"
+                  style={{ cursor: "pointer" }}
                   onClick={() => onSubmitHandler(UserName, Password)}
                 >
-                  <p className="buttonT">Sign In</p>{" "}
+                  <p className="buttonT" style={{ fontWeight: "bold" }}>
+                    Sign In
+                  </p>{" "}
                 </button>
               </div>
-        <p onClick={setOpen1} style={{fontSize:"13px",color:"green", textAlign:"right", alignSelf:"flex-end", marginBlock:"10px", marginRight:"5px", cursor:"pointer", fontFamily:"Montserrat" }}>forgott?</p>
+              <p
+                onClick={setOpen1}
+                style={{
+                  fontSize: "13px",
+                  color: "#2b4162",
+                  fontWeight: "bold",
+                  textAlign: "right",
+                  alignSelf: "flex-end",
+                  marginBlock: "10px",
+                  marginRight: "13px",
+                  cursor: "pointer",
+                  fontFamily: "Montserrat",
+                  
+                }}
+              >
+                Forgot password?
+              </p>
             </div>
           </div>
         </div>
@@ -130,32 +164,46 @@ setReset
         </div>
       </Modal>
       <Modal open={open1} onClose={onCloseModal1} center classNames={"modal"}>
-        <div className="modal" style={{minHeight:"95px", minWidth: "250px", maxWidth:"300px"}}>
-         
-          <p className="modalText" style={{fontSize:"13", marginTop:"20px"}}>{message1}</p>
-          <p className="modalText" style={{fontSize:"10px", marginTop:"20px"}}>it may be in the spam folder.</p>
-          {message1!=="Check your email for instructions"&&
-          <>
-          <input
-                  className="loginInput"
-                  style={{
-                    maxWidth: "270px",
-                    height: "25px",
-                    borderWidth: "0px",
-                    borderRadius: "8px",
-                    backgroundColor: "#E5E5E5",
-                    paddingX: "5px",
-                    alignSelf:"center",
-                    marginTop:"20px",
-                    marginBottom:"5px"
-                  }}
-                  placeholder="Email"
-                  onChange={(event) => setReset(event.target.value)}
-                />
-            
-          <button className="modalButton" onClick={onResetHandler}>
-            Continue
-          </button></>}
+        <div
+          className="modal"
+          style={{ minHeight: "95px", minWidth: "250px", maxWidth: "300px" }}
+        >
+          <p
+            className="modalText"
+            style={{ fontSize: "13", marginTop: "20px" }}
+          >
+            {message1}
+          </p>
+          <p
+            className="modalText"
+            style={{ fontSize: "10px", marginTop: "20px" }}
+          >
+            it may be in the spam folder.
+          </p>
+          {message1 !== "Check your email for instructions" && (
+            <>
+              <input
+                className="loginInput"
+                style={{
+                  maxWidth: "270px",
+                  height: "25px",
+                  borderWidth: "0px",
+                  borderRadius: "8px",
+                  backgroundColor: "#E5E5E5",
+                  paddingX: "5px",
+                  alignSelf: "center",
+                  marginTop: "20px",
+                  marginBottom: "5px",
+                }}
+                placeholder="Email"
+                onChange={(event) => setReset(event.target.value)}
+              />
+
+              <button className="modalButton" onClick={onResetHandler}>
+                Continue
+              </button>
+            </>
+          )}
         </div>
       </Modal>
     </div>

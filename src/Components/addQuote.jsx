@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import React from "react";
+import React, { useState } from "react";
 import { BiMessageSquareAdd } from "react-icons/bi";
 
 import Select from "react-select";
@@ -40,7 +40,10 @@ const AddQuoteComponent = ({
   dealerData,
   setDealerData,
   show,
+  onCloseModal
 }) => {
+
+  const [colorButtom, setColorButtom] = useState(true)
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -54,10 +57,10 @@ const AddQuoteComponent = ({
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <p className="AQinputName">Client Name</p>
                 <BiMessageSquareAdd
-                  onClick={() => handleNewClient()}
+                  onClick={() => {handleNewClient(); setColorButtom(!colorButtom)}}
                   size="20"
-                  color="#28C76F"
-                  style={{ marginLeft: "60px" }}
+                  color={colorButtom ? "#28C76F" : '#DC4C64'}
+                  style={{ marginLeft: "60px", cursor:'pointer' }}
                 />
               </div>
               {!newClient ? (
@@ -601,7 +604,7 @@ const AddQuoteComponent = ({
           display: "flex",
         }}
       >
-        <button onClick={handleSubmit(onSubmit)} className="PAYbutton">
+        <button onClick={handleSubmit(onSubmit)} className="PAYbuttonPay">
           <p className="PAYbuttonText">Add Quote</p>
         </button>
       </div>
@@ -620,7 +623,7 @@ const AddQuoteComponent = ({
 
           <p className="modalText">Quote added successfully</p>
 
-          <button className="modalButton" onClick={reload}>
+          <button className="modalButton" onClick={onCloseModal} style={{cursor:'pointer'}}>
             Continue
           </button>
         </div>

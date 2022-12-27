@@ -32,13 +32,15 @@ const ManagementManager = () => {
     resolver: yupResolver(schema),
   });
   const [inputs, setinputs] = useState({});
-  const reload = () => {
-    window.location.reload();
-  };
+
+  // const reload = () => {
+  //   window.location.reload();
+  // };
+
   const onSubmit = (data) => {
     data && setinputs({ ...inputs, UserRole: "Producer" });
 
-    fetch(`http://localhost:8080/addManager`, {
+    fetch(`https://truewayagentbackend.com/addManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,9 +82,7 @@ const ManagementManager = () => {
             onSubmit={onSubmit}
             register={register}
             errors={errors}
-            schema={schema}
-            reload={reload}
-        />
+            schema={schema}        />
   );
 };
 export default ManagementManager;

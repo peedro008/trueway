@@ -25,9 +25,9 @@ function AddPaymentComponent({
   optionsQ,
   optionT,
   t1,
-setT1,
-t2,
-setT2,
+  setT1,
+  t2,
+  setT2,
   optionM,
   quotes,
   control,
@@ -57,14 +57,16 @@ setT2,
   setTotalValues,
   MultiMethod,
   setMultiMethod,
-method2,
+  method2,
   setMethod2,
-total2,
-setTotal2,
-percent,
+  total2,
+  setTotal2,
+  percent,
   setPercent,
+  clientsId
 }) {
-
+  const [colorButtom, setColorButtom] = useState(true)
+ 
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -77,9 +79,9 @@ percent,
             <div style={{ display: "flex", flexDirection: "row" }}>
               <p className="PAYtitle">Client Name</p>
               <BiMessageSquareAdd
-                onClick={() => handleNewClient()}
+                onClick={() => {handleNewClient(); setColorButtom(!colorButtom)}}
                 size="20"
-                color="#28C76F"
+                color={colorButtom ? "#28C76F" : '#DC4C64'}
                 style={{ marginLeft: "70px", cursor: "pointer" }}
               />
             </div>
@@ -98,20 +100,56 @@ percent,
                         onChange(val.value);
                         setForm({ ...form, client: val.label, id: val.value });
                       }}
+                      // onKeyDown={(val) => {
+                      //   if (
+                      //     val.key === "a" ||
+                      //     val.key === "q" ||
+                      //     val.key === "z" ||
+                      //     val.key === "x" ||
+                      //     val.key === "s" ||
+                      //     val.key === "w" ||
+                      //     val.key === "e" ||
+                      //     val.key === "d" ||
+                      //     val.key === "c" ||
+                      //     val.key === "v" ||
+                      //     val.key === "f" ||
+                      //     val.key === "r" ||
+                      //     val.key === "t" ||
+                      //     val.key === "g" ||
+                      //     val.key === "b" ||
+                      //     val.key === "n" ||
+                      //     val.key === "h" ||
+                      //     val.key === "y" ||
+                      //     val.key === "u" ||
+                      //     val.key === "j" ||
+                      //     val.key === "m" ||
+                      //     val.key === "i" ||
+                      //     val.key === "k" ||
+                      //     val.key === "l" ||
+                      //     val.key === "o" ||
+                      //     val.key === "p" ||
+                      //     val.key === "ñ" ||
+                      //     val.key === " " ||
+                      //     val.key === "2"
+                      //   ) {
+                      //     setClienteByName(clienteByName + val.key);
+                      //   } else if (val.key === 'Backspace') {
+                      //     setClienteByName(clienteByName.substr(0, clienteByName - 1))
+                      //   }
+                      //   // console.log(val.key)
+                      // }}
                       control={control}
-                      options={clients?.map((e) => ({
-                        value: e.id,
-                        label: e.name,
-                      }))}
+                      options={ clientsId}
                       name={"ClientId"}
                       className="PAYselect"
+                      
                     />
                   )}
                 />
               </>
             ) : (
               <>
-                <input className="PAYsub-title" {...register("name")} />
+                <input className="PAYsub-title" {...register("name")} placeholder="Name"/>
                 <p className="FORMerror">{errors.name?.message}</p>
               </>
             )}
@@ -165,7 +203,7 @@ percent,
                                 setTotalValues({
                                   ...totalValues,
                                   Category: val.value,
-                                  CategoryNsd: optionsCa.find(
+                                  CategoryNsd: optionsCa?.find(
                                     (c) => c.value === val.value
                                   ).NSD,
                                 });
@@ -418,17 +456,17 @@ percent,
           )}
         </div>
         <div className="PAYInputCont">
-            <p className="PAYtitle">Policy Number (optional)</p>
-            <input
-              placeholder="Policy Number"
-              className="AQinput"
-              value={payment?.policyNumber}
-              {...register("policyNumber")}
-              onChange={(e) => {
-                setTotalValues({ ...totalValues, policyNumber: e.target.value });
-              }}
-            />
-          </div>
+          <p className="PAYtitle">Policy Number (optional)</p>
+          <input
+            placeholder="Policy Number"
+            className="AQinput"
+            value={payment?.policyNumber}
+            {...register("policyNumber")}
+            onChange={(e) => {
+              setTotalValues({ ...totalValues, policyNumber: e.target.value });
+            }}
+          />
+        </div>
         <div className="AQwhiteContainer11">
           <div className="AQinputContainer">
             <p className="AQinputName">NSD</p>
@@ -456,7 +494,7 @@ percent,
                 <>
                   <input
                     className="AQinput2"
-                    type='number'
+                    type="number"
                     placeholder="How much?"
                     key="NSDamount"
                     name="NSDamount"
@@ -611,22 +649,21 @@ percent,
                   flexDirection: "row",
                   display: "flex",
                   justifyContent: "center",
-                  
-               
                 }}
               >
-                <p className="PAYtitle" style={{textAlign:"center"}}>Amount</p>
-              </div><input
-                    className="AQinput2"
-                    placeholder="$$$"
-                    key="NSDamount"
-                    name="NSDamount"
-                   
-                    onChange={(e)=>setT1(e.target.value)}
-                   style={{maxWidth:"50px",}}
-                  />
-              
+                <p className="PAYtitle" style={{ textAlign: "center" }}>
+                  Amount
+                </p>
               </div>
+              <input
+                className="AQinput2"
+                placeholder="$$$"
+                key="NSDamount"
+                name="NSDamount"
+                onChange={(e) => setT1(e.target.value)}
+                style={{ maxWidth: "50px" }}
+              />
+            </div>
             <div className="PAYInputCont">
               <div
                 style={{
@@ -667,22 +704,22 @@ percent,
                   flexDirection: "row",
                   display: "flex",
                   justifyContent: "center",
-                  
-               
                 }}
               >
-                <p className="PAYtitle" style={{textAlign:"center"}}>Amount</p>
-              </div><input
-                    className="AQinput2"
-                    placeholder="$$$"
-                    key="NSDamount"
-                    name="NSDamount"
-                    value={t2}
-                    disabled={true}
-                   style={{maxWidth:"50px",}}
-                  />
-              
+                <p className="PAYtitle" style={{ textAlign: "center" }}>
+                  Amount
+                </p>
               </div>
+              <input
+                className="AQinput2"
+                placeholder="$$$"
+                key="NSDamount"
+                name="NSDamount"
+                value={t2}
+                disabled={true}
+                style={{ maxWidth: "50px" }}
+              />
+            </div>
           </div>
         ) : (
           <></>
@@ -691,7 +728,6 @@ percent,
         <div className="DEPtotal1">
           <p className="DEPtotalT">TOTAL $ {total ? total.toFixed(2) : 0}</p>
         </div>
-      
 
         <Modal open={open} onClose={reload} center classNames={"modal"}>
           <div className="modal">
@@ -714,7 +750,7 @@ percent,
         </Modal>
 
         <BsChevronLeft
-        cursor='pointer'
+          cursor="pointer"
           color="grey"
           style={{
             minWidth: "25px",
@@ -737,7 +773,7 @@ percent,
           display: "flex",
         }}
       >
-        <button onClick={handleSubmit(onSubmit)} className="PAYbutton">
+        <button onClick={handleSubmit(onSubmit)} className="PAYbuttonPay">
           <p className="PAYbuttonText">Add payment</p>
         </button>
       </div>

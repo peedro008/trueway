@@ -20,7 +20,7 @@ const DepositCash = () => {
  
 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/getCashPayment?LocationId=${LocationId}`)
+        axios.get(`https://truewayagentbackend.com/getCashPayment?LocationId=${LocationId}`)
         .then(function(response){
             setDbPayments(response.data)
             
@@ -45,7 +45,7 @@ const DepositCash = () => {
     const submit = () =>{
         let data = {id:id, UserId: UserId, LocationId: LocationId, note: `$1: ${box.pay1?box.pay1:0}, $5: ${box.pay5?box.pay5:0}, $10: ${box.pay10?box.pay10:0}, $20: ${box.pay20?box.pay20:0}, $50: ${box.pay50?box.pay50:0}, $100: ${box.pay100?box.pay100:0}. ${box.note?box.note:""} `, total: (Number(box.pay1))+(Number(box.pay5)*5)+(Number(box.pay10)*10)+(Number(box.pay20)*20)+(Number(box.pay50)*50)+(Number(box.pay100)*100)}
         onOpenModal()
-        fetch(`http://localhost:8080/deposit`, {
+        fetch(`https://truewayagentbackend.com/deposit`, {
                     
             method: 'POST',
             headers: {
@@ -56,7 +56,7 @@ const DepositCash = () => {
         })
         .then((a)=>{
             axios
-            .get(`http://localhost:8080/getDeposit`)
+            .get(`https://truewayagentbackend.com/getDeposit`)
             .then(function (response) {
               dispatch(getDeposits(response.data));
             })

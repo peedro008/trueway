@@ -1,76 +1,38 @@
-import React, { useEffect } from 'react';
-import {  useDispatch, useSelector } from 'react-redux';
-import Auth from './Controllers/auth';
-import { BrowserRouter as Router, Route } from "react-router-dom"
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import AdminRouter from "./Routers/adminRouter";
+import ProducerRouter from "./Routers/producersRouter";
+import LoginRouter from "./Routers/LoginRouter";
+import { logout } from "./Redux/actions";
 
-import AdminRouter from './Routers/adminRouter';
-
-import ProducerRouter from './Routers/producersRouter';
-
-import { FetchAll}  from './Logic/Fetch';
-import LoginRouter from './Routers/LoginRouter';
-import { logout } from './Redux/actions';
-
-function Root ({ store }) {
-  const dispatch = useDispatch()
-  const SessionDate= useSelector(state=>state.SessionDate)
+function Root({ store }) {
+  const dispatch = useDispatch();
+  const SessionDate = useSelector((state) => state.SessionDate);
   const date = new Date();
- const DATE =
-    date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
+  const DATE =
+    date.getFullYear() +
+    (date.getMonth() + 1 > 9 ? "-" : "-0") +
+    (date.getMonth() + 1) +
+    "-" +
+    date.getDate();
   useEffect(() => {
-    if(DATE!==SessionDate) dispatch(logout())
-  }, [])
-  
-  const userRole= useSelector(state=>state.userRole)
+    if (DATE !== SessionDate) dispatch(logout());
+  }, []);
 
+  const userRole = useSelector((state) => state.userRole);
 
-if(!userRole){
-  return (
-      
-    
-
-    
-      <LoginRouter/>
-       
-     
-   )
-  
+  if (!userRole) {
+    return <LoginRouter />;
   }
 
- if (userRole==="Admin"||userRole=="Manager"){
-  return (
-
+  if (userRole === "Admin" || userRole == "Manager") {
     
-    <AdminRouter/>
-     
-     
-  
-  )
+    return <AdminRouter />;
+  }
 
+  if (userRole === "Producer") {
+    return <ProducerRouter />;
+  }
 }
 
-if (userRole==="Producer"){
-  return (
-
-    <ProducerRouter/>
-  )
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-  
-export default   Root
-
+export default Root;

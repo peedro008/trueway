@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import moment from "moment";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import PaymentReportComponent from "../Components/paymentReport";
+import { GetPayments } from "../Logic/Fetch";
 const PaymentReport = () => {
+  const dispatch = useDispatch();
   const userRole = useSelector((state) => state.userRole);
   const [payments, setPayments] = useState([]);
   const [paymentsFil, setPaymentsFil] = useState([]);
@@ -40,11 +42,11 @@ const PaymentReport = () => {
   };
   const handleDeleteModal = (e) => {
     deleteClient({ PaymentId: deletedOne });
-    window.location.reload();
+    // window.location.reload();
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deletePayment`, {
+    fetch(`https://truewayagentbackend.com/deletePayment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,6 +61,7 @@ const PaymentReport = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
+            GetPayments(dispatch)
           }
         } catch (err) {
           console.log(err);
@@ -81,7 +84,7 @@ const PaymentReport = () => {
       params.append(e[0]=="ProducerId"?"UserId":`${e[0]}`, e[1]);
     });
     axios
-      .get(`http://localhost:8080/getPaymentsReport`, { params })
+      .get(`https://truewayagentbackend.com/getPaymentsReport`, { params })
       .then(function (response) {
         setPayments(response.data);
       })

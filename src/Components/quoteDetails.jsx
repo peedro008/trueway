@@ -2,7 +2,7 @@ import {BiPencil} from "react-icons/bi"
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
-import spinnerr from "../assets/spinnerr.gif"
+import spinnerr from "../assets/loadingIcon.gif";
 function QuoteDetailsComponent({
     quote,
     id
@@ -11,7 +11,7 @@ function QuoteDetailsComponent({
 
     return (
         <div className='genericDiv' style={{overflowX:"hidden"}}>
-            {!quote.length?<img src={spinnerr} style={{width:"200px", position:"absolute", right:"45vw", top:"45vh"}}/>:
+            {!quote.length?<img src={spinnerr} style={{width:"120px", position:"absolute", right:"45vw", top:"45vh"}}/>:
                
                <div>
                 <div className="genericHeader">
@@ -37,7 +37,7 @@ function QuoteDetailsComponent({
                     </div>
                     <div className='DETsBox'>
                         <p className="DETtitle">Hour</p>
-                        <p className="DETtext">{parseInt(quote[0].time.substring(11,13))-5}{quote[0].time.substring(16,19)}</p>
+                        <p className="DETtext">{parseInt(quote[0].time?.substring(11,13))-5}{quote[0].time?.substring(16,19)}</p>
                     </div>
                     <div className='DETsBox'>
                         <p className="DETtitle">Phone</p>

@@ -200,7 +200,7 @@ const ManagementClientComponent = ({
           <button className="modalButton">
             {" "}
             <NavLink
-              style={{ textDecoration: "none", color: "#000" }}
+              style={{ textDecoration: "none", color: "#000", cursor:'pointer' }}
               to={"/Management"}
             >
               Continue

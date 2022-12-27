@@ -7,25 +7,20 @@ import QuoteReportComponent from "../Components/quoteReport";
 const QuoteReport = (props) => {
   const userRole = useSelector((state) => state.userRole);
   const [open, setOpen] = useState(false);
-  const onOpenModal = () => setOpen(false);
   const onCloseModal = () => setOpen(false);
   const [deleteConf, setDeleteConf] = useState("");
   const [deletedOne, setDeletedOne] = useState(null);
   const [open1, setOpen1] = useState(false);
-  const onOpenModal1 = () => setOpen1(false);
   const onCloseModal1 = () => setOpen1(false);
   const [quote, setQuote] = useState({});
   const [quotes, setQuotes] = useState([]);
   const [quotesFil, setQuotesFil] = useState([]);
-  const [pes, setPes] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
   const [paginator, setPaginator] = useState(1);
   let columns = props.location.aboutProps;
   const producers = useSelector((state) => state.Producers);
 
-  const [filterValues, setFilterValues] = useState({
-  
-  });
+  const [filterValues, setFilterValues] = useState({});
   const [filterCheck, setFilterCheck] = useState({
     date: false,
     ClientId: false,
@@ -45,18 +40,16 @@ const QuoteReport = (props) => {
   const dealers = useSelector((state) => state.DealerSalesPersons);
   const locations = useSelector((state) => state.Locations);
 
-
-
-  useEffect(()=>{
+  useEffect(() => {
     let params = new URLSearchParams();
-    params.append("offset", (paginator-1)*20);
-    let temp = Object.entries(filterValues)
-    
-    temp.map(e=>{
-      params.append(e[0]=="ProducerId"?"UserId":`${e[0]}`, e[1]);
-    })
+    params.append("offset", (paginator - 1) * 20);
+    let temp = Object.entries(filterValues);
+
+    temp.map((e) => {
+      params.append(e[0] == "ProducerId" ? "UserId" : `${e[0]}`, e[1]);
+    });
     axios
-      .get(`http://localhost:8080/getQuotesReport`, { params })
+      .get(`https://truewayagentbackend.com/getQuotesReport`, { params })
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -65,19 +58,18 @@ const QuoteReport = (props) => {
         setQuotes([]);
         console.log(error);
       });
-  },[paginator, filterValues])
+  }, [paginator, filterValues]);
 
   useEffect(() => {
     filterSubmit(filterValues);
   }, [filterValues, quotes]);
   const closeCloud = (e) => {
-    let temp = filterValues
-    console.log(temp)
-    delete temp[e]
-    console.log(temp)
+    let temp = filterValues;
+    console.log(temp);
+    delete temp[e];
+    console.log(temp);
 
     setFilterValues({});
-  
   };
 
   const modify = (e) => {
@@ -85,7 +77,6 @@ const QuoteReport = (props) => {
     setOpen(true);
   };
   const filterSubmit = (e) => {
-
     setQuotesFil(quotes);
   };
   const handleDeleteModal = (e) => {
@@ -94,7 +85,7 @@ const QuoteReport = (props) => {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deleteQuote`, {
+    fetch(`https://truewayagentbackend.com/deleteQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -145,9 +136,7 @@ const QuoteReport = (props) => {
   return (
     <QuoteReportComponent
       handleDelete={handleDelete}
-      deleteClient={deleteClient}
       handleDeleteModal={handleDeleteModal}
-      filterSubmit={filterSubmit}
       closeCloud={closeCloud}
       modify={modify}
       categories={categories}
@@ -162,21 +151,12 @@ const QuoteReport = (props) => {
       userRole={userRole}
       open={open}
       deleteConf={deleteConf}
-      deletedOne={deletedOne}
       open1={open1}
       setDeleteConf={setDeleteConf}
-      setDeletedOne={setDeletedOne}
-      setOpen1={setOpen1}
-      setOpen={setOpen}
       quote={quote}
       quotes={quotes}
       quotesFil={quotesFil}
-      pes={pes}
       openFilter={openFilter}
-      setQuote={setQuote}
-      setQuotes={setQuotes}
-      setQuotesFil={setQuotesFil}
-      setPes={setPes}
       setOpenFilter={setOpenFilter}
       columns={columns ? columns : defaultC}
       onCloseModal={onCloseModal}

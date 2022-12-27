@@ -35,15 +35,14 @@ const ManagerEdit = (props) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const reload = () => {
-    window.location.reload();
-  };
+
+
   setValue("UserId", `${Producer.UserId}`);
 
   setValue("ProducerId", `${Producer.id}`);
 
   const onSubmit = (data) => {
-    fetch(`http://localhost:8080/modifyManager`, {
+    fetch(`https://truewayagentbackend.com/modifyManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,14 +57,13 @@ const ManagerEdit = (props) => {
             console.log("error");
           } else {
             console.log(jsonRes);
-            
+            GetManager(dispatch)
           }
         } catch (err) {
           console.log(err);
         }
         onOpenModal();
       })
-      .then(()=>GetManager(dispatch))
       .catch((err) => {
         console.log(err);
       });
@@ -99,7 +97,6 @@ const ManagerEdit = (props) => {
     <ManagerEditComponent
       options={options}
       customStyles={customStyles}
-      reload={reload}
       onSubmit={onSubmit}
       locations={locations}
       dispatch={dispatch}

@@ -9,7 +9,6 @@ function PizzaChartBig({ google, producers, graficType }) {
   const [color, setColor] = useState("#2b4162")
   const [time, setTime] = useState(false);
 
-  console.log(quotex)
   useEffect(() => {
     let sold = [];
     let unsold = [];
@@ -85,7 +84,7 @@ function PizzaChartBig({ google, producers, graficType }) {
         <img
           src={spinnerr}
           style={{
-            width: "150px",
+            width: "100px",
             position: "absolute",
             right: "65vw",
             top: "40vh",

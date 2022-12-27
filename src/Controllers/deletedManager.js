@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DeletedManagersComponent from "../Components/deletedManager";
+import { GetClients, GetClientsId } from "../Logic/Fetch";
 
 const DeletedManagers = () => {
+  const dispatch = useDispatch()
   const [managers, setManagers] = useState([]);
   const [sold, setSold] = useState(0);
   const [unSold, setUnSold] = useState(0);
@@ -21,11 +23,11 @@ const DeletedManagers = () => {
   };
   const handleDeleteModal = (e) => {
     deleteManager({ ManagerId: deletedOne });
-    window.location.reload();
+    // window.location.reload();
   };
   const deleteManager = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/undeleteManager`, {
+    fetch(`https://truewayagentbackend.com/undeleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,6 +42,8 @@ const DeletedManagers = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
+            GetClients(dispatch)
+          GetClientsId(dispatch)
           }
         } catch (err) {
           console.log(err);
@@ -52,7 +56,7 @@ const DeletedManagers = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDeletedManager`)
+      .get(`https://truewayagentbackend.com/getDeletedManager`)
       .then(function (response) {
         setManagers(response.data);
       })

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import error from "../assets/error.png";
 import wbill from "../assets/wbill.png";
 import bbill from "../assets/bbill.png";
@@ -9,6 +9,8 @@ import PozzaChart from "../Charts/ColumnChar";
 import { NavLink } from "react-router-dom";
 import Select from "react-select";
 import PizzaChartBig from "../Charts/ProducersChartBig";
+import spinnerr from "../assets/loadingIcon.gif";
+import { BiUser } from "react-icons/bi";
 
 const AdminDashboardComponent = ({
   next,
@@ -24,9 +26,64 @@ const AdminDashboardComponent = ({
   Payment,
   handleNext,
   mpayments,
+  A_AVG,
 }) => {
   const [graficType, setGraficType] = useState();
   const [graficMultiple, setGraficMultiple] = useState(true);
+  const [typeOfTable, setTypeOfTable] = useState(true);
+  const [dato, setDato] = useState([]);
+  const [dato2, setDato2] = useState([]);
+  const [unsoldQuotes, setUnsoldQuotes] = useState();
+  const [soldQuotes, setSoldQuotes] = useState();
+
+  let quotexWithoutAdmin = A_AVG?.filter((e) => e.id !== 1 && e.id !== 24);
+
+  // console.log(A_AVG)
+  useEffect(() => {
+        
+      let pes = [];
+      producers?.map((e) => {
+        pes.push([
+          e.name,
+          A_AVG?.filter((g) => g.id == e.UserId)[0]?.sold,
+          A_AVG?.filter((g) => g.id == e.UserId)[0]?.unsold,
+        ]);
+      });
+      // console.log(pes.filter((e) => e[1] !== 0 || e[2] !== 0) || pes)
+      setDato(pes.filter((e) => e[1] !== 0 || e[2] !== 0) || pes);
+      setDato2(pes.filter((e) => e[1] !== 0 || e[2] !== 0) || pes);
+    
+  }, [A_AVG]);
+
+  useEffect(() => {
+    setSoldQuotes(
+      dato?.sort((a, b) => {
+        if (a[1] < b[1]) {
+          return 1;
+        }
+
+        if (a[1] > b[1]) {
+          return -1;
+        }
+
+        return 0;
+      })
+    );
+
+    setUnsoldQuotes(
+      dato2?.sort((a, b) => {
+        if (a[2] < b[2]) {
+          return 1;
+        }
+
+        if (a[2] > b[2]) {
+          return -1;
+        }
+
+        return 0;
+      })
+    );
+  }, [typeOfTable]);
 
   const options = [
     { value: "All", label: "All" },
@@ -44,9 +101,16 @@ const AdminDashboardComponent = ({
             onChange={(e) => {
               setGraficType(e.value);
               if (e.value !== "All") {
-                setGraficMultiple(false);
+                setGraficMultiple();
               } else {
                 setGraficMultiple(true);
+              }
+              if (e.value === "Sold") {
+                setTypeOfTable("Sold");
+              } else if (e.value === "Unsold") {
+                setTypeOfTable("Unsold");
+              } else {
+                setTypeOfTable();
               }
             }}
             className="StadSelectGrafic"
@@ -61,7 +125,7 @@ const AdminDashboardComponent = ({
             <div style={{ marginLeft: "-100px" }}>
               {google &&
                 quotex &&
-                quotex.length &&
+                quotex?.length &&
                 (graficMultiple ? (
                   <PizzaChart google={google} producers={producers} />
                 ) : (
@@ -72,68 +136,149 @@ const AdminDashboardComponent = ({
                   />
                 ))}
             </div>
-            <div className="DashPList1">
-              <div className="DashPListHeader">
-                <p className="DashPListTitle">Producers average sale</p>
-                <p className="DashPListSTitle">Desc.</p>
-              </div>
-              <div className="DashPListDivider" />
-              {quotex
-                ?.sort(function (a, b) {
-                  return Number(b.avg) - Number(a.avg);
-                })
-                .map((e) => {
+
+            {typeOfTable === "Sold" ? (
+              <div className="DashPList1">
+                <div className="DashPListHeader">
+                  <p className="DashPListTitle">Producers Sold Ranking</p>
+                  <p className="DashPListSTitle">Desc.</p>
+                </div>
+                <div className="DashPListDivider" />
+                {soldQuotes?.map((e) => {
                   return (
-                    <div
-                      className="DashPListRow1"
-                      style={{ marginBottom: "7px" }}
+                    <NavLink
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                        color: "black",
+                      }}
+                      to={{
+                        pathname: "/users/producers/details",
+                        aboutProps: producers.filter((f) => f.name === e[0])[0],
+                      }}
                     >
                       <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "center",
-                        }}
+                        className="DashPListRow1"
+                        style={{ marginBottom: "7px" }}
                       >
-                        <div className="DashPListCircle">
-                          <NavLink
-                            style={{
-                              textDecoration: "none",
-                              color: "#000",
-                              color: "black",
-                            }}
-                            to={{
-                              pathname: "/users/producers/details",
-                              aboutProps: e.id,
-                            }}
-                          >
-                            <img src={mask} />
-                          </NavLink>
-                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div className="DashPListCircle">
+                            <BiUser size={"20px"} color={"#2b4162"} />
+                          </div>
 
-                        <p className="DashPListItemText">
-                          <NavLink
-                            style={{
-                              textDecoration: "none",
-                              color: "#000",
-                              color: "black",
-                            }}
-                            to={{
-                              pathname: "/users/producers/details",
-                              aboutProps: e.id,
-                            }}
-                          >
-                            {e.name}
-                          </NavLink>
-                        </p>
+                          <p className="DashPListItemText">{e[0]}</p>
+                        </div>
+                        <div className="DashNumberDiv">
+                          <p className="DashNumber">{e[1]}</p>
+                        </div>
                       </div>
-                      <div className="DashNumberDiv">
-                        <p className="DashNumber">{e.avg}%</p>
-                      </div>
-                    </div>
+                    </NavLink>
                   );
                 })}
-            </div>
+              </div>
+            ) : typeOfTable === "Unsold" ? (
+              <div className="DashPList1">
+                <div className="DashPListHeader">
+                  <p className="DashPListTitle">Producers Unsold Ranking</p>
+                  <p className="DashPListSTitle">Desc.</p>
+                </div>
+                <div className="DashPListDivider" />
+                {unsoldQuotes?.map((e) => {
+                  return (
+                    <NavLink
+                      style={{
+                        textDecoration: "none",
+                        color: "#000",
+                        color: "black",
+                      }}
+                      to={{
+                        pathname: "/users/producers/details",
+                        aboutProps: producers.filter((f) => f.name === e[0])[0],
+                      }}
+                    >
+                      <div
+                        className="DashPListRow1"
+                        style={{ marginBottom: "7px" }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div className="DashPListCircle">
+                            <BiUser size={"20px"} color={"#2b4162"} />
+                          </div>
+
+                          <p className="DashPListItemText">{e[0]}</p>
+                        </div>
+                        <div className="DashNumberDiv">
+                          <p className="DashNumber">{e[2]}</p>
+                        </div>
+                      </div>
+                    </NavLink>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="DashPList1">
+                <div className="DashPListHeader">
+                  <p className="DashPListTitle">Producers average sale</p>
+                  <p className="DashPListSTitle">Desc.</p>
+                </div>
+                <div className="DashPListDivider" />
+                {quotexWithoutAdmin
+                  ?.sort(function (a, b) {
+                    return Number(b.avg) - Number(a.avg);
+                  })
+                  .map((e) => {
+                    return (
+                      <NavLink
+                        style={{
+                          textDecoration: "none",
+                          color: "#000",
+                          color: "black",
+                        }}
+                        to={{
+                          pathname: "/users/producers/details",
+                          aboutProps: producers?.filter(
+                            (f) => f.UserId === e.id
+                          )[0],
+                        }}
+                      >
+                        <div
+                          className="DashPListRow1"
+                          style={{ marginBottom: "7px" }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                            }}
+                          >
+                            <div className="DashPListCircle">
+                              <BiUser size={"20px"} color={"#2b4162"} />
+                            </div>
+
+                            <p className="DashPListItemText">{e.name}</p>
+                          </div>
+                          <div className="DashNumberDiv">
+                            <p className="DashNumber">{e.avg}%</p>
+                          </div>
+                        </div>
+                      </NavLink>
+                    );
+                  })}
+              </div>
+            )}
           </div>
           <div className="dashContCard">
             <div
@@ -184,7 +329,7 @@ const AdminDashboardComponent = ({
                       ? mpayments
                       : Payment?.filter(
                           (e) =>
-                            e.date.substring(0, 7) == DATE.substring(0, 7) &&
+                            e.date?.substring(0, 7) == DATE.substring(0, 7) &&
                             parseFloat(e.NSDvalue)
                         ),
                 },
@@ -220,7 +365,7 @@ const AdminDashboardComponent = ({
                     userRole == "Manager"
                       ? mpayments
                       : Payment?.filter(
-                          (e) => e.date.substring(0, 7) == DATE.substring(0, 7)
+                          (e) => e.date?.substring(0, 7) == DATE.substring(0, 7)
                         ),
                 },
               }}
@@ -273,8 +418,8 @@ const AdminDashboardComponent = ({
                 <p className="dashListColumnT">STATUS</p>
               </div>
               <div className="DastStatusBody">
-                {modifiedList.length ? (
-                  modifiedList.map((e) => {
+                {modifiedList?.length ? (
+                  modifiedList?.map((e) => {
                     return (
                       <div className="DashStatusRow">
                         <p className="DashStatusItem1">
@@ -358,7 +503,14 @@ const AdminDashboardComponent = ({
                     );
                   })
                 ) : (
-                  <div></div>
+                  <div>
+                    <img
+                      src={spinnerr}
+                      style={{
+                        width: "100px",
+                      }}
+                    />
+                  </div>
                 )}
               </div>
             </div>
@@ -369,6 +521,7 @@ const AdminDashboardComponent = ({
         <BsChevronRight
           color="grey"
           style={{
+            cursor:'pointer',
             minWidth: "40px",
             minHeight: "40px",
             position: "absolute",

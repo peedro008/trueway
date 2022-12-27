@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ClientEditComponent from "../Components/clientEdit";
-import { GetClients } from "../Logic/Fetch";
+import { GetClients, GetClientsId } from "../Logic/Fetch";
 function ClientEdit(props) {
   let Client = props.location.aboutProps;
   const [inputs, setInputs] = useState({
@@ -24,9 +24,9 @@ function ClientEdit(props) {
   const company = useSelector((state) => state.Companies);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
-const dispatch = useDispatch	()
+  const dispatch = useDispatch();
   const handleClick = () => {
-    fetch(`http://localhost:8080/modifyClient`, {
+    fetch(`https://truewayagentbackend.com/modifyClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,13 +47,14 @@ const dispatch = useDispatch	()
         }
         onOpenModal();
       })
-      .then(()=>GetClients(dispatch))
+      .then(() => GetClients(dispatch))
+      .then(() => GetClientsId(dispatch))
       .catch((err) => {
         console.log(err);
       });
   };
   useEffect(() => {
-    setInputs({...inputs, address: address});
+    setInputs({ ...inputs, address: address });
   }, [address]);
   const options = company.map((e) => ({ value: e.id, label: e.name }));
 
@@ -74,7 +75,7 @@ const dispatch = useDispatch	()
       show={show}
       setShow={setShow}
       address={address}
-setAddress={setAddress}
+      setAddress={setAddress}
     />
   );
 }

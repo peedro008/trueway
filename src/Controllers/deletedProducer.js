@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DeletedProducersComponent from "../Components/deletedProducer";
+import { GetProducer } from "../Logic/Fetch";
 const DeletedProducers = () => {
+  const dispatch = useDispatch()
   const [producers, setProducers] = useState([]);
   const [deleteConf, setDeleteConf] = useState("");
   const [deletedOne, setDeletedOne] = useState(null);
@@ -20,11 +22,11 @@ const DeletedProducers = () => {
   };
   const handleDeleteModal = (e) => {
     deleteProducer({ ProducerId: deletedOne });
-    window.location.reload();
+    // window.location.reload();
   };
   const deleteProducer = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/undeleteProducer`, {
+    fetch(`https://truewayagentbackend.com/undeleteProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,6 +41,7 @@ const DeletedProducers = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
+            GetProducer(dispatch)
           }
         } catch (err) {
           console.log(err);
@@ -51,7 +54,7 @@ const DeletedProducers = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDeletedProducer`)
+      .get(`https://truewayagentbackend.com/getDeletedProducer`)
       .then(function (response) {
         setProducers(response.data);
       })

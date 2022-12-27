@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DeletedClientsComponent from "../Components/deletedClients";
+import { GetClients, GetClientsId } from "../Logic/Fetch";
 function DeletedClients() {
+  const dispatch = useDispatch()
   const [clients, setClients] = useState([]);
   const [deleteConf, setDeleteConf] = useState("");
   const [deletedOne, setDeletedOne] = useState(null);
@@ -17,7 +19,7 @@ function DeletedClients() {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDeletedClients`)
+      .get(`https://truewayagentbackend.com/getDeletedClients`)
       .then(function (response) {
         setClients(response.data);
       })
@@ -27,11 +29,11 @@ function DeletedClients() {
   }, []);
   const handleDeleteModal = (e) => {
     deleteClient({ ClientId: deletedOne });
-    window.location.reload();
+    // window.location.reload();
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/undeleteClient`, {
+    fetch(`https://truewayagentbackend.com/undeleteClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,6 +48,8 @@ function DeletedClients() {
             console.log("error");
           } else {
             console.log(jsonRes);
+            GetClients(dispatch)
+          GetClientsId(dispatch)
           }
         } catch (err) {
           console.log(err);

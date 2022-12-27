@@ -8,7 +8,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import ManagementClientComponent from "../Components/managementClient";
-import { GetClients } from "../Logic/Fetch";
+import { GetClients, GetClientsId } from "../Logic/Fetch";
+
 
 const schema = yup
   .object({
@@ -44,7 +45,7 @@ const ManagementClient = () => {
 
   const onSubmit = (data) => {
     data && console.log(JSON.stringify(data));
-    fetch(`http://localhost:8080/addClient`, {
+    fetch(`https://truewayagentbackend.com/addClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +61,7 @@ const ManagementClient = () => {
           } else {
             console.log(jsonRes);
             GetClients(dispatch)
+            GetClientsId(dispatch)
           }
         } catch (err) {
           console.log(err);

@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DeletedPaymentsComponent from "../Components/deletedPayment";
+import { GetPayments } from "../Logic/Fetch";
 
 const DeletedPayments = () => {
+  const dispatch = useDispatch()
   const userRole = useSelector((state) => state.userRole);
   const clients = useSelector((state) => state.Clients);
   const producers = useSelector((state) => state.Producers);
@@ -43,11 +45,11 @@ const DeletedPayments = () => {
   };
   const handleDeleteModal = (e) => {
     deleteClient({ PaymentId: deletedOne });
-    window.location.reload();
+    // window.location.reload();
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/undeletePayment`, {
+    fetch(`https://truewayagentbackend.com/undeletePayment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,6 +64,7 @@ const DeletedPayments = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
+            GetPayments(dispatch);
           }
         } catch (err) {
           console.log(err);
@@ -75,7 +78,7 @@ const DeletedPayments = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDeletedPayment`)
+      .get(`https://truewayagentbackend.com/getDeletedPayment`)
       .then(function (response) {
         setPayments(response.data);
       })

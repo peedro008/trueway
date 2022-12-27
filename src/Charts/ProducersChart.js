@@ -8,11 +8,10 @@ function PizzaChart({ google, producers }) {
   const [dato, setDato] = useState([]);
 
   const [time, setTime] = useState(false);
-  const prod = producers?.filter(e => e[1] !== 0 && e[2] !== 0)
+
   useEffect(() => {
-    console.log(prod)
     let pes = [];
-    producers?.map((e, index) => {
+    producers?.map((e) => {
       pes.push([
         e.name,
         quotex?.filter((g) => g.id == e.UserId)[0]?.sold,
@@ -34,7 +33,7 @@ function PizzaChart({ google, producers }) {
 
         // Set chart options
         var options = {
-          title: "Quotes sold per seller",
+          title: "Quotes sold and unsold this month",
 
           fontSize: 12,
           titleTextStyle: {
@@ -69,7 +68,7 @@ function PizzaChart({ google, producers }) {
         <img
           src={spinnerr}
           style={{
-            width: "150px",
+            width: "100px",
             position: "absolute",
             right: "65vw",
             top: "40vh",

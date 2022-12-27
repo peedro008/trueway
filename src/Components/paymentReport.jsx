@@ -9,8 +9,7 @@ import Select from "react-select";
 import close from "../assets/close.svg";
 
 import Modal from "react-responsive-modal";
-import pdf from "../assets/pdf.svg";
-import { AiOutlineDelete, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineFilter, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import MyDocument from "../PDF/prueba";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -160,63 +159,75 @@ setPaginator
             </div>
           )}
         </div>
-        <div
-          className="FilterButtoN"
+       
+         <div
+        style={{
+          cursor:'pointer',
+          position: "fixed",
+          right: "50px",
+          top: "85px",
+          display: "flex",
+        }}
+      >
+        <AiOutlineFilter
+          color="#2b4162"
+          size={"40px"}
           onClick={() => setOpenFilter(!openFilter)}
         />
+      </div>
       </div>
       <table class="table1">
         <tbody>
           <tr>
-          <th scope="col" className="column1"><p   className="REPtype">&nbsp;</p></th>
+          <th scope="col" className="column1"><p   className="REPtype">Info</p></th>
             <th scope="col" className="column1">
-              <p className="REPtype">Client name</p>
+              <p className="REPtype2">Client name</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">User name</p>
+              <p className="REPtype2">User name</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Location</p>
+              <p className="REPtype2">Location</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Type</p>
+              <p className="REPtype2">Type</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Date</p>
+              <p className="REPtype2">Date</p>
             </th>
             {
               <th scope="col" className="column1">
-                <p className="REPtype">Time</p>
+                <p className="REPtype2">Time</p>
               </th>
             }
             <th scope="col" className="column1">
-              <p className="REPtype">Amount</p>
+              <p className="REPtype2">Amount</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Method</p>
+              <p className="REPtype2">Method</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Fee</p>
+              <p className="REPtype2">Fee</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">PIP</p>
+              <p className="REPtype2">PIP</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">NSD</p>
+              <p className="REPtype2">NSD</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">MVR</p>
+              <p className="REPtype2">MVR</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Total</p>
+              <p className="REPtype2">Total</p>
             </th>
             {userRole !== "Producer" && (
               <th scope="col" className="column1">
-                <p className="REPtype">Delete</p>
+                <p className="REPtype2">Delete</p>
               </th>
             )}
             <th scope="col" className="column1">
-              <p className="REPtype">PDF</p>
+              <p className="REPtype2">PDF</p>
             </th>
           </tr>
           {paymentsFil
@@ -226,10 +237,16 @@ setPaginator
             .map((e) => {
               return (
                 <tr>
-                   <td className="ClientName" scope="row"><NavLink style={{display:"flex", justifyContent:"center",textDecoration: "none"}} to={{
+                   <td className="ClientName" scope="row">
+                    <NavLink style={{display:"flex", justifyContent:"center",textDecoration: "none"}} to={{
                     pathname:("/report/payment/details"),
                     aboutProps:e.id
-                }}><div className="InfoIcon" /></NavLink></td>
+                }}>
+                  <div className="InfoIcon2">
+                        <BsInfoCircle size={'25px'} color={'#54B4D3'}/>
+                        </div>
+                </NavLink>
+                </td>
                   <td className="ClientName" scope="row">
                     {e.Client.name}
                   </td>
@@ -288,6 +305,7 @@ setPaginator
                       >
                         <AiOutlineDelete
                           className="deleteIcon"
+                          color="#DC4C64"
                           size={"20px"}
                           onClick={() => {
                             handleDelete(e.id);
@@ -325,7 +343,7 @@ setPaginator
                         }
                         fileName="Receipt"
                       >
-                        <VscFilePdf className="pdfIcon" size={"20px"} />
+                        <VscFilePdf className="pdfIcon" size={"20px"} color={'black'} />
                       </PDFDownloadLink>
                     </div>
                   </td>
@@ -350,11 +368,11 @@ setPaginator
       />
       <div className="PaginatorBox">
             <div className="PaginatorLeft"  onClick={()=>{paginator!==1&&setPaginator(paginator-1)}}>
-                <AiOutlineLeft  color="#858585" size={"20px"}/>
+                <AiOutlineLeft  color="white" size={"20px"}/>
             </div>
             <div className="PaginatorNum">{paginator}</div>
             <div className="PaginatorRight" onClick={()=>{payments.length>19 && setPaginator(paginator+1)}}>
-                <AiOutlineRight color="#858585" size={"20px"}/>
+                <AiOutlineRight color="white" size={"20px"}/>
             </div>
       </div>
       {openFilter && (

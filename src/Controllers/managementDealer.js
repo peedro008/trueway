@@ -34,12 +34,12 @@ const ManagementDealer = () => {
   const  Clients  = useSelector(state=>state.Clients)
   const  DealerSalesPersons  = useSelector(state=>state.DealerSalesPersons)
   const reload = () => {
-    window.location.reload();
+    // window.location.reload();
   };
   const onSubmit = (data) => {
     data && 
 
-    fetch(`http://localhost:8080/addDealer`, {
+    fetch(`https://truewayagentbackend.com/addDealer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const ManagementDealer = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
-            
+            GetDealers(dispatch)
           }
         } catch (err) {
           console.log(err);
@@ -62,7 +62,6 @@ const ManagementDealer = () => {
         onOpenModal();
         
       })
-      .then(()=>GetDealers(dispatch))
       .catch((err) => {
         console.log(err);
       });

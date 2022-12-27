@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ClientReportComponent from "../Components/clientReport";
-import { GetClients } from "../Logic/Fetch";
+import { GetClients, GetClientsId } from "../Logic/Fetch";
 
 function ClientReport() {
   const dispatch = useDispatch()
@@ -26,7 +26,7 @@ function ClientReport() {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/deleteClient`, {
+    fetch(`https://truewayagentbackend.com/deleteClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,6 +37,7 @@ function ClientReport() {
         try {
           const jsonRes = await res.json();
           GetClients(dispatch)
+          GetClientsId(dispatch)
           if (res.status !== 200) {
             console.log("error");
           } else {

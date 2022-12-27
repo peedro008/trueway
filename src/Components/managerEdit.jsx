@@ -12,7 +12,7 @@ const ManagerEditComponent = ({
   customStyles,
   onSubmit,
   locations,
-  reload,
+
   dispatch,
   inputs,
   Producer,
@@ -129,7 +129,7 @@ const ManagerEditComponent = ({
           <p className="PAYbuttonText">Submit</p>
         </button>
       </div>
-      <Modal open={open} onClose={reload} center classNames={"modal"}>
+      <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div className="modal">
           <img
             src={Icon}
@@ -143,7 +143,7 @@ const ManagerEditComponent = ({
 
           <p className="modalText">Manager modified successfully</p>
 
-          <button onClick={reload} className="modalButton">
+          <button onClick={onCloseModal} className="modalButton">
             {" "}
             <NavLink
               style={{ textDecoration: "none", color: "#000" , width:"100%", height:"100%"}}

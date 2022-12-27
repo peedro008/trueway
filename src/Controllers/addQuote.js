@@ -1,8 +1,7 @@
 import axios from "axios";
-
+import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { BiMessageSquareAdd } from "react-icons/bi";
-import { useSelector } from "react-redux";
 import Select from "react-select";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
@@ -12,6 +11,7 @@ import { useForm, Controller, set } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import AddQuoteComponent from "../Components/addQuote";
+import { GetA_AVG, GetClients, GetClientsId } from "../Logic/Fetch";
 
 const schema = yup
   .object({
@@ -40,6 +40,7 @@ const schema = yup
   .required();
 
 const AddQuote = () => {
+  const dispatch = useDispatch()
   const [neww, setNeww] = useState(false);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -70,7 +71,6 @@ const AddQuote = () => {
   const categories = useSelector((state) => state.Categories);
   const companies = useSelector((state) => state.Companies);
   const clients = useSelector((state) => state.Clients);
-
   const dealers = useSelector((state) => state.DealerSalesPersons);
   const locations = useSelector((state) => state.Locations);
 
@@ -104,7 +104,7 @@ const AddQuote = () => {
   };
 
   const reload = () => {
-    window.history.go(-1)
+    // window.location.reload();
   };
 
   const reset = (event) => {
@@ -127,29 +127,27 @@ const AddQuote = () => {
       (data.monthlyPayments == "" && setValue("monthlyPayment", "0"));
     setValue("Bound", `${inputs.Bound}`);
 
-    fetch(`http://localhost:8080/addQuote`, {
+    fetch(`https://truewayagentbackend.com/addQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-      .then((response) => {response.json()
-      
-     
-    
-        
+      .then((response) => {
+        response.json();
         handleDealer(data.ClientId);
-        
-      
-
         onOpenModal();
+        GetClients(dispatch);
+        GetClientsId(dispatch);
+        GetA_AVG(dispatch)
       })
+      
   };
   const handleDealer = (x=null) => {
     inputs.DealerSalePerson &&
     !x?
-      fetch(`http://localhost:8080/addDealer`, {
+      fetch(`https://truewayagentbackend.com/addDealer`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -173,7 +171,7 @@ const AddQuote = () => {
           console.log(err);
         })
         :
-        fetch(`http://localhost:8080/addDealer`, {
+        fetch(`https://truewayagentbackend.com/addDealer`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -250,7 +248,9 @@ const AddQuote = () => {
 CategoAux={CategoAux}
       setCategoAux={setCategoAux}
 show={show}
+
       setShow={setShow}
+      
     />
   );
 };

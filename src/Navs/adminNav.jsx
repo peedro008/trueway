@@ -17,7 +17,8 @@ import { BiStats } from "react-icons/bi";
 import vertafore from "../assets/vertafore.png";
 import agencyZoom from "../assets/agencyZoom.jpg";
 import qqcatalyst from "../assets/qqcatalyst.png";
-import kvCore from "../assets/kvCore.png";
+import trueWayMarketing from "../assets/TRUEWAYMARKETING.png";
+import trueWayRealtors from "../assets/TRUEWAYREALTORS.png";
 
 
 function AdminNav() {
@@ -36,7 +37,26 @@ function AdminNav() {
     <div style={{ display: "flex" }}>
       <div className="topbar">
       <div style={{ paddingRight: "50px", display: "flex" }}>
-      
+      <div className="circleLink" style={{marginBottom: '10px',marginRight:'100px', marginTop: '20px'}}>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfohgaggb5AGraI-wzMDXdxch6LPgbcMH5lj5ZJLlGijFSGew/viewform?vc=0&c=0&w=1&flr=0" target='_blank'>
+        <img
+          className="imageLink"
+          src={trueWayMarketing}
+          alt={"logo"}
+          style={{height: '30px', width: '120px'}}
+        />
+            </a>
+      </div>
+      <div className="circleLink" style={{marginBottom: '10px', marginRight:'25px'}}>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZxHssfWU5-ZyJ_b3vYtYsSUiyFZu4k1CDJ1rRviBQbbV70w/viewform?vc=0&c=0&w=1&flr=0" target='_blank'>
+        <img
+          className="imageLink"
+          src={trueWayRealtors}
+          alt={"logo"}
+          style={{height: '48px', width: '48px', }}
+        />
+            </a>
+      </div>
       <div className="circleLink">
       <a href="https://login.apps.vertafore.com/idp/prp.wsf?wa=wsignin1.0&wtrealm=https%3a%2f%2frating.vertafore.com%2fUserInterface%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252fUserInterface%252fmain%252fvim.aspx&wct=2022-11-29T14%3a24%3a52Z" target='_blank'>
 
@@ -79,12 +99,12 @@ function AdminNav() {
           </div>
           <button
             onClick={() => logOut()}
-            style={{ backgroundColor: "transparent", borderWidth: "0px" }}
+            style={{ backgroundColor: "transparent", borderWidth: "0px", cursor:'pointer', width: '30px' }}
           >
             <FiLogOut
             cursor='pointer'
               size="20px"
-              className="NAicon"
+              className="NAicon2"
               style={{ alignSelf: "center" }}
             />
           </button>
@@ -94,7 +114,7 @@ function AdminNav() {
       <div className="sidebar">
         <img className="image" src={logo} alt={"logo"} />
         <div className="NAcontainer">
-          <NavLink className="icons" to="/" activeClassName="NAavtive" exact>
+          <NavLink className="NAiconCover" to="/" activeClassName="NAavtive" exact>
             <FiGrid
               cursor='pointer'
               className="NAicon"
@@ -107,14 +127,14 @@ function AdminNav() {
         <span />
 
         <div className="NAcontainer">
-          <NavLink className="icons" to="/addquote" activeClassName="NAavtive">
+          <NavLink className="NAiconCover" to="/addquote" activeClassName="NAavtive">
             <AiOutlineFile className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
         <span />
         <div className="NAcontainer">
           <NavLink
-            className="icons"
+            className="NAiconCover"
             to="/Management"
             activeClassName="NAavtive"
           >
@@ -123,29 +143,29 @@ function AdminNav() {
         </div>
         <span />
         <div className="NAcontainer">
-          <NavLink className="icons" to="/payments" activeClassName="NAavtive">
+          <NavLink className="NAiconCover" to="/payments" activeClassName="NAavtive">
             <FaRegMoneyBillAlt className="NAicon" color="#868ba5" />
           </NavLink>
         </div>
         <div className="NAcontainer">
-          <NavLink className="icons" to="/policyNumberReport" activeClassName="NAavtive">
+          <NavLink className="NAiconCover" to="/policyNumberReport" activeClassName="NAavtive">
             <FaCoins className="NAicon" color="#868ba5" />
           </NavLink>
         </div>
         <div className="NAcontainer">
-          <NavLink className="icons" to="/users" activeClassName="NAavtive">
+          <NavLink className="NAiconCover" to="/users" activeClassName="NAavtive">
             <FiUser className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
         <span />
         <div className="NAcontainer">
-          <NavLink className="icons" to="/report" activeClassName="NAavtive">
+          <NavLink className="NAiconCover" to="/report" activeClassName="NAavtive">
             <VscGraph className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
         <span />
         <div className="NAcontainer">
-          <NavLink className="icons" to="/stadistic" activeClassName="NAavtive">
+          <NavLink className="NAiconCover" to="/stadistic" activeClassName="NAavtive">
             <BiStats className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>

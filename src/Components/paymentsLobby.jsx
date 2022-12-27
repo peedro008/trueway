@@ -7,7 +7,7 @@ import Isologo_background from "../assets/Isologo_background.png";
 import { useSelector } from "react-redux";
 const PaymentsLobby = () => {
   const userRole = useSelector((state) => state.userRole);
-  console.log(userRole);
+  
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -22,7 +22,7 @@ const PaymentsLobby = () => {
           style={{ textDecoration: "none", color: "#000" }}
           to="/payments/pay"
         >
-          <button className="PAYbutton">
+          <button className="PAYbuttonAdd">
             <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF" />
             <p className="PAYbuttonText">Add payment</p>
           </button>
@@ -31,7 +31,7 @@ const PaymentsLobby = () => {
           style={{ textDecoration: "none", color: "#000" }}
           to="/payments/deposit"
         >
-          <button className="PAYbutton">
+          <button className="PAYbuttonAdd" style={{marginLeft: '20px'}}>
             <MdAdd size="1.25em" className="PAYbuttonIcon" color="#FFFFFF" />
             <p className="PAYbuttonText">Deposit cash</p>
           </button>
@@ -39,7 +39,7 @@ const PaymentsLobby = () => {
         {userRole !== "Admin" && (
           <NavLink
             to="/payments/dailyReport"
-            style={{ textDecoration: "none", color: "#000" }}
+            style={{ textDecoration: "none", color: "#000",marginLeft: '20px' }}
           >
             <button className="PAYbutton">
               <CgImport
@@ -47,7 +47,7 @@ const PaymentsLobby = () => {
                 className="PAYbuttonIcon"
                 color="#FFFFFF"
               />
-              <p className="PAYbuttonText">Generate daily report</p>
+              <p className="PAYbuttonText" style={{minWidth: '180px', }}>Generate daily report</p>
             </button>
           </NavLink>
         )}

@@ -11,6 +11,7 @@ import {
   GET_CATEGORIES,
   GET_COMPANIES,
   GET_CLIENTS,
+  GET_CLIENTS_ID,
   GET_DEALERS,
   GET_DEALERSALEPERSON,
   GET_PRODUCERS,
@@ -35,6 +36,7 @@ const initialState = {
   Categories: [],
   Companies: [],
   Clients: [],
+  ClientsId: [],
   Producers: [],
   Users: [],
   Quotes: [],
@@ -118,6 +120,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         Clients: action.payload,
       };
+      case GET_CLIENTS_ID:
+        return {
+          ...state,
+          ClientsId: action.payload,
+        };
     case GET_PRODUCERS:
       return {
         ...state,

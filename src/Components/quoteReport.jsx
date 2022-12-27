@@ -13,6 +13,9 @@ import {
   AiOutlineCloseCircle,
   AiOutlineLeft,
   AiOutlineRight,
+  AiOutlineFilter,
+  AiOutlineEdit,
+  
 } from "react-icons/ai";
 
 import Modal from "react-responsive-modal";
@@ -20,9 +23,7 @@ import spinnerr from "../assets/spinnerr.gif";
 import { useSelector } from "react-redux";
 const QuoteReportComponent = ({
   handleDelete,
-  deleteClient,
   handleDeleteModal,
-  filterSubmit,
   closeCloud,
   modify,
   categories,
@@ -37,21 +38,12 @@ const QuoteReportComponent = ({
   userRole,
   open,
   deleteConf,
-  deletedOne,
   open1,
   setDeleteConf,
-  setDeletedOne,
-  setOpen1,
-  setOpen,
   quote,
   quotes,
   quotesFil,
-  pes,
   openFilter,
-  setQuote,
-  setQuotes,
-  setQuotesFil,
-  setPes,
   setOpenFilter,
   columns,
   onCloseModal,
@@ -87,7 +79,7 @@ const QuoteReportComponent = ({
               />
             </div>
           )}
-          {filterValues.ClientId && (
+          {filterValues?.ClientId && (
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 Client name:
@@ -212,8 +204,24 @@ const QuoteReportComponent = ({
             </div>
           )}
         </div>
-        <div
+        {/* <div
           className="FilterButtoN"
+          onClick={() => setOpenFilter(!openFilter)}
+        /> */}
+      </div>
+      
+      <div
+        style={{
+          cursor:'pointer',
+          position: "fixed",
+          right: "50px",
+          top: "85px",
+          display: "flex",
+        }}
+      >
+        <AiOutlineFilter
+          color="#2b4162"
+          size={"40px"}
           onClick={() => setOpenFilter(!openFilter)}
         />
       </div>
@@ -221,107 +229,107 @@ const QuoteReportComponent = ({
         <tbody>
           <tr>
             <th scope="col" className="column1">
-              <p className="REPtype">&nbsp;</p>
+              <p className="REPtype">Info</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">&nbsp;</p>
+              <p className="REPtype">Edit</p>
             </th>
             {columns.clientName && (
               <th scope="col" className="column1">
-                <p className="REPtype">Client name</p>
+                <p className="REPtype2">Client name</p>
               </th>
             )}
             {columns.clientEmail && (
               <th scope="col" className="column1">
-                <p className="REPtype">Client E-mail</p>
+                <p className="REPtype2">Client E-mail</p>
               </th>
             )}
             {columns.clienTel && (
               <th scope="col" className="column1">
-                <p className="REPtype">Client phone</p>
+                <p className="REPtype2">Client phone</p>
               </th>
             )}
             {columns.category && (
               <th scope="col" className="column1">
-                <p className="REPtype">Category</p>
+                <p className="REPtype2">Category</p>
               </th>
             )}
             {columns.CompanyId && (
               <th scope="col" className="column1">
-                <p className="REPtype">Company</p>
+                <p className="REPtype2">Company</p>
               </th>
             )}
             {columns.ProducerId && (
               <th scope="col" className="column1">
-                <p className="REPtype">Producer</p>
+                <p className="REPtype2">Producer</p>
               </th>
             )}
             {
               <th scope="col" className="column1">
-                <p className="REPtype">Sold By</p>
+                <p className="REPtype2">Sold By</p>
               </th>
             }
             <th scope="col" className="column1">
-              <p className="REPtype">Total</p>
+              <p className="REPtype2">Total</p>
             </th>
             {columns.bound && (
               <th scope="col" className="column1">
-                <p className="REPtype">Status</p>
+                <p className="REPtype2">Status</p>
               </th>
             )}
             {
               <th scope="col" className="column1">
-                <p className="REPtype">Date</p>
+                <p className="REPtype2">Date</p>
               </th>
             }
             {
               <th scope="col" className="column1">
-                <p className="REPtype">Closing date</p>
+                <p className="REPtype2">Closing date</p>
               </th>
             }
             {
               <th scope="col" className="column1">
-                <p className="REPtype">Time</p>
+                <p className="REPtype2">Time</p>
               </th>
             }
             {columns.down && (
               <th scope="col" className="column1">
-                <p className="REPtype">Down Payments</p>
+                <p className="REPtype2">Down Payments</p>
               </th>
             )}
             {columns.monthlyPayment && (
               <th scope="col" className="column1">
-                <p className="REPtype">Monthly Payments</p>
+                <p className="REPtype2">Monthly Payments</p>
               </th>
             )}
             {columns.dealer && (
               <th scope="col" className="column1">
-                <p className="REPtype">Dealer Name</p>
+                <p className="REPtype2">Dealer Name</p>
               </th>
             )}
             {columns.NSD && (
               <th scope="col" className="column1">
-                <p className="REPtype">NSD</p>
+                <p className="REPtype2">NSD</p>
               </th>
             )}
             {columns.PIP && (
               <th scope="col" className="column1">
-                <p className="REPtype">PIP</p>
+                <p className="REPtype2">PIP</p>
               </th>
             )}
             {columns.MVR && (
               <th scope="col" className="column1">
-                <p className="REPtype">MVR</p>
+                <p className="REPtype2">MVR</p>
               </th>
             )}
             {columns.location && (
               <th scope="col" className="column1">
-                <p className="REPtype">Location</p>
+                <p className="REPtype2">Location</p>
               </th>
             )}
             {userRole !== "Producer" && (
               <th scope="col" className="column1">
-                <p className="REPtype">Delete Quote</p>
+                <p className="REPtype2">Delete Quote</p>
               </th>
             )}
           </tr>
@@ -352,11 +360,15 @@ const QuoteReportComponent = ({
                           aboutProps: { ID: e.id },
                         }}
                       >
-                        <div className="InfoIcon"></div>
+                        <div className="InfoIcon2">
+                        <BsInfoCircle size={'25px'} color={'#54B4D3'}/>
+                        </div>
                       </NavLink>
                     </td>
                     <td className="ClientName" scope="row">
-                      <div className="editIcon" onClick={() => modify(e)}></div>
+                      <div className="InfoIcon2" onClick={() => modify(e)}>
+                        <AiOutlineEdit size={'26px'} color={'#14A44D'}/>
+                      </div>
                     </td>
                     {columns.clientName && (
                       <td className="ClientName" scope="row">
@@ -476,6 +488,7 @@ const QuoteReportComponent = ({
                           }}
                         >
                           <AiOutlineDelete
+                            color="#DC4C64"
                             className="deleteIcon"
                             size={"20px"}
                             onClick={() => {
@@ -498,7 +511,7 @@ const QuoteReportComponent = ({
             paginator !== 1 && setPaginator(paginator - 1);
           }}
         >
-          <AiOutlineLeft color="#858585" size={"20px"} />
+          <AiOutlineLeft color="white" size={"20px"} />
         </div>
         <div className="PaginatorNum">{paginator}</div>
         <div
@@ -507,7 +520,7 @@ const QuoteReportComponent = ({
             quotes.length > 19 && setPaginator(paginator + 1);
           }}
         >
-          <AiOutlineRight color="#858585" size={"20px"} />
+          <AiOutlineRight color="white" size={"20px"} />
         </div>
       </div>
       <BsChevronLeft
@@ -532,10 +545,10 @@ const QuoteReportComponent = ({
       {openFilter && (
         <div className="FilterCom">
           <div className="FilterComTitleD">
-            <p className="FilterComTitle">Search</p>
+            <p className="FilterComTitle">Filter</p>
             <AiOutlineCloseCircle
               size="20px"
-              style={{ color: "#787d84", cursor: "pointer" }}
+              style={{ color: "#2b4162", cursor: "pointer" }}
               onClick={() => setOpenFilter(false)}
             />
           </div>
