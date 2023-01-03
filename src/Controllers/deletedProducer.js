@@ -26,7 +26,7 @@ const DeletedProducers = () => {
   };
   const deleteProducer = (data) => {
     data && console.log(data);
-    fetch(`http://localhost:8080/undeleteProducer`, {
+    fetch(`https://truewayagentbackend.com/undeleteProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const DeletedProducers = () => {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getDeletedProducer`)
+      .get(`https://truewayagentbackend.com/getDeletedProducer`)
       .then(function (response) {
         setProducers(response.data);
       })

@@ -78,7 +78,7 @@ useEffect(() => {
   }, [cuotitas]);
 
   const getQuoteStatuses = () => {
-    fetch(`http://localhost:8080/getStatus`)
+    fetch(`https://truewayagentbackend.com/getStatus`)
       .then((res) => res.json())
       .then((json) => setCuotitas(json))
       .catch((err) => console.log(err));
@@ -86,7 +86,7 @@ useEffect(() => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getUserPayment?UserId=${UserId}`)
+      .get(`https://truewayagentbackend.com/getUserPayment?UserId=${UserId}`)
       .then(function (response) {
         setPayments(response.data);
       })

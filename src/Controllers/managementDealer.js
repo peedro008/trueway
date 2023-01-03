@@ -39,7 +39,7 @@ const ManagementDealer = () => {
   const onSubmit = (data) => {
     data && 
 
-    fetch(`http://localhost:8080/addDealer`, {
+    fetch(`https://truewayagentbackend.com/addDealer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
