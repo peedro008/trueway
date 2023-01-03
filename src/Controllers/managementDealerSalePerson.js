@@ -32,7 +32,7 @@ function ManagementDealerSalePerson() {
 
   const onSubmit = (data) => {
     data &&
-      fetch(`https://truewayagentbackend.com/addDealerSalePerson`, {
+      fetch(`http://localhost:8080/addDealerSalePerson`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

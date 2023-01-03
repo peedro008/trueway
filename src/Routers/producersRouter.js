@@ -34,6 +34,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addLocation } from "../Redux/actions";
 import logo from "../assets/logored.svg";
 import Dual from '../assets/DualRing.gif'
+import PolicyList from "../Controllers/policyNumberList";
 
 const ProducerRouter = () => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const ProducerRouter = () => {
 
   useEffect(() => {
     fetch(
-      `https://truewayagentbackend.com/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`,
+      `http://localhost:8080/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`,
       {
         method: "GET",
         headers: {
@@ -142,6 +143,7 @@ const ProducerRouter = () => {
         <Route exact path="/report/modifyquote" component={QuoteModify} />
         <Route exact path="/report/depositReport" component={DepositReport} />
         <Route exact path="/addquote" component={AddQuote} />
+        <Route exact path='/policyNumberReport' component={PolicyList}/>
         <Route
           exact
           path="/report/payment/details"

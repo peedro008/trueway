@@ -1,17 +1,12 @@
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { BiMessageSquareAdd } from "react-icons/bi";
-import Select from "react-select";
 import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
-import Icon from "../assets/Icon.png";
-import { NavLink } from "react-router-dom";
-import { useForm, Controller, set } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import AddQuoteComponent from "../Components/addQuote";
 import { GetA_AVG, GetClients, GetClientsId } from "../Logic/Fetch";
+import { useHistory } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -35,14 +30,14 @@ const schema = yup
     CategoryNsd: yup.number().optional().nullable(false),
     address: yup.string().optional().nullable().default(null),
     date: yup.string().optional().nullable().default(null),
-
   })
   .required();
 
 const AddQuote = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [neww, setNeww] = useState(false);
   const [open, setOpen] = useState(false);
+  const [quoteStatus, setQuoteStatus] = useState("");
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const User = useSelector((state) => state.User);
@@ -51,6 +46,7 @@ const AddQuote = () => {
   const [CategoAux, setCategoAux] = useState(false);
   const [show, setShow] = useState(true);
   const [ERR, setERR] = useState({ ClientId: false });
+  const [addingQuote, setAddingQuote] = useState(false);
   const [dealerData, setDealerData] = useState({
     ClientId: null,
     DealerSalePersonId: null,
@@ -65,9 +61,9 @@ const AddQuote = () => {
     setValue,
   } = useForm({
     resolver: yupResolver(schema),
-    delayError:5
+    delayError: 5,
   });
-
+  const history = useHistory();
   const categories = useSelector((state) => state.Categories);
   const companies = useSelector((state) => state.Companies);
   const clients = useSelector((state) => state.Clients);
@@ -75,51 +71,27 @@ const AddQuote = () => {
   const locations = useSelector((state) => state.Locations);
 
   const date = new Date();
- const DATE =
-    date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
+  const DATE =
+    date.getFullYear() +
+    (date.getMonth() + 1 > 9 ? "-" : "-0") +
+    (date.getMonth() + 1) +
+    "-" +
+    date.getDate();
   useEffect(() => {
     setValue("UserId", parseInt(User.userId));
     setValue("date", DATE);
   }, []);
-  const customStyles = {
-    control: (base) => ({
-      ...base,
-      height: 30,
-      minHeight: 30,
-    }),
-    placeholder: (defaultStyles) => {
-      return {
-        ...defaultStyles,
-        marginTop: "-5px",
-      };
-    },
-    indicatorSeparator: (base) => ({
-      ...base,
-      height: "0px",
-    }),
-    dropdownIndicator: (base) => ({
-      ...base,
-      marginTop: "-4px",
-    }),
-  };
 
   const reload = () => {
-    // window.location.reload();
-  };
-
-  const reset = (event) => {
-    const value = event.target.value;
-    setInputs({
-      ...inputs,
-      [event.target.name]: !value,
-    });
+    history.push("/report/quoteReport");
   };
 
   const onSubmit = (data) => {
+    setAddingQuote(true);
     (!data.PIPamount || data.PIPamount == "") && setValue("PIPamount", "0");
     (!data.NSDamount || data.NSDamount) == "" && setValue("NSDamount", "0");
     (!data.MVRamount || data.MVRamount == "") && setValue("MVRamount", "0");
-    
+
     !data.Bound && setValue("Bound", false);
     !data.totalPremium ||
       (data.totalPremium == "" && setValue("totalPremium", "0"));
@@ -127,7 +99,7 @@ const AddQuote = () => {
       (data.monthlyPayments == "" && setValue("monthlyPayment", "0"));
     setValue("Bound", `${inputs.Bound}`);
 
-    fetch(`https://truewayagentbackend.com/addQuote`, {
+    fetch(`http://localhost:8080/addQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -138,75 +110,85 @@ const AddQuote = () => {
         response.json();
         handleDealer(data.ClientId);
         onOpenModal();
+        setQuoteStatus("Quote added successfully");
         GetClients(dispatch);
         GetClientsId(dispatch);
-        GetA_AVG(dispatch)
+        GetA_AVG(dispatch);
+        setAddingQuote(false);
       })
-      
+      .catch(() => {
+        setQuoteStatus("Quote could not be added");
+        setAddingQuote(false);
+      });
   };
-  const handleDealer = (x=null) => {
-    inputs.DealerSalePerson &&
-    !x?
-      fetch(`https://truewayagentbackend.com/addDealer`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dealerData),
-      })
-        .then(async (res) => {
-          try {
-            const jsonRes = await res.json();
+  const handleDealer = (x = null) => {
+    inputs.DealerSalePerson && !x
+      ? fetch(`http://localhost:8080/addDealer`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dealerData),
+        })
+          .then(async (res) => {
+            try {
+              const jsonRes = await res.json();
 
-            if (res.status !== 200) {
-              console.log("error");
-            } else {
-              console.log(jsonRes);
-            }
-          } catch (err) {
-            console.log(err);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        :
-        fetch(`https://truewayagentbackend.com/addDealer`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ClientId:x, DealerSalePersonId:dealerData.DealerSalePersonId, amount: dealerData.amount, paid:dealerData.paid}),
-          })
-            .then(async (res) => {
-              try {
-                const jsonRes = await res.json();
-    
-                if (res.status !== 200) {
-                  console.log("error");
-                } else {
-                  console.log(jsonRes);
-                }
-              } catch (err) {
-                console.log(err);
+              if (res.status !== 200) {
+                console.log("error");
+              } else {
+                console.log(jsonRes);
               }
-            })
-            .catch((err) => {
+            } catch (err) {
               console.log(err);
-            }) 
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      : fetch(`http://localhost:8080/addDealer`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ClientId: x,
+            DealerSalePersonId: dealerData.DealerSalePersonId,
+            amount: dealerData.amount,
+            paid: dealerData.paid,
+          }),
+        })
+          .then(async (res) => {
+            try {
+              const jsonRes = await res.json();
+
+              if (res.status !== 200) {
+                console.log("error");
+              } else {
+                console.log(jsonRes);
+              }
+            } catch (err) {
+              console.log(err);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
   };
   const handleNewClient = () => {
-
-    setValue("ClientId", null)
+    setValue("ClientId", null);
     setValue("email", null);
     setValue("name", null);
     setValue("phone", null);
     setValue("address", null);
-    setNewClient(!newClient)
-  
-    
+    setNewClient(!newClient);
   };
-  const optionsCa = categories?.map((e) => ({ value: e.id, label: e.name, NSD:e.NSDvalue}));
+
+  const optionsCa = categories?.map((e) => ({
+    value: e.id,
+    label: e.name,
+    NSD: e.NSDvalue,
+  }));
   const optionsCo = companies?.map((e) => ({ value: e.id, label: e.name }));
   const optionsL = locations?.map((e) => ({ value: e.id, label: e.name }));
   const optionsD = dealers?.map((e) => ({ value: e.id, label: e.name }));
@@ -214,7 +196,6 @@ const AddQuote = () => {
 
   return (
     <AddQuoteComponent
-      reset={reset}
       onSubmit={onSubmit}
       handleNewClient={handleNewClient}
       register={register}
@@ -245,12 +226,12 @@ const AddQuote = () => {
       dealerData={dealerData}
       setValue={setValue}
       setDealerData={setDealerData}
-CategoAux={CategoAux}
+      CategoAux={CategoAux}
       setCategoAux={setCategoAux}
-show={show}
-
+      show={show}
       setShow={setShow}
-      
+      quoteStatus={quoteStatus}
+      addingQuote={addingQuote}
     />
   );
 };

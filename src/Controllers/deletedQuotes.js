@@ -52,7 +52,7 @@ const DeletedQuote = (props) => {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getdeletedquotes`)
+      .get(`http://localhost:8080/getdeletedquotes`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -125,7 +125,7 @@ const DeletedQuote = (props) => {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/undeleteQuote`, {
+    fetch(`http://localhost:8080/undeleteQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

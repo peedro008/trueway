@@ -49,7 +49,7 @@ const search = () => {
     });
     setPayments([])
     axios
-      .get(`https://truewayagentbackend.com/getPaymentsStats`, { params })
+      .get(`http://localhost:8080/getPaymentsStats`, { params })
       .then(function (response) {
         setPayments(response.data);
       })
@@ -72,7 +72,7 @@ const search = () => {
     })
     setQuotes([])
     axios
-      .get(`https://truewayagentbackend.com/getQuotesStats`, { params })
+      .get(`http://localhost:8080/getQuotesStats`, { params })
       .then(function (response) {
         setQuotes(response.data);
         setLoader(false)

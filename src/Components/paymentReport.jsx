@@ -48,7 +48,7 @@ closeCloud,
 paginator,
 setPaginator
 }) => {
-  
+ console.log(paymentsFil)
   return (
     <div className="genericDiv1">
       <div className="genericHeader">

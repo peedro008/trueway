@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import "../Css/css.css";
-
+import spinnerr from "../assets/loadingIcon.gif";
 import { BiMessageSquareAdd } from "react-icons/bi";
 import Select from "react-select";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
+import ErrorIcon from "../assets/cross-mark.png";
 import { Controller } from "react-hook-form";
 
 import { FiDivide } from "react-icons/fi";
@@ -14,7 +15,7 @@ import { BsChevronLeft } from "react-icons/bs";
 
 function AddPaymentComponent({
   onOpenModal,
-
+  optionsComp,
   open,
   optionsCa,
   categories,
@@ -63,9 +64,12 @@ function AddPaymentComponent({
   setTotal2,
   percent,
   setPercent,
-  clientsId
+  clientsId,
+  addingPayment,
+  paymentStatus
 }) {
   const [colorButtom, setColorButtom] = useState(true)
+ const [isEndorsement, setIsEndorsement] = useState('')
  
   return (
     <div className="genericDiv1">
@@ -222,7 +226,37 @@ function AddPaymentComponent({
                       </div>
                     </div>
                   </div>
-
+                  <div className="AQinputContainer" style={{ marginLeft: '30px' }}>
+                <p className="AQinputName">Company</p>
+                <div className="AQyesNoContainer">
+                  <div>
+                    <Controller
+                      control={control}
+                      name="CompanyId"
+                      render={({ field: { onChange, onBlur, value, ref } }) => (
+                        <Select
+                          defaultValue={optionsComp?.find(
+                            (c) => c.value === form.Company
+                          )}
+                          value={optionsComp.find((c) => c.value === value)}
+                          onChange={(val) => {
+                            onChange(val.value);
+                            setTotalValues({
+                              ...totalValues,
+                              CompanyId: val.value
+                            });
+                          }}
+                          control={control}
+                          options={optionsComp}
+                          name={"Company"}
+                          className="PAYselect"
+                          placeholder="Select Company"
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+              </div>
                   <div
                     className="AQinputContainer"
                     style={{ marginLeft: "50px" }}
@@ -251,7 +285,7 @@ function AddPaymentComponent({
             </div>
           ) : (
             <>
-              <div className="PAYInputCont" style={{ marginTop: "25px" }}>
+              <div className="PAYInputCont" style={{ marginTop: "25px", marginRight: '53px' }}>
                 <p className="PAYtitle">Quote</p>
                 <Controller
                   control={control}
@@ -266,11 +300,14 @@ function AddPaymentComponent({
                           ...form,
                           aa: val.value,
                           Category: val.Category,
+                          Company: val.CompanyId,
                           NSDcategory: val.NSD,
                         });
+                   
                         setTotalValues({
                           ...totalValues,
                           Category: val.Category,
+                          CompanyId: val.CompanyId,
                           CategoryNsd: optionsCa.find(
                             (c) => c.value === val.Category
                           ).NSD,
@@ -285,9 +322,10 @@ function AddPaymentComponent({
                   )}
                 />
 
-                <p className="FORMerror">{errors.LocationId?.message}</p>
+               
               </div>
-              <div className="AQinputContainer" style={{ marginTop: "29px" }}>
+              
+              <div className="AQinputContainer" style={{ marginTop: "29px", marginRight: '50px' }}>
                 <p className="AQinputName">Category</p>
                 <div className="AQyesNoContainer">
                   <div>
@@ -329,6 +367,39 @@ function AddPaymentComponent({
                   </div>
                 </div>
               </div>
+              {!form.Company &&
+              <div className="AQinputContainer" style={{ marginTop: "29px" }}>
+                <p className="AQinputName">Company</p>
+                <div className="AQyesNoContainer">
+                  <div>
+                    <Controller
+                      control={control}
+                      name="CompanyId"
+                      render={({ field: { onChange, onBlur, value, ref } }) => (
+                        <Select
+                          defaultValue={optionsComp?.find(
+                            (c) => c.value === form.Company
+                          )}
+                          value={optionsComp.find((c) => c.value === value)}
+                          onChange={(val) => {
+                            onChange(val.value);
+                            setTotalValues({
+                              ...totalValues,
+                              CompanyId: val.value
+                            });
+                          }}
+                          control={control}
+                          options={optionsComp}
+                          name={"Company"}
+                          className="PAYselect"
+                          placeholder="Select Company"
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+              </div>
+               }
             </>
           )}
         </div>
@@ -380,7 +451,7 @@ function AddPaymentComponent({
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Select
                   value={optionT.find((c) => c.value === value)}
-                  onChange={(val) => onChange(val.value)}
+                  onChange={(val) => {onChange(val.value); setIsEndorsement(val.value)}}
                   control={control}
                   options={optionT.map((e) => ({
                     value: e.value,
@@ -394,7 +465,29 @@ function AddPaymentComponent({
             />
             <p className="FORMerror">{errors.type?.message}</p>
           </div>
-          {!MultiMethod ? (
+          {(isEndorsement === 'Endorsement' || isEndorsement === 'Renew Down' || isEndorsement === 'Down Payment') &&
+          
+          <div className="PAYInputCont">
+          <p className="PAYtitle">Increse Total Premium</p>
+          <input
+            placeholder="Add to Premium"
+            className="AQinput"
+            type='number'
+            defaultValue={0}
+            value={payment?.increasePremium}
+            {...register("increasePremium")}
+            onChange={(e) => {
+
+              setTotalValues({ ...totalValues, increasePremium: e.target.value });
+            }}
+          />
+          
+        </div>
+        }
+        </div>
+        <div className="PAYBox" style={{ marginTop: "25px" }}>
+        
+        {!MultiMethod ? (
             <div className="PAYInputCont">
               <div
                 style={{
@@ -454,9 +547,8 @@ function AddPaymentComponent({
               <p className="FORMerror">{errors.creditCardFee?.message}</p>
             </div>
           )}
-        </div>
-        <div className="PAYInputCont">
-          <p className="PAYtitle">Policy Number (optional)</p>
+          <div className="PAYInputCont">
+          <p className="PAYtitle" style={{width: '600px'}}>Policy number for New Policies, Endorsments and Renewals ONLY</p>
           <input
             placeholder="Policy Number"
             className="AQinput"
@@ -467,6 +559,8 @@ function AddPaymentComponent({
             }}
           />
         </div>
+        </div>
+        
         <div className="AQwhiteContainer11">
           <div className="AQinputContainer">
             <p className="AQinputName">NSD</p>
@@ -732,7 +826,7 @@ function AddPaymentComponent({
         <Modal open={open} onClose={reload} center classNames={"modal"}>
           <div className="modal">
             <img
-              src={Icon}
+              src={paymentStatus === 'Payment added successfully' ? Icon : ErrorIcon}
               style={{
                 width: "35px",
                 alignSelf: "center",
@@ -741,7 +835,7 @@ function AddPaymentComponent({
               }}
             />
 
-            <p className="modalText">Payment added successfully</p>
+            <p className="modalText">{paymentStatus}</p>
 
             <button className="modalButton" onClick={reload}>
               Continue
@@ -773,10 +867,21 @@ function AddPaymentComponent({
           display: "flex",
         }}
       >
-        <button onClick={handleSubmit(onSubmit)} className="PAYbuttonPay">
+        <button onClick={handleSubmit(onSubmit)} className={addingPayment ? "PAYbuttonPayWaiting" : "PAYbuttonPay"}>
           <p className="PAYbuttonText">Add payment</p>
         </button>
       </div>
+      {
+        addingPayment &&
+      <div style={{position:'absolute', bottom: '25px', right: '25px'}}>
+        <img
+          src={spinnerr}
+          style={{
+            width: "100px",
+          }}
+          />
+      </div>
+        }
     </div>
   );
 }

@@ -2,11 +2,12 @@ import axios from "axios";
 
 import React, { useState } from "react";
 import { BiMessageSquareAdd } from "react-icons/bi";
-
+import spinnerr from "../assets/loadingIcon.gif";
 import Select from "react-select";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
+import ErrorIcon from "../assets/cross-mark.png";
 import { Controller } from "react-hook-form";
 
 const AddQuoteComponent = ({
@@ -40,10 +41,11 @@ const AddQuoteComponent = ({
   dealerData,
   setDealerData,
   show,
-  onCloseModal
+  onCloseModal,
+  addingQuote,
+  quoteStatus,
 }) => {
-
-  const [colorButtom, setColorButtom] = useState(true)
+  const [colorButtom, setColorButtom] = useState(true);
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -57,10 +59,13 @@ const AddQuoteComponent = ({
               <div style={{ display: "flex", flexDirection: "row" }}>
                 <p className="AQinputName">Client Name</p>
                 <BiMessageSquareAdd
-                  onClick={() => {handleNewClient(); setColorButtom(!colorButtom)}}
+                  onClick={() => {
+                    handleNewClient();
+                    setColorButtom(!colorButtom);
+                  }}
                   size="20"
-                  color={colorButtom ? "#28C76F" : '#DC4C64'}
-                  style={{ marginLeft: "60px", cursor:'pointer' }}
+                  color={colorButtom ? "#28C76F" : "#DC4C64"}
+                  style={{ marginLeft: "60px", cursor: "pointer" }}
                 />
               </div>
               {!newClient ? (
@@ -357,7 +362,7 @@ const AddQuoteComponent = ({
             <div className="AQinputContainer">
               <p className="AQinputName">Down payment</p>
               <input
-                type='number'
+                type="number"
                 className="AQinput"
                 placeholder="Down payment"
                 key="down"
@@ -379,7 +384,7 @@ const AddQuoteComponent = ({
             >
               <p className="AQinputName">Monthly payment</p>
               <input
-              type='number'
+                type="number"
                 className="AQinput"
                 placeholder="Monthly payment"
                 key="monthlyPayment"
@@ -400,7 +405,7 @@ const AddQuoteComponent = ({
             >
               <p className="AQinputName">Total premium</p>
               <input
-              type='number'
+                type="number"
                 className="AQinput"
                 placeholder="Total premium"
                 key="totalPremium"
@@ -466,7 +471,7 @@ const AddQuoteComponent = ({
                 {inputs.NSD && (
                   <>
                     <input
-                    type='number'
+                      type="number"
                       className="AQinput2"
                       placeholder="How much?"
                       key="NSDamount"
@@ -504,7 +509,7 @@ const AddQuoteComponent = ({
                 {inputs.MVR && (
                   <>
                     <input
-                    type='number'
+                      type="number"
                       className="AQinput2"
                       placeholder="How much"
                       defaultValue={0}
@@ -543,7 +548,7 @@ const AddQuoteComponent = ({
                 {inputs.PIP && (
                   <>
                     <input
-                    type='number'
+                      type="number"
                       className="AQinput2"
                       placeholder="PIP value"
                       defaultValue={0}
@@ -604,7 +609,7 @@ const AddQuoteComponent = ({
           display: "flex",
         }}
       >
-        <button onClick={handleSubmit(onSubmit)} className="PAYbuttonPay">
+        <button onClick={handleSubmit(onSubmit)} className={addingQuote ? "PAYbuttonPayWaiting" : "PAYbuttonPay"}>
           <p className="PAYbuttonText">Add Quote</p>
         </button>
       </div>
@@ -612,7 +617,7 @@ const AddQuoteComponent = ({
       <Modal open={open} onClose={reload} center classNames={"modal"}>
         <div className="modal">
           <img
-            src={Icon}
+            src={quoteStatus === 'Quote added successfully' ? Icon : ErrorIcon}
             style={{
               width: "35px",
               alignSelf: "center",
@@ -621,13 +626,28 @@ const AddQuoteComponent = ({
             }}
           />
 
-          <p className="modalText">Quote added successfully</p>
+          <p className="modalText">{quoteStatus}</p>
 
-          <button className="modalButton" onClick={onCloseModal} style={{cursor:'pointer'}}>
+          <button
+            className="modalButton"
+            onClick={reload}
+            style={{ cursor: "pointer" }}
+          >
             Continue
           </button>
         </div>
       </Modal>
+      {
+        addingQuote &&
+      <div style={{position:'absolute', bottom: '25px', right: '25px'}}>
+        <img
+          src={spinnerr}
+          style={{
+            width: "100px",
+          }}
+          />
+      </div>
+        }
     </div>
   );
 };

@@ -5,7 +5,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import AddPaymentComponent from "../Components/addPayment";
-import { GetA_AVG, GetClientsId, GetPayments } from "../Logic/Fetch";
+import { GetA_AVG, GetClientsId, GetLastPayments, GetPayments } from "../Logic/Fetch";
+import { useHistory } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -32,6 +33,7 @@ const schema = yup
   .required();
 
 function AddPayment(props) {
+  const history = useHistory();
   const ClientSelected = props.location.aboutProps?.id;
   const clientName = props.location.aboutProps?.name;
   const [neww, setNeww] = useState(false);
@@ -52,8 +54,11 @@ function AddPayment(props) {
   const [percent, setPercent] = useState(0);
   const [MultiMethod, setMultiMethod] = useState(false);
   const categories = useSelector((state) => state.Categories);
+  const companies = useSelector((state) => state.Companies);
   const locations = useSelector((state) => state.Locations);
   const clients = useSelector((state) => state.Clients);
+  const [addingPayment, setAddingPayment] = useState(false);
+  const [paymentStatus, setPaymentStatus] = useState("");
   const clientsId = useSelector((state) =>
     state.ClientsId?.map((e) => ({ value: e.id, label: e.name }))
   );
@@ -75,22 +80,6 @@ function AddPayment(props) {
           ? totalValues.CategoryNsd * totalValues.NSDamount
           : 0)
     );
-    // :
-    // setTotal(
-    //   ((totalValues.amount?parseFloat(totalValues.amount):0)+
-    // (totalValues.PIPamount?10*parseFloat(totalValues.PIPamount):0)+
-    // (totalValues.MVRamount?9*parseFloat(totalValues.MVRamount):0)+
-    // (totalValues.creditCardFee?parseFloat(totalValues.creditCardFee):0)+
-    // (totalValues.NSDamount?(totalValues.CategoryNsd*totalValues.NSDamount):0))*(percent/100))
-
-    // setTotal2(
-    //   (
-    //     (totalValues.amount?parseFloat(totalValues.amount):0)+
-    //     (totalValues.PIPamount?10*parseFloat(totalValues.PIPamount):0)+
-    //     (totalValues.MVRamount?9*parseFloat(totalValues.MVRamount):0)+
-    //     (totalValues.creditCardFee?parseFloat(totalValues.creditCardFee):0)+
-    //     (totalValues.NSDamount?(totalValues.CategoryNsd*totalValues.NSDamount):0))
-    //   *(1-(percent/100)))
   }, [totalValues]);
 
   const {
@@ -125,9 +114,7 @@ function AddPayment(props) {
       marginTop: "-4px",
     }),
   };
-  const reload = () => {
-    window.history.go(-1);
-  };
+
   useEffect(() => {
     setValue("UserId", `${User?.userId}`);
   }, [User]);
@@ -150,7 +137,7 @@ function AddPayment(props) {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clientQuotes?client=${form.id}`)
+      .get(`http://localhost:8080/clientQuotes?client=${form.id}`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -186,10 +173,15 @@ function AddPayment(props) {
     { value: "Full Premium", label: "Full Premium" },
   ];
 
+  const reload = () => {
+    history.push("/report/paymentReport");
+  };
+
   const onSubmit = (data) => {
+    setAddingPayment(true);
     if (!MultiMethod) {
       if (newClient == false) {
-        fetch(`https://truewayagentbackend.com/addPayment`, {
+        fetch(`http://localhost:8080/addPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -198,25 +190,49 @@ function AddPayment(props) {
         })
           .then((response) => response.json())
           .then((data) => {
-            GetPayments(dispatch);
             onOpenModal();
+            GetPayments(dispatch);
+            GetLastPayments(dispatch);
+            GetClientsId(dispatch);
             GetA_AVG(dispatch);
+            setAddingPayment(false);
+            setPaymentStatus("Payment added successfully");
+          })
+          .catch((err) => {
+
+            onOpenModal();
+            console.log(err);
+            setAddingPayment(false);
+            setPaymentStatus("Payment could not be added");
           });
       } else {
-        fetch(`https://truewayagentbackend.com/addClientPayment`, {
+        fetch(`http://localhost:8080/addClientPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-        });
-        GetPayments(dispatch);
-        GetClientsId(dispatch);
-        onOpenModal();
+        })
+          .then(() => {
+            GetPayments(dispatch);
+            GetLastPayments(dispatch);
+            GetA_AVG(dispatch);
+            GetClientsId(dispatch);
+            onOpenModal();
+            setAddingPayment(false);
+            setPaymentStatus("Payment added successfully");
+          })
+          .catch((err) => {
+
+            onOpenModal();
+            console.log(err);
+            setAddingPayment(false);
+            setPaymentStatus("Payment could not be added");
+          });
       }
     } else {
       if (newClient == false) {
-        fetch(`https://truewayagentbackend.com/addMultiPayment`, {
+        fetch(`http://localhost:8080/addMultiPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -226,25 +242,51 @@ function AddPayment(props) {
           .then((response) => response.json())
           .then((data) => {
             GetPayments(dispatch);
+            GetLastPayments(dispatch);
+            GetA_AVG(dispatch);
+            GetClientsId(dispatch);
             onOpenModal();
+            setAddingPayment(false);
+            setPaymentStatus("Payment added successfully");
+          })
+          .catch((err) => {
+
+            onOpenModal();
+            console.log(err);
+            setAddingPayment(false);
+            setPaymentStatus("Payment could not be added");
           });
       } else {
-        fetch(`https://truewayagentbackend.com/ClientMultiPayment`, {
+        fetch(`http://localhost:8080/ClientMultiPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-        });
-        GetPayments(dispatch);
-        onOpenModal();
+        })
+          .then(() => {
+            GetPayments(dispatch);
+            GetLastPayments(dispatch);
+            GetA_AVG(dispatch);
+            GetClientsId(dispatch);
+            onOpenModal();
+            setAddingPayment(false);
+            setPaymentStatus("Payment added successfully");
+          })
+          .catch((err) => {
+
+            onOpenModal();
+            console.log(err);
+            setAddingPayment(false);
+            setPaymentStatus("Payment could not be added");
+          });
       }
     }
   };
 
   // useEffect(() => {
   //   if (clienteByName?.length > 2) {
-  //     fetch(`https://truewayagentbackend.com/clientsByName?name=${clienteByName}`, {
+  //     fetch(`http://localhost:8080/clientsByName?name=${clienteByName}`, {
   //       method: "GET",
   //       headers: {
   //         "Content-Type": "application/json",
@@ -276,6 +318,12 @@ function AddPayment(props) {
     label: e.name,
     NSD: e.NSDvalue,
   }));
+
+  const optionsComp = companies?.map((e) => ({
+    value: e.id,
+    label: e.name,
+  }));
+
   // const optionsC = clients?.map((e) => ({ value: e.id, label: e.name }));
   const optionsC = [];
   const optionsL = locations?.map((e) => ({ value: e.id, label: e.name }));
@@ -283,6 +331,7 @@ function AddPayment(props) {
     value: e.id,
     label: `${e.id}  |  ${e.Category.name}  |  ${e.date}`,
     Category: e.Category.id,
+    CompanyId: e.CompanyId,
     NSD: e.Category.NSDvalue,
   }));
 
@@ -291,6 +340,7 @@ function AddPayment(props) {
       onOpenModal={onOpenModal}
       open={open}
       optionsCa={optionsCa}
+      optionsComp={optionsComp}
       categories={categories}
       optionsC={optionsC}
       clients={clients}
@@ -340,6 +390,9 @@ function AddPayment(props) {
       setClienteByName={setClienteByName}
       clienteByName={clienteByName}
       clientsId={clientsId}
+      companies={companies}
+      addingPayment={addingPayment}
+      paymentStatus={paymentStatus}
     />
   );
 }

@@ -70,14 +70,14 @@ const ModifyModal = (props) => {
   }, [props, userId]);
   const submit = () => {
     inputs.Status
-      ? fetch(`https://truewayagentbackend.com/modifyQuote`, {
+      ? fetch(`http://localhost:8080/modifyQuote`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(inputs),
         }).then(onOpenModal1()).then( reload()).then(GetA_AVG(dispatch))
-      : fetch(`https://truewayagentbackend.com/addNotes`, {
+      : fetch(`http://localhost:8080/addNotes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -18,7 +18,7 @@ const PolicyNumberList = ({
       </div>
 
       <div style={{ marginBottom: "100px", marginTop: "40px" }}>
-        <table className="table2">
+        <table className="table2" style={{minWidth: '90vw'}}>
           <thead>
             <tr>
               <th scope="col" className="column1">
@@ -40,6 +40,9 @@ const PolicyNumberList = ({
                 <p className="REPtype2">Address</p>
               </th>
               <th scope="col" className="column1">
+                <p className="REPtype2">Type</p>
+              </th>
+              <th scope="col" className="column1">
                 <p className="REPtype2">Total Premium</p>
               </th>
               <th scope="col" className="column1">
@@ -48,46 +51,53 @@ const PolicyNumberList = ({
             </tr>
           </thead>
           <tbody>
-            {payments === 'Nothing' ? 
+            {payments === "Nothing" ? (
               <> </>
-            : payments
-              ?.sort(function (a, b) {
-                return b.id - a.id;
-              })
-              .map((e) => {
-                return (
-                  <tr>
-                    <td scope="row" style={{ fontWeight: "bold" }}>
-                      {e?.policyNumber || " "}
-                    </td>
+            ) : (
+              payments
+                ?.sort(function (a, b) {
+                  return b.id - a.id;
+                })
+                .map((e) => {
+                  return (
+                    <tr>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e?.policyNumber || " "}
+                      </td>
 
-                    <td scope="row" style={{ fontWeight: "bold" }}>
-                      {e?.date}
-                    </td>
-                    <td scope="row" style={{ fontWeight: "bold" }}>
-                      {e.time?.slice(11, 16)}
-                    </td>
-                    <td scope="row" style={{ fontWeight: "bold" }}>
-                      {e.Client?.name}
-                    </td>
-                    <td scope="row" style={{ fontWeight: "bold" }}>
-                      {
-                        companies?.find((f) => f.id === e.Quote?.CompanyId)
-                          ?.name
-                      }
-                    </td>
-                    <td scope="row" style={{ fontWeight: "bold" }}>
-                      {e.Client?.address || " "}
-                    </td>
-                    <td scope="row" style={{ fontWeight: "bold" }}>
-                      {e.Quote?.totalPremium}
-                    </td>
-                    <td scope="row" style={{ fontWeight: "bold" }}>
-                      {e?.NSDvalue}
-                    </td>
-                  </tr>
-                );
-              })}
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e?.date}
+                      </td>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e.time?.slice(11, 16)}
+                      </td>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e.Client?.name}
+                      </td>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e.Quote !== null
+                          ? companies?.find((f) => f.id === e.Quote?.CompanyId)?.name
+                          : companies?.find((f) => f.id === Number(e.CompanyId))?.name}
+                      </td>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e.Client?.address || " "}
+                      </td>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e?.type}
+                      </td>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e?.Quote !== null
+                          ? Number(e.Quote?.totalPremium) +
+                            Number(e?.increasePremium)
+                          : Number(e?.increasePremium)}
+                      </td>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e?.NSDvalue}
+                      </td>
+                    </tr>
+                  );
+                })
+            )}
           </tbody>
         </table>
       </div>
@@ -135,9 +145,9 @@ const PolicyNumberList = ({
             borderColor: "transparent",
             borderRadius: "10px",
             paddingInline: "8px",
-             fontFamily: 'Poppins',
+            fontFamily: "Poppins",
           }}
-          placeholder='Policy Number...'
+          placeholder="Policy Number..."
         ></input>
       </div>
     </div>

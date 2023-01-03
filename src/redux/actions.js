@@ -18,6 +18,7 @@ export const GET_MANAGERS = "GET_MANAGERS";
 export const GET_QUOTES = "GET_QUOTES";
 export const GET_QUOTESTATUSES = "GET_QUOTESTATUSES";
 export const GET_PAYMENTS = "GET_PAYMENTS";
+export const GET_LAST_PAYMENTS = "GET_LAST_PAYMENTS";
 export const GET_DEPOSITS = "GET_DEPOSITS";
 export const GET_DAILYREPORTS = "GET_DAILYREPORTS";
 export const GET_LOCATIONS = "GET_LOCATIONS";
@@ -178,6 +179,13 @@ export function getQuoteStatuses(data) {
 export function getPayments(data) {
   return {
     type: GET_PAYMENTS,
+    payload: data,
+  };
+}
+
+export function getLastPayments(data) {
+  return {
+    type: GET_LAST_PAYMENTS,
     payload: data,
   };
 }

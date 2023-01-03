@@ -19,6 +19,7 @@ import {
   GET_QUOTES,
   GET_QUOTESTATUSES,
   GET_PAYMENTS,
+  GET_LAST_PAYMENTS,
   GET_DEPOSITS,
   GET_DAILYREPORTS,
   GET_LOCATIONS,
@@ -43,6 +44,7 @@ const initialState = {
   Dealers: [],
   DealerSalesPersons: [],
   Payments: [],
+  LastPayments: [],
   DailyReports: [],
   Deposits: [],
   Managers: [],
@@ -155,6 +157,11 @@ export default function reducer(state = initialState, action) {
         ...state,
         Payments: action.payload,
       };
+      case GET_LAST_PAYMENTS:
+        return {
+          ...state,
+          LastPayments: action.payload,
+        };
     case GET_DAILYREPORTS:
       return {
         ...state,

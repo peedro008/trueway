@@ -5,7 +5,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 
 import PaymentReportComponent from "../Components/paymentReport";
-import { GetPayments } from "../Logic/Fetch";
+import { GetLastPayments, GetPayments } from "../Logic/Fetch";
 const PaymentReport = () => {
   const dispatch = useDispatch();
   const userRole = useSelector((state) => state.userRole);
@@ -42,11 +42,11 @@ const PaymentReport = () => {
   };
   const handleDeleteModal = (e) => {
     deleteClient({ PaymentId: deletedOne });
-    // window.location.reload();
+    window.history.go(-1)
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/deletePayment`, {
+    fetch(`http://localhost:8080/deletePayment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,6 +62,7 @@ const PaymentReport = () => {
           } else {
             console.log(jsonRes);
             GetPayments(dispatch)
+            GetLastPayments(dispatch)
           }
         } catch (err) {
           console.log(err);
@@ -84,7 +85,7 @@ const PaymentReport = () => {
       params.append(e[0]=="ProducerId"?"UserId":`${e[0]}`, e[1]);
     });
     axios
-      .get(`https://truewayagentbackend.com/getPaymentsReport`, { params })
+      .get(`http://localhost:8080/getPaymentsReport`, { params })
       .then(function (response) {
         setPayments(response.data);
       })

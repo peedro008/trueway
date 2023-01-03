@@ -252,12 +252,11 @@
   background-color: #ebeff2;
   display: flex;
   min-height: 90%;
-
   min-height: 92vh;
   max-width: 95vw;
-
   flex-direction: column;
 }
+
 .genericDiv1 {
   padding-top: 4.5vw;
   padding-left: 5vw;
@@ -392,6 +391,21 @@
 }
 .PAYbuttonPay {
   background-color: #2b4162;
+  border-radius: 5px;
+  border-width: 0px;
+  display: flex;
+  height: 40px;
+  width: auto;
+  cursor: pointer;
+  justify-content: space-between;
+  padding-right: 20px;
+  padding-left: 16px;
+  box-shadow: 2px 2px 2px rgb(165, 162, 162);
+}
+
+.PAYbuttonPayWaiting{
+  background-color: #2b416276;
+  pointer-events: none;
   border-radius: 5px;
   border-width: 0px;
   display: flex;

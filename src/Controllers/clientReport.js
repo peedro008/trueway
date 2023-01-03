@@ -22,11 +22,11 @@ function ClientReport() {
 
   const handleDeleteModal = (e) => {
     deleteClient({ ClientId: deletedOne });
-    // window.location.reload();
+    window.history.go(-1)
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/deleteClient`, {
+    fetch(`http://localhost:8080/deleteClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
