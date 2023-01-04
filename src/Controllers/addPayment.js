@@ -137,7 +137,7 @@ function AddPayment(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/clientQuotes?client=${form.id}`)
+      .get(`https://truewayagentbackend.com/clientQuotes?client=${form.id}`)
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -181,7 +181,7 @@ function AddPayment(props) {
     setAddingPayment(true);
     if (!MultiMethod) {
       if (newClient == false) {
-        fetch(`http://localhost:8080/addPayment`, {
+        fetch(`https://truewayagentbackend.com/addPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -206,7 +206,7 @@ function AddPayment(props) {
             setPaymentStatus("Payment could not be added");
           });
       } else {
-        fetch(`http://localhost:8080/addClientPayment`, {
+        fetch(`https://truewayagentbackend.com/addClientPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -232,7 +232,7 @@ function AddPayment(props) {
       }
     } else {
       if (newClient == false) {
-        fetch(`http://localhost:8080/addMultiPayment`, {
+        fetch(`https://truewayagentbackend.com/addMultiPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -257,7 +257,7 @@ function AddPayment(props) {
             setPaymentStatus("Payment could not be added");
           });
       } else {
-        fetch(`http://localhost:8080/ClientMultiPayment`, {
+        fetch(`https://truewayagentbackend.com/ClientMultiPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -286,7 +286,7 @@ function AddPayment(props) {
 
   // useEffect(() => {
   //   if (clienteByName?.length > 2) {
-  //     fetch(`http://localhost:8080/clientsByName?name=${clienteByName}`, {
+  //     fetch(`https://truewayagentbackend.com/clientsByName?name=${clienteByName}`, {
   //       method: "GET",
   //       headers: {
   //         "Content-Type": "application/json",

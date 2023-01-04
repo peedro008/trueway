@@ -38,7 +38,7 @@ useEffect(() => {
 
   useEffect(() => {
     if (search?.length > 2) {
-      fetch(`http://localhost:8080/getPolicyNumber?policyNumber=${search}`)
+      fetch(`https://truewayagentbackend.com/getPolicyNumber?policyNumber=${search}`)
         .then((res) => res.json())
         .then((json) => {
           setPolicyByName(json);

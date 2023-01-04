@@ -26,7 +26,7 @@ function DailyReport() {
 
    
     useEffect(() => {
-        axios.get(`http://localhost:8080/dailyReport?LocationId=${LocationId}`)
+        axios.get(`https://truewayagentbackend.com/dailyReport?LocationId=${LocationId}`)
         .then(function(response){
             setPayments(response.data)
             
@@ -37,7 +37,7 @@ function DailyReport() {
     }, [LocationId,UserId])
        
     useEffect(() => {
-        axios.get(`http://localhost:8080/dailyReport?LocationId=${LocationId}&yesterday=true`)
+        axios.get(`https://truewayagentbackend.com/dailyReport?LocationId=${LocationId}&yesterday=true`)
         .then(function(response){
             setYPayments(response.data)
             
@@ -105,7 +105,7 @@ function DailyReport() {
     let onSubmit = ()=>{
         let IDs = (yesterday?yPayments:payments).map(e=>{return e.id})
         console.log({LocationId:LocationId, IDs:IDs, total:total })
-        fetch(`http://localhost:8080/addDailyReport`, {
+        fetch(`https://truewayagentbackend.com/addDailyReport`, {
             
             method: 'POST',
             headers: {

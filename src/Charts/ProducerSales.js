@@ -16,7 +16,7 @@ function ProducerSales({ aboutProps, google }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/producerQuotes?UserId=${userId}`)
+      .get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
       .then(function (response) {
         setQuotes(response.data);
       })

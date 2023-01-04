@@ -16,7 +16,7 @@ function QuoteModify(props) {
     const onOpenModal = () => setOpen(true);
     const onCloseModal = () => setOpen(false);
     useEffect(() => {
-        axios.get(`http://localhost:8080/idquotes`,{ params: { id: id } })
+        axios.get(`https://truewayagentbackend.com/idquotes`,{ params: { id: id } })
         .then(function(response){
             setQuote(response.data)
             
@@ -59,7 +59,7 @@ function QuoteModify(props) {
     }
     const submit = () =>{
         inputs.Status?
-        fetch(`http://localhost:8080/modifyQuote`, {
+        fetch(`https://truewayagentbackend.com/modifyQuote`, {
             
             method: 'POST',
             headers: {
