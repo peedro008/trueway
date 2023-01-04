@@ -44,7 +44,7 @@ const ProducerRouter = () => {
 
   useEffect(() => {
     fetch(
-      `https://truewayagentbackend.com/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`,
+      `http://localhost:8080/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`,
       {
         method: "GET",
         headers: {

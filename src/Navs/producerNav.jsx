@@ -16,7 +16,7 @@ import { logout } from "../Redux/actions";
 import vertafore from "../assets/vertafore.png";
 import agencyZoom from "../assets/agencyZoom.jpg";
 import qqcatalyst from "../assets/qqcatalyst.png";
-
+import buddyPunch from "../assets/buddyPunch.png";
 
 function ProducerNav({ onSearch }) {
   const dispatch = useDispatch();
@@ -36,7 +36,17 @@ function ProducerNav({ onSearch }) {
     <div style={{ display: "flex" }}>
       <div className="topbar">
       <div style={{ paddingRight: "50px", display: "flex" }}>
-     
+      <div className="circleLink" style={{marginBottom: '10px', marginRight: '23px'}}>
+      <a href="https://app.buddypunch.com/" target='_blank'>
+
+        <img
+          className="imageLink3"
+          src={buddyPunch}
+          alt={"logo"}
+          />
+          </a>
+ 
+      </div>
       <div className="circleLink">
       <a href="https://login.apps.vertafore.com/idp/prp.wsf?wa=wsignin1.0&wtrealm=https%3a%2f%2frating.vertafore.com%2fUserInterface%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252fUserInterface%252fmain%252fvim.aspx&wct=2022-11-29T14%3a24%3a52Z" target='_blank'>
 

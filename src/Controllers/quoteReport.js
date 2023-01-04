@@ -49,7 +49,7 @@ const QuoteReport = (props) => {
       params.append(e[0] == "ProducerId" ? "UserId" : `${e[0]}`, e[1]);
     });
     axios
-      .get(`https://truewayagentbackend.com/getQuotesReport`, { params })
+      .get(`http://localhost:8080/getQuotesReport`, { params })
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -85,7 +85,7 @@ const QuoteReport = (props) => {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/deleteQuote`, {
+    fetch(`http://localhost:8080/deleteQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

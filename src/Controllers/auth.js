@@ -41,7 +41,7 @@ const Auth = () => {
       UserName,
       Password,
     };
-    fetch(`https://truewayagentbackend.com/login`, {
+    fetch(`http://localhost:8080/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ const Auth = () => {
      email: reset,
    
     };
-    fetch(`https://truewayagentbackend.com/send`, {
+    fetch(`http://localhost:8080/send`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
