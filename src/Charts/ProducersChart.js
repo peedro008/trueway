@@ -27,8 +27,8 @@ function PizzaChart({ google, producers }) {
       if (google && !chart) {
         const data = new google.visualization.DataTable();
         data.addColumn("string", "Topping");
-        data.addColumn("number", "Sold", "color:#6F52ED");
-        data.addColumn("number", "Unsold", "color:#FF7A00");
+        data.addColumn("number", "Sold", "color:#002752");
+        data.addColumn("number", "Unsold", "color:#D8AF4D");
         data.addRows(dato);
 
         // Set chart options
@@ -42,7 +42,7 @@ function PizzaChart({ google, producers }) {
             marginLeft: "-10px",
           },
 
-          colors: ["#6F52ED", "#FF7A00"],
+          colors: ['#002752', "#D8AF4D"],
           backgroundColor: "#EBEFF2",
 
           bar: { groupWidth: "30%" },
@@ -76,7 +76,7 @@ function PizzaChart({ google, producers }) {
         />
       ) : (
         <div
-          style={{ minHeight: "400px", minWidth: "66vw" }}
+          style={{ minHeight: "500px", minWidth: "90vw" }}
           id="pizzaChart"
           className={!google ? "d-none" : ""}
         ></div>

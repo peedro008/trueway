@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import error from "../assets/error.png";
-import wbill from "../assets/wbill.png";
-import bbill from "../assets/bbill.png";
-import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
-import mask from "../assets/mask.png";
+import {
+  BsChevronRight,
+  BsChevronLeft,
+  BsExclamationCircleFill,
+} from "react-icons/bs";
 import PizzaChart from "../Charts/ProducersChart";
 import PozzaChart from "../Charts/ColumnChar";
 import { NavLink } from "react-router-dom";
 import Select from "react-select";
 import PizzaChartBig from "../Charts/ProducersChartBig";
 import spinnerr from "../assets/loadingIcon.gif";
-import { BiUser } from "react-icons/bi";
+import { BiDollarCircle, BiMoney, BiWallet } from "react-icons/bi";
 
 const AdminDashboardComponent = ({
   next,
@@ -30,60 +30,11 @@ const AdminDashboardComponent = ({
 }) => {
   const [graficType, setGraficType] = useState();
   const [graficMultiple, setGraficMultiple] = useState(true);
-  const [typeOfTable, setTypeOfTable] = useState(true);
-  const [dato, setDato] = useState([]);
-  const [dato2, setDato2] = useState([]);
-  const [unsoldQuotes, setUnsoldQuotes] = useState();
-  const [soldQuotes, setSoldQuotes] = useState();
+  const [styleTable, setStyleTable] = useState("divTable2");
+  const [chevron, setChevron] = useState("bsChevron3");
+  const [circle, setCircle] = useState("circle4");
 
   let quotexWithoutAdmin = A_AVG?.filter((e) => e.id !== 1 && e.id !== 24);
-
-  // console.log(A_AVG)
-  useEffect(() => {
-        
-      let pes = [];
-      producers?.map((e) => {
-        pes.push([
-          e.name,
-          A_AVG?.filter((g) => g.id == e.UserId)[0]?.sold,
-          A_AVG?.filter((g) => g.id == e.UserId)[0]?.unsold,
-        ]);
-      });
-      // console.log(pes.filter((e) => e[1] !== 0 || e[2] !== 0) || pes)
-      setDato(pes.filter((e) => e[1] !== 0 || e[2] !== 0) || pes);
-      setDato2(pes.filter((e) => e[1] !== 0 || e[2] !== 0) || pes);
-    
-  }, [A_AVG]);
-
-  useEffect(() => {
-    setSoldQuotes(
-      dato?.sort((a, b) => {
-        if (a[1] < b[1]) {
-          return 1;
-        }
-
-        if (a[1] > b[1]) {
-          return -1;
-        }
-
-        return 0;
-      })
-    );
-
-    setUnsoldQuotes(
-      dato2?.sort((a, b) => {
-        if (a[2] < b[2]) {
-          return 1;
-        }
-
-        if (a[2] > b[2]) {
-          return -1;
-        }
-
-        return 0;
-      })
-    );
-  }, [typeOfTable]);
 
   const options = [
     { value: "All", label: "All" },
@@ -104,13 +55,6 @@ const AdminDashboardComponent = ({
                 setGraficMultiple();
               } else {
                 setGraficMultiple(true);
-              }
-              if (e.value === "Sold") {
-                setTypeOfTable("Sold");
-              } else if (e.value === "Unsold") {
-                setTypeOfTable("Unsold");
-              } else {
-                setTypeOfTable();
               }
             }}
             className="StadSelectGrafic"
@@ -137,7 +81,7 @@ const AdminDashboardComponent = ({
                 ))}
             </div>
 
-            {typeOfTable === "Sold" ? (
+            {/* {typeOfTable === "Sold" ? (
               <div className="DashPList1">
                 <div className="DashPListHeader">
                   <p className="DashPListTitle">Producers Sold Ranking</p>
@@ -278,43 +222,51 @@ const AdminDashboardComponent = ({
                     );
                   })}
               </div>
-            )}
+            )} */}
           </div>
           <div className="dashContCard">
             <div
               className="dashCard"
               style={{
                 marginLeft: "50px",
-                backgroundColor: " rgba(255, 122, 0, 0.15)",
+                backgroundColor: " rgba(0, 39, 82,0.8)",
               }}
             >
               <div
                 className="dashCircle"
-                style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                style={{ backgroundColor: "#ebeff2" }}
               >
-                <img src={error} />
+                <BsExclamationCircleFill size="28px" color="#002752" />
               </div>
               <div className="dashText">
-                <p className="dashCardTitle">{unSold}</p>
-                <p className="dashCardText">Unsold quotes</p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {unSold}
+                </p>
+                <p className="dashCardText" style={{ color: "#ebeff2" }}>
+                  Unsold quotes
+                </p>
               </div>
             </div>
             <div
               className="dashCard"
               style={{
                 marginLeft: "50px",
-                backgroundColor: " rgba(111, 82, 237, 0.15)",
+                backgroundColor: "#D8AF4D",
               }}
             >
               <div
                 className="dashCircle"
-                style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                style={{ backgroundColor: "#ebeff2" }}
               >
-                <img src={wbill} />
+                <BiDollarCircle size="35px" color="#D8AF4D" />
               </div>
               <div className="dashText">
-                <p className="dashCardTitle">{sold}</p>
-                <p className="dashCardText">Sold quotes</p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {sold}
+                </p>
+                <p className="dashCardText" style={{ color: "#ebeff2" }}>
+                  Sold quotes
+                </p>
               </div>
             </div>
             <NavLink
@@ -339,18 +291,22 @@ const AdminDashboardComponent = ({
                 className="dashCard"
                 style={{
                   marginLeft: "50px",
-                  backgroundColor: "rgba(51, 214, 159 ,0.15)",
+                  backgroundColor: "#98473E",
                 }}
               >
                 <div
                   className="dashCircle"
-                  style={{ backgroundColor: "rgba(239, 239, 239,0.3)" }}
+                  style={{ backgroundColor: "#ebeff2" }}
                 >
-                  <img src={wbill} />
+                  <BiMoney size="35px" color="#98473E" />
                 </div>
                 <div className="dashText">
-                  <p className="dashCardTitle">${NSD}</p>
-                  <p className="dashCardText">Total NSD sales</p>
+                  <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                    ${NSD}
+                  </p>
+                  <p className="dashCardText" style={{ color: "#ebeff2" }}>
+                    NSD sales
+                  </p>
                 </div>
               </div>
             </NavLink>
@@ -374,24 +330,26 @@ const AdminDashboardComponent = ({
                 className="dashCard"
                 style={{
                   marginLeft: "50px",
-                  backgroundColor: "rgba(204, 234, 59 ,0.15)",
+                  backgroundColor: "#84596B",
                 }}
               >
                 <div
                   className="dashCircle"
-                  style={{ backgroundColor: " rgba(8, 76, 97, 0.07)" }}
+                  style={{ backgroundColor: "#ebeff2" }}
                 >
-                  <img src={bbill} />
+                  <BiWallet size="28px" color="#84596B" />
                 </div>
                 <div className="dashText">
-                  <p className="dashCardTitle">
+                  <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
                     {
                       Payment?.filter(
                         (e) => e.date.substring(0, 7) == DATE.substring(0, 7)
-                      ).length
+                      ).length || '...'
                     }
                   </p>
-                  <p className="dashCardText">Total payments</p>
+                  <p className="dashCardText" style={{ color: "#ebeff2" }}>
+                   Total payments
+                  </p>
                 </div>
               </div>
             </NavLink>
@@ -477,10 +435,10 @@ const AdminDashboardComponent = ({
                                 e.Status == "Cancelled"
                                   ? "#D14343"
                                   : e.Status == "Sold"
-                                  ? "#14B8A6"
+                                  ? "#D8AF4D"
                                   : e.Status == "Renew down"
-                                  ? "#FFB020"
-                                  : "#777DA7",
+                                  ? "rgba(0, 39, 82, 0.5)"
+                                  : "rgba(0, 39, 82, 0.5)",
                             }}
                           >
                             <p className="DashStatusItemC">
@@ -521,7 +479,7 @@ const AdminDashboardComponent = ({
         <BsChevronRight
           color="grey"
           style={{
-            cursor:'pointer',
+            cursor: "pointer",
             minWidth: "40px",
             minHeight: "40px",
             position: "absolute",
@@ -546,6 +504,102 @@ const AdminDashboardComponent = ({
           onClick={handleNext}
         />
       )}
+      <div className={styleTable}>
+        <table className="table6">
+          <tbody>
+            <tr style={{ position: "fixed", top: "125px", width: "650px" }}>
+              <th scope="col">
+                <p className="REPtype2" style={{ width: "320px" }}>
+                  Name
+                </p>
+              </th>
+
+              <th scope="col" className="column1" style={{ width: "90px" }}>
+                <p className="REPtype2">% Sold</p>
+              </th>
+              <th scope="col" className="column1" style={{ width: "60px" }}>
+                <p className="REPtype2">Sold</p>
+              </th>
+              <th scope="col" className="column1" style={{ width: "60px" }}>
+                <p className="REPtype2">Unsold</p>
+              </th>
+            </tr>
+
+            {quotexWithoutAdmin
+              ?.sort(function (a, b) {
+                return Number(b.avg) - Number(a.avg);
+              })
+              ?.map((e) => {
+                return (
+                  <tr>
+                    <td className="ClientName2" scope="row">
+                      {e.name}
+                    </td>
+                    <td
+                      className="ClientName2"
+                      scope="row"
+                      style={{ textAlign: "center", minWidth: "30px" }}
+                    >
+                      {e.avg}%
+                    </td>
+                    <td
+                      className="ClientName2"
+                      scope="row"
+                      style={{ textAlign: "center", minWidth: "30px" }}
+                    >
+                      {e.sold}
+                    </td>
+                    <td
+                      className="ClientName2"
+                      scope="row"
+                      style={{ textAlign: "center", minWidth: "30px" }}
+                    >
+                      {e.unsold}
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+
+        {styleTable === "divTable2" && (
+          <div
+            className={circle}
+            onClick={() => {
+              setStyleTable("divTable");
+              setChevron("bsChevron");
+              setCircle("circle2");
+            }}
+          >
+            <BsChevronLeft cursor="pointer" color="white" className={chevron} />
+          </div>
+        )}
+        {styleTable === "divTable3" && (
+          <div
+            className={circle}
+            onClick={() => {
+              setStyleTable("divTable");
+              setChevron("bsChevron");
+              setCircle("circle2");
+            }}
+          >
+            <BsChevronLeft cursor="pointer" color="white" className={chevron} />
+          </div>
+        )}
+
+        {styleTable === "divTable" && (
+          <div
+            className={circle}
+            onClick={() => {
+              setStyleTable("divTable3");
+              setChevron("bsChevron2");
+              setCircle("circle3");
+            }}
+          >
+            <BsChevronLeft cursor="pointer" color="white" className={chevron} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

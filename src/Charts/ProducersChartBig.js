@@ -28,10 +28,10 @@ function PizzaChartBig({ google, producers, graficType }) {
     
     if (graficType === 'Sold') {
       setDato(sold.filter(e => e[1] !== 0 ) || sold);
-      setColor('#6F52ED')
+      setColor('#002752')
     } else {
       setDato(unsold.filter(e => e[1] !== 0) || unsold);
-      setColor("#FF7A00")
+      setColor("#D8AF4D")
     }
 
   }, [graficType, producers]);
@@ -92,7 +92,7 @@ function PizzaChartBig({ google, producers, graficType }) {
         />
       ) : (
         <div
-          style={{ minHeight: "400px", minWidth: "66vw" }}
+          style={{ minHeight: "500px", minWidth: "90vw" }}
           id="pizzaChart"
           className={!google ? "d-none" : ""}
         ></div>

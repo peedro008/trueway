@@ -54,9 +54,9 @@ useEffect(()=>{
                       fontSize: "14", 
                       marginLeft:"-10px"
                   },
-                     'height':400,
-                      "width":600,
-                      "colors": ["#FFB800","#33D69F","#FF4C61","#777DA7","#ADD9F4"],
+                     'height':550,
+                      "width":700,
+                      "colors": ['#002752',"#D8AF4D"],
           
                       
                      backgroundColor:"#EBEFF2"

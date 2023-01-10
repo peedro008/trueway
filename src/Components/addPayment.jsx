@@ -468,7 +468,7 @@ function AddPaymentComponent({
           {(isEndorsement === 'Endorsement' || isEndorsement === 'Renew Down' || isEndorsement === 'Down Payment') &&
           
           <div className="PAYInputCont">
-          <p className="PAYtitle">Increse Total Premium</p>
+          <p className="PAYtitle">Additional premium</p>
           <input
             placeholder="Add to Premium"
             className="AQinput"

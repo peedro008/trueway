@@ -86,13 +86,13 @@ const PolicyNumberList = ({
                         {e?.type}
                       </td>
                       <td scope="row" style={{ fontWeight: "bold" }}>
-                        {e?.Quote !== null
+                       $ {e?.Quote !== null
                           ? Number(e.Quote?.totalPremium) +
                             Number(e?.increasePremium)
                           : Number(e?.increasePremium)}
                       </td>
                       <td scope="row" style={{ fontWeight: "bold" }}>
-                        {e?.NSDvalue}
+                       $ {e?.NSDvalue}
                       </td>
                     </tr>
                   );

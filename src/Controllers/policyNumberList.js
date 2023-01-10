@@ -14,7 +14,7 @@ const PolicyList = () => {
   const [policyByName, setPolicyByName] = useState();
   const [paymentsOrder, setPaymentsOrder] = useState([])
 
-console.log(paymentsOrder)
+console.log(policies)
 useEffect(() => {
   GetLastPayments(dispatch)
 }, [])

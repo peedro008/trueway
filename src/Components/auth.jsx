@@ -32,10 +32,10 @@ const AuthComponent = ({
   return (
     <div className="main">
       <div className="containerLogo">
-        <div style={{ display: "flex", alignSelf: "center", marginTop: "45%" }}>
+        <div style={{ display: "flex" }}>
           <img
             style={{
-              width: "250px",
+              width: "350px",
               height: "auto",
               objectFit: "cover",
               display: "flex",

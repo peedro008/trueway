@@ -45,8 +45,9 @@
   background-color: #2b4162;
   display: flex;
   flex-direction: column;
-  align-items: "center";
-  justify-content: "center";
+  align-items: center;
+  justify-content: center;
+
 }
 .loginContainer {
   background-color: #ebeff2;
@@ -1509,7 +1510,7 @@
 .dashCard {
   background-color: white;
   width: 270px;
-  height: 103px;
+  height: 95px;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
@@ -1540,27 +1541,27 @@
 }
 .dashCardTitle {
   font-family: "Gilroy-Regular";
+  color: #000000;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
   letter-spacing: 0.01em;
-  text-align: left;
+  text-align: center;
 }
 .dashCardText {
   font-family: "Gilroy-Regular";
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
+  color: #000000;
   font-weight: 800;
-  line-height: 19px;
+  line-height: 24px;
   letter-spacing: 0.01em;
-  text-align: left;
-  color: 'black';
-  margin-top: 5px;
-  padding-right: 20px;
+  text-align: center;
+  
 }
 .dashText {
-  margin-left: 20px;
+  margin-left: 40px;
 }
 
 .asdasd {
@@ -1585,7 +1586,7 @@
 }
 .dashListColumnT {
   font-family: Inter;
-  font-size: 10px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 600;
   line-height: 30px;
@@ -1595,9 +1596,9 @@
 }
 .dashListColumnT1 {
   font-family: Inter;
-  font-size: 10px;
+  font-size: 13px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 800;
   line-height: 30px;
   letter-spacing: 0.5px;
   text-align: left;
@@ -1605,7 +1606,7 @@
 }
 .dashListColumnT2 {
   font-family: Inter;
-  font-size: 10px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 600;
   line-height: 30px;
@@ -1758,7 +1759,8 @@
   font-weight: 600;
   line-height: 22px;
   letter-spacing: 0px;
-  text-align: left;
+  width: 50px;
+  text-align: center;
   color: white;
   margin-left: 5px;
   margin-right: 5px;
@@ -2868,4 +2870,263 @@ color:#ffffff;
   display: "flex";
   flex-direction: "row";
   align-items: "center";
+}
+
+.bsChevron {
+  min-width: 30px;
+  min-height: 30px;
+  margin-top: 6px;
+  margin-left: 4px;
+  z-index: 9;
+  justify-self: 'center';
+  animation: chevronRotate ease-in-out 1s forwards;
+  align-self: 'center';
+}
+
+.bsChevron2 {
+  min-width: 30px;
+  min-height: 30px;
+  margin-top: 6px;
+  z-index: 9;
+  justify-self: 'center';
+  animation: chevronBack ease-in-out 1s forwards;
+  align-self: 'center';
+}
+
+.bsChevron3 {
+  min-width: 30px;
+  min-height: 30px;
+  margin-top: 6px;
+  z-index: 9;
+  justify-self: 'center';
+  align-self: 'center';
+}
+
+@keyframes chevronRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(180deg);
+    }
+  }
+
+  @keyframes chevronBack {
+    from {
+      transform: rotate(180deg);
+      
+    }
+    to {
+      transform: rotate(0deg);
+
+    }
+  }
+
+.divTable{
+  max-height: 300px;
+  width: 650px;
+  top: 155px;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: fixed;
+  animation: divtableIn ease-in-out 1s forwards;
+  right: -700px;
+}
+
+.divTable2{
+  max-height: 300px;
+  width: 650px;
+  top: 155px;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: fixed;
+  right: -700px;
+}
+
+.divTable3{
+  max-height: 300px;
+  width: 650px;
+  top: 155px;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: fixed;
+  animation: divtableOut ease-in-out 1s forwards;
+  right: 20px;
+}
+
+@keyframes divtableIn {
+  0% {
+    right: -700px;
+  }
+  80% {
+    right: 40px;
+  }
+  100% {
+    right: 20px;
+  }
+}
+
+@keyframes divtableOut {
+  0% {
+    right: 20px;
+  }
+  100% {
+    right: -700px;
+  }
+}
+
+.divTable::-webkit-scrollbar {
+  background-color: #f3f4f6;
+  width: 8px;
+  border-radius: 0px 10px 10px 0px;
+}
+.divTable::-webkit-scrollbar-thumb {
+  background-color:  #002752;
+  border-radius: 2px;
+}
+.divTable::-webkit-scrollbar {
+  background-color: #f3f4f6;
+  width: 8px;
+  border-radius: 0px 10px 10px 0px;
+}
+.divTable::-webkit-scrollbar-thumb {
+  background-color:  #002752;
+  border-radius: 2px;
+}
+.divTable3::-webkit-scrollbar {
+  background-color: #f3f4f6;
+  width: 8px;
+  border-radius: 0px 10px 10px 0px;
+}
+.divTable3::-webkit-scrollbar-thumb {
+  background-color:  #002752;
+  border-radius: 2px;
+}
+.divTable3::-webkit-scrollbar {
+  background-color: #f3f4f6;
+  width: 8px;
+  border-radius: 0px 10px 10px 0px;
+}
+.divTable3::-webkit-scrollbar-thumb {
+  background-color:  #002752;
+  border-radius: 2px;
+}
+
+.table6 {
+  font-family: "Gilroy-Regular";
+  font-weight: 100;
+  border-collapse: collapse;
+  width: 600px;
+max-height: 200px;
+  margin-left: 40px;
+  background: rgb(255, 255, 255);
+  border-radius: 6px;
+  overflow: scroll;
+}
+
+.table6 td,
+.table6 th {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+}
+
+.table6 tr:nth-child(even) {
+  background-color: #ededed;
+}
+.table6 tr:hover {
+  background-color: #ddd;
+}
+.table6 th {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: left;
+  background-color: white;
+  color: white;
+}
+
+
+
+.circle2 {
+  position: fixed;
+  cursor: pointer;
+  top: 270px;
+  right: 650px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  height: 43px;
+  width: 43px;
+  border-radius: 50%;
+  animation: circleIn ease-in-out 1s forwards;
+  background-color: #002752;
+}
+.circle3 {
+  position: fixed;
+  cursor: pointer;
+  top: 270px;
+  right: 20px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  height: 43px;
+  width: 43px;
+  border-radius: 50%;
+  animation: circleOut ease-in-out 1s forwards;
+  background-color: #002752;
+}
+
+.circle4 {
+  position: fixed;
+  cursor: pointer;
+  top: 270px;
+  right: 20px;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  height: 43px;
+  width: 43px;
+  border-radius: 50%;
+  background-color: #002752;
+}
+.circle5 {
+  pointer-events: none;
+  position: fixed;
+  top: -2000px;
+  height: 1px;
+  width: 1px;
+}
+
+@keyframes circleIn {
+  0% {
+    right: 20px;
+  }
+  80% {
+    right: 700px;
+  }
+  100% {
+    right: 650px;
+  }
+}
+
+@keyframes circleOut {
+  from {
+    right: 650px;
+    
+  }
+  to {
+    right: 20px;
+
+  }
+}
+
+.ClientName2 {
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  text-decoration: none;
+  color: #000000;
+  font-weight: 800;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  text-align: left;
 }
