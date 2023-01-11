@@ -831,6 +831,28 @@
   text-align: left;
   color: "#323C47";
 }
+.ClientNameGreen {
+  background-color: #2ca58db7;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color: "#323C47";
+}
+.ClientNameRed {
+  background-color: #84596b9d;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  color: "#323C47";
+}
 .REPmonth {
   height: 24px;
   width: 32px;
@@ -2005,21 +2027,22 @@
   height: 25px;
   width: 110px;
   margin-bottom: 10px;
+  font-weight: bold;
   background: #fbfbfb;
   border: 0.678715px solid #d6e4ec;
   box-sizing: border-box;
   border-radius: 7px;
-  padding-left: 5px;
-  color: #6e6b7b;
+  padding-left: 6px;
+  color: #000000;
 }
 .DEPinput::placeholder {
   padding-left: 5px;
 }
 .DEPbils {
   font-family: Montserrat;
-  font-size: 13px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 800;
   line-height: 18px;
   letter-spacing: 0px;
   text-align: left;
@@ -2062,6 +2085,7 @@
 .DEPcont {
   display: flex;
   margin-top: 32px;
+  
 }
 .DEPtotal {
   height: 35px;
@@ -2069,16 +2093,30 @@
   width: 220px;
   display: flex;
   align-items: "center";
-  justify-content: center;
+  justify-content: space-between;
+  padding-inline: 10px;
   align-self: center;
-
   border-radius: 0px;
   border-radius: 5px;
-  margin-top: 65%;
-
-  background-color: #e3e3e3;
+  margin-top: 80px;
+  background-color: #2ca58dbe;
+}
+.DEPtotal2 {
+  height: 35px;
+  max-width: 388px;
+  width: 220px;
+  display: flex;
+  align-items: "center";
+  justify-content: space-between;
+  padding-inline: 10px;
+  align-self: center;
+  border-radius: 0px;
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: #84596ba8;
 }
 .DEPtotal1 {
+  
   min-height: 35px;
   max-width: 358px;
   width: 180px;
@@ -2468,16 +2506,7 @@
   cursor: pointer;
 }
 
-.FilterButtoN {
-  background-image: url("../assets/filter.svg");
-  background-size: cover;
-  width: 84px;
-  height: 30px;
-  position: fixed;
-  right: 15px;
-  top: 13%;
-  cursor: pointer;
-}
+
 
 .FilterCom {
   display: "flex";

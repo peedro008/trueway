@@ -204,10 +204,7 @@ const QuoteReportComponent = ({
             </div>
           )}
         </div>
-        {/* <div
-          className="FilterButtoN"
-          onClick={() => setOpenFilter(!openFilter)}
-        /> */}
+     
       </div>
       
       <div

@@ -3,7 +3,7 @@ import React from "react";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { BsChevronLeft } from "react-icons/bs";
 
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AiOutlineCloseCircle, AiOutlineFilter } from "react-icons/ai";
 
 import close from "../assets/close.svg";
 import Select from "react-select";
@@ -111,10 +111,23 @@ const DealerReportComponent = ({
             </div>
           )}
         </div>
-        <div
-          className="FilterButtoN"
+       
+          <div
+        style={{
+          cursor:'pointer',
+          position: "fixed",
+          right: "50px",
+          top: "85px",
+          display: "flex",
+        }}
+      >
+        <AiOutlineFilter
+          color="#2b4162"
+          size={"40px"}
           onClick={() => setOpenFilter(!openFilter)}
         />
+      </div>
+        
       </div>
       <table class="table2">
         <tbody>

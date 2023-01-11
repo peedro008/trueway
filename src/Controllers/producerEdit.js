@@ -36,8 +36,8 @@ const ProducerEdit = (props) => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  setValue("UserId", `${Producer.UserId}`);
-  setValue("ProducerId", `${Producer.id}`);
+  setValue("UserId", `${Producer?.UserId}`);
+  setValue("ProducerId", `${Producer?.id}`);
   const reload = () => {
     window.location.reload();
   };

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, {  useEffect, useState } from "react";
 import { BsChevronLeft } from "react-icons/bs";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AiOutlineCloseCircle, AiOutlineFilter } from "react-icons/ai";
 import close from "../assets/close.svg"
 import Select from 'react-select'
 
@@ -21,6 +21,7 @@ setFilterValues,
 filterCheck,
 setFilterCheck,
 }) => {
+
     return(
         <div className="genericDiv1">
              
@@ -49,20 +50,38 @@ setFilterCheck,
 
 
              </div>
-             <div className="FilterButtoN" onClick={()=>setOpenFilter(!openFilter)}/>
+            
 
-                </div>
-           <table class="table2">
+               
+                <div
+        style={{
+          cursor:'pointer',
+          position: "fixed",
+          right: "50px",
+          top: "85px",
+          display: "flex",
+        }}
+      >
+        <AiOutlineFilter
+          color="#2b4162"
+          size={"40px"}
+          onClick={() => setOpenFilter(!openFilter)}
+        />
+      </div>
+      </div>
+           <table class="table2" style={{width: '90vw'}}>
       
         <tbody>
             <tr>
                 
-                <th scope="col" className="column1"><p   className="REPtype">Location</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Total</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Date</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Payments amount</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">User</p></th>
-                <th scope="col" className="column1"><p   className="REPtype">Notes</p></th>
+                <th scope="col" className="column1"><p   className="REPtype2">Location</p></th>
+                <th scope="col" className="column1"><p   className="REPtype2">Total Deposit</p></th>
+                <th scope="col" className="column1"><p   className="REPtype2">Total Sold</p></th>
+                <th scope="col" className="column1"><p   className="REPtype2">Difference $</p></th>
+                <th scope="col" className="column1"><p   className="REPtype2">Date</p></th>
+                <th scope="col" className="column1"><p   className="REPtype2">Payments amount</p></th>
+                <th scope="col" className="column1"><p   className="REPtype2">User</p></th>
+                <th scope="col" className="column1"><p   className="REPtype2">Notes</p></th>
                 {/* <th scope="col" className="column1"><p   className="REPtype">PDF</p></th> */}
              
             </tr>
@@ -71,12 +90,17 @@ setFilterCheck,
                depositsFil&&
                    
             depositsFil.sort(function(a,b){return b.id-a.id}).map((e)=>{
-                   
+                   let sumTotalSold = 0
+                   e.Payments.map(f => sumTotalSold = sumTotalSold + Number(f.amount))
+                   let colorDif = 'ClientNameGreen'
+                   if(e.total - sumTotalSold > -0.01) {colorDif = 'ClientNameGreen'} else {colorDif = 'ClientNameRed'}
                    return (
                         <tr>
                            
                             <td className="ClientName" scope="row">{e.Location.name}</td>  
-                            <td className="ClientName" scope="row">${e.total}</td>  
+                            <td className="ClientName" scope="row">$ {e.total}</td>  
+                            <td className="ClientName" scope="row">$ {sumTotalSold}</td>  
+                            <td className={colorDif} scope="row">$ {e.total - sumTotalSold }</td>  
                             <td className="ClientName" scope="row">{e.date}</td>
                             <td className="ClientName" scope="row">{e.Payments.length} Payments</td> 
                             <td className="ClientName" scope="row">{e.User.name}</td>

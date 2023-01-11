@@ -70,7 +70,7 @@ function AddPaymentComponent({
 }) {
   const [colorButtom, setColorButtom] = useState(true)
  const [isEndorsement, setIsEndorsement] = useState('')
- 
+ console.log(form)
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -302,7 +302,13 @@ function AddPaymentComponent({
                           Category: val.Category,
                           Company: val.CompanyId,
                           NSDcategory: val.NSD,
+                          totalPremium: val.totalPremium,
+                          LocationId: val.LocationId
                         });
+                        setValue(
+                          "LocationId",
+                          val.LocationId
+                        );
                    
                         setTotalValues({
                           ...totalValues,
@@ -412,7 +418,8 @@ function AddPaymentComponent({
               name="LocationId"
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Select
-                  value={optionsL.find((c) => c.value === value)}
+                defaultValue={optionsL.find((c) => c.value === form.LocationId)}
+                value={optionsL.find((c) => c.value === form.LocationId)}
                   onChange={(val) => onChange(val.value)}
                   control={control}
                   options={locations.map((e) => ({
@@ -465,8 +472,7 @@ function AddPaymentComponent({
             />
             <p className="FORMerror">{errors.type?.message}</p>
           </div>
-          {(isEndorsement === 'Endorsement' || isEndorsement === 'Renew Down' || isEndorsement === 'Down Payment') &&
-          
+          {(isEndorsement === 'Endorsement' && 
           <div className="PAYInputCont">
           <p className="PAYtitle">Additional premium</p>
           <input
@@ -474,6 +480,24 @@ function AddPaymentComponent({
             className="AQinput"
             type='number'
             defaultValue={0}
+            value={payment?.increasePremium}
+            {...register("increasePremium")}
+            onChange={(e) => {
+              setTotalValues({ ...totalValues, increasePremium: e.target.value });
+            }}
+          />
+          
+        </div>
+        )}
+          {( isEndorsement === 'Renew Down' || isEndorsement === 'Down Payment' || isEndorsement === 'Full Premium') &&
+          
+          <div className="PAYInputCont">
+          <p className="PAYtitle">Total premium</p>
+          <input
+            placeholder="Add to Premium"
+            className="AQinput"
+            type='number'
+            defaultValue={form.totalPremium || 0}
             value={payment?.increasePremium}
             {...register("increasePremium")}
             onChange={(e) => {

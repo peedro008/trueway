@@ -46,7 +46,7 @@ const ProducerEditComponent = ({
                 setInputs({ ...inputs, name: e.target.value });
               }}
               className="AQinput"
-              defaultValue={Producer.name}
+              defaultValue={Producer?.name}
             ></input>
             <p className="FORMerror">{errors.name?.message}</p>
           </div>
@@ -63,7 +63,7 @@ const ProducerEditComponent = ({
               })}
               placeholder="Email"
               className="AQinput"
-              defaultValue={Producer.email}
+              defaultValue={Producer?.email}
             ></input>
             <p className="FORMerror">{errors.email?.message}</p>
           </div>
@@ -76,7 +76,7 @@ const ProducerEditComponent = ({
                 setInputs({ ...inputs, phone: e.target.value });
               }}
               className="AQinput"
-              defaultValue={Producer.phone}
+              defaultValue={Producer?.phone}
             ></input>
             <p className="FORMerror">
               {errors.phone?.message.substring(0, 25)}
@@ -91,7 +91,7 @@ const ProducerEditComponent = ({
                 setInputs({ ...inputs, address: e.target.value });
               }}
               className="AQinput"
-              defaultValue={Producer.address}
+              defaultValue={Producer?.address}
             ></input>
             <p className="FORMerror">{errors.address?.message}</p>
           </div>
@@ -117,7 +117,7 @@ const ProducerEditComponent = ({
                   value={options.find((c) => c.value === value)}
                   onChange={(val) => onChange(val.value)}
                   control={control}
-                  options={locations.map((e) => ({
+                  options={locations?.map((e) => ({
                     value: e.id,
                     label: e.name,
                   }))}

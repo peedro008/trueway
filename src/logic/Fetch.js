@@ -333,14 +333,6 @@ const GetPayments = (dispatch) => {
 };
 
 const GetLastPayments = (dispatch) => {
-  axios
-    .get(`https://truewayagentbackend.com/getLastPayments`)
-    .then(function (response) {
-      dispatch(getLastPayments(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
     axios
     .get(`https://truewayagentbackend.com/getLastPayments`)
     .then(function (response) {

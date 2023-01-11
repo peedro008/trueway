@@ -333,6 +333,8 @@ function AddPayment(props) {
     Category: e.Category.id,
     CompanyId: e.CompanyId,
     NSD: e.Category.NSDvalue,
+    totalPremium: e.totalPremium,
+    LocationId: e.LocationId
   }));
 
   return (

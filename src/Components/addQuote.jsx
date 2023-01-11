@@ -441,6 +441,67 @@ const AddQuoteComponent = ({
                 ) : (
                   <p className="AQyesNoText">No</p>
                 )}
+
+                {/* {inputs.Bound && (
+                  <>
+                    <div
+                      className="AQinputContainer"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        backgroundColor: "start",
+                        marginTop: "10px",
+                      }}
+                    >
+                      <p className="AQinputName">Efective Date</p>
+                      <input
+                        type={"date"}
+                        className="AQinput"
+                        placeholder="Effective Date"
+                        key="effectiveDate"
+                        name="effectiveDate"
+                        {...register("effectiveDate")}
+                      />
+                    </div>
+                    <div
+                      className="AQinputContainer"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        backgroundColor: "start",
+                        marginTop: "10px",
+                      }}
+                    >
+                      <p className="AQinputName">Expiration Date</p>
+                      <input
+                        type={"date"}
+                        className="AQinput"
+                        placeholder="Expiration Date"
+                        key="expirationDate"
+                        name="expirationDate"
+                        {...register("expirationDate")}
+                      />
+                    </div>
+                    <div
+                      className="AQinputContainer"
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        backgroundColor: "start",
+                        marginTop: "10px",
+                      }}
+                    >
+                      <p className="AQinputName">Policy Number</p>
+                      <input
+                        className="AQinput"
+                        placeholder="Policy Number"
+                        key="policyNumber"
+                        name="policyNumber"
+                        {...register("policyNumber")}
+                      />
+                    </div>
+                  </>
+                )} */}
               </div>
             </div>
           </div>
@@ -609,7 +670,10 @@ const AddQuoteComponent = ({
           display: "flex",
         }}
       >
-        <button onClick={handleSubmit(onSubmit)} className={addingQuote ? "PAYbuttonPayWaiting" : "PAYbuttonPay"}>
+        <button
+          onClick={handleSubmit(onSubmit)}
+          className={addingQuote ? "PAYbuttonPayWaiting" : "PAYbuttonPay"}
+        >
           <p className="PAYbuttonText">Add Quote</p>
         </button>
       </div>
@@ -617,7 +681,7 @@ const AddQuoteComponent = ({
       <Modal open={open} onClose={reload} center classNames={"modal"}>
         <div className="modal">
           <img
-            src={quoteStatus === 'Quote added successfully' ? Icon : ErrorIcon}
+            src={quoteStatus === "Quote added successfully" ? Icon : ErrorIcon}
             style={{
               width: "35px",
               alignSelf: "center",
@@ -637,17 +701,16 @@ const AddQuoteComponent = ({
           </button>
         </div>
       </Modal>
-      {
-        addingQuote &&
-      <div style={{position:'absolute', bottom: '25px', right: '25px'}}>
-        <img
-          src={spinnerr}
-          style={{
-            width: "100px",
-          }}
+      {addingQuote && (
+        <div style={{ position: "absolute", bottom: "25px", right: "25px" }}>
+          <img
+            src={spinnerr}
+            style={{
+              width: "100px",
+            }}
           />
-      </div>
-        }
+        </div>
+      )}
     </div>
   );
 };

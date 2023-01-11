@@ -6,6 +6,7 @@ import close from "../assets/close.svg"
 
 import Modal from 'react-responsive-modal';
 import {FiRefreshCcw} from "react-icons/fi"
+import { AiOutlineFilter } from "react-icons/ai";
 
 
 const DeletedPaymentsComponent = ({
@@ -110,8 +111,22 @@ closeCloud,
              }
              
          </div>
-         <div className="FilterButtoN" onClick={()=>setOpenFilter(!openFilter)}/>
-
+         
+         <div
+        style={{
+          cursor:'pointer',
+          position: "fixed",
+          right: "50px",
+          top: "85px",
+          display: "flex",
+        }}
+      >
+        <AiOutlineFilter
+          color="#2b4162"
+          size={"40px"}
+          onClick={() => setOpenFilter(!openFilter)}
+        />
+      </div>
                 </div>
            <table class="table2">
       
