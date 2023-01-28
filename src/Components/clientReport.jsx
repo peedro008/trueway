@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { BsChevronLeft } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
@@ -7,74 +6,80 @@ import SearchField from "react-search-field";
 import Modal from "react-responsive-modal";
 
 function ClientReportComponent({
-    deleteConf,
-deletedOne,
-search,
-userRole,
-open,
-setDeleteConf,
-setDeletedOne,
-setSearch,
-clients,
-onCloseModal,
-handleDelete,
-handleDeleteModal,
-deleteClient
+  deleteConf,
+  deletedOne,
+  search,
+  userRole,
+  open,
+  setDeleteConf,
+  setDeletedOne,
+  setSearch,
+  clients,
+  onCloseModal,
+  handleDelete,
+  handleDeleteModal,
+  deleteClient,
 }) {
-
   return (
     <div className="genericDiv">
       <div className="genericHeader">
         <p className="genericTitle">Client list</p>
       </div>
-      <div className="REPcontrol" style={{maxWidth:"90vw"}}>
+      <div className="REPcontrol" style={{ maxWidth: "90vw" }}>
         <div className="REPsearch">
           <SearchField
             classNames="pepe"
-            placeholder="Search item"
+            placeholder="Search client"
             onChange={setSearch}
           />
         </div>
       </div>
-      <table class="table2" style={{ maxWidth: "88.3vw",  }}>
+      <table class="table2" style={{ maxWidth: '90vw'}}>
         <tbody>
           <tr>
             <th scope="col" className="column1">
-              <p className="REPtype">Client name</p>
+              <p className="REPtype2">Client name</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Client email</p>
+              <p className="REPtype2">Client email</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Client phone</p>
+              <p className="REPtype2">Client phone</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Client company</p>
+              <p className="REPtype2">Client company</p>
+            </th>
+            <th scope="col" className="column1" style={{maxWidth: '200px'}}>
+              <p className="REPtype2">Client address</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Client address</p>
+              <p className="REPtype2">New</p>
+            </th>
+            <th scope="col" className="column1" style={{ minWidth: "150px" }}>
+              <p className="REPtype2">Notes</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">New</p>
-            </th>
-            <th scope="col" className="column1" style={{minWidth:"150px"}}>
-              <p className="REPtype">Notes</p>
+              <p className="REPtype2">Add payment</p>
             </th>
             <th scope="col" className="column1">
-              <p className="REPtype">Add payment</p>
-            </th>
-            <th scope="col" className="column1">
-              <p className="REPtype">Modify Client</p>
+              <p className="REPtype2">Modify Client</p>
             </th>
             {userRole !== "Producer" && (
               <th scope="col" className="column1">
-                <p className="REPtype">Delete Client</p>
+                <p className="REPtype2">Delete Client</p>
               </th>
             )}
           </tr>
           {!search
             ? clients
-                .filter(e=>((e.Quotes.filter(e=>e.QuoteStatuses[e.QuoteStatuses.length-1].Status=="Sold").length)>0))
+                .filter(
+                  (e) =>
+                    e.Quotes?.filter(
+                      (e) =>
+                        e.QuoteStatuses[e.QuoteStatuses.length - 1].Status ==
+                        "Sold"
+                    ).length > 0
+                )
                 .map((e) => {
                   return (
                     <tr>
@@ -91,7 +96,11 @@ deleteClient
                       <td className="ClientName" scope="row">
                         {e.Company ? e.Company.name : "-"}
                       </td>
-                      <td className="ClientName" scope="row">
+                      <td className="ClientName" scope="row" style={{
+                          textOverflow: "ellipsis",
+                          overflow: "hidden",
+                          maxWidth: "300px",
+                        }}>
                         {e.address ? e.address : "-"}
                       </td>
                       <td className="ClientName" scope="row">
@@ -184,7 +193,7 @@ deleteClient
                   );
                 })
             : clients
-                .filter((e) =>
+                ?.filter((e) =>
                   e.name.toLowerCase().includes(search.toLowerCase())
                 )
                 .sort(function (a, b) {
@@ -302,7 +311,7 @@ deleteClient
       </table>
 
       <BsChevronLeft
-          cursor='pointer'
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",

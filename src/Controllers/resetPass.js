@@ -15,11 +15,10 @@ import "react-responsive-modal/styles.css";
 
 import ResetPassComponent from "../Components/resetPass";
 
-
 const ResetPass = () => {
   var URLactual = window.location.search.substring();
-  let pes = URLactual.split("=")[1]
-  console.log(pes)
+  let pes = URLactual.split("=")[1];
+  console.log(pes);
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState("");
@@ -29,7 +28,7 @@ const ResetPass = () => {
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
-  const [reset, setReset]= useState("")
+  const [reset, setReset] = useState("");
 
   const producers = useSelector((state) => state.Producers);
   const reload = () => {
@@ -38,9 +37,8 @@ const ResetPass = () => {
   };
   const onResetHandler = () => {
     const payload = {
-      UserName:pes,
-      Password:Password,
-   
+      UserName: pes,
+      Password: Password,
     };
     fetch(`https://truewayagentbackend.com/resetPass`, {
       method: "POST",
@@ -49,27 +47,27 @@ const ResetPass = () => {
       },
       body: JSON.stringify(payload),
     })
-    .then(async (res) => {
-      onOpenModal();
-     setMessage("Done!")
-    })
-    .catch((err) => {
-      console.log(err);
-      setMessage("There was an error, try again later.")
-    });
-  }
+      .then(async (res) => {
+        onOpenModal();
+        setMessage("Done!");
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessage("There was an error, try again later.");
+      });
+  };
   return (
     <ResetPassComponent
-    Password={Password}
-    setPassword={setPassword}
-    RPassword={RPassword}
-    setRPassword={setRPassword}
-    onResetHandler={onResetHandler}
-    open={open}
-    onOpenModal={onOpenModal}
-    onCloseModal={onCloseModal}
-    message={message}
-    reload={reload}
+      Password={Password}
+      setPassword={setPassword}
+      RPassword={RPassword}
+      setRPassword={setRPassword}
+      onResetHandler={onResetHandler}
+      open={open}
+      onOpenModal={onOpenModal}
+      onCloseModal={onCloseModal}
+      message={message}
+      reload={reload}
     />
   );
 };

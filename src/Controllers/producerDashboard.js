@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ProducerDashboardComponent from "../Components/producerDashboard";
 
 const ProducerDashboard = () => {
@@ -35,7 +35,9 @@ const ProducerDashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getUserPayment?UserId=${user.userId}`)
+      .get(
+        `https://truewayagentbackend.com/getUserPayment?UserId=${user.userId}`
+      )
       .then(function (response) {
         setPayments(
           response.data.filter(

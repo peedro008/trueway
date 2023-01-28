@@ -24,10 +24,12 @@ const DepositCash = () => {
   const LocationId = useSelector((state) => state.LocationId);
   const [note, setNote] = useState("");
 
-  console.log(LocationId)
+  console.log(LocationId);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getCashPayment?LocationId=${LocationId}`)
+      .get(
+        `https://truewayagentbackend.com/getCashPayment?LocationId=${LocationId}`
+      )
       .then(function (response) {
         setDbPayments(response.data);
       })

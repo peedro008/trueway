@@ -14,24 +14,29 @@ import {
 import AuthComponent from "../Components/auth";
 import "react-responsive-modal/styles.css";
 
-
 const Auth = () => {
   const dispatch = useDispatch();
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState("");
-  const [message1, setMessage1] = useState("Insert your email and you will receive a recovery link");
+  const [message1, setMessage1] = useState(
+    "Insert your email and you will receive a recovery link"
+  );
 
   const [open1, setOpen1] = useState(false);
   const onOpenModal1 = () => setOpen1(true);
   const onCloseModal1 = () => setOpen1(false);
-  const [reset, setReset]= useState("")
+  const [reset, setReset] = useState("");
 
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
   const date = new Date();
- const DATE =
-    date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
+  const DATE =
+    date.getFullYear() +
+    (date.getMonth() + 1 > 9 ? "-" : "-0") +
+    (date.getMonth() + 1) +
+    "-" +
+    date.getDate();
   useEffect(() => {
     window.history.pushState("", "", "/");
   }, []);
@@ -59,11 +64,11 @@ const Auth = () => {
           } else {
             setIsError(false);
             setMessage(jsonRes.message);
-            console.log(jsonRes)
+            console.log(jsonRes);
             dispatch(user(jsonRes));
             dispatch(userRole(jsonRes.UserRole));
-            dispatch(sessionDate(DATE))
-            dispatch(userId(jsonRes.userId))
+            dispatch(sessionDate(DATE));
+            dispatch(userId(jsonRes.userId));
           }
         } catch (err) {
           onOpenModal();
@@ -76,8 +81,7 @@ const Auth = () => {
   };
   const onResetHandler = (UserName, Password) => {
     const payload = {
-     email: reset,
-   
+      email: reset,
     };
     fetch(`https://truewayagentbackend.com/send`, {
       method: "POST",
@@ -86,14 +90,14 @@ const Auth = () => {
       },
       body: JSON.stringify(payload),
     })
-    .then(async (res) => {
-     setMessage1("Check your email for instructions")
-    })
-    .catch((err) => {
-      console.log(err);
-      onOpenModal();
-    });
-  }
+      .then(async (res) => {
+        setMessage1("Check your email for instructions");
+      })
+      .catch((err) => {
+        console.log(err);
+        onOpenModal();
+      });
+  };
   return (
     <AuthComponent
       onSubmitHandler={onSubmitHandler}
@@ -104,13 +108,13 @@ const Auth = () => {
       message={message}
       open1={open1}
       setOpen1={setOpen1}
-      onOpenModal1={onOpenModal1} 
+      onOpenModal1={onOpenModal1}
       reset={reset}
-setReset={setReset}
-    onCloseModal1={onCloseModal1}
-    message1={message1}
-setMessage1={setMessage1}
-onResetHandler={onResetHandler}
+      setReset={setReset}
+      onCloseModal1={onCloseModal1}
+      message1={message1}
+      setMessage1={setMessage1}
+      onResetHandler={onResetHandler}
     />
   );
 };

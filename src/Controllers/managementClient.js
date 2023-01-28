@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../Css/css.css";
 
-
-
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import ManagementClientComponent from "../Components/managementClient";
 import { GetClients, GetClientsId } from "../Logic/Fetch";
-
 
 const schema = yup
   .object({
@@ -25,7 +22,7 @@ const schema = yup
   .required();
 
 const ManagementClient = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const Companies = useSelector((state) => state.Companies);
   const [open, setOpen] = useState(false);
   const [neww, setNeww] = useState(false);
@@ -60,14 +57,13 @@ const ManagementClient = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
-            GetClients(dispatch)
-            GetClientsId(dispatch)
+            GetClients(dispatch);
+            GetClientsId(dispatch);
           }
         } catch (err) {
           console.log(err);
         }
         onOpenModal();
-       
       })
       .catch((err) => {
         console.log(err);

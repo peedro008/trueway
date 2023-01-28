@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -58,15 +58,13 @@ const ProducerEdit = (props) => {
             console.log("error");
           } else {
             console.log(jsonRes);
-
-         
           }
         } catch (err) {
           console.log(err);
         }
         onOpenModal();
       })
-      .then(()=>GetProducer(dispatch))
+      .then(() => GetProducer(dispatch))
       .catch((err) => {
         console.log(err);
       });

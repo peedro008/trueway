@@ -3,8 +3,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import ProducerReportComponent from "../Components/producersReport";
 const ProducerReport = () => {
-  const producers= useSelector(s=>s.Producers)
-  const quotes = useSelector(s=>s.AVG)
+  const producers = useSelector((s) => s.Producers);
+  const quotes = useSelector((s) => s.AVG);
   const [deleteConf, setDeleteConf] = useState("");
   const [deletedOne, setDeletedOne] = useState(null);
   const [sold, setSold] = useState(0);
@@ -49,8 +49,6 @@ const ProducerReport = () => {
       });
   };
 
-
-
   return (
     <ProducerReportComponent
       producers={producers}
@@ -59,7 +57,6 @@ const ProducerReport = () => {
       deletedOne={deletedOne}
       sold={sold}
       unSold={unSold}
-    
       onCloseModal={onCloseModal}
       open={open}
       handleDelete={handleDelete}

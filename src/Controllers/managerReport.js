@@ -5,19 +5,19 @@ import ManagerReportComponent from "../Components/managerReport";
 import { GetManager } from "../Logic/Fetch";
 
 const ManagerReport = () => {
-  const Manager= useSelector(s=>s.Managers)
-  const quotes = useSelector(s=>s.AVG)
+  const Manager = useSelector((s) => s.Managers);
+  const quotes = useSelector((s) => s.AVG);
   const dispatch = useDispatch();
   const [sold, setSold] = useState(0);
   const [unSold, setUnSold] = useState(0);
   const [modify, setModify] = useState([]);
   const [deleteConf, setDeleteConf] = useState("");
   const [deletedOne, setDeletedOne] = useState(null);
-  const  userRole = useSelector((state) => state.userRole);
+  const userRole = useSelector((state) => state.userRole);
   const [open, setOpen] = useState(false);
-  const  onOpenModal = () => setOpen(true);
-  const  onCloseModal = () => setOpen(false);
-  const  handleDelete = (e) => {
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+  const handleDelete = (e) => {
     setDeletedOne(e);
     onOpenModal();
   };
@@ -42,7 +42,7 @@ const ManagerReport = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
-            GetManager(dispatch)
+            GetManager(dispatch);
           }
         } catch (err) {
           console.log(err);
@@ -54,25 +54,22 @@ const ManagerReport = () => {
       });
   };
 
-
-
-
   return (
     <ManagerReportComponent
-        managers={Manager}
-        quotes={quotes}
-        sold={sold}
-        unSold={unSold}
-        modify={modify}
-        deleteConf={deleteConf}
-        setDeleteConf={setDeleteConf} 
-        deletedOne={deletedOne}
-        userRole={userRole}
-        open={open}
-        onOpenModal={onOpenModal}
-        onCloseModal={onCloseModal}
-        handleDelete={handleDelete}
-        handleDeleteModal={handleDeleteModal}
+      managers={Manager}
+      quotes={quotes}
+      sold={sold}
+      unSold={unSold}
+      modify={modify}
+      deleteConf={deleteConf}
+      setDeleteConf={setDeleteConf}
+      deletedOne={deletedOne}
+      userRole={userRole}
+      open={open}
+      onOpenModal={onOpenModal}
+      onCloseModal={onCloseModal}
+      handleDelete={handleDelete}
+      handleDeleteModal={handleDeleteModal}
     />
   );
 };

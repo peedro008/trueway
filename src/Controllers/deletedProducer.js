@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DeletedProducersComponent from "../Components/deletedProducer";
 import { GetProducer } from "../Logic/Fetch";
 const DeletedProducers = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [producers, setProducers] = useState([]);
   const [deleteConf, setDeleteConf] = useState("");
   const [deletedOne, setDeletedOne] = useState(null);
@@ -41,7 +41,7 @@ const DeletedProducers = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
-            GetProducer(dispatch)
+            GetProducer(dispatch);
           }
         } catch (err) {
           console.log(err);

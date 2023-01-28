@@ -41,7 +41,9 @@ const ProducerDetails = (props) => {
   }, [userId]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/producerQuotes?UserId=${Producer?.UserId}`)
+      .get(
+        `https://truewayagentbackend.com/producerQuotes?UserId=${Producer?.UserId}`
+      )
       .then(function (response) {
         setQuotes(response.data);
 
@@ -53,7 +55,9 @@ const ProducerDetails = (props) => {
   }, [Producer]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getUserPayment?UserId=${Producer?.UserId}`)
+      .get(
+        `https://truewayagentbackend.com/getUserPayment?UserId=${Producer?.UserId}`
+      )
       .then(function (response) {
         setPayments(response.data);
       })
@@ -61,58 +65,58 @@ const ProducerDetails = (props) => {
         console.log(error);
       });
   }, [Producer]);
- 
+
   useEffect(() => {
     const date = new Date();
     const DATE =
-  date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
+      date.getFullYear() +
+      (date.getMonth() + 1 > 9 ? "-" : "-0") +
+      (date.getMonth() + 1) +
+      "-" +
+      date.getDate();
     let MY = date.getFullYear() + "-0" + (date.getMonth() + 1);
-    let LMY = date.getFullYear() + "-0" + (date.getMonth() );
+    let LMY = date.getFullYear() + "-0" + date.getMonth();
 
-    setYquotes(
-      {
-        sold:quotes[1]?.filter((e) => e.closingDate.substring(0, 4) == DATE.substring(0, 4)).length,
-        unsold:quotes[0]?.filter((e) => e.date.substring(0, 4) == DATE.substring(0, 4)).length
-      }
+    setYquotes({
+      sold: quotes[1]?.filter(
+        (e) => e.closingDate.substring(0, 4) == DATE.substring(0, 4)
+      ).length,
+      unsold: quotes[0]?.filter(
+        (e) => e.date.substring(0, 4) == DATE.substring(0, 4)
+      ).length,
+    });
+    console.log(
+      quotes[1]?.filter(
+        (e) => e.closingDate.substring(0, 4) !== DATE.substring(0, 4)
       )
-      console.log(quotes[1]?.filter((e) => e.closingDate.substring(0, 4) !== DATE.substring(0, 4)))
-    setMquotes(
-      {
-        sold:quotes[1]?.filter((e) => {
-       
-          return e.date.indexOf(MY) !== -1;
-        }).length,
-        unsold:quotes[0]?.filter((e) => {
-       
-          return e.date.indexOf(MY) !== -1;
-        }).length
-      }
-    )
-    setLmquotes(
-      {
-        sold:quotes[1]?.filter((e) => {
-       
-          return e.date.indexOf(LMY) !== -1;
-        }).length,
-        unsold:quotes[0]?.filter((e) => {
-       
-          return e.date.indexOf(LMY) !== -1;
-        }).length
-      }
-    )
+    );
+    setMquotes({
+      sold: quotes[1]?.filter((e) => {
+        return e.date.indexOf(MY) !== -1;
+      }).length,
+      unsold: quotes[0]?.filter((e) => {
+        return e.date.indexOf(MY) !== -1;
+      }).length,
+    });
+    setLmquotes({
+      sold: quotes[1]?.filter((e) => {
+        return e.date.indexOf(LMY) !== -1;
+      }).length,
+      unsold: quotes[0]?.filter((e) => {
+        return e.date.indexOf(LMY) !== -1;
+      }).length,
+    });
 
     setYpay(
       payments.filter((e) => e.date.substring(0, 4) == DATE.substring(0, 4))
     );
     setMpay(
-       payments.filter((e) => {
-       
+      payments.filter((e) => {
         return e.date.indexOf(MY) !== -1;
       })
     );
     setLmpay(
       payments.filter((e) => {
-       
         return e.date.indexOf(LMY) !== -1;
       })
     );
@@ -121,39 +125,46 @@ const ProducerDetails = (props) => {
   useEffect(() => {
     const date = new Date();
     const DATE =
-  date.getFullYear() + ( (date.getMonth() + 1)>9?"-":"-0" )+ (date.getMonth() + 1)+"-" + date.getDate()
+      date.getFullYear() +
+      (date.getMonth() + 1 > 9 ? "-" : "-0") +
+      (date.getMonth() + 1) +
+      "-" +
+      date.getDate();
     let MY = date.getFullYear() + "-0" + (date.getMonth() + 1);
-    let LMY = date.getFullYear() + "-0" + (date.getMonth() );
+    let LMY = date.getFullYear() + "-0" + date.getMonth();
     let pes = 0;
     let pas = 0;
-    let pos = 0
-    let pis = 0
+    let pos = 0;
+    let pis = 0;
 
-
-    quotes[1]?.filter((e) => {
-       
-      return e.date.indexOf(MY) !== -1;
-    }).map((e) => {
-      if ( e.Category.id == 2&&!e.Payment) {
-        pes += 10;
-      }
-    })
-    quotes?.filter((e) => e.date?.substring(0, 4) == DATE.substring(0, 4)).map((e) => {
-      if ( e.Category.id == 2&&!e.Payment) {
-        pas += 10;
-      }
-    })
-    quotes[1]?.filter((e) => {
-       
-      return e.date.indexOf(LMY) !== -1;
-    }).map((e) => {
-      if ( e.Category.id == 2&&!e.Payment) {
-        pos += 10;
-      }
-    })
+    quotes[1]
+      ?.filter((e) => {
+        return e.date.indexOf(MY) !== -1;
+      })
+      .map((e) => {
+        if (e.Category.id == 2 && !e.Payment) {
+          pes += 10;
+        }
+      });
+    quotes
+      ?.filter((e) => e.date?.substring(0, 4) == DATE.substring(0, 4))
+      .map((e) => {
+        if (e.Category.id == 2 && !e.Payment) {
+          pas += 10;
+        }
+      });
+    quotes[1]
+      ?.filter((e) => {
+        return e.date.indexOf(LMY) !== -1;
+      })
+      .map((e) => {
+        if (e.Category.id == 2 && !e.Payment) {
+          pos += 10;
+        }
+      });
     mpay?.map((e) => {
       if (e.Category.name !== "HEALTH INSURANCE") {
-        if ( e.Category.id == 2) {
+        if (e.Category.id == 2) {
           pes += 10;
         }
         if (e.NSDvalue !== "") {
@@ -193,23 +204,21 @@ const ProducerDetails = (props) => {
         }
       }
     });
-    ;
     setNSD(pes);
     setYNSD(pas);
-    setLmNSD(pos)
+    setLmNSD(pos);
   }, [quotes, Producer, ystat, mstat]);
 
   return (
     <ProducerDetailsComponent
-    lmstat={lmstat}
-    lmquotes={lmquotes}
+      lmstat={lmstat}
+      lmquotes={lmquotes}
       quotes={quotes}
       setQuotes={setQuotes}
       payments={payments}
       setPayments={setPayments}
       mquotes={mquotes}
       setMquotes={setMquotes}
-  
       mstat={mstat}
       setMstat={setMstat}
       yquotes={yquotes}
@@ -240,7 +249,6 @@ const ProducerDetails = (props) => {
       google={google}
       LmNSD={LmNSD}
     />
-
   );
 };
 export default ProducerDetails;

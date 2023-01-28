@@ -1,89 +1,100 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import StadisticComponent from "../Components/stadistic";
-import axios from "axios"
+import axios from "axios";
 
 import useGoogleCharts from "../Charts/useGoogleCharts";
 function Stadistic() {
   const Producers = useSelector((state) => state.Producers);
   const [dateReq, setDateReq] = useState({});
-  const [loader, setLoader] = useState(true)
+  const [loader, setLoader] = useState(true);
   const [yearLabel, setYearLabel] = useState("");
   const [dateSelected, setDateSelected] = useState("");
-  const [quotes, setQuotes] = useState([])
-  const [payments, setPayments] = useState([])
-  const [defMonth, setDefMonth] = useState([])
+  const [quotes, setQuotes] = useState([]);
+  const [payments, setPayments] = useState([]);
+  const [defMonth, setDefMonth] = useState([]);
   const userRole = useSelector((state) => state.userRole);
   const UserId = useSelector((state) => state.UserId);
   const google = useGoogleCharts();
 
-console.log(payments)
-const search = () => {
-  dateSelected.substring(0,2)!=="00"?
-    setDateReq({
-      dateFrom: dateSelected.split("/").join("-"),
-      dateTo:
-        (parseFloat(dateSelected.substring(0, 2)) == 12
-          ? "01"
-          : parseFloat(dateSelected.substring(0, 2)).toString().length == 2
-          ? parseFloat(dateSelected.substring(0, 2)) + 1
-          : "0" + (parseFloat(dateSelected.substring(0, 2)) + 1)) +
-        (parseFloat(dateSelected.substring(0, 2)) == 12
-          ? dateSelected.substring(2, 6) +
-            (parseFloat(dateSelected.substring(6, 10)) + 1)
-          : dateSelected.substring(2, dateSelected.length)),
-    }):
-    setDateReq({
-      dateFrom:"01"+ dateSelected.substring(2,dateSelected.length),
-      dateTo:"01"+ dateSelected.substring(2,dateSelected.length-4)+(parseFloat(dateSelected.substring(dateSelected.length-4, dateSelected.length))+1)
-    })
+  console.log(payments);
+  const search = () => {
+    dateSelected.substring(0, 2) !== "00"
+      ? setDateReq({
+          dateFrom: dateSelected.split("/").join("-"),
+          dateTo:
+            (parseFloat(dateSelected.substring(0, 2)) == 12
+              ? "01"
+              : parseFloat(dateSelected.substring(0, 2)).toString().length == 2
+              ? parseFloat(dateSelected.substring(0, 2)) + 1
+              : "0" + (parseFloat(dateSelected.substring(0, 2)) + 1)) +
+            (parseFloat(dateSelected.substring(0, 2)) == 12
+              ? dateSelected.substring(2, 6) +
+                (parseFloat(dateSelected.substring(6, 10)) + 1)
+              : dateSelected.substring(2, dateSelected.length)),
+        })
+      : setDateReq({
+          dateFrom: "01" + dateSelected.substring(2, dateSelected.length),
+          dateTo:
+            "01" +
+            dateSelected.substring(2, dateSelected.length - 4) +
+            (parseFloat(
+              dateSelected.substring(
+                dateSelected.length - 4,
+                dateSelected.length
+              )
+            ) +
+              1),
+        });
   };
-   useEffect(()=>{
-    if(dateReq.dateFrom){
-    let params = new URLSearchParams();
-  
-    let temp = Object.entries(dateReq)
+  useEffect(() => {
+    if (dateReq.dateFrom) {
+      let params = new URLSearchParams();
 
-    temp.map(e=>{
-      params.append(`${e[0]}`, e[1]);
-    });
-    setPayments([])
-    axios
-      .get(`https://truewayagentbackend.com/getPaymentsStats`, { params })
-      .then(function (response) {
-        setPayments(response.data);
-      })
-      .catch((error) => {
-        setPayments([]);
-        console.log(error);
-      });}
-  },[dateReq])
-  
-  useEffect(()=>{
-    setLoader(true)
-    if(dateReq.dateFrom){
-      setLoader(true)
-    let params = new URLSearchParams();
+      let temp = Object.entries(dateReq);
 
-    let temp = Object.entries(dateReq)
+      temp.map((e) => {
+        params.append(`${e[0]}`, e[1]);
+      });
+      setPayments([]);
+      axios
+        .get(`https://truewayagentbackend.com/getPaymentsStats`, { params })
+        .then(function (response) {
+          setPayments(response.data);
+        })
+        .catch((error) => {
+          setPayments([]);
+          console.log(error);
+        });
+    }
+  }, [dateReq]);
 
-    temp.map(e=>{
-      params.append(`${e[0]}`, e[1]);
-    })
-    setQuotes([])
-    axios
-      .get(`https://truewayagentbackend.com/getQuotesStats`, { params })
-      .then(function (response) {
-        setQuotes(response.data);
-        setLoader(false)
-      })
+  useEffect(() => {
+    setLoader(true);
+    if (dateReq.dateFrom) {
+      setLoader(true);
+      let params = new URLSearchParams();
 
-      .catch((error) => {
-        setQuotes([]);
-        console.log(error);
-        setLoader(false)
-      })}
-  },[dateReq])
+      let temp = Object.entries(dateReq);
+
+      temp.map((e) => {
+        params.append(`${e[0]}`, e[1]);
+      });
+      setQuotes([]);
+      axios
+        .get(`https://truewayagentbackend.com/getQuotesStats`, { params })
+        .then(function (response) {
+          setQuotes(response.data);
+          setLoader(false);
+        })
+
+        .catch((error) => {
+          setQuotes([]);
+          console.log(error);
+          setLoader(false);
+        });
+    }
+  }, [dateReq]);
 
   ///dateStuff
   //.split('/').join("-")
@@ -100,29 +111,28 @@ const search = () => {
     setYearLabel(
       now.toLocaleDateString("en-US", { month: "short", year: "numeric" })
     );
-    let temp = (yyyymmdd.substring(0, 3) + "01" + yyyymmdd.substring(5, yyyymmdd.length))
-    .split("/")
-    .join("-")
-    setDateSelected(
-      temp
-    );
+    let temp = (
+      yyyymmdd.substring(0, 3) +
+      "01" +
+      yyyymmdd.substring(5, yyyymmdd.length)
+    )
+      .split("/")
+      .join("-");
+    setDateSelected(temp);
 
     setDateReq({
       dateFrom: temp.split("/").join("-"),
       dateTo:
         (parseFloat(temp.substring(0, 2)) == 12
           ? "01"
-          : parseFloat(temp.substring(0, 2)).toString().length >1
+          : parseFloat(temp.substring(0, 2)).toString().length > 1
           ? Number(temp.substring(0, 2)) + 1
           : "0" + (Number(temp.substring(0, 2)) + 1)) +
         (parseFloat(temp.substring(0, 2)) == 12
-          ? temp.substring(2, 6) +
-            (parseFloat(temp.substring(6, 10)) + 1)
+          ? temp.substring(2, 6) + (parseFloat(temp.substring(6, 10)) + 1)
           : temp.substring(2, temp.length)),
-    })
-
+    });
   }, []);
-
 
   let yearOptions = [
     parseFloat(yyyymmdd.substring(6, 10)),
@@ -147,34 +157,38 @@ const search = () => {
     { value: "00", label: "All year" },
   ];
 
-
-  useEffect(()=>{setDefMonth(monthOptions.find(e=>e.label==yearLabel.substring(0,3)))}, [yearLabel])
-  const getComission =(payments,quotes )=>{
+  useEffect(() => {
+    setDefMonth(monthOptions.find((e) => e.label == yearLabel.substring(0, 3)));
+  }, [yearLabel]);
+  const getComission = (payments, quotes) => {
     let pes = 0;
-    console.log(quotes)
-    if(quotes.length) {quotes.map((e) => {
-      if ( e.CategoryId === 2 && e.SoldBy) {
-        pes += 10;
-      }
-      if ( e.CategoryId === 7 && e.SoldBy) {
-        pes += 10;
-      }
-    })}
-    if(payments.length){
-     payments.map((e) => {
-       if (e.CategoryId !== 7) {
-        if ( e.CategoryId == 2) {
+    console.log(quotes);
+    if (quotes.length) {
+      quotes.map((e) => {
+        if (e.CategoryId === 2 && e.SoldBy) {
           pes += 10;
         }
+        if (e.CategoryId === 7 && e.SoldBy) {
+          pes += 10;
+        }
+      });
+    }
+    if (payments.length) {
+      payments.map((e) => {
+        if (e.CategoryId !== 7) {
+          if (e.CategoryId == 2) {
+            pes += 10;
+          }
           pes +=
             5 *
-            (e?.NSDvalue?.length?
-               parseFloat(e.NSDvalue)/parseFloat(e.Category?.NSDvalue):0
-              );
-      }
-    })}
-    return pes
-  }
+            (e?.NSDvalue?.length
+              ? parseFloat(e.NSDvalue) / parseFloat(e.Category?.NSDvalue)
+              : 0);
+        }
+      });
+    }
+    return pes;
+  };
   /////
 
   return (
@@ -194,8 +208,8 @@ const search = () => {
       defMonth={defMonth}
       google={google}
       userRole={userRole}
-UserId={UserId}
-loader={loader}
+      UserId={UserId}
+      loader={loader}
     />
   );
 }

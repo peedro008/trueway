@@ -18,7 +18,7 @@ const schema = yup
   .required();
 
 const ManagementManager = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const locations = useSelector((state) => state.Locations);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -55,7 +55,7 @@ const ManagementManager = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
-            GetManager(dispatch)
+            GetManager(dispatch);
           }
         } catch (err) {
           console.log(err);
@@ -70,19 +70,20 @@ const ManagementManager = () => {
 
   return (
     <ManagementManagerComponenet
-            onOpenModal={onOpenModal}
-            onCloseModal={onCloseModal}
-            open={open}
-            options={options}
-            locations={locations}
-            control={control}
-            inputs={inputs}
-            setinputs={setinputs}
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
-            errors={errors}
-            schema={schema}        />
+      onOpenModal={onOpenModal}
+      onCloseModal={onCloseModal}
+      open={open}
+      options={options}
+      locations={locations}
+      control={control}
+      inputs={inputs}
+      setinputs={setinputs}
+      handleSubmit={handleSubmit}
+      onSubmit={onSubmit}
+      register={register}
+      errors={errors}
+      schema={schema}
+    />
   );
 };
 export default ManagementManager;

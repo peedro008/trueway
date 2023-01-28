@@ -5,7 +5,7 @@ import ModifyModalComponent from "../Components/modifyModal";
 import { GetA_AVG } from "../Logic/Fetch";
 
 const ModifyModal = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { quoteM, open, onCloseModal } = props;
   const [quote, setQuote] = useState([]);
   const [renew, setRenew] = useState(false);
@@ -22,7 +22,7 @@ const ModifyModal = (props) => {
   const onCloseModal1 = () => setOpen1(false);
   const checkNotes = () => {
     setBound(false);
-    setInputs({ ...inputs, Status:null });
+    setInputs({ ...inputs, Status: null });
     setCancel(false);
     setReInstall(false);
     setRenew(false);
@@ -66,7 +66,14 @@ const ModifyModal = (props) => {
     setNotes(false);
   };
   useEffect(() => {
-    setInputs({ ...inputs, QuoteId: quoteM.id, UserId: userId });
+    setInputs({
+      ...inputs,
+      QuoteId: quoteM.id,
+      UserId: userId,
+      effectiveDate: quoteM.effectiveDate,
+      expirationDate: quoteM.expirationDate,
+      policyNumber: quoteM.policyNumber,
+    });
   }, [props, userId]);
   const submit = () => {
     inputs.Status
@@ -76,49 +83,53 @@ const ModifyModal = (props) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(inputs),
-        }).then(onOpenModal1()).then( reload()).then(GetA_AVG(dispatch))
+        })
+          .then(onOpenModal1())
+          .then(GetA_AVG(dispatch))
       : fetch(`https://truewayagentbackend.com/addNotes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputs),
-      }).then(onOpenModal1()).then( reload())
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(inputs),
+        })
+          .then(onOpenModal1())
+          .then(reload());
   };
 
   return (
     <ModifyModalComponent
-    quoteM={quoteM}
-    quote={quote}
-    renew={renew}
-    notes={notes}
-    cancel={cancel}
-    bound={bound}
-    reInstall={reInstall}
-    inputs={inputs}
-    setQuote={setQuote}
-    setRenew={setRenew}
-    setNotes={setNotes}
-    setCancel={setCancel}
-    setBound={setBound}
-    setReInstall={setReInstall}
-    setInputs={setInputs}
-    useSelector={useSelector}
-    setOpen1={setOpen1}
-    open1={open1}
-    open={open}
-    onCloseModal={onCloseModal}
-    onOpenModal1={onOpenModal1}
-    onCloseModal1={onCloseModal1}
-    checkNotes={checkNotes}
-    checkRenew={checkRenew}
-    checkReinstall={checkReinstall}
-    checkBound={checkBound}
-    checkCancel={checkCancel}
-    submit={submit}
-    optionsCo={optionsCo}
+      quoteM={quoteM}
+      quote={quote}
+      renew={renew}
+      notes={notes}
+      cancel={cancel}
+      bound={bound}
+      reInstall={reInstall}
+      inputs={inputs}
+      setQuote={setQuote}
+      setRenew={setRenew}
+      setNotes={setNotes}
+      setCancel={setCancel}
+      setBound={setBound}
+      setReInstall={setReInstall}
+      setInputs={setInputs}
+      useSelector={useSelector}
+      setOpen1={setOpen1}
+      open1={open1}
+      open={open}
+      onCloseModal={onCloseModal}
+      onOpenModal1={onOpenModal1}
+      onCloseModal1={onCloseModal1}
+      checkNotes={checkNotes}
+      checkRenew={checkRenew}
+      checkReinstall={checkReinstall}
+      checkBound={checkBound}
+      checkCancel={checkCancel}
+      submit={submit}
+      optionsCo={optionsCo}
+      reload={reload}
     />
-    
   );
 };
-export default ModifyModal
+export default ModifyModal;

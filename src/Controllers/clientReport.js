@@ -6,7 +6,7 @@ import ClientReportComponent from "../Components/clientReport";
 import { GetClients, GetClientsId } from "../Logic/Fetch";
 
 function ClientReport() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const clients = useSelector((state) => state.Clients);
   const [deleteConf, setDeleteConf] = useState("");
   const [deletedOne, setDeletedOne] = useState(null);
@@ -22,7 +22,7 @@ function ClientReport() {
 
   const handleDeleteModal = (e) => {
     deleteClient({ ClientId: deletedOne });
-    window.history.go(-1)
+    window.history.go(-1);
   };
   const deleteClient = (data) => {
     data && console.log(data);
@@ -36,8 +36,8 @@ function ClientReport() {
       .then(async (res) => {
         try {
           const jsonRes = await res.json();
-          GetClients(dispatch)
-          GetClientsId(dispatch)
+          GetClients(dispatch);
+          GetClientsId(dispatch);
           if (res.status !== 200) {
             console.log("error");
           } else {
@@ -52,25 +52,23 @@ function ClientReport() {
         console.log(err);
       });
   };
-  return (<ClientReportComponent
-    deleteConf={deleteConf}
-    deletedOne={deletedOne}
-    search={search}
-    userRole={userRole}
-    open={open}
-    setDeleteConf={setDeleteConf}
-    setDeletedOne={setDeletedOne}
-    setSearch={setSearch}
-    clients={clients}
-    onCloseModal={onCloseModal}
-    handleDelete={handleDelete}
-    handleDeleteModal={handleDeleteModal}
-    deleteClient={deleteClient}
-
-    
-  />
+  return (
+    <ClientReportComponent
+      deleteConf={deleteConf}
+      deletedOne={deletedOne}
+      search={search}
+      userRole={userRole}
+      open={open}
+      setDeleteConf={setDeleteConf}
+      setDeletedOne={setDeletedOne}
+      setSearch={setSearch}
+      clients={clients}
+      onCloseModal={onCloseModal}
+      handleDelete={handleDelete}
+      handleDeleteModal={handleDeleteModal}
+      deleteClient={deleteClient}
+    />
   );
 }
 
 export default ClientReport;
-

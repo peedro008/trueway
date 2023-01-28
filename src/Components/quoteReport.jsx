@@ -225,11 +225,9 @@ const QuoteReportComponent = ({
       <table class="table1">
         <tbody>
           <tr>
+         
             <th scope="col" className="column1">
-              <p className="REPtype">Info</p>
-            </th>
-            <th scope="col" className="column1">
-              <p className="REPtype">Edit</p>
+              <p className="REPtype2">Edit</p>
             </th>
             {columns.clientName && (
               <th scope="col" className="column1">
@@ -349,7 +347,7 @@ const QuoteReportComponent = ({
               .map((e) => {
                 return (
                   <tr>
-                    <td className="ClientName" scope="row">
+                    {/* <td className="ClientName" scope="row">
                       <NavLink
                         style={{ textDecoration: "none", color: "#000" }}
                         to={{
@@ -361,7 +359,7 @@ const QuoteReportComponent = ({
                         <BsInfoCircle size={'25px'} color={'#54B4D3'}/>
                         </div>
                       </NavLink>
-                    </td>
+                    </td> */}
                     <td className="ClientName" scope="row">
                       <div className="InfoIcon2" onClick={() => modify(e)}>
                         <AiOutlineEdit size={'26px'} color={'#14A44D'}/>

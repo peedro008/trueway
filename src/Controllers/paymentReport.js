@@ -20,10 +20,8 @@ const PaymentReport = () => {
   const clients = useSelector((state) => state.Clients);
   const locations = useSelector((state) => state.Locations);
   const [paginator, setPaginator] = useState(1);
-  
-  const [filterValues, setFilterValues] = useState({
-    
-  });
+
+  const [filterValues, setFilterValues] = useState({});
   const [filterCheck, setFilterCheck] = useState({
     date: false,
     ClientId: false,
@@ -42,7 +40,7 @@ const PaymentReport = () => {
   };
   const handleDeleteModal = (e) => {
     deleteClient({ PaymentId: deletedOne });
-    window.history.go(-1)
+    window.history.go(-1);
   };
   const deleteClient = (data) => {
     data && console.log(data);
@@ -61,8 +59,8 @@ const PaymentReport = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
-            GetPayments(dispatch)
-            GetLastPayments(dispatch)
+            GetPayments(dispatch);
+            GetLastPayments(dispatch);
           }
         } catch (err) {
           console.log(err);
@@ -74,15 +72,13 @@ const PaymentReport = () => {
       });
   };
 
-
-
-  useEffect(()=>{
+  useEffect(() => {
     let params = new URLSearchParams();
-    params.append("offset", (paginator-1)*20)
-    let temp = Object.entries(filterValues)
-    
-    temp.map(e=>{
-      params.append(e[0]=="ProducerId"?"UserId":`${e[0]}`, e[1]);
+    params.append("offset", (paginator - 1) * 20);
+    let temp = Object.entries(filterValues);
+
+    temp.map((e) => {
+      params.append(e[0] == "ProducerId" ? "UserId" : `${e[0]}`, e[1]);
     });
     axios
       .get(`https://truewayagentbackend.com/getPaymentsReport`, { params })
@@ -94,11 +90,9 @@ const PaymentReport = () => {
         setPayments([]);
         console.log(error);
       });
-  },[paginator, filterValues])
-
+  }, [paginator, filterValues]);
 
   const filterSubmit = (e) => {
- 
     setPaymentsFil(payments);
 
     setFiltered(true);
@@ -111,39 +105,39 @@ const PaymentReport = () => {
   };
 
   return (
-  <PaymentReportComponent
-    userRole={userRole}
-    payments={payments}
-    paymentsFil={paymentsFil}
-    dateF={dateF}
-    openFilter={openFilter}
-    filtered={filtered}
-    deleteConf={deleteConf}
-    deletedOne={deletedOne}
-    producers={producers}
-    clients={clients}
-    locations={locations}
-    setPayments={setPayments}
-    setPaymentsFil={setPaymentsFil}
-    setDateF={setDateF}
-    setOpenFilter={setOpenFilter}
-    setFiltered={setFiltered}
-    setDeleteConf={setDeleteConf}
-    setDeletedOne={setDeletedOne}
-    filterValues={filterValues}
-    setFilterValues={setFilterValues}
-    filterCheck={filterCheck}
-    setFilterCheck={setFilterCheck}
-    open={open}
-    onCloseModal={onCloseModal}
-    handleDelete={handleDelete}
-    handleDeleteModal={handleDeleteModal}
-    deleteClient={deleteClient}
-    filterSubmit={filterSubmit}
-    closeCloud={closeCloud}
-    paginator={paginator}
-    setPaginator={setPaginator}
-  />
+    <PaymentReportComponent
+      userRole={userRole}
+      payments={payments}
+      paymentsFil={paymentsFil}
+      dateF={dateF}
+      openFilter={openFilter}
+      filtered={filtered}
+      deleteConf={deleteConf}
+      deletedOne={deletedOne}
+      producers={producers}
+      clients={clients}
+      locations={locations}
+      setPayments={setPayments}
+      setPaymentsFil={setPaymentsFil}
+      setDateF={setDateF}
+      setOpenFilter={setOpenFilter}
+      setFiltered={setFiltered}
+      setDeleteConf={setDeleteConf}
+      setDeletedOne={setDeletedOne}
+      filterValues={filterValues}
+      setFilterValues={setFilterValues}
+      filterCheck={filterCheck}
+      setFilterCheck={setFilterCheck}
+      open={open}
+      onCloseModal={onCloseModal}
+      handleDelete={handleDelete}
+      handleDeleteModal={handleDeleteModal}
+      deleteClient={deleteClient}
+      filterSubmit={filterSubmit}
+      closeCloud={closeCloud}
+      paginator={paginator}
+      setPaginator={setPaginator}
+    />
   );
 };
 export default PaymentReport;

@@ -5,7 +5,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import AddPaymentComponent from "../Components/addPayment";
-import { GetA_AVG, GetClientsId, GetLastPayments, GetPayments } from "../Logic/Fetch";
+import {
+  GetA_AVG,
+  GetClients,
+  GetClientsId,
+  GetLastPayments,
+  GetPayments,
+} from "../Logic/Fetch";
 import { useHistory } from "react-router-dom";
 
 const schema = yup
@@ -20,6 +26,7 @@ const schema = yup
     method: yup.string().required(),
     creditCardFee: yup.string().optional().default("0"),
     LocationId: yup.number().positive().integer().required(),
+    policyNumber: yup.string().optional(),
     UserId: yup.number().required(),
     new: yup.bool().optional(),
     PIPvalue: yup.string().optional().default("0"),
@@ -199,7 +206,6 @@ function AddPayment(props) {
             setPaymentStatus("Payment added successfully");
           })
           .catch((err) => {
-
             onOpenModal();
             console.log(err);
             setAddingPayment(false);
@@ -217,13 +223,13 @@ function AddPayment(props) {
             GetPayments(dispatch);
             GetLastPayments(dispatch);
             GetA_AVG(dispatch);
+            GetClients(dispatch);
             GetClientsId(dispatch);
             onOpenModal();
             setAddingPayment(false);
             setPaymentStatus("Payment added successfully");
           })
           .catch((err) => {
-
             onOpenModal();
             console.log(err);
             setAddingPayment(false);
@@ -250,7 +256,6 @@ function AddPayment(props) {
             setPaymentStatus("Payment added successfully");
           })
           .catch((err) => {
-
             onOpenModal();
             console.log(err);
             setAddingPayment(false);
@@ -274,7 +279,6 @@ function AddPayment(props) {
             setPaymentStatus("Payment added successfully");
           })
           .catch((err) => {
-
             onOpenModal();
             console.log(err);
             setAddingPayment(false);
@@ -334,8 +338,13 @@ function AddPayment(props) {
     CompanyId: e.CompanyId,
     NSD: e.Category.NSDvalue,
     totalPremium: e.totalPremium,
-    LocationId: e.LocationId
+    LocationId: e.LocationId,
+    policyNumber: e.policyNumber,
+    effectiveDate: e.effectiveDate,
+    expirationDate: e.expirationDate,
   }));
+
+  console.log(quotes);
 
   return (
     <AddPaymentComponent

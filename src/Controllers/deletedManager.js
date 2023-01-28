@@ -5,7 +5,7 @@ import DeletedManagersComponent from "../Components/deletedManager";
 import { GetClients, GetClientsId } from "../Logic/Fetch";
 
 const DeletedManagers = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [managers, setManagers] = useState([]);
   const [sold, setSold] = useState(0);
   const [unSold, setUnSold] = useState(0);
@@ -42,8 +42,8 @@ const DeletedManagers = () => {
             console.log("error");
           } else {
             console.log(jsonRes);
-            GetClients(dispatch)
-          GetClientsId(dispatch)
+            GetClients(dispatch);
+            GetClientsId(dispatch);
           }
         } catch (err) {
           console.log(err);

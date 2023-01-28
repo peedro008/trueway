@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { BsChevronLeft } from "react-icons/bs";
+import Isologo_background from  "../assets/Isologo_background.png"
 import { AiOutlineDelete, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import spinnerr from "../assets/loadingIcon.gif";
 import "../Css/css.css";
 import { BiSearchAlt2 } from "react-icons/bi";
 
@@ -10,7 +11,19 @@ const PolicyNumberList = ({
   setPaginator,
   companies,
   setSearch,
+  totalMonthlyPayments,
+  filterOn,
+  setFilterOn,isLoader
+
 }) => {
+
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+const d = new Date();
+const month = monthNames[d.getMonth()]
+
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -47,6 +60,12 @@ const PolicyNumberList = ({
               </th>
               <th scope="col" className="column1">
                 <p className="REPtype2">Coverage (NSD)</p>
+              </th>
+              <th scope="col" className="column1">
+                <p className="REPtype2">Effective Date</p>
+              </th>
+              <th scope="col" className="column1">
+                <p className="REPtype2">Expiration Date</p>
               </th>
             </tr>
           </thead>
@@ -96,6 +115,12 @@ const PolicyNumberList = ({
                       <td scope="row" style={{ fontWeight: "bold" }}>
                        $ {e?.NSDvalue}
                       </td>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                       {e?.effectiveDate}
+                      </td>
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                       {e?.expirationDate}
+                      </td>
                     </tr>
                   );
                 })
@@ -103,6 +128,105 @@ const PolicyNumberList = ({
           </tbody>
         </table>
       </div>
+      {
+        isLoader ?     <img
+        src={spinnerr}
+        style={{
+          width: "100px",
+          marginLeft: '60px'
+        }}
+      />:
+        <div className="dashContCard2">
+       
+            <div
+            onClick={() => setFilterOn('TW1')}
+              className="dashCard"
+              style={{
+                marginLeft: "50px",
+                cursor: 'pointer',
+                backgroundColor: filterOn === 'TW1' ? " rgba(0, 39, 82,0.6)": " rgba(0, 39, 82,0.8)"     }}            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">
+                TW 1
+                </p>
+              </div>
+              <div className="dashText">
+              <p className="dashCardText" style={{ color: "#ebeff2",marginBottom: '-5px', marginTop: '-5px' }}>
+                Total {month} 
+                </p>
+                <p className="dashCardText" style={{ color: "#ebeff2", marginBottom: '5px' }}>
+                  Trueway 1
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalMonthlyPayments[0]}
+                </p>
+              
+              </div>
+            </div>
+            <div
+              className="dashCard"
+              onClick={() => setFilterOn('TW2')}
+              style={{
+                marginLeft: "50px",
+                cursor: 'pointer',
+                backgroundColor: filterOn === 'TW2' ? " rgba(0, 39, 82,0.6)": " rgba(0, 39, 82,0.8)"     }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                 <p className="dashCardText">
+                TW 2
+                </p>
+              </div>
+              <div className="dashText">
+              <p className="dashCardText" style={{ color: "#ebeff2",marginBottom: '-5px', marginTop: '-5px' }}>
+              Total {month}
+                </p>
+                <p className="dashCardText" style={{ color: "#ebeff2", marginBottom: '5px' }}>
+                  Trueway 2
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalMonthlyPayments[1]}
+                </p>
+                
+              </div>
+            </div>
+            <div
+              className="dashCard"
+              onClick={() => setFilterOn('CC')}
+              style={{
+                marginLeft: "50px",
+                cursor: 'pointer',
+                backgroundColor: filterOn === 'CC' ? " rgba(0, 39, 82,0.6)": " rgba(0, 39, 82,0.8)"     }}            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                 <p className="dashCardText">
+                CC
+                </p>
+              </div>
+              <div className="dashText">
+               
+              <p className="dashCardText" style={{ color: "#ebeff2",marginBottom: '-5px', marginTop: '-5px' }}>
+              Total {month}
+                </p>
+                <p className="dashCardText" style={{ color: "#ebeff2", marginBottom: '5px' }}>
+                  Call Center
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalMonthlyPayments[2]}
+                </p>
+              </div>
+            </div>
+           
+          </div>
+      }
+      
       <div className="PaginatorBox">
         <div
           className="PaginatorLeft"
@@ -141,7 +265,7 @@ const PolicyNumberList = ({
           style={{ marginLeft: "200px", marginRight: "10px" }}
         />
         <input
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {setSearch(e.target.value); setFilterOn('')}}
           style={{
             height: "25px",
             borderColor: "transparent",
@@ -152,6 +276,8 @@ const PolicyNumberList = ({
           placeholder="Policy Number..."
         ></input>
       </div>
+      <img src={Isologo_background} style={{position:"absolute", right:0, bottom:0, width:"428px", opacity:"0.5", pointerEvents: 'none'}}/>
+
     </div>
   );
 };

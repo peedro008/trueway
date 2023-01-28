@@ -379,7 +379,6 @@ const AddQuoteComponent = ({
               style={{
                 display: "flex",
                 flexDirection: "column",
-                backgroundColor: "start",
               }}
             >
               <p className="AQinputName">Monthly payment</p>
@@ -505,6 +504,43 @@ const AddQuoteComponent = ({
               </div>
             </div>
           </div>
+          {inputs.Bound && (
+            <div className="AQrowContainer1">
+              <div className="AQinputContainer">
+                <p className="AQinputName">Policy Number</p>
+                <input
+                  className="AQinput"
+                  placeholder="Policy Number"
+                  key="policyNumber"
+                  name="policyNumber"
+                  {...register("policyNumber")}
+                />
+              </div>
+              <div className="AQinputContainer">
+                <p className="AQinputName">Efective Date</p>
+                <input
+                  type={"date"}
+                  className="AQinput"
+                  placeholder="Effective Date"
+                  key="effectiveDate"
+                  name="effectiveDate"
+                  {...register("effectiveDate")}
+                />
+              </div>
+              <div className="AQinputContainer">
+                <p className="AQinputName">Expiration Date</p>
+                <input
+                  type={"date"}
+                  className="AQinput"
+                  placeholder="Expiration Date"
+                  key="expirationDate"
+                  name="expirationDate"
+                  {...register("expirationDate")}
+                />
+              </div>
+              <div className="AQinputContainer"></div>
+            </div>
+          )}
 
           <div className="AQwhiteContainer10">
             <div className="AQinputContainer">

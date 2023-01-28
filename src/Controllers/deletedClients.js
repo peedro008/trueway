@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DeletedClientsComponent from "../Components/deletedClients";
 import { GetClients, GetClientsId } from "../Logic/Fetch";
 function DeletedClients() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [clients, setClients] = useState([]);
   const [deleteConf, setDeleteConf] = useState("");
   const [deletedOne, setDeletedOne] = useState(null);
@@ -48,8 +48,8 @@ function DeletedClients() {
             console.log("error");
           } else {
             console.log(jsonRes);
-            GetClients(dispatch)
-          GetClientsId(dispatch)
+            GetClients(dispatch);
+            GetClientsId(dispatch);
           }
         } catch (err) {
           console.log(err);

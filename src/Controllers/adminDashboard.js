@@ -35,8 +35,8 @@ const AdminDashboard = () => {
   const quotex = useSelector((s) => s.AVG);
   const A_AVG = useSelector((s) => s.A_AVG);
   const Payment = useSelector((state) => state.Payments);
-  const [loading, setLoading] = useState(true)
-const [cuotitas, setCuotitas] = useState([])
+  const [loading, setLoading] = useState(true);
+  const [cuotitas, setCuotitas] = useState([]);
   const quotexWithoutDeleted = quotex?.filter((e) => e.deleted == false);
   const A_AVGWithoutDeleted = A_AVG?.filter((e) => e.deleted == false);
   useEffect(() => {
@@ -50,14 +50,13 @@ const [cuotitas, setCuotitas] = useState([])
     setUnSold(tempU);
   }, [A_AVG]);
 
-useEffect(() => {
-  getQuoteStatuses()
-}, [])
+  useEffect(() => {
+    getQuoteStatuses();
+  }, []);
 
   useEffect(() => {
-    
     setTimeout(() => {
-      setLoading(false)
+      setLoading(false);
       let temp = [];
       let pes = [];
       {
@@ -73,7 +72,7 @@ useEffect(() => {
             }
           });
         setModifiedList(temp);
-        } 
+      }
     }, 500);
   }, [cuotitas]);
 

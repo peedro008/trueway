@@ -122,11 +122,11 @@ function QuoteModifyComponent({id,
                 {(renew||bound||reInstall)&&<div style={{width:"max-content"}} > 
                    <div className="MOBmainInput"  >
                         <div className="MOBinputDiv" > 
-                            <p className="MOBinputText">Down amount</p>
+                            <p className="MOBinputText">Down payment</p>
                             <input onChange={(e)=>{setInputs({...inputs, down:e.target.value})}} placeholder="down" className="MOBinput"></input>
                         </div>
                         <div className="MOBinputDiv" > 
-                            <p  className="MOBinputText">Monthly amount</p>
+                            <p  className="MOBinputText">Monthly payment</p>
                             <input  onChange={(e)=>{setInputs({...inputs, monthly:e.target.value})}} placeholder="monthly" className="MOBinput"></input>
                         </div>
                     </div></div>}

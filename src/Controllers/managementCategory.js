@@ -16,7 +16,7 @@ const schema = yup
   .required();
 
 const ManagerCategory = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [inputs, setinputs] = useState({});
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -47,13 +47,12 @@ const ManagerCategory = () => {
               console.log("error");
             } else {
               console.log(jsonRes);
-              GetCategories(dispatch)
+              GetCategories(dispatch);
             }
           } catch (err) {
             console.log(err);
           }
           onOpenModal();
-        
         })
         .catch((err) => {
           console.log(err);

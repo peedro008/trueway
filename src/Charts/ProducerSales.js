@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import spinnerr from "../assets/loadingIcon.gif";
 
-
 function ProducerSales({ aboutProps, google }) {
   const [chart, setChart] = useState(null);
   const [quotes, setQuotes] = useState([]);
@@ -136,9 +135,9 @@ function ProducerSales({ aboutProps, google }) {
   }, [year]);
 
   useEffect(() => {
-      setTimeout(() => {
-        setTime(true);
-        if (google && !chart && dato.length) {
+    setTimeout(() => {
+      setTime(true);
+      if (google && !chart && dato.length) {
         const data = new google.visualization.DataTable();
         data.addColumn("string", "Topping");
         data.addColumn("number", "Sold Quotes", "color:#6F52ED");
@@ -168,7 +167,7 @@ function ProducerSales({ aboutProps, google }) {
           document.getElementById("producerSales")
         );
         newChart.draw(data, options);
-      
+
         setChart(newChart);
       }
     }, 4000);
@@ -189,12 +188,10 @@ function ProducerSales({ aboutProps, google }) {
         />
       ) : (
         <div
-        style={{ minHeight: "400px", minWidth: "66vw" }}
-        id="producerSales"
-      ></div>
+          style={{ minHeight: "400px", minWidth: "66vw" }}
+          id="producerSales"
+        ></div>
       )}
-
-    
     </>
   );
 }

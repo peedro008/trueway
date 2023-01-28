@@ -303,11 +303,20 @@ function AddPaymentComponent({
                           Company: val.CompanyId,
                           NSDcategory: val.NSD,
                           totalPremium: val.totalPremium,
-                          LocationId: val.LocationId
+                          LocationId: val.LocationId,
+                          policyNumber: val.policyNumber,
+                          effectiveDate: val.effectiveDate,
+                          expirationDate: val.expirationDate
                         });
                         setValue(
                           "LocationId",
-                          val.LocationId
+                          val.LocationId,
+                          "policyNumber",
+                          val.policyNumber,
+                          "effectiveDate",
+                          val.effectiveDate,
+                          "expirationDate",
+                          val.expirationDate,
                         );
                    
                         setTotalValues({
@@ -317,6 +326,9 @@ function AddPaymentComponent({
                           CategoryNsd: optionsCa.find(
                             (c) => c.value === val.Category
                           ).NSD,
+                          policyNumber: val.policyNumber,
+                          effectiveDate: val.effectiveDate,
+                          expirationDate: val.expirationDate
                         });
                       }}
                       control={control}
@@ -505,7 +517,6 @@ function AddPaymentComponent({
               setTotalValues({ ...totalValues, increasePremium: e.target.value });
             }}
           />
-          
         </div>
         }
         </div>
@@ -571,18 +582,54 @@ function AddPaymentComponent({
               <p className="FORMerror">{errors.creditCardFee?.message}</p>
             </div>
           )}
-          <div className="PAYInputCont">
-          <p className="PAYtitle" style={{width: '600px'}}>Policy number for New Policies, Endorsments and Renewals ONLY</p>
+
+{( isEndorsement === 'Renew Down' || isEndorsement === 'Down Payment' || isEndorsement === 'Full Premium' || isEndorsement === 'Endorsement') &&
+<>
+
+          <div className="PAYInputCont" style={{marginTop: '-13px', marginRight: '0px'}}>
+          <p className="PAYtitle" style={{width: '245px', fontSize: '15px'}}>Policy number for New Policies, Endorsments, Renewals ONLY.</p>         
           <input
             placeholder="Policy Number"
             className="AQinput"
+            defaultValue={form.policyNumber || ''}
             value={payment?.policyNumber}
             {...register("policyNumber")}
             onChange={(e) => {
               setTotalValues({ ...totalValues, policyNumber: e.target.value });
             }}
           />
+        
         </div>
+        <div className="PAYInputCont">
+          <p className="PAYtitle">Effective Date</p>
+          <input
+          type={"date"}
+            placeholder="Effective Date"
+            className="AQinput"
+            defaultValue={form.effectiveDate}
+            value={payment?.effectiveDate}
+            {...register("effectiveDate")}
+            onChange={(e) => {
+              setTotalValues({ ...totalValues, effectiveDate: e.target.value });
+            }}
+          />
+        </div>
+        <div className="PAYInputCont">
+          <p className="PAYtitle">Expiration Date</p>
+          <input
+          type={"date"}
+            placeholder="Expiration Date"
+            className="AQinput"
+            defaultValue={form.expirationDate}
+            value={payment?.expirationDate}
+            {...register("expirationDate")}
+            onChange={(e) => {
+              setTotalValues({ ...totalValues, expirationDate: e.target.value });
+            }}
+          />
+        </div>
+        </>
+}
         </div>
         
         <div className="AQwhiteContainer11">

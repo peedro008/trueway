@@ -16,7 +16,7 @@ const schema = yup
   .required();
 
 function ManagementLocation() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -40,27 +40,22 @@ function ManagementLocation() {
         .then(async (res) => {
           try {
             const jsonRes = await res.json();
-            GetLocations(dispatch)
+            GetLocations(dispatch);
             if (res.status !== 200) {
               console.log("error");
             } else {
               console.log(jsonRes);
-             
             }
           } catch (err) {
             console.log(err);
           }
-          
         })
-        
-          
-      
+
         .catch((err) => {
           console.log(err);
         });
-        
+
     onOpenModal();
- 
   };
   return (
     <ManagementLocationComponent

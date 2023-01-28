@@ -9,14 +9,11 @@ import ManagementDealerSalePersonComponent from "../Components/managementDealerS
 const schema = yup
   .object({
     name: yup.string().required(),
-
-   
   })
   .required();
 
 function ManagementDealerSalePerson() {
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
@@ -42,28 +39,24 @@ function ManagementDealerSalePerson() {
         .then(async (res) => {
           try {
             const jsonRes = await res.json();
-            
+
             if (res.status !== 200) {
               console.log("error");
             } else {
-                
               console.log(jsonRes);
             }
           } catch (err) {
             console.log(err);
           }
-       
+
           onOpenModal();
-         
         })
-        .then(()=>GetDealerSalePerson(dispatch))
+        .then(() => GetDealerSalePerson(dispatch))
 
         .catch((err) => {
           console.log(err);
         });
   };
-
-
 
   return (
     <ManagementDealerSalePersonComponent
@@ -71,7 +64,6 @@ function ManagementDealerSalePerson() {
       onCloseModal={onCloseModal}
       open={open}
       control={control}
-      
       handleSubmit={handleSubmit}
       onSubmit={onSubmit}
       register={register}

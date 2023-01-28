@@ -23,18 +23,21 @@ import {
 } from "../Redux/actions";
 
 const date = new Date();
-function sumarDias(fecha, dias){
-  const date = new Date(fecha)
+function sumarDias(fecha, dias) {
+  const date = new Date(fecha);
   date.setDate(date.getDate() + dias);
   return date;
 }
 
-let yearBy = date.getFullYear()
-let monthBy =  ( (date.getMonth() + 1)>9?"-":"-0" ) + (date.getMonth() + 1)
-let yearTo = date.getFullYear()
-let monthTo = ( (date.getMonth() +2)>9?"-":"-0" ) + (date.getMonth()+2)
+let yearBy = date.getFullYear();
+let monthBy = (date.getMonth() + 1 > 9 ? "-" : "-0") + (date.getMonth() + 1);
+let yearTo = date.getFullYear();
+let monthTo = (date.getMonth() + 2 > 9 ? "-" : "-0") + (date.getMonth() + 2);
 
-if(monthTo === '-13') {monthTo = '-01'; yearTo = date.getFullYear() + 1}
+if (monthTo === "-13") {
+  monthTo = "-01";
+  yearTo = date.getFullYear() + 1;
+}
 
 const FetchAll = (dispatch) => {
   axios
@@ -45,16 +48,20 @@ const FetchAll = (dispatch) => {
     .catch((error) => {
       console.log(error);
     });
-    axios
-    .get(`https://truewayagentbackend.com/getUsersAverage?dateFrom=${yearBy}${( (date.getMonth() +1)>9?"-":"-0" )}${(date.getMonth()+1)}-01&dateTo=${yearTo}${monthTo}-01`)
+  axios
+    .get(
+      `https://truewayagentbackend.com/getUsersAverage?dateFrom=${yearBy}${
+        date.getMonth() + 1 > 9 ? "-" : "-0"
+      }${date.getMonth() + 1}-01&dateTo=${yearTo}${monthTo}-01`
+    )
     .then(function (response) {
-      console.log(response.data)
+      console.log(response.data);
       dispatch(a_avg(response.data));
     })
     .catch((error) => {
       console.log(error);
     });
-    axios
+  axios
     .get(`https://truewayagentbackend.com/getUsersAverage`)
     .then(function (response) {
       dispatch(avg(response.data));
@@ -103,11 +110,11 @@ const FetchAll = (dispatch) => {
     .catch((error) => {
       console.log(error);
     });
-    axios
+  axios
     .get(`https://truewayagentbackend.com/clientsLast`)
     .then(function (response) {
       dispatch(getClientsID(response.data));
-      console.log('HOla')
+      console.log("HOla");
     })
     .catch((error) => {
       console.log(error);
@@ -152,7 +159,7 @@ const FetchAll = (dispatch) => {
     .catch((error) => {
       console.log(error);
     });
-    axios
+  axios
     .get(`https://truewayagentbackend.com/getLastPayments`)
     .then(function (response) {
       dispatch(getLastPayments(response.data));
@@ -231,17 +238,20 @@ const GetCompany = (dispatch) => {
 };
 
 const GetA_AVG = (dispatch) => {
-
   axios
-  .get(`https://truewayagentbackend.com/getUsersAverage?dateFrom=${yearBy}${( (date.getMonth() +1)>9?"-":"-0" )}${(date.getMonth()+1)}-01&dateTo=${yearTo}${monthTo}-01`)
-  .then(function (response) {
-    console.log(response.data)
-    dispatch(a_avg(response.data));
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+    .get(
+      `https://truewayagentbackend.com/getUsersAverage?dateFrom=${yearBy}${
+        date.getMonth() + 1 > 9 ? "-" : "-0"
+      }${date.getMonth() + 1}-01&dateTo=${yearTo}${monthTo}-01`
+    )
+    .then(function (response) {
+      console.log(response.data);
+      dispatch(a_avg(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 const GetClients = (dispatch) => {
   axios
@@ -255,15 +265,15 @@ const GetClients = (dispatch) => {
 };
 
 const GetClientsId = (dispatch) => {
-axios
-.get(`https://truewayagentbackend.com/clientsLast`)
-.then(function (response) {
-  dispatch(getClientsID(response.data));
-  console.log('HOla')
-})
-.catch((error) => {
-  console.log(error);
-});
+  axios
+    .get(`https://truewayagentbackend.com/clientsLast`)
+    .then(function (response) {
+      dispatch(getClientsID(response.data));
+      console.log("HOla");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 const GetProducer = (dispatch) => {
@@ -333,7 +343,7 @@ const GetPayments = (dispatch) => {
 };
 
 const GetLastPayments = (dispatch) => {
-    axios
+  axios
     .get(`https://truewayagentbackend.com/getLastPayments`)
     .then(function (response) {
       dispatch(getLastPayments(response.data));
@@ -394,5 +404,5 @@ export {
   GetDealerSalePerson,
   GetClientsId,
   GetA_AVG,
-  GetLastPayments
+  GetLastPayments,
 };

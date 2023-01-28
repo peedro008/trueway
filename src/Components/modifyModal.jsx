@@ -3,9 +3,11 @@ import { BiPencil } from "react-icons/bi";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
+import { NavLink } from "react-router-dom";
 import { Controller } from "react-hook-form";
 
 import Select from "react-select";
+import { BsInfoCircle } from "react-icons/bs";
 const ModifyModalComponent = ({
     quoteM,
     quote,
@@ -35,8 +37,9 @@ const ModifyModalComponent = ({
     checkBound,
     checkCancel,
     optionsCo,
+    reload,
     submit,}) => {
-  
+  console.log(quoteM)
   return (
     <Modal
       open={open}
@@ -47,7 +50,24 @@ const ModifyModalComponent = ({
       <div>
         <div className="genericHeader">
           <p className="genericTitle">Modify quote</p>
-          <p className="genericSubTitle1">Quote # {quoteM.id} </p>
+           
+          <div style={{width:'150px', display: 'flex'}}>
+
+          
+          <NavLink
+                        style={{width:'25px', marginTop: '2px'}}
+                        to={{
+                          pathname: "/report/quote",
+                          aboutProps: { ID: quoteM.id },
+                        }}
+                      >
+                        <div className="InfoIcon2">
+                        <BsInfoCircle size={'25px'} color={'#54B4D3'}/>
+                        </div>
+                      </NavLink>
+                      <p className="genericSubTitle1" style={{marginLeft: '10px'}}>Quote # {quoteM.id} </p>
+                      </div>
+                     
         </div>
 
         {!quoteM ? (
@@ -57,42 +77,42 @@ const ModifyModalComponent = ({
             <tbody>
               <tr>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Client name</p>
+                  <p className="REPtype2">Client name</p>
                 </th>
 
                 <th scope="col" className="column1">
-                  <p className="REPtype">Client phone</p>
+                  <p className="REPtype2">Client phone</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Company</p>
+                  <p className="REPtype2">Company</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Monthly Payments</p>
+                  <p className="REPtype2">Monthly Payments</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Down Payments</p>
+                  <p className="REPtype2">Down Payments</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Date</p>
+                  <p className="REPtype2">Date</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Time</p>
+                  <p className="REPtype2">Time</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Quoted by</p>
+                  <p className="REPtype2">Quoted by</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Status</p>
+                  <p className="REPtype2">Status</p>
                 </th>
                 
                 {
                   quoteM.QuoteStatuses[0].Status=="Sold"
                 &&<>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Sold date</p>
+                  <p className="REPtype2">Sold date</p>
                 </th>
                 <th scope="col" className="column1">
-                  <p className="REPtype">Sold by</p>
+                  <p className="REPtype2">Sold by</p>
                 </th></>}
               </tr>
 
@@ -141,7 +161,7 @@ const ModifyModalComponent = ({
         )}
 
         <div className="MOBbox1">
-        <div className="MOBsBox" >
+        <div className="MOBsBox">
                 <p className="MOBtitle" style={{ color: "#777DA7" }}>
                   Add Note
                 </p>
@@ -238,30 +258,29 @@ const ModifyModalComponent = ({
             </div>
 
             {(renew || bound || reInstall) && (
-              <div style={{  }}>
-                <div className="MOBmainInput">
+              <>
+              
+                <div className="MOBmainInput2">
                   <div className="MOBinputDiv">
-                    <p className="MOBinputText">Down amount</p>
+                    <p className="MOBinputText">Down payment</p>
                     <input
                       onChange={(e) => {
                         setInputs({ ...inputs, down: e.target.value });
                       }}
-                      placeholder="down"
+                      placeholder="Down"
                       className="AQinput"
                     ></input>
                   </div>
                   <div className="MOBinputDiv">
-                    <p className="MOBinputText">Monthly amount</p>
+                    <p className="MOBinputText">Monthly payment</p>
                     <input
                       onChange={(e) => {
                         setInputs({ ...inputs, monthly: e.target.value });
                       }}
-                      placeholder="monthly"
+                      placeholder="Monthly"
                       className="AQinput"
                     ></input>
-                  </div>
-                  </div>
-                  <div className="MOBmainInput">
+                  </div>   
                   <div className="MOBinputDiv">
                     <p className="MOBinputText">Company</p>
                     
@@ -292,22 +311,63 @@ const ModifyModalComponent = ({
                 onChange={(val) => setInputs({ ...inputs,date:val.target.value})}
               />
              
-            </div>
+                  </div>
               
                 </div>
-              </div>
+             <div className="MOBmainInput2">
+                  <div className="MOBinputDiv">
+                    <p className="MOBinputText">Effective Date</p>
+                    <input
+                      onChange={(e) => {
+                        setInputs({ ...inputs, effectiveDate: e.target.value });
+                      }}
+                      defaultValue={quoteM?.effectiveDate}
+                      type='date'
+                      className="AQinput"
+                    ></input>
+                  </div>
+                  <div className="MOBinputDiv">
+                    <p className="MOBinputText">Expiration Date</p>
+                    <input
+                      onChange={(e) => {
+                        setInputs({ ...inputs, expirationDate: e.target.value });
+                      }}
+                      defaultValue={quoteM?.expirationDate}
+                      type='date'
+                      className="AQinput"
+                    ></input>
+                  </div>   
+                  <div className="MOBinputDiv">
+                    <p className="MOBinputText" style={{width: '500px', fontSize: '15px'}}>Policy number for New Policies, Endorsments, Renewals ONLY.</p>
+                    
+                    <input
+                      onChange={(e) => {
+                        setInputs({ ...inputs, policyNumber: e.target.value });
+                      }}
+                      defaultValue={quoteM?.policyNumber}
+                      placeholder='Policy number...'
+                      className="AQinput"
+                    ></input>
+             
+                  </div>
+                 
+              
+                </div>
+                </>
             )}
             {(renew || bound || cancel || reInstall || notes) && (
-              <div className="MOBinputDiv">
+              <div className="MOBinputDiv" style={{marginLeft: '-200px'}}>
                 <p className="MOBinputText">Notes</p>
                 <textarea
                   onChange={(e) => {
                     setInputs({ ...inputs, note: e.target.value });
                   }}
+                  placeholder='Type notes...'
                   className="MOBtexta1"
                 />
               </div>
             )}
+            
           </div>
 
           {/* <div className='MOBsBox'>
@@ -355,7 +415,7 @@ const ModifyModalComponent = ({
 
             <p className="modalText">Quote modified successfully</p>
 
-            <button onClick={onCloseModal} className="modalButton">
+            <button onClick={reload} className="modalButton">
               Continue
             </button>
           </div>

@@ -6,7 +6,7 @@ import DeletedPaymentsComponent from "../Components/deletedPayment";
 import { GetPayments } from "../Logic/Fetch";
 
 const DeletedPayments = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const userRole = useSelector((state) => state.userRole);
   const clients = useSelector((state) => state.Clients);
   const producers = useSelector((state) => state.Producers);

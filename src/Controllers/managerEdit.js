@@ -36,7 +36,6 @@ const ManagerEdit = (props) => {
     resolver: yupResolver(schema),
   });
 
-
   setValue("UserId", `${Producer.UserId}`);
 
   setValue("ProducerId", `${Producer.id}`);
@@ -57,7 +56,7 @@ const ManagerEdit = (props) => {
             console.log("error");
           } else {
             console.log(jsonRes);
-            GetManager(dispatch)
+            GetManager(dispatch);
           }
         } catch (err) {
           console.log(err);
