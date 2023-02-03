@@ -6,7 +6,8 @@ import GenericReportComponent from "../Components/genericReport";
 
 function GenericReport(props) {
   let data = props.location?.aboutProps;
-  console.log(data)
+  console.log(data);
+
   const [paymentsFil, setPaymentsFil] = useState(data.items);
   const [cash, setCash] = useState(0);
   const [credit, setCredit] = useState(0);
@@ -18,7 +19,7 @@ function GenericReport(props) {
     EFT: false,
     CDC: false,
   });
-  const users = useSelector(e=>e.Users)
+  const users = useSelector((e) => e.Users);
   const checkCash = () => {
     if (data.type == "P") {
       if (checkbox.Cash) {
@@ -84,26 +85,44 @@ function GenericReport(props) {
     paz.map((h) => {
       h.method == "Cash"
         ? (CA += Number(
-            Number(h.amount)? Number(h.amount):0 +
-              Number(h.creditCardFee)? Number(h.creditCardFee):0 +
-              Number(h.NSDvalue)? Number(h.NSDvalue):0 +
-              Number(h.MVRvalue)? Number(h.MVRvalue):0 +
-              Number(h.PIPvalue)? Number(h.PIPvalue):0
+            Number(h.amount)
+              ? Number(h.amount)
+              : 0 + Number(h.creditCardFee)
+              ? Number(h.creditCardFee)
+              : 0 + Number(h.NSDvalue)
+              ? Number(h.NSDvalue)
+              : 0 + Number(h.MVRvalue)
+              ? Number(h.MVRvalue)
+              : 0 + Number(h.PIPvalue)
+              ? Number(h.PIPvalue)
+              : 0
           ))
         : h.method == "EFT"
         ? (EF += Number(
-            Number(h.amount)? Number(h.amount):0 +
-              Number(h.creditCardFee)? Number(h.creditCardFee):0 +
-              Number(h.NSDvalue)? Number(h.NSDvalue):0 +
-              Number(h.MVRvalue)? Number(h.MVRvalue):0 +
-              Number(h.PIPvalue)? Number(h.PIPvalue):0
+            Number(h.amount)
+              ? Number(h.amount)
+              : 0 + Number(h.creditCardFee)
+              ? Number(h.creditCardFee)
+              : 0 + Number(h.NSDvalue)
+              ? Number(h.NSDvalue)
+              : 0 + Number(h.MVRvalue)
+              ? Number(h.MVRvalue)
+              : 0 + Number(h.PIPvalue)
+              ? Number(h.PIPvalue)
+              : 0
           ))
         : (CR += Number(
-            Number(h.amount)? Number(h.amount):0 +
-              Number(h.creditCardFee)? Number(h.creditCardFee):0 +
-              Number(h.NSDvalue)? Number(h.NSDvalue):0 +
-              Number(h.MVRvalue)? Number(h.MVRvalue):0 +
-              Number(h.PIPvalue)? Number(h.PIPvalue):0
+            Number(h.amount)
+              ? Number(h.amount)
+              : 0 + Number(h.creditCardFee)
+              ? Number(h.creditCardFee)
+              : 0 + Number(h.NSDvalue)
+              ? Number(h.NSDvalue)
+              : 0 + Number(h.MVRvalue)
+              ? Number(h.MVRvalue)
+              : 0 + Number(h.PIPvalue)
+              ? Number(h.PIPvalue)
+              : 0
           ));
     });
     setCash(CA);
@@ -117,7 +136,7 @@ function GenericReport(props) {
         TOTAL +
         (parseFloat(h.amount) +
           parseFloat(h.creditCardFee) +
-        (  Number(h.NSDvalue)?Number(h.NSDvalue):0) +
+          (Number(h.NSDvalue) ? Number(h.NSDvalue) : 0) +
           parseFloat(h.MVRvalue) +
           parseFloat(h.PIPvalue));
     });

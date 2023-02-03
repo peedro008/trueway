@@ -66,11 +66,11 @@ function AddPaymentComponent({
   setPercent,
   clientsId,
   addingPayment,
-  paymentStatus
+  paymentStatus,
 }) {
-  const [colorButtom, setColorButtom] = useState(true)
- const [isEndorsement, setIsEndorsement] = useState('')
- console.log(form)
+  const [colorButtom, setColorButtom] = useState(true);
+  const [isEndorsement, setIsEndorsement] = useState("");
+  console.log(form);
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -83,9 +83,12 @@ function AddPaymentComponent({
             <div style={{ display: "flex", flexDirection: "row" }}>
               <p className="PAYtitle">Client Name</p>
               <BiMessageSquareAdd
-                onClick={() => {handleNewClient(); setColorButtom(!colorButtom)}}
+                onClick={() => {
+                  handleNewClient();
+                  setColorButtom(!colorButtom);
+                }}
                 size="20"
-                color={colorButtom ? "#28C76F" : '#DC4C64'}
+                color={colorButtom ? "#28C76F" : "#DC4C64"}
                 style={{ marginLeft: "70px", cursor: "pointer" }}
               />
             </div>
@@ -143,17 +146,20 @@ function AddPaymentComponent({
                       //   // console.log(val.key)
                       // }}
                       control={control}
-                      options={ clientsId}
+                      options={clientsId}
                       name={"ClientId"}
                       className="PAYselect"
-                      
                     />
                   )}
                 />
               </>
             ) : (
               <>
-                <input className="PAYsub-title" {...register("name")} placeholder="Name"/>
+                <input
+                  className="PAYsub-title"
+                  {...register("name")}
+                  placeholder="Name"
+                />
                 <p className="FORMerror">{errors.name?.message}</p>
               </>
             )}
@@ -226,37 +232,42 @@ function AddPaymentComponent({
                       </div>
                     </div>
                   </div>
-                  <div className="AQinputContainer" style={{ marginLeft: '30px' }}>
-                <p className="AQinputName">Company</p>
-                <div className="AQyesNoContainer">
-                  <div>
-                    <Controller
-                      control={control}
-                      name="CompanyId"
-                      render={({ field: { onChange, onBlur, value, ref } }) => (
-                        <Select
-                          defaultValue={optionsComp?.find(
-                            (c) => c.value === form.Company
-                          )}
-                          value={optionsComp.find((c) => c.value === value)}
-                          onChange={(val) => {
-                            onChange(val.value);
-                            setTotalValues({
-                              ...totalValues,
-                              CompanyId: val.value
-                            });
-                          }}
+                  <div
+                    className="AQinputContainer"
+                    style={{ marginLeft: "30px" }}
+                  >
+                    <p className="AQinputName">Company</p>
+                    <div className="AQyesNoContainer">
+                      <div>
+                        <Controller
                           control={control}
-                          options={optionsComp}
-                          name={"Company"}
-                          className="PAYselect"
-                          placeholder="Select Company"
+                          name="CompanyId"
+                          render={({
+                            field: { onChange, onBlur, value, ref },
+                          }) => (
+                            <Select
+                              defaultValue={optionsComp?.find(
+                                (c) => c.value === form.Company
+                              )}
+                              value={optionsComp.find((c) => c.value === value)}
+                              onChange={(val) => {
+                                onChange(val.value);
+                                setTotalValues({
+                                  ...totalValues,
+                                  CompanyId: val.value,
+                                });
+                              }}
+                              control={control}
+                              options={optionsComp}
+                              name={"Company"}
+                              className="PAYselect"
+                              placeholder="Select Company"
+                            />
+                          )}
                         />
-                      )}
-                    />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
                   <div
                     className="AQinputContainer"
                     style={{ marginLeft: "50px" }}
@@ -285,7 +296,10 @@ function AddPaymentComponent({
             </div>
           ) : (
             <>
-              <div className="PAYInputCont" style={{ marginTop: "25px", marginRight: '53px' }}>
+              <div
+                className="PAYInputCont"
+                style={{ marginTop: "25px", marginRight: "53px" }}
+              >
                 <p className="PAYtitle">Quote</p>
                 <Controller
                   control={control}
@@ -306,7 +320,7 @@ function AddPaymentComponent({
                           LocationId: val.LocationId,
                           policyNumber: val.policyNumber,
                           effectiveDate: val.effectiveDate,
-                          expirationDate: val.expirationDate
+                          expirationDate: val.expirationDate,
                         });
                         setValue(
                           "LocationId",
@@ -316,9 +330,9 @@ function AddPaymentComponent({
                           "effectiveDate",
                           val.effectiveDate,
                           "expirationDate",
-                          val.expirationDate,
+                          val.expirationDate
                         );
-                   
+
                         setTotalValues({
                           ...totalValues,
                           Category: val.Category,
@@ -328,7 +342,7 @@ function AddPaymentComponent({
                           ).NSD,
                           policyNumber: val.policyNumber,
                           effectiveDate: val.effectiveDate,
-                          expirationDate: val.expirationDate
+                          expirationDate: val.expirationDate,
                         });
                       }}
                       control={control}
@@ -339,11 +353,12 @@ function AddPaymentComponent({
                     />
                   )}
                 />
-
-               
               </div>
-              
-              <div className="AQinputContainer" style={{ marginTop: "29px", marginRight: '50px' }}>
+
+              <div
+                className="AQinputContainer"
+                style={{ marginTop: "29px", marginRight: "50px" }}
+              >
                 <p className="AQinputName">Category</p>
                 <div className="AQyesNoContainer">
                   <div>
@@ -385,39 +400,41 @@ function AddPaymentComponent({
                   </div>
                 </div>
               </div>
-              {!form.Company &&
-              <div className="AQinputContainer" style={{ marginTop: "29px" }}>
-                <p className="AQinputName">Company</p>
-                <div className="AQyesNoContainer">
-                  <div>
-                    <Controller
-                      control={control}
-                      name="CompanyId"
-                      render={({ field: { onChange, onBlur, value, ref } }) => (
-                        <Select
-                          defaultValue={optionsComp?.find(
-                            (c) => c.value === form.Company
-                          )}
-                          value={optionsComp.find((c) => c.value === value)}
-                          onChange={(val) => {
-                            onChange(val.value);
-                            setTotalValues({
-                              ...totalValues,
-                              CompanyId: val.value
-                            });
-                          }}
-                          control={control}
-                          options={optionsComp}
-                          name={"Company"}
-                          className="PAYselect"
-                          placeholder="Select Company"
-                        />
-                      )}
-                    />
+              {!form.Company && (
+                <div className="AQinputContainer" style={{ marginTop: "29px" }}>
+                  <p className="AQinputName">Company</p>
+                  <div className="AQyesNoContainer">
+                    <div>
+                      <Controller
+                        control={control}
+                        name="CompanyId"
+                        render={({
+                          field: { onChange, onBlur, value, ref },
+                        }) => (
+                          <Select
+                            defaultValue={optionsComp?.find(
+                              (c) => c.value === form.Company
+                            )}
+                            value={optionsComp.find((c) => c.value === value)}
+                            onChange={(val) => {
+                              onChange(val.value);
+                              setTotalValues({
+                                ...totalValues,
+                                CompanyId: val.value,
+                              });
+                            }}
+                            control={control}
+                            options={optionsComp}
+                            name={"Company"}
+                            className="PAYselect"
+                            placeholder="Select Company"
+                          />
+                        )}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-               }
+              )}
             </>
           )}
         </div>
@@ -430,9 +447,17 @@ function AddPaymentComponent({
               name="LocationId"
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Select
-                defaultValue={optionsL.find((c) => c.value === form.LocationId)}
-                value={optionsL.find((c) => c.value === form.LocationId)}
-                  onChange={(val) => onChange(val.value)}
+                  defaultValue={optionsL.find(
+                    (c) => c.value === form.LocationId
+                  )}
+                  value={optionsL.find((c) => c.value === value)}
+                  onChange={(val) => {
+                    onChange(val.value);
+                    setTotalValues({
+                      ...totalValues,
+                      LocationId: val.value,
+                    });
+                  }}
                   control={control}
                   options={locations.map((e) => ({
                     value: e.id,
@@ -470,7 +495,10 @@ function AddPaymentComponent({
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Select
                   value={optionT.find((c) => c.value === value)}
-                  onChange={(val) => {onChange(val.value); setIsEndorsement(val.value)}}
+                  onChange={(val) => {
+                    onChange(val.value);
+                    setIsEndorsement(val.value);
+                  }}
                   control={control}
                   options={optionT.map((e) => ({
                     value: e.value,
@@ -484,45 +512,49 @@ function AddPaymentComponent({
             />
             <p className="FORMerror">{errors.type?.message}</p>
           </div>
-          {(isEndorsement === 'Endorsement' && 
-          <div className="PAYInputCont">
-          <p className="PAYtitle">Additional premium</p>
-          <input
-            placeholder="Add to Premium"
-            className="AQinput"
-            type='number'
-            defaultValue={0}
-            value={payment?.increasePremium}
-            {...register("increasePremium")}
-            onChange={(e) => {
-              setTotalValues({ ...totalValues, increasePremium: e.target.value });
-            }}
-          />
-          
-        </div>
-        )}
-          {( isEndorsement === 'Renew Down' || isEndorsement === 'Down Payment' || isEndorsement === 'Full Premium') &&
-          
-          <div className="PAYInputCont">
-          <p className="PAYtitle">Total premium</p>
-          <input
-            placeholder="Add to Premium"
-            className="AQinput"
-            type='number'
-            defaultValue={form.totalPremium || 0}
-            value={payment?.increasePremium}
-            {...register("increasePremium")}
-            onChange={(e) => {
-
-              setTotalValues({ ...totalValues, increasePremium: e.target.value });
-            }}
-          />
-        </div>
-        }
+          {isEndorsement === "Endorsement" && (
+            <div className="PAYInputCont">
+              <p className="PAYtitle">Additional premium</p>
+              <input
+                placeholder="Add to Premium"
+                className="AQinput"
+                type="number"
+                defaultValue={0}
+                value={payment?.increasePremium}
+                {...register("increasePremium")}
+                onChange={(e) => {
+                  setTotalValues({
+                    ...totalValues,
+                    increasePremium: e.target.value,
+                  });
+                }}
+              />
+            </div>
+          )}
+          {(isEndorsement === "Renew Down" ||
+            isEndorsement === "Down Payment" ||
+            isEndorsement === "Full Premium") && (
+            <div className="PAYInputCont">
+              <p className="PAYtitle">Total premium</p>
+              <input
+                placeholder="Add to Premium"
+                className="AQinput"
+                type="number"
+                defaultValue={form.totalPremium || 0}
+                value={payment?.increasePremium}
+                {...register("increasePremium")}
+                onChange={(e) => {
+                  setTotalValues({
+                    ...totalValues,
+                    increasePremium: e.target.value,
+                  });
+                }}
+              />
+            </div>
+          )}
         </div>
         <div className="PAYBox" style={{ marginTop: "25px" }}>
-        
-        {!MultiMethod ? (
+          {!MultiMethod ? (
             <div className="PAYInputCont">
               <div
                 style={{
@@ -583,55 +615,73 @@ function AddPaymentComponent({
             </div>
           )}
 
-{( isEndorsement === 'Renew Down' || isEndorsement === 'Down Payment' || isEndorsement === 'Full Premium' || isEndorsement === 'Endorsement') &&
-<>
+          {(isEndorsement === "Renew Down" ||
+            isEndorsement === "Down Payment" ||
+            isEndorsement === "Full Premium" ||
+            isEndorsement === "Endorsement") && (
+            <>
+              <div
+                className="PAYInputCont"
+                style={{ marginTop: "-13px", marginRight: "0px" }}
+              >
+                <p
+                  className="PAYtitle"
+                  style={{ width: "245px", fontSize: "15px" }}
+                >
+                  Policy number for New Policies, Endorsments, Renewals ONLY.
+                </p>
+                <input
+                  placeholder="Policy Number"
+                  className="AQinput"
+                  defaultValue={form.policyNumber || ""}
+                  value={payment?.policyNumber}
+                  {...register("policyNumber")}
+                  onChange={(e) => {
+                    setTotalValues({
+                      ...totalValues,
+                      policyNumber: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+              <div className="PAYInputCont">
+                <p className="PAYtitle">Effective Date</p>
+                <input
+                  type={"date"}
+                  placeholder="Effective Date"
+                  className="AQinput"
+                  defaultValue={form.effectiveDate}
+                  value={payment?.effectiveDate}
+                  {...register("effectiveDate")}
+                  onChange={(e) => {
+                    setTotalValues({
+                      ...totalValues,
+                      effectiveDate: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+              <div className="PAYInputCont">
+                <p className="PAYtitle">Expiration Date</p>
+                <input
+                  type={"date"}
+                  placeholder="Expiration Date"
+                  className="AQinput"
+                  defaultValue={form.expirationDate}
+                  value={payment?.expirationDate}
+                  {...register("expirationDate")}
+                  onChange={(e) => {
+                    setTotalValues({
+                      ...totalValues,
+                      expirationDate: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+            </>
+          )}
+        </div>
 
-          <div className="PAYInputCont" style={{marginTop: '-13px', marginRight: '0px'}}>
-          <p className="PAYtitle" style={{width: '245px', fontSize: '15px'}}>Policy number for New Policies, Endorsments, Renewals ONLY.</p>         
-          <input
-            placeholder="Policy Number"
-            className="AQinput"
-            defaultValue={form.policyNumber || ''}
-            value={payment?.policyNumber}
-            {...register("policyNumber")}
-            onChange={(e) => {
-              setTotalValues({ ...totalValues, policyNumber: e.target.value });
-            }}
-          />
-        
-        </div>
-        <div className="PAYInputCont">
-          <p className="PAYtitle">Effective Date</p>
-          <input
-          type={"date"}
-            placeholder="Effective Date"
-            className="AQinput"
-            defaultValue={form.effectiveDate}
-            value={payment?.effectiveDate}
-            {...register("effectiveDate")}
-            onChange={(e) => {
-              setTotalValues({ ...totalValues, effectiveDate: e.target.value });
-            }}
-          />
-        </div>
-        <div className="PAYInputCont">
-          <p className="PAYtitle">Expiration Date</p>
-          <input
-          type={"date"}
-            placeholder="Expiration Date"
-            className="AQinput"
-            defaultValue={form.expirationDate}
-            value={payment?.expirationDate}
-            {...register("expirationDate")}
-            onChange={(e) => {
-              setTotalValues({ ...totalValues, expirationDate: e.target.value });
-            }}
-          />
-        </div>
-        </>
-}
-        </div>
-        
         <div className="AQwhiteContainer11">
           <div className="AQinputContainer">
             <p className="AQinputName">NSD</p>
@@ -897,7 +947,11 @@ function AddPaymentComponent({
         <Modal open={open} onClose={reload} center classNames={"modal"}>
           <div className="modal">
             <img
-              src={paymentStatus === 'Payment added successfully' ? Icon : ErrorIcon}
+              src={
+                paymentStatus === "Payment added successfully"
+                  ? Icon
+                  : ErrorIcon
+              }
               style={{
                 width: "35px",
                 alignSelf: "center",
@@ -938,21 +992,23 @@ function AddPaymentComponent({
           display: "flex",
         }}
       >
-        <button onClick={handleSubmit(onSubmit)} className={addingPayment ? "PAYbuttonPayWaiting" : "PAYbuttonPay"}>
+        <button
+          onClick={handleSubmit(onSubmit)}
+          className={addingPayment ? "PAYbuttonPayWaiting" : "PAYbuttonPay"}
+        >
           <p className="PAYbuttonText">Add payment</p>
         </button>
       </div>
-      {
-        addingPayment &&
-      <div style={{position:'absolute', bottom: '25px', right: '25px'}}>
-        <img
-          src={spinnerr}
-          style={{
-            width: "100px",
-          }}
+      {addingPayment && (
+        <div style={{ position: "absolute", bottom: "25px", right: "25px" }}>
+          <img
+            src={spinnerr}
+            style={{
+              width: "100px",
+            }}
           />
-      </div>
-        }
+        </div>
+      )}
     </div>
   );
 }
