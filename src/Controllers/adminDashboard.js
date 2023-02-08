@@ -39,6 +39,7 @@ const AdminDashboard = () => {
   const [cuotitas, setCuotitas] = useState([]);
   const quotexWithoutDeleted = quotex?.filter((e) => e.deleted == false);
   const A_AVGWithoutDeleted = A_AVG?.filter((e) => e.deleted == false);
+  console.log(A_AVGWithoutDeleted);
   useEffect(() => {
     let tempS = 0;
     let tempU = 0;

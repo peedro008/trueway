@@ -26,59 +26,50 @@ function ProducerNav({ onSearch }) {
   const Role = useSelector((state) => state.userRole);
 
   const logOut = () => {
-    localStorage.clear()
+    localStorage.clear();
     window.history.pushState("", "", "/");
     dispatch(logout());
-
   };
 
   return (
     <div style={{ display: "flex" }}>
       <div className="topbar">
-      <div style={{ paddingRight: "50px", display: "flex" }}>
-      <div className="circleLink" style={{marginBottom: '10px', marginRight: '23px'}}>
-      <a href="https://app.buddypunch.com/" target='_blank'>
-
-        <img
-          className="imageLink3"
-          src={buddyPunch}
-          alt={"logo"}
-          />
-          </a>
- 
-      </div>
-      <div className="circleLink">
-      <a href="https://login.apps.vertafore.com/idp/prp.wsf?wa=wsignin1.0&wtrealm=https%3a%2f%2frating.vertafore.com%2fUserInterface%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252fUserInterface%252fmain%252fvim.aspx&wct=2022-11-29T14%3a24%3a52Z" target='_blank'>
-
-        <img
-          className="imageLink"
-          src={vertafore}
-          alt={"logo"}
-          />
-          </a>
- 
-      </div>
-      <div className="circleLink" style={{marginBottom: '10px'}}>
-      <a href="https://app.agencyzoom.com/login" target='_blank'>
-        <img
-          className="imageLink"
-          src={agencyZoom}
-          alt={"logo"}
-          style={{height: '48px', width: '48px'}}
-        />
+        <div style={{ paddingRight: "50px", display: "flex" }}>
+          <div
+            className="circleLink"
+            style={{ marginBottom: "10px", marginRight: "23px" }}
+          >
+            <a href="https://app.buddypunch.com/" target="_blank">
+              <img className="imageLink3" src={buddyPunch} alt={"logo"} />
             </a>
-      </div>
-      <div className="circleLink" style={{marginLeft: '6px'}}>
-      <a href="https://login.qqcatalyst.com/Login.aspx?ReturnUrl=%2fOAuthAuthorize.aspx%3fClientApp%3dQQCatalyst%2bWeb%26ClientIdentifier%3dDC152CD1-F653-4DF0-9E39-2337A7F9C887%26Callback%3dhttps%3a%2f%2fapp.qqcatalyst.com%2fAccount%2fLoginNew%26State%3dZige4fJSkNB9CzHBC9WjvQ%26Scope%3dTimestamp112922142356%26ResponseType%3dcode%26OverrideBrowserCheck%3d&ClientApp=QQCatalyst+Web&ClientIdentifier=DC152CD1-F653-4DF0-9E39-2337A7F9C887&Callback=https://app.qqcatalyst.com/Account/LoginNew&State=Zige4fJSkNB9CzHBC9WjvQ&Scope=Timestamp112922142356&ResponseType=code&OverrideBrowserCheck=" target='_blank'>
-        <img
-          className="imageLink"
-          src={qqcatalyst}
-          alt={"logo"}
-          
-        />
+          </div>
+          <div className="circleLink">
+            <a
+              href="https://login.apps.vertafore.com/idp/prp.wsf?wa=wsignin1.0&wtrealm=https%3a%2f%2frating.vertafore.com%2fUserInterface%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252fUserInterface%252fmain%252fvim.aspx&wct=2022-11-29T14%3a24%3a52Z"
+              target="_blank"
+            >
+              <img className="imageLink" src={vertafore} alt={"logo"} />
             </a>
-      </div>
-    </div>
+          </div>
+          <div className="circleLink" style={{ marginBottom: "10px" }}>
+            <a href="https://app.agencyzoom.com/login" target="_blank">
+              <img
+                className="imageLink"
+                src={agencyZoom}
+                alt={"logo"}
+                style={{ height: "48px", width: "48px" }}
+              />
+            </a>
+          </div>
+          <div className="circleLink" style={{ marginLeft: "6px" }}>
+            <a
+              href="https://login.qqcatalyst.com/Login.aspx?ReturnUrl=%2fOAuthAuthorize.aspx%3fClientApp%3dQQCatalyst%2bWeb%26ClientIdentifier%3dDC152CD1-F653-4DF0-9E39-2337A7F9C887%26Callback%3dhttps%3a%2f%2fapp.qqcatalyst.com%2fAccount%2fLoginNew%26State%3dZige4fJSkNB9CzHBC9WjvQ%26Scope%3dTimestamp112922142356%26ResponseType%3dcode%26OverrideBrowserCheck%3d&ClientApp=QQCatalyst+Web&ClientIdentifier=DC152CD1-F653-4DF0-9E39-2337A7F9C887&Callback=https://app.qqcatalyst.com/Account/LoginNew&State=Zige4fJSkNB9CzHBC9WjvQ&Scope=Timestamp112922142356&ResponseType=code&OverrideBrowserCheck="
+              target="_blank"
+            >
+              <img className="imageLink" src={qqcatalyst} alt={"logo"} />
+            </a>
+          </div>
+        </div>
         <div style={{ paddingRight: "40px", display: "flex" }}>
           <div className="circle">
             <p className="initial">{Name.Name && Name.Name.substring(0, 1)}</p>
@@ -89,7 +80,11 @@ function ProducerNav({ onSearch }) {
           </div>
           <button
             onClick={() => logOut()}
-            style={{ backgroundColor: "transparent", borderWidth: "0px", cursor:'pointer'}}
+            style={{
+              backgroundColor: "transparent",
+              borderWidth: "0px",
+              cursor: "pointer",
+            }}
           >
             <FiLogOut
               size="20px"
@@ -103,7 +98,12 @@ function ProducerNav({ onSearch }) {
       <div className="sidebar">
         <img className="image" src={logo} alt={"logo"} />
         <div className="NAcontainer">
-          <NavLink className="NAiconCover" to="/" activeClassName="NAavtive" exact>
+          <NavLink
+            className="NAiconCover"
+            to="/"
+            activeClassName="NAavtive"
+            exact
+          >
             <FiGrid
               className="NAicon"
               color="#868ba5"
@@ -115,7 +115,11 @@ function ProducerNav({ onSearch }) {
         <span />
 
         <div className="NAcontainer">
-          <NavLink className="NAiconCover" to="/addquote" activeClassName="NAavtive">
+          <NavLink
+            className="NAiconCover"
+            to="/addquote"
+            activeClassName="NAavtive"
+          >
             <AiOutlineFile className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
@@ -131,36 +135,57 @@ function ProducerNav({ onSearch }) {
         </div>
         <span />
         <div className="NAcontainer">
-          <NavLink className="NAiconCover" to="/payments" activeClassName="NAavtive">
+          <NavLink
+            className="NAiconCover"
+            to="/payments"
+            activeClassName="NAavtive"
+          >
             <FaRegMoneyBillAlt className="NAicon" color="#868ba5" />
           </NavLink>
         </div>
-        <div className="NAcontainer">
+        {/* <div className="NAcontainer">
           <NavLink className="NAiconCover" to="/policyNumberReport" activeClassName="NAavtive">
             <FaCoins className="NAicon" color="#868ba5" />
           </NavLink>
-        </div>
+        </div> */}
         <div className="NAcontainer">
-          <NavLink className="NAiconCover" to="/report" activeClassName="NAavtive">
+          <NavLink
+            className="NAiconCover"
+            to="/report"
+            activeClassName="NAavtive"
+          >
             <VscGraph className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
         <span />
         <div className="NAcontainer">
-          <NavLink className="NAiconCover"  to='/profile'activeClassName="NAavtive">
+          <NavLink
+            className="NAiconCover"
+            to="/profile"
+            activeClassName="NAavtive"
+          >
             <FiUser className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
         <span />
         <div className="NAcontainer">
-          <NavLink className="NAiconCover" to="/stadistic" activeClassName="NAavtive">
+          <NavLink
+            className="NAiconCover"
+            to="/stadistic"
+            activeClassName="NAavtive"
+          >
             <BiStats className="NAicon" size="20px" color="#868ba5" />
           </NavLink>
         </div>
-        <div className="NAcontainer" style={{cursor:"help"}} onClick={()=>{ window.open('https://wa.me/5493515330625');
-              return null}}>
-             <BsInfoCircle className="NAicon" size="20px" color="#868ba5" />
-        
+        <div
+          className="NAcontainer"
+          style={{ cursor: "help" }}
+          onClick={() => {
+            window.open("https://wa.me/5493515330625");
+            return null;
+          }}
+        >
+          <BsInfoCircle className="NAicon" size="20px" color="#868ba5" />
         </div>
       </div>
     </div>

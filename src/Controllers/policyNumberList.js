@@ -14,11 +14,15 @@ const PolicyList = () => {
   const [policyByName, setPolicyByName] = useState();
   const [monthlyPayments, setMonthlyPayments] = useState([]);
   const [totalMonthlyPayments, setTotalMonthlyPayments] = useState([]);
+  const [totalRenew, setTotalRenew] = useState([]);
+  const [totalEndorsement, setTotalEndorsement] = useState([]);
   const [paymentsOrder, setPaymentsOrder] = useState([]);
   const [filterOn, setFilterOn] = useState("");
   const [isLoader, setIsLoader] = useState(false);
+  const [searchDate, setSearchDate] = useState();
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
 
-  console.log(monthlyPayments);
   useEffect(() => {
     GetLastPayments(dispatch);
   }, []);
@@ -38,6 +42,7 @@ const PolicyList = () => {
     );
   }, [lastPayments]);
 
+  console.log(policyByName);
   useEffect(() => {
     if (filterOn === "") {
       if (policyByName?.length) {
@@ -49,31 +54,92 @@ const PolicyList = () => {
       setPolicies(
         paymentsOrder
           ?.filter((e) => e.LocationId === 1)
+          .filter((e) => e.type === "Down Payment")
           .slice(paginator * 10, paginator * 10 + 10)
       );
     } else if (filterOn === "TW2") {
       setPolicies(
         paymentsOrder
           ?.filter((e) => e.LocationId === 2)
+          .filter((e) => e.type === "Down Payment")
           .slice(paginator * 10, paginator * 10 + 10)
       );
-    } else {
+    } else if (filterOn === "CC") {
       setPolicies(
         paymentsOrder
           ?.filter((e) => e.LocationId === 3)
+          .filter((e) => e.type === "Down Payment")
+          .slice(paginator * 10, paginator * 10 + 10)
+      );
+    } else if (filterOn === "TOTAL") {
+      setPolicies(
+        paymentsOrder
+          ?.filter((e) => e.type === "Down Payment")
+          .slice(paginator * 10, paginator * 10 + 10)
+      );
+    } else if (filterOn === "TW1END") {
+      setPolicies(
+        paymentsOrder
+          ?.filter((e) => e.LocationId === 1)
+          .filter((e) => e.type === "Endorsement")
+          .slice(paginator * 10, paginator * 10 + 10)
+      );
+    } else if (filterOn === "TW2END") {
+      setPolicies(
+        paymentsOrder
+          ?.filter((e) => e.LocationId === 2)
+          .filter((e) => e.type === "Endorsement")
+          .slice(paginator * 10, paginator * 10 + 10)
+      );
+    } else if (filterOn === "CCEND") {
+      setPolicies(
+        paymentsOrder
+          ?.filter((e) => e.LocationId === 3)
+          .filter((e) => e.type === "Endorsement")
+          .slice(paginator * 10, paginator * 10 + 10)
+      );
+    } else if (filterOn === "TOTALEND") {
+      setPolicies(
+        paymentsOrder
+          ?.filter((e) => e.type === "Endorsement")
+          .slice(paginator * 10, paginator * 10 + 10)
+      );
+    } else if (filterOn === "TW1RENEW") {
+      setPolicies(
+        paymentsOrder
+          ?.filter((e) => e.LocationId === 1)
+          .filter((e) => e.type === "Renew Down")
+          .slice(paginator * 10, paginator * 10 + 10)
+      );
+    } else if (filterOn === "TW2RENEW") {
+      setPolicies(
+        paymentsOrder
+          ?.filter((e) => e.LocationId === 2)
+          .filter((e) => e.type === "Renew Down")
+          .slice(paginator * 10, paginator * 10 + 10)
+      );
+    } else if (filterOn === "CCRENEW") {
+      setPolicies(
+        paymentsOrder
+          ?.filter((e) => e.LocationId === 3)
+          .filter((e) => e.type === "Renew Down")
+          .slice(paginator * 10, paginator * 10 + 10)
+      );
+    } else if (filterOn === "TOTALRENEW") {
+      setPolicies(
+        paymentsOrder
+          ?.filter((e) => e.type === "Renew Down")
           .slice(paginator * 10, paginator * 10 + 10)
       );
     }
   }, [paginator, policyByName, paymentsOrder, filterOn]);
-
-  console.log(totalMonthlyPayments);
 
   useEffect(() => {
     const monthlyPayment1 = monthlyPayments?.filter(
       (e) =>
         e.policyNumber !== null &&
         e.policyNumber !== "" &&
-        e.type !== "Monthly Payment"
+        e.type === "Down Payment"
     );
 
     let totalTW1 = 0;
@@ -87,6 +153,48 @@ const PolicyList = () => {
         : (totalCC = totalCC + 1)
     );
     setTotalMonthlyPayments([totalTW1, totalTW2, totalCC]);
+
+    const monthlyRenew = monthlyPayments?.filter(
+      (e) =>
+        e.policyNumber !== null &&
+        e.policyNumber !== "" &&
+        e.type === "Renew Down"
+    );
+
+    let totalRenewTW1 = 0;
+    let totalRenewTW2 = 0;
+    let totalRenewCC = 0;
+    monthlyRenew.map((e) =>
+      e.LocationId === 1
+        ? (totalRenewTW1 = totalRenewTW1 + 1)
+        : e.LocationId === 2
+        ? (totalRenewTW2 = totalRenewTW2 + 1)
+        : (totalRenewCC = totalRenewCC + 1)
+    );
+    setTotalRenew([totalRenewTW1, totalRenewTW2, totalRenewCC]);
+
+    const monthlyEndorsement = monthlyPayments?.filter(
+      (e) =>
+        e.policyNumber !== null &&
+        e.policyNumber !== "" &&
+        e.type === "Endorsement"
+    );
+
+    let totalEndorsementTW1 = 0;
+    let totalEndorsementTW2 = 0;
+    let totalEndorsementCC = 0;
+    monthlyEndorsement.map((e) =>
+      e.LocationId === 1
+        ? (totalEndorsementTW1 = totalEndorsementTW1 + 1)
+        : e.LocationId === 2
+        ? (totalEndorsementTW2 = totalEndorsementTW2 + 1)
+        : (totalEndorsementCC = totalEndorsementCC + 1)
+    );
+    setTotalEndorsement([
+      totalEndorsementTW1,
+      totalEndorsementTW2,
+      totalEndorsementCC,
+    ]);
   }, [monthlyPayments]);
 
   useEffect(() => {
@@ -107,6 +215,33 @@ const PolicyList = () => {
     }
   }, [search]);
 
+  const searchByDate = () => {
+    fetch(
+      `https://truewayagentbackend.com/getPolicyByDate?dateFrom=${dateFrom}&dateTo=${dateTo}`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        setSearchDate("Search");
+        console.log(`Hola Pelu ${json.length}`);
+        setPaymentsOrder(
+          json
+            .filter((e) => e.type !== "Monthly Payment")
+            .filter((e) => e.policyNumber !== null)
+            .filter((e) => e.policyNumber !== "")
+        );
+        setMonthlyPayments(
+          json
+            .filter((e) => e.type !== "Monthly Payment")
+            .filter((e) => e.policyNumber !== null)
+            .filter((e) => e.policyNumber !== "")
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        setPaymentsOrder("Nothing");
+      });
+  };
+  console.log(monthlyPayments);
   useEffect(() => {
     setIsLoader(true);
     fetch(`https://truewayagentbackend.com/getMonthlyPayments`)
@@ -133,8 +268,15 @@ const PolicyList = () => {
       filterOn={filterOn}
       setFilterOn={setFilterOn}
       isLoader={isLoader}
+      totalRenew={totalRenew}
+      totalEndorsement={totalEndorsement}
+      setDateFrom={setDateFrom}
+      searchByDate={searchByDate}
+      setDateTo={setDateTo}
+      dateFrom={dateFrom}
+      dateTo={dateTo}
+      searchDate={searchDate}
     />
   );
 };
-
 export default PolicyList;

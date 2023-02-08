@@ -6,13 +6,12 @@ import GenericReportComponent from "../Components/genericReport";
 
 function GenericReport(props) {
   let data = props.location?.aboutProps;
-  console.log(data);
 
   const [paymentsFil, setPaymentsFil] = useState(data.items);
   const [cash, setCash] = useState(0);
   const [credit, setCredit] = useState(0);
   const [EFT, setEFT] = useState(0);
-
+  console.log(data);
   const [total, setTotal] = useState(0);
   const [checkbox, setCheckbox] = useState({
     Cash: false,

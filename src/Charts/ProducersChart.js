@@ -18,8 +18,8 @@ function PizzaChart({ google, producers }) {
         quotex?.filter((g) => g.id == e.UserId)[0]?.unsold,
       ]);
     });
-    
-    setDato(pes.filter(e => e[1] !== 0 || e[2] !== 0) || pes);
+
+    setDato(pes.filter((e) => e[1] !== 0 || e[2] !== 0) || pes);
   }, [quotex]);
   useEffect(() => {
     setTimeout(() => {
@@ -27,8 +27,8 @@ function PizzaChart({ google, producers }) {
       if (google && !chart) {
         const data = new google.visualization.DataTable();
         data.addColumn("string", "Topping");
-        data.addColumn("number", "Sold", "color:#002752");
-        data.addColumn("number", "Unsold", "color:#D8AF4D");
+        data.addColumn("number", "Sold", "color:#D8AF4D");
+        data.addColumn("number", "Unsold", "color:#002752");
         data.addRows(dato);
 
         // Set chart options
@@ -42,7 +42,7 @@ function PizzaChart({ google, producers }) {
             marginLeft: "-10px",
           },
 
-          colors: ['#002752', "#D8AF4D"],
+          colors: ["#D8AF4D", "#002752"],
           backgroundColor: "#EBEFF2",
 
           bar: { groupWidth: "30%" },
