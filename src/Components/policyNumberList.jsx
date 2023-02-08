@@ -367,7 +367,12 @@ const PolicyNumberList = ({
                 >
                   Down P. {searchDate || month}
                 </p>
-
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  TOTAL
+                </p>
                 <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
                   {totalMonthlyPayments[2] +
                     totalMonthlyPayments[1] +
@@ -526,7 +531,12 @@ const PolicyNumberList = ({
                 >
                   Endors. {searchDate || month}
                 </p>
-
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  TOTAL
+                </p>
                 <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
                   {totalEndorsement[2] +
                     totalEndorsement[1] +
@@ -691,7 +701,7 @@ const PolicyNumberList = ({
                   className="dashCardText"
                   style={{ color: "#ebeff2", marginBottom: "5px" }}
                 >
-                  Call Center
+                  TOTAL
                 </p>
                 <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
                   {totalRenew[2] + totalRenew[1] + totalRenew[0]}
