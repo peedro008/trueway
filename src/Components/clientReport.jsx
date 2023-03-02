@@ -34,7 +34,7 @@ function ClientReportComponent({
           />
         </div>
       </div>
-      <table class="table2" style={{ maxWidth: '90vw'}}>
+      <table class="table2" style={{ maxWidth: "90vw" }}>
         <tbody>
           <tr>
             <th scope="col" className="column1">
@@ -49,7 +49,7 @@ function ClientReportComponent({
             <th scope="col" className="column1">
               <p className="REPtype2">Client company</p>
             </th>
-            <th scope="col" className="column1" style={{maxWidth: '200px'}}>
+            <th scope="col" className="column1" style={{ maxWidth: "200px" }}>
               <p className="REPtype2">Client address</p>
             </th>
             <th scope="col" className="column1">
@@ -96,11 +96,15 @@ function ClientReportComponent({
                       <td className="ClientName" scope="row">
                         {e.Company ? e.Company.name : "-"}
                       </td>
-                      <td className="ClientName" scope="row" style={{
+                      <td
+                        className="ClientName"
+                        scope="row"
+                        style={{
                           textOverflow: "ellipsis",
                           overflow: "hidden",
                           maxWidth: "300px",
-                        }}>
+                        }}
+                      >
                         {e.address ? e.address : "-"}
                       </td>
                       <td className="ClientName" scope="row">
@@ -310,20 +314,25 @@ function ClientReportComponent({
         </tbody>
       </table>
 
-      <BsChevronLeft
-        cursor="pointer"
-        color="grey"
-        style={{
-          minWidth: "30px",
-          minHeight: "30px",
-          position: "fixed",
-          zIndex: 9,
-          left: "80px",
-          top: "17px",
-          alignSelf: "flex-start",
+      <NavLink
+        to={{
+          pathname: "/report",
         }}
-        onClick={() => window.history.go(-1)}
-      />
+      >
+        <BsChevronLeft
+          cursor="pointer"
+          color="grey"
+          style={{
+            minWidth: "30px",
+            minHeight: "30px",
+            position: "fixed",
+            zIndex: 9,
+            left: "80px",
+            top: "17px",
+            alignSelf: "flex-start",
+          }}
+        />
+      </NavLink>
 
       <Modal open={open} onClose={onCloseModal} center classNames={"modal"}>
         <div

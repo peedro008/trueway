@@ -17,10 +17,20 @@ const QuoteReport = (props) => {
   const [quotesFil, setQuotesFil] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
   const [paginator, setPaginator] = useState(1);
-  let columns = props.location.aboutProps;
+  const [onlyOne, setOnlyOne] = useState(1);
+  const [columns, setColumns] = useState([]);
+  const [filterValues, setFilterValues] = useState({});
+  useEffect(() => {
+    if (props.location.aboutProps.clientName) {
+      setColumns(props.location?.aboutProps);
+    } else {
+      setFilterValues(props.location?.aboutProps);
+      setColumns(defaultC);
+    }
+  }, []);
+
   const producers = useSelector((state) => state.Producers);
 
-  const [filterValues, setFilterValues] = useState({});
   const [filterCheck, setFilterCheck] = useState({
     date: false,
     ClientId: false,
@@ -33,7 +43,6 @@ const QuoteReport = (props) => {
     Status: false,
     DealerId: false,
   });
-
   const categories = useSelector((state) => state.Categories);
   const companies = useSelector((state) => state.Companies);
   const clients = useSelector((state) => state.Clients);
@@ -41,8 +50,20 @@ const QuoteReport = (props) => {
   const locations = useSelector((state) => state.Locations);
 
   useEffect(() => {
+    if (typeof props.location.paginator !== "undefined") {
+      console.log(props.location.paginator);
+      setPaginator(props.location.paginator);
+    }
+  }, [props]);
+
+  useEffect(() => {
     let params = new URLSearchParams();
-    params.append("offset", (paginator - 1) * 20);
+    params.append(
+      "offset",
+      (typeof props.location.paginator !== "undefined" && onlyOne === 1
+        ? props.location.paginator - 1
+        : paginator - 1) * 20
+    );
     let temp = Object.entries(filterValues);
 
     temp.map((e) => {
@@ -51,10 +72,16 @@ const QuoteReport = (props) => {
     axios
       .get(`https://truewayagentbackend.com/getQuotesReport`, { params })
       .then(function (response) {
-        setQuotes(response.data);
+        setOnlyOne(2);
+        if (filterValues.Status === "Quoted") {
+          setQuotes(response.data.filter((e) => !e.SoldBy));
+        } else {
+          setQuotes(response.data);
+        }
       })
 
       .catch((error) => {
+        setOnlyOne(2);
         setQuotes([]);
         console.log(error);
       });

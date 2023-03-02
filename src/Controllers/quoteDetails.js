@@ -4,6 +4,7 @@ import QuoteDetailsComponent from "../Components/quoteDetails";
 
 function QuoteDetails(props) {
   const id = props.location.aboutProps?.ID;
+  const paginator = props.location.aboutProps?.paginator;
   const [quote, setQuote] = useState([]);
   useEffect(() => {
     axios
@@ -16,7 +17,7 @@ function QuoteDetails(props) {
       });
   }, [id]);
 
-  return <QuoteDetailsComponent quote={quote} id={id} />;
+  return <QuoteDetailsComponent quote={quote} id={id} paginator={paginator} />;
 }
 
 export default QuoteDetails;

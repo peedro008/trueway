@@ -143,11 +143,15 @@ function ProducerNav({ onSearch }) {
             <FaRegMoneyBillAlt className="NAicon" color="#868ba5" />
           </NavLink>
         </div>
-        {/* <div className="NAcontainer">
-          <NavLink className="NAiconCover" to="/policyNumberReport" activeClassName="NAavtive">
+        <div className="NAcontainer">
+          <NavLink
+            className="NAiconCover"
+            to="/policyNumberReport"
+            activeClassName="NAavtive"
+          >
             <FaCoins className="NAicon" color="#868ba5" />
           </NavLink>
-        </div> */}
+        </div>
         <div className="NAcontainer">
           <NavLink
             className="NAiconCover"

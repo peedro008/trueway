@@ -19,10 +19,12 @@ function ClientEditComponent({
   handleClick,
   show,
   address,
-setAddress,
+  setAddress,
   setShow,
   options,
+  paginator,
 }) {
+  console.log(paginator);
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -106,30 +108,25 @@ setAddress,
             ></input>
           </div>
           <div className="inputDiv" style={{ marginRight: "52%" }}>
-            <div style={{flexDirection:"row", display:"flex"}}> <p className="PAYtitle">Address</p><GrCircleQuestion onClick={()=>setShow(!show)}/></div>
-              {!show ? (<></>
-                // <div class="autocomplete-container" id="autocomplete-container">
-                //   <GeoapifyContext apiKey="fae2fbe3125e4b1d870dd3ab7c96f6b3">
-                //     <GeoapifyGeocoderAutocomplete
-                //       placeSelect={(value) => {
-                //         setAddress(value.properties.formatted);
-                //       }}
-                //       suggestionsChange={(value) => {
-                //         console.log(value);
-                //       }}
-                //     />
-                //   </GeoapifyContext>
-                // </div>
-              ) : (
-                <input
-                    onChange={(e)=>{setAddress(e.target.value)}}
-                  placeholder="Address"
-                  className="AQinput"
-                  defaultValue={address}
-                ></input>
-              )}
+            <div style={{ flexDirection: "row", display: "flex" }}>
+              {" "}
+              <p className="PAYtitle">Address</p>
+              <GrCircleQuestion onClick={() => setShow(!show)} />
             </div>
-         </div>
+            {!show ? (
+              <></>
+            ) : (
+              <input
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                }}
+                placeholder="Address"
+                className="AQinput"
+                defaultValue={address}
+              ></input>
+            )}
+          </div>
+        </div>
         <div className="managerInputsubContainer">
           <div className="MOBinputDiv">
             <p className="MOBinputText">Notes</p>
@@ -144,20 +141,44 @@ setAddress,
           </div>
         </div>
       </div>
-      <BsChevronLeft
-          cursor='pointer'
-        color="grey"
-        style={{
-          minWidth: "30px",
-          minHeight: "30px",
-          position: "fixed",
-          zIndex: 9,
-          left: "80px",
-          top: "17px",
-          alignSelf: "flex-start",
-        }}
-        onClick={() => window.history.go(-1)}
-      />
+      {paginator ? (
+        <NavLink
+          to={{
+            pathname: "/report/quoteReport",
+            paginator: paginator,
+          }}
+        >
+          <BsChevronLeft
+            color="grey"
+            cursor="pointer"
+            style={{
+              minWidth: "25px",
+              minHeight: "25px",
+              position: "fixed",
+              zIndex: 9,
+              left: "80px",
+              top: "17px",
+              alignSelf: "flex-start",
+            }}
+          />
+        </NavLink>
+      ) : (
+        <BsChevronLeft
+          cursor="pointer"
+          color="grey"
+          style={{
+            minWidth: "30px",
+            minHeight: "30px",
+            position: "fixed",
+            zIndex: 9,
+            left: "80px",
+            top: "17px",
+            alignSelf: "flex-start",
+          }}
+          onClick={() => window.history.go(-1)}
+        />
+      )}
+
       <div
         style={{
           position: "absolute",
@@ -188,7 +209,10 @@ setAddress,
             {" "}
             <NavLink
               style={{ textDecoration: "none", color: "#000" }}
-              to={"/report/Clients"}
+              to={{
+                pathname: paginator ? "/report/quoteReport" : "/report/Clients",
+                paginator: paginator,
+              }}
             >
               Continue
             </NavLink>

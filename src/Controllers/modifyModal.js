@@ -6,7 +6,7 @@ import { GetA_AVG } from "../Logic/Fetch";
 
 const ModifyModal = (props) => {
   const dispatch = useDispatch();
-  const { quoteM, open, onCloseModal } = props;
+  const { quoteM, open, onCloseModal, paginator } = props;
   const [quote, setQuote] = useState([]);
   const [renew, setRenew] = useState(false);
   const [notes, setNotes] = useState(false);
@@ -54,7 +54,8 @@ const ModifyModal = (props) => {
   };
 
   const reload = () => {
-    window.history.go(-1);
+    onCloseModal1();
+    onCloseModal();
   };
 
   const checkCancel = () => {
@@ -94,7 +95,7 @@ const ModifyModal = (props) => {
           body: JSON.stringify(inputs),
         })
           .then(onOpenModal1())
-          .then(reload());
+          .then(onCloseModal());
   };
 
   return (
@@ -129,6 +130,7 @@ const ModifyModal = (props) => {
       submit={submit}
       optionsCo={optionsCo}
       reload={reload}
+      paginator={paginator}
     />
   );
 };

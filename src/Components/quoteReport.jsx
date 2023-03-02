@@ -15,7 +15,6 @@ import {
   AiOutlineRight,
   AiOutlineFilter,
   AiOutlineEdit,
-  
 } from "react-icons/ai";
 
 import Modal from "react-responsive-modal";
@@ -204,12 +203,11 @@ const QuoteReportComponent = ({
             </div>
           )}
         </div>
-     
       </div>
-      
+
       <div
         style={{
-          cursor:'pointer',
+          cursor: "pointer",
           position: "fixed",
           right: "50px",
           top: "85px",
@@ -225,7 +223,6 @@ const QuoteReportComponent = ({
       <table class="table1">
         <tbody>
           <tr>
-         
             <th scope="col" className="column1">
               <p className="REPtype2">Edit</p>
             </th>
@@ -362,7 +359,7 @@ const QuoteReportComponent = ({
                     </td> */}
                     <td className="ClientName" scope="row">
                       <div className="InfoIcon2" onClick={() => modify(e)}>
-                        <AiOutlineEdit size={'26px'} color={'#14A44D'}/>
+                        <AiOutlineEdit size={"26px"} color={"#14A44D"} />
                       </div>
                     </td>
                     {columns.clientName && (
@@ -372,6 +369,7 @@ const QuoteReportComponent = ({
                           to={{
                             pathname: "/report/clientedit",
                             aboutProps: e.Client,
+                            paginator: paginator,
                           }}
                         >
                           {e.Client.name}
@@ -518,23 +516,33 @@ const QuoteReportComponent = ({
           <AiOutlineRight color="white" size={"20px"} />
         </div>
       </div>
-      <BsChevronLeft
-        color="grey"
-        cursor="pointer"
-        style={{
-          minWidth: "30px",
-          minHeight: "30px",
-          position: "fixed",
-          zIndex: 9,
-          left: "80px",
-          top: "17px",
-          alignSelf: "flex-start",
+      <NavLink
+        to={{
+          pathname: "/report",
         }}
-        onClick={() => window.history.go(-1)}
-      />
+      >
+        <BsChevronLeft
+          cursor="pointer"
+          color="grey"
+          style={{
+            minWidth: "30px",
+            minHeight: "30px",
+            position: "fixed",
+            zIndex: 9,
+            left: "80px",
+            top: "17px",
+            alignSelf: "flex-start",
+          }}
+        />
+      </NavLink>
 
       {open && (
-        <ModifyModal open={open} onCloseModal={onCloseModal} quoteM={quote} />
+        <ModifyModal
+          open={open}
+          onCloseModal={onCloseModal}
+          quoteM={quote}
+          paginator={paginator}
+        />
       )}
 
       {openFilter && (
@@ -847,9 +855,16 @@ const QuoteReportComponent = ({
                   { value: "Re-install", label: "Re-install" },
                   { value: "Quoted", label: "Quoted" },
                 ]}
-                onChange={(e) =>
-                  setFilterValues({ ...filterValues, Status: e.value })
-                }
+                onChange={(e) => {
+                  if (e.value === "Quoted") {
+                    setFilterValues({
+                      ...filterValues,
+                      Status: e.value,
+                    });
+                  } else {
+                    setFilterValues({ ...filterValues, Status: e.value });
+                  }
+                }}
                 className="PAYselect"
               />
             </div>

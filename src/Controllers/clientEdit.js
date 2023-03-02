@@ -6,6 +6,7 @@ import ClientEditComponent from "../Components/clientEdit";
 import { GetClients, GetClientsId } from "../Logic/Fetch";
 function ClientEdit(props) {
   let Client = props.location.aboutProps;
+  let paginator = props.location.paginator;
   const [inputs, setInputs] = useState({
     name: Client.name,
     email: Client.email,
@@ -76,6 +77,7 @@ function ClientEdit(props) {
       setShow={setShow}
       address={address}
       setAddress={setAddress}
+      paginator={paginator}
     />
   );
 }

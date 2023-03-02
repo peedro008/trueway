@@ -42,6 +42,26 @@ const AdminDashboardComponent = ({
     { value: "Unsold", label: "Unsold" },
   ];
 
+  const date = new Date();
+
+  let yearBy = date.getFullYear();
+  let yearLast = date.getFullYear();
+  let monthBy = (date.getMonth() + 1 > 9 ? "-" : "-0") + (date.getMonth() + 1);
+  let monthLast = (date.getMonth() - 1 > 9 ? "-" : "-0") + date.getMonth();
+  let yearTo = date.getFullYear();
+  let monthTo = (date.getMonth() + 2 > 9 ? "-" : "-0") + (date.getMonth() + 2);
+  if (monthLast === "-00") {
+    monthLast = "-12";
+    yearLast = date.getFullYear() - 1;
+  }
+  if (monthTo === "-13") {
+    monthTo = "-01";
+    yearTo = date.getFullYear() + 1;
+  }
+
+  const DATE1 = yearBy + monthBy + "-01";
+  const DATE2 = yearTo + monthTo + "-01";
+
   return (
     <div className="genericDiv">
       <div className="genericHeader" style={{ display: "flex" }}>
@@ -225,50 +245,75 @@ const AdminDashboardComponent = ({
             )} */}
           </div>
           <div className="dashContCard">
-            <div
-              className="dashCard"
-              style={{
-                marginLeft: "50px",
-                backgroundColor: " rgba(0, 39, 82,0.8)",
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/report/quoteReport",
+                aboutProps: {
+                  dateFrom: DATE1,
+                  dateTo: DATE2,
+                  Status: "Quoted",
+                },
               }}
             >
               <div
-                className="dashCircle"
-                style={{ backgroundColor: "#ebeff2" }}
+                className="dashCard"
+                style={{
+                  marginLeft: "50px",
+                  backgroundColor: " rgba(0, 39, 82,0.8)",
+                }}
               >
-                <BsExclamationCircleFill size="28px" color="#002752" />
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "#ebeff2" }}
+                >
+                  <BsExclamationCircleFill size="28px" color="#002752" />
+                </div>
+
+                <div className="dashText">
+                  <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                    {unSold}
+                  </p>
+                  <p className="dashCardText" style={{ color: "#ebeff2" }}>
+                    Unsold quotes
+                  </p>
+                </div>
               </div>
-              <div className="dashText">
-                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
-                  {unSold}
-                </p>
-                <p className="dashCardText" style={{ color: "#ebeff2" }}>
-                  Unsold quotes
-                </p>
-              </div>
-            </div>
-            <div
-              className="dashCard"
-              style={{
-                marginLeft: "50px",
-                backgroundColor: "#D8AF4D",
+            </NavLink>
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={{
+                pathname: "/report/quoteReport",
+                aboutProps: {
+                  dateFrom: DATE1,
+                  dateTo: DATE2,
+                  Status: "Sold",
+                },
               }}
             >
               <div
-                className="dashCircle"
-                style={{ backgroundColor: "#ebeff2" }}
+                className="dashCard"
+                style={{
+                  marginLeft: "50px",
+                  backgroundColor: "#D8AF4D",
+                }}
               >
-                <BiDollarCircle size="35px" color="#D8AF4D" />
+                <div
+                  className="dashCircle"
+                  style={{ backgroundColor: "#ebeff2" }}
+                >
+                  <BiDollarCircle size="35px" color="#D8AF4D" />
+                </div>
+                <div className="dashText">
+                  <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                    {sold}
+                  </p>
+                  <p className="dashCardText" style={{ color: "#ebeff2" }}>
+                    Sold quotes
+                  </p>
+                </div>
               </div>
-              <div className="dashText">
-                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
-                  {sold}
-                </p>
-                <p className="dashCardText" style={{ color: "#ebeff2" }}>
-                  Sold quotes
-                </p>
-              </div>
-            </div>
+            </NavLink>
             <NavLink
               style={{ textDecoration: "none" }}
               to={{
@@ -341,14 +386,12 @@ const AdminDashboardComponent = ({
                 </div>
                 <div className="dashText">
                   <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
-                    {
-                      Payment?.filter(
-                        (e) => e.date.substring(0, 7) == DATE.substring(0, 7)
-                      ).length || '...'
-                    }
+                    {Payment?.filter(
+                      (e) => e.date.substring(0, 7) == DATE.substring(0, 7)
+                    ).length || "..."}
                   </p>
                   <p className="dashCardText" style={{ color: "#ebeff2" }}>
-                   Total payments
+                    Total payments
                   </p>
                 </div>
               </div>
