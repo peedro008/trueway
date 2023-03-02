@@ -510,7 +510,7 @@ const QuoteReportComponent = ({
         <div
           className="PaginatorRight"
           onClick={() => {
-            quotes.length > 19 && setPaginator(paginator + 1);
+            setPaginator(paginator + 1);
           }}
         >
           <AiOutlineRight color="white" size={"20px"} />
