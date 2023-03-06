@@ -83,7 +83,7 @@ const AddQuote = () => {
   }, []);
 
   const reload = () => {
-    history.push("/report/quoteReport");
+    history.push("/report/filter");
   };
 
   const onSubmit = (data) => {

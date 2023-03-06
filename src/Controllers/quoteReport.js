@@ -21,7 +21,7 @@ const QuoteReport = (props) => {
   const [columns, setColumns] = useState([]);
   const [filterValues, setFilterValues] = useState({});
   useEffect(() => {
-    if (props.location.aboutProps.clientName) {
+    if (props.location.aboutProps?.clientName) {
       setColumns(props.location?.aboutProps);
     } else {
       setFilterValues(props.location?.aboutProps);
@@ -64,7 +64,8 @@ const QuoteReport = (props) => {
         ? props.location.paginator - 1
         : paginator - 1) * 20
     );
-    let temp = Object.entries(filterValues);
+
+    let temp = Object.entries(filterValues || {});
 
     temp.map((e) => {
       params.append(e[0] == "ProducerId" ? "UserId" : `${e[0]}`, e[1]);

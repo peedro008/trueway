@@ -59,13 +59,13 @@ const QuoteReportComponent = ({
       </div>
       <div className="REPcontrol">
         <div className="REPDate">
-          {filterValues.dateFrom && filterValues.dateTo && (
+          {filterValues?.dateFrom && filterValues?.dateTo && (
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 From:&nbsp;<strong>{filterValues.dateFrom}</strong>
               </p>
               <p className="cloudFilterText" style={{ marginLeft: "5px" }}>
-                To:&nbsp;<strong>{filterValues.dateTo}</strong>
+                To:&nbsp;<strong>{filterValues?.dateTo}</strong>
               </p>
 
               <img
@@ -82,7 +82,7 @@ const QuoteReportComponent = ({
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 Client name:
-                {clients.find((c) => c.id == filterValues.ClientId).name}
+                {clients.find((c) => c.id == filterValues?.ClientId).name}
               </p>
               <img
                 src={close}
@@ -94,12 +94,12 @@ const QuoteReportComponent = ({
             </div>
           )}
 
-          {filterValues.SoldBy && (
+          {filterValues?.SoldBy && (
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 Sold By:
                 {
-                  producers.find((c) => c.User.id == filterValues.ProducerId)
+                  producers.find((c) => c.User.id == filterValues?.ProducerId)
                     ?.User.name
                 }
               </p>
@@ -112,12 +112,12 @@ const QuoteReportComponent = ({
               />
             </div>
           )}
-          {filterValues.UserId && (
+          {filterValues?.UserId && (
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 Producer name:
                 {
-                  producers.find((c) => c.User.id == filterValues.ProducerId)
+                  producers.find((c) => c.User.id == filterValues?.ProducerId)
                     ?.User.name
                 }
               </p>
@@ -130,11 +130,11 @@ const QuoteReportComponent = ({
               />
             </div>
           )}
-          {filterValues.LocationId && (
+          {filterValues?.LocationId && (
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 Location:
-                {locations.find((c) => c.id == filterValues.LocationId)?.name}
+                {locations.find((c) => c.id == filterValues?.LocationId)?.name}
               </p>
               <img
                 src={close}
@@ -145,11 +145,11 @@ const QuoteReportComponent = ({
               />
             </div>
           )}
-          {filterValues.CompanyId && (
+          {filterValues?.CompanyId && (
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 Company:
-                {companies.find((c) => c.id == filterValues.CompanyId)?.name}
+                {companies.find((c) => c.id == filterValues?.CompanyId)?.name}
               </p>
               <img
                 src={close}
@@ -160,11 +160,11 @@ const QuoteReportComponent = ({
               />
             </div>
           )}
-          {filterValues.CategoryId && (
+          {filterValues?.CategoryId && (
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 Category:
-                {categories.find((c) => c.id == filterValues.CategoryId)?.name}
+                {categories.find((c) => c.id == filterValues?.CategoryId)?.name}
               </p>
               <img
                 src={close}
@@ -175,9 +175,9 @@ const QuoteReportComponent = ({
               />
             </div>
           )}
-          {filterValues.Status && (
+          {filterValues?.Status && (
             <div className="cloudFilter">
-              <p className="cloudFilterText">Status:{filterValues.Status}</p>
+              <p className="cloudFilterText">Status:{filterValues?.Status}</p>
               <img
                 src={close}
                 style={{ marginLeft: "5px" }}
@@ -187,11 +187,11 @@ const QuoteReportComponent = ({
               />
             </div>
           )}
-          {filterValues.DealerSalePersonId && (
+          {filterValues?.DealerSalePersonId && (
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 Location:
-                {dealers?.find((c) => c.id == filterValues.DealerId)?.name}
+                {dealers?.find((c) => c.id == filterValues?.DealerId)?.name}
               </p>
               <img
                 src={close}
