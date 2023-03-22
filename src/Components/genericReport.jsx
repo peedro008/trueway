@@ -473,20 +473,25 @@ const GenericReportComponent = ({
           </div>
         </>
       )}
-      <BsChevronLeft
-        color="grey"
-        cursor="pointer"
-        style={{
-          minWidth: "30px",
-          minHeight: "30px",
-          position: "fixed",
-          zIndex: 9,
-          left: "80px",
-          top: "17px",
-          alignSelf: "flex-start",
+      <NavLink
+        to={{
+          pathname: "/stadistic",
         }}
-        onClick={() => window.history.go(-1)}
-      />
+      >
+        <BsChevronLeft
+          color="grey"
+          cursor="pointer"
+          style={{
+            minWidth: "30px",
+            minHeight: "30px",
+            position: "fixed",
+            zIndex: 9,
+            left: "80px",
+            top: "17px",
+            alignSelf: "flex-start",
+          }}
+        />
+      </NavLink>
     </div>
   );
 };
