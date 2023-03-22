@@ -23,6 +23,7 @@ const GenericReportComponent = ({
   checkbox,
   setCheckbox,
   users,
+  data,
 }) => {
   return (
     <div className="genericDiv1">
@@ -208,7 +209,11 @@ const GenericReportComponent = ({
                         style={{ textDecoration: "none", color: "#000" }}
                         to={{
                           pathname: "/report/quote",
-                          aboutProps: { ID: e.id },
+                          aboutProps: {
+                            ID: e.id,
+                            isGenericReport: "Yes",
+                            data: data,
+                          },
                         }}
                       >
                         <div className="InfoIcon"></div>

@@ -74,7 +74,7 @@ const QuoteReport = (props) => {
       .get(`https://truewayagentbackend.com/getQuotesReport`, { params })
       .then(function (response) {
         setOnlyOne(2);
-        if (filterValues.Status === "Quoted") {
+        if (filterValues?.Status === "Quoted") {
           setQuotes(response.data.filter((e) => !e.SoldBy));
         } else {
           setQuotes(response.data);

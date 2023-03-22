@@ -143,6 +143,7 @@ function GenericReport(props) {
   }, [paymentsFil]);
   return (
     <GenericReportComponent
+      data={data}
       items={data.items}
       type={data.type}
       title={data.title}

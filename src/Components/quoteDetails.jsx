@@ -3,7 +3,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import spinnerr from "../assets/loadingIcon.gif";
-function QuoteDetailsComponent({ quote, id, paginator }) {
+function QuoteDetailsComponent({ quote, id, paginator, data, generic }) {
   return (
     <div className="genericDiv" style={{ overflowX: "hidden" }}>
       {!quote.length ? (
@@ -130,33 +130,59 @@ function QuoteDetailsComponent({ quote, id, paginator }) {
                           <p className="DETtitle">Producer</p>
                           <p className="DETtext">{e.User.name}</p>
                         </div>
-                        <div className="DETbBox">
+                        <div
+                          className="DETbBox"
+                          style={{ height: "auto", minHeight: "85px" }}
+                        >
                           <p className="DETtitle">Notes</p>
                           <p className="DETtext">{e.note}</p>
                         </div>
                       </div>
                     );
                   })}
-              <NavLink
-                to={{
-                  pathname: "/report/quoteReport",
-                  paginator: paginator,
-                }}
-              >
-                <BsChevronLeft
-                  color="grey"
-                  cursor="pointer"
-                  style={{
-                    minWidth: "25px",
-                    minHeight: "25px",
-                    position: "fixed",
-                    zIndex: 9,
-                    left: "80px",
-                    top: "17px",
-                    alignSelf: "flex-start",
+              {generic === "Yes" ? (
+                <NavLink
+                  to={{
+                    pathname: "/report/genericReport",
+                    aboutProps: data,
                   }}
-                />
-              </NavLink>
+                >
+                  <BsChevronLeft
+                    color="grey"
+                    cursor="pointer"
+                    style={{
+                      minWidth: "25px",
+                      minHeight: "25px",
+                      position: "fixed",
+                      zIndex: 9,
+                      left: "80px",
+                      top: "17px",
+                      alignSelf: "flex-start",
+                    }}
+                  />
+                </NavLink>
+              ) : (
+                <NavLink
+                  to={{
+                    pathname: "/report/quoteReport",
+                    paginator: paginator,
+                  }}
+                >
+                  <BsChevronLeft
+                    color="grey"
+                    cursor="pointer"
+                    style={{
+                      minWidth: "25px",
+                      minHeight: "25px",
+                      position: "fixed",
+                      zIndex: 9,
+                      left: "80px",
+                      top: "17px",
+                      alignSelf: "flex-start",
+                    }}
+                  />
+                </NavLink>
+              )}
             </div>
           </div>
         </div>
