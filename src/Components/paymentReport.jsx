@@ -54,7 +54,7 @@ const PaymentReportComponent = ({
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
-        <p className="genericTitle">Payment reports</p>
+        <p className="genericTitle">Payments report</p>
       </div>
       <div className="REPcontrol">
         <div className="REPDate">
