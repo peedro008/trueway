@@ -1,54 +1,56 @@
-
 import React from "react";
 
 import { BsChevronLeft } from "react-icons/bs";
 import { VscFilePdf } from "react-icons/vsc";
 import Select from "react-select";
 
-
 import close from "../assets/close.svg";
 
 import Modal from "react-responsive-modal";
-import { AiOutlineDelete, AiOutlineFilter, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import {
+  AiOutlineDelete,
+  AiOutlineFilter,
+  AiOutlineLeft,
+  AiOutlineRight,
+} from "react-icons/ai";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import MyDocument from "../PDF/prueba";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 const PaymentReportComponent = ({
-    userRole,
-payments,
-paymentsFil,
-dateF,
-openFilter,
-filtered,
-deleteConf,
-deletedOne,
-producers,
-clients,
-locations,
-setPayments,
-setPaymentsFil,
-setDateF,
-setOpenFilter,
-setFiltered,
-setDeleteConf,
-setDeletedOne,
-filterValues,
-setFilterValues,
-filterCheck,
-setFilterCheck,
-open,
-onCloseModal,
-handleDelete,
-handleDeleteModal,
-deleteClient,
-filterSubmit,
-closeCloud,
-paginator,
-setPaginator
+  userRole,
+  payments,
+  paymentsFil,
+  dateF,
+  openFilter,
+  filtered,
+  deleteConf,
+  deletedOne,
+  producers,
+  clients,
+  locations,
+  setPayments,
+  setPaymentsFil,
+  setDateF,
+  setOpenFilter,
+  setFiltered,
+  setDeleteConf,
+  setDeletedOne,
+  filterValues,
+  setFilterValues,
+  filterCheck,
+  setFilterCheck,
+  open,
+  onCloseModal,
+  handleDelete,
+  handleDeleteModal,
+  deleteClient,
+  filterSubmit,
+  closeCloud,
+  paginator,
+  setPaginator,
 }) => {
- console.log(paymentsFil)
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -108,7 +110,10 @@ setPaginator
             <div className="cloudFilter">
               <p className="cloudFilterText">
                 Producer name:
-                {producers.find((c) => c.UserId == filterValues.ProducerId)?.name}
+                {
+                  producers.find((c) => c.UserId == filterValues.ProducerId)
+                    ?.name
+                }
               </p>
               <img
                 src={close}
@@ -159,27 +164,29 @@ setPaginator
             </div>
           )}
         </div>
-       
-         <div
-        style={{
-          cursor:'pointer',
-          position: "fixed",
-          right: "50px",
-          top: "85px",
-          display: "flex",
-        }}
-      >
-        <AiOutlineFilter
-          color="#2b4162"
-          size={"40px"}
-          onClick={() => setOpenFilter(!openFilter)}
-        />
-      </div>
+
+        <div
+          style={{
+            cursor: "pointer",
+            position: "fixed",
+            right: "50px",
+            top: "85px",
+            display: "flex",
+          }}
+        >
+          <AiOutlineFilter
+            color="#2b4162"
+            size={"40px"}
+            onClick={() => setOpenFilter(!openFilter)}
+          />
+        </div>
       </div>
       <table class="table1">
         <tbody>
           <tr>
-          <th scope="col" className="column1"><p   className="REPtype">Info</p></th>
+            <th scope="col" className="column1">
+              <p className="REPtype">Info</p>
+            </th>
             <th scope="col" className="column1">
               <p className="REPtype2">Client name</p>
             </th>
@@ -237,16 +244,23 @@ setPaginator
             .map((e) => {
               return (
                 <tr>
-                   <td className="ClientName" scope="row">
-                    <NavLink style={{display:"flex", justifyContent:"center",textDecoration: "none"}} to={{
-                    pathname:("/report/payment/details"),
-                    aboutProps:e.id
-                }}>
-                  <div className="InfoIcon2">
-                        <BsInfoCircle size={'25px'} color={'#54B4D3'}/>
-                        </div>
-                </NavLink>
-                </td>
+                  <td className="ClientName" scope="row">
+                    <NavLink
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        textDecoration: "none",
+                      }}
+                      to={{
+                        pathname: "/report/payment/details",
+                        aboutProps: e.id,
+                      }}
+                    >
+                      <div className="InfoIcon2">
+                        <BsInfoCircle size={"25px"} color={"#54B4D3"} />
+                      </div>
+                    </NavLink>
+                  </td>
                   <td className="ClientName" scope="row">
                     {e.Client.name}
                   </td>
@@ -259,7 +273,7 @@ setPaginator
                   <td className="ClientName" scope="row">
                     {e.type}
                   </td>
-                  
+
                   <td className="ClientName" scope="row">
                     {e.date}
                   </td>
@@ -279,18 +293,20 @@ setPaginator
                     ${parseFloat(e.PIPvalue).toFixed(2)}
                   </td>
                   <td className="ClientName" scope="row">
-                    ${(e.NSDvalue?parseFloat(e.NSDvalue).toFixed(2):0)}
+                    ${e.NSDvalue ? parseFloat(e.NSDvalue).toFixed(2) : 0}
                   </td>
                   <td className="ClientName" scope="row">
                     ${parseFloat(e.MVRvalue).toFixed(2)}
                   </td>
                   <td className="ClientName" scope="row">
                     $
-                    {((e.amount?parseFloat(e.amount):0) +
-                      (e.PIPvalue?parseFloat(e.PIPvalue):0) +
-                      (e.NSDvalue?parseFloat(e.NSDvalue):0) +
-                      (e.MVRvalue?parseFloat(e.MVRvalue):0) +
-                      (e.creditCardFee?parseFloat(e.creditCardFee):0)).toFixed(2)}
+                    {(
+                      (e.amount ? parseFloat(e.amount) : 0) +
+                      (e.PIPvalue ? parseFloat(e.PIPvalue) : 0) +
+                      (e.NSDvalue ? parseFloat(e.NSDvalue) : 0) +
+                      (e.MVRvalue ? parseFloat(e.MVRvalue) : 0) +
+                      (e.creditCardFee ? parseFloat(e.creditCardFee) : 0)
+                    ).toFixed(2)}
                   </td>
                   {userRole !== "Producer" && (
                     <td className="ClientName" scope="row">
@@ -343,7 +359,11 @@ setPaginator
                         }
                         fileName="Receipt"
                       >
-                        <VscFilePdf className="pdfIcon" size={"20px"} color={'black'} />
+                        <VscFilePdf
+                          className="pdfIcon"
+                          size={"20px"}
+                          color={"black"}
+                        />
                       </PDFDownloadLink>
                     </div>
                   </td>
@@ -353,7 +373,7 @@ setPaginator
         </tbody>
       </table>
       <BsChevronLeft
-          cursor='pointer'
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",
@@ -367,13 +387,23 @@ setPaginator
         onClick={() => window.history.go(-1)}
       />
       <div className="PaginatorBox">
-            <div className="PaginatorLeft"  onClick={()=>{paginator!==1&&setPaginator(paginator-1)}}>
-                <AiOutlineLeft  color="white" size={"20px"}/>
-            </div>
-            <div className="PaginatorNum">{paginator}</div>
-            <div className="PaginatorRight" onClick={()=>{payments.length>19 && setPaginator(paginator+1)}}>
-                <AiOutlineRight color="white" size={"20px"}/>
-            </div>
+        <div
+          className="PaginatorLeft"
+          onClick={() => {
+            paginator !== 1 && setPaginator(paginator - 1);
+          }}
+        >
+          <AiOutlineLeft color="white" size={"20px"} />
+        </div>
+        <div className="PaginatorNum">{paginator}</div>
+        <div
+          className="PaginatorRight"
+          onClick={() => {
+            payments.length > 19 && setPaginator(paginator + 1);
+          }}
+        >
+          <AiOutlineRight color="white" size={"20px"} />
+        </div>
       </div>
       {openFilter && (
         <div className="FilterCom">
@@ -600,7 +630,7 @@ setPaginator
                   { value: "Renew Down", label: "Renew Down" },
                 ]}
                 onChange={(e) =>
-                  setFilterValues({ ...filterValues, Type: e.value })
+                  setFilterValues({ ...filterValues, type: e.value })
                 }
                 className="PAYselect"
               />
@@ -639,8 +669,6 @@ setPaginator
               />
             </div>
           )}
-
-          
         </div>
       )}
 

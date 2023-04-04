@@ -114,7 +114,6 @@ const FetchAll = (dispatch) => {
     .get(`https://truewayagentbackend.com/clientsLast`)
     .then(function (response) {
       dispatch(getClientsID(response.data));
-      console.log("HOla");
     })
     .catch((error) => {
       console.log(error);
@@ -269,7 +268,6 @@ const GetClientsId = (dispatch) => {
     .get(`https://truewayagentbackend.com/clientsLast`)
     .then(function (response) {
       dispatch(getClientsID(response.data));
-      console.log("HOla");
     })
     .catch((error) => {
       console.log(error);
