@@ -28,8 +28,17 @@ const PolicyList = () => {
   }, []);
 
   useEffect(() => {
-    setPaymentsOrder(
-      lastPayments
+    if (lastPayments) {
+      const uniquePayments = Object.values(
+        lastPayments?.reduce((temp, payment) => {
+          const key = payment.policyNumber + payment.type + payment.date; // Concatenamos todas las propiedades relevantes
+          if (!temp[key]) {
+            temp[key] = payment;
+          }
+          return temp;
+        }, {})
+      )
+        .filter((payment) => payment.type !== "Monthly Payment")
         ?.sort(function (a, b) {
           return b.id - a.id;
         })
@@ -38,12 +47,14 @@ const PolicyList = () => {
             e.policyNumber !== null &&
             e.policyNumber !== "" &&
             e.type !== "Monthly Payment"
-        )
-    );
+        );
+      setPaymentsOrder(uniquePayments);
+    }
   }, [lastPayments]);
 
-  console.log(policyByName);
+  console.log(monthlyPayments);
   useEffect(() => {
+    console.log(paymentsOrder);
     if (filterOn === "") {
       if (policyByName?.length) {
         setPolicies(policyByName?.slice(paginator * 10, paginator * 10 + 10));
@@ -135,12 +146,25 @@ const PolicyList = () => {
   }, [paginator, policyByName, paymentsOrder, filterOn]);
 
   useEffect(() => {
-    const monthlyPayment1 = monthlyPayments?.filter(
-      (e) =>
-        e.policyNumber !== null &&
-        e.policyNumber !== "" &&
-        e.type === "Down Payment"
-    );
+    const monthlyPayment1 = Object.values(
+      monthlyPayments?.reduce((temp, payment) => {
+        const key = payment.policyNumber + payment.type + payment.date; // Concatenamos todas las propiedades relevantes
+        if (!temp[key]) {
+          temp[key] = payment;
+        }
+        return temp;
+      }, {})
+    )
+      ?.sort(function (a, b) {
+        return b.id - a.id;
+      })
+      .filter(
+        (e) =>
+          e.policyNumber !== null &&
+          e.policyNumber !== "" &&
+          e.type !== "Monthly Payment" &&
+          e.type === "Down Payment"
+      );
 
     let totalTW1 = 0;
     let totalTW2 = 0;
@@ -154,12 +178,25 @@ const PolicyList = () => {
     );
     setTotalMonthlyPayments([totalTW1, totalTW2, totalCC]);
 
-    const monthlyRenew = monthlyPayments?.filter(
-      (e) =>
-        e.policyNumber !== null &&
-        e.policyNumber !== "" &&
-        e.type === "Renew Down"
-    );
+    const monthlyRenew = Object.values(
+      monthlyPayments?.reduce((temp, payment) => {
+        const key = payment.policyNumber + payment.type + payment.date; // Concatenamos todas las propiedades relevantes
+        if (!temp[key]) {
+          temp[key] = payment;
+        }
+        return temp;
+      }, {})
+    )
+      ?.sort(function (a, b) {
+        return b.id - a.id;
+      })
+      .filter(
+        (e) =>
+          e.policyNumber !== null &&
+          e.policyNumber !== "" &&
+          e.type !== "Monthly Payment" &&
+          e.type === "Renew Down"
+      );
 
     let totalRenewTW1 = 0;
     let totalRenewTW2 = 0;
@@ -173,12 +210,25 @@ const PolicyList = () => {
     );
     setTotalRenew([totalRenewTW1, totalRenewTW2, totalRenewCC]);
 
-    const monthlyEndorsement = monthlyPayments?.filter(
-      (e) =>
-        e.policyNumber !== null &&
-        e.policyNumber !== "" &&
-        e.type === "Endorsement"
-    );
+    const monthlyEndorsement = Object.values(
+      monthlyPayments?.reduce((temp, payment) => {
+        const key = payment.policyNumber + payment.type + payment.date; // Concatenamos todas las propiedades relevantes
+        if (!temp[key]) {
+          temp[key] = payment;
+        }
+        return temp;
+      }, {})
+    )
+      ?.sort(function (a, b) {
+        return b.id - a.id;
+      })
+      .filter(
+        (e) =>
+          e.policyNumber !== null &&
+          e.policyNumber !== "" &&
+          e.type !== "Monthly Payment" &&
+          e.type === "Endorsement"
+      );
 
     let totalEndorsementTW1 = 0;
     let totalEndorsementTW2 = 0;
@@ -222,26 +272,35 @@ const PolicyList = () => {
       .then((res) => res.json())
       .then((json) => {
         setSearchDate("Search");
-        console.log(`Hola Pelu ${json.length}`);
-        setPaymentsOrder(
-          json
-            .filter((e) => e.type !== "Monthly Payment")
-            .filter((e) => e.policyNumber !== null)
-            .filter((e) => e.policyNumber !== "")
-        );
-        setMonthlyPayments(
-          json
-            .filter((e) => e.type !== "Monthly Payment")
-            .filter((e) => e.policyNumber !== null)
-            .filter((e) => e.policyNumber !== "")
-        );
+
+        const uniquePayments = Object.values(
+          json.reduce((temp, payment) => {
+            const key = payment.policyNumber + payment.type + payment.date; // Concatenamos todas las propiedades relevantes
+            if (!temp[key]) {
+              temp[key] = payment;
+            }
+            return temp;
+          }, {})
+        )
+          ?.sort(function (a, b) {
+            return b.id - a.id;
+          })
+          .filter(
+            (e) =>
+              e.policyNumber !== null &&
+              e.policyNumber !== "" &&
+              e.type !== "Monthly Payment"
+          );
+
+        setPaymentsOrder(uniquePayments);
+        setMonthlyPayments(uniquePayments);
       })
       .catch((err) => {
         console.log(err);
         setPaymentsOrder("Nothing");
       });
   };
-  console.log(monthlyPayments);
+  console.log(payments);
   useEffect(() => {
     setIsLoader(true);
     fetch(`https://truewayagentbackend.com/getMonthlyPayments`)

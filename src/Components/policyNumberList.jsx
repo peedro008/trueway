@@ -41,7 +41,7 @@ const PolicyNumberList = ({
 
   const d = new Date();
   const month = monthNames[d.getMonth()];
-
+  console.log(payments);
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
