@@ -78,7 +78,7 @@ const ModifyModal = (props) => {
   }, [props, userId]);
   const submit = () => {
     inputs.Status
-      ? fetch(`https://truewayagentbackend.com/modifyQuote`, {
+      ? fetch(`https://lantana.truewayagentbackend.com/modifyQuote`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const ModifyModal = (props) => {
         })
           .then(onOpenModal1())
           .then(GetA_AVG(dispatch))
-      : fetch(`https://truewayagentbackend.com/addNotes`, {
+      : fetch(`https://lantana.truewayagentbackend.com/addNotes`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

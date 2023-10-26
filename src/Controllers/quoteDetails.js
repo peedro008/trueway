@@ -11,7 +11,7 @@ function QuoteDetails(props) {
   const [quote, setQuote] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/idquotes?id=${id}`)
+      .get(`https://lantana.truewayagentbackend.com/idquotes?id=${id}`)
       .then(function (response) {
         setQuote(response.data);
       })

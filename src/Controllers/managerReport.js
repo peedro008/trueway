@@ -27,7 +27,7 @@ const ManagerReport = () => {
   };
   const deleteManager = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/deleteManager`, {
+    fetch(`https://lantana.truewayagentbackend.com/deleteManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

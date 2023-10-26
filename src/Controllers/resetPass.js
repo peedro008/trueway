@@ -40,7 +40,7 @@ const ResetPass = () => {
       UserName: pes,
       Password: Password,
     };
-    fetch(`https://truewayagentbackend.com/resetPass`, {
+    fetch(`https://lantana.truewayagentbackend.com/resetPass`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

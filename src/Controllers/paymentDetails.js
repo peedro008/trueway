@@ -7,7 +7,7 @@ function PaymentDetails(props) {
   const [payment, setPayment] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/idPayment?id=${id}`)
+      .get(`https://lantana.truewayagentbackend.com/idPayment?id=${id}`)
       .then(function (response) {
         setPayment(response.data);
       })

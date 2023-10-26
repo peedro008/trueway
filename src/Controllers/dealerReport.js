@@ -35,7 +35,7 @@ const DealerReport = () => {
   };
 
   const PayDealer = (data) => {
-    fetch(`https://truewayagentbackend.com/paidDealer`, {
+    fetch(`https://lantana.truewayagentbackend.com/paidDealer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const DealerReport = () => {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDealers`)
+      .get(`https://lantana.truewayagentbackend.com/getDealers`)
       .then(function (response) {
         setDealers(response.data);
       })

@@ -17,7 +17,9 @@ function QuoteModify(props) {
   const onCloseModal = () => setOpen(false);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/idquotes`, { params: { id: id } })
+      .get(`https://lantana.truewayagentbackend.com/idquotes`, {
+        params: { id: id },
+      })
       .then(function (response) {
         setQuote(response.data);
 
@@ -59,7 +61,7 @@ function QuoteModify(props) {
   };
   const submit = () => {
     inputs.Status
-      ? fetch(`https://truewayagentbackend.com/modifyQuote`, {
+      ? fetch(`https://lantana.truewayagentbackend.com/modifyQuote`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

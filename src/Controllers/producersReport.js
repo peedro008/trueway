@@ -23,7 +23,7 @@ const ProducerReport = () => {
   };
   const deleteProducer = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/deleteProducer`, {
+    fetch(`https://lantana.truewayagentbackend.com/deleteProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

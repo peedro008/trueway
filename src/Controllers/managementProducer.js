@@ -34,7 +34,7 @@ const ManagementProducer = () => {
   const onSubmit = (data) => {
     data && setinputs({ ...inputs, UserRole: "Producer" });
 
-    fetch(`https://truewayagentbackend.com/addProducer`, {
+    fetch(`https://lantana.truewayagentbackend.com/addProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

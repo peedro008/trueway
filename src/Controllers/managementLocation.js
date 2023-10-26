@@ -30,7 +30,7 @@ function ManagementLocation() {
   });
   const onSubmit = (data) => {
     data &&
-      fetch(`https://truewayagentbackend.com/addLocation`, {
+      fetch(`https://lantana.truewayagentbackend.com/addLocation`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

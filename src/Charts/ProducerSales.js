@@ -15,7 +15,9 @@ function ProducerSales({ aboutProps, google }) {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/producerQuotes?UserId=${userId}`)
+      .get(
+        `https://lantana.truewayagentbackend.com/producerQuotes?UserId=${userId}`
+      )
       .then(function (response) {
         setQuotes(response.data);
       })

@@ -144,7 +144,9 @@ function AddPayment(props) {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/clientQuotes?client=${form.id}`)
+      .get(
+        `https://lantana.truewayagentbackend.com/clientQuotes?client=${form.id}`
+      )
       .then(function (response) {
         setQuotes(response.data);
       })
@@ -188,7 +190,7 @@ function AddPayment(props) {
     setAddingPayment(true);
     if (!MultiMethod) {
       if (newClient == false) {
-        fetch(`https://truewayagentbackend.com/addPayment`, {
+        fetch(`https://lantana.truewayagentbackend.com/addPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -212,7 +214,7 @@ function AddPayment(props) {
             setPaymentStatus("Payment could not be added");
           });
       } else {
-        fetch(`https://truewayagentbackend.com/addClientPayment`, {
+        fetch(`https://lantana.truewayagentbackend.com/addClientPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -238,7 +240,7 @@ function AddPayment(props) {
       }
     } else {
       if (newClient == false) {
-        fetch(`https://truewayagentbackend.com/addMultiPayment`, {
+        fetch(`https://lantana.truewayagentbackend.com/addMultiPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -262,7 +264,7 @@ function AddPayment(props) {
             setPaymentStatus("Payment could not be added");
           });
       } else {
-        fetch(`https://truewayagentbackend.com/ClientMultiPayment`, {
+        fetch(`https://lantana.truewayagentbackend.com/ClientMultiPayment`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -290,7 +292,7 @@ function AddPayment(props) {
 
   // useEffect(() => {
   //   if (clienteByName?.length > 2) {
-  //     fetch(`https://truewayagentbackend.com/clientsByName?name=${clienteByName}`, {
+  //     fetch(`https://lantana.truewayagentbackend.com/clientsByName?name=${clienteByName}`, {
   //       method: "GET",
   //       headers: {
   //         "Content-Type": "application/json",

@@ -27,7 +27,7 @@ function DailyReport() {
   useEffect(() => {
     axios
       .get(
-        `https://truewayagentbackend.com/dailyReport?LocationId=${LocationId}`
+        `https://lantana.truewayagentbackend.com/dailyReport?LocationId=${LocationId}`
       )
       .then(function (response) {
         setPayments(response.data);
@@ -40,7 +40,7 @@ function DailyReport() {
   useEffect(() => {
     axios
       .get(
-        `https://truewayagentbackend.com/dailyReport?LocationId=${LocationId}&yesterday=true`
+        `https://lantana.truewayagentbackend.com/dailyReport?LocationId=${LocationId}&yesterday=true`
       )
       .then(function (response) {
         setYPayments(response.data);
@@ -106,7 +106,7 @@ function DailyReport() {
       return e.id;
     });
     console.log({ LocationId: LocationId, IDs: IDs, total: total });
-    fetch(`https://truewayagentbackend.com/addDailyReport`, {
+    fetch(`https://lantana.truewayagentbackend.com/addDailyReport`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

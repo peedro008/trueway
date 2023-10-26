@@ -44,7 +44,7 @@ const ProducerRouter = () => {
 
   useEffect(() => {
     fetch(
-      `https://truewayagentbackend.com/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`,
+      `https://lantana.truewayagentbackend.com/getProducerFilter?Id=${User.userId}&UserRole=${UserRole}`,
       {
         method: "GET",
         headers: {

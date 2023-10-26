@@ -71,7 +71,9 @@ const QuoteReport = (props) => {
       params.append(e[0] == "ProducerId" ? "UserId" : `${e[0]}`, e[1]);
     });
     axios
-      .get(`https://truewayagentbackend.com/getQuotesReport`, { params })
+      .get(`https://lantana.truewayagentbackend.com/getQuotesReport`, {
+        params,
+      })
       .then(function (response) {
         setOnlyOne(2);
         if (filterValues?.Status === "Quoted") {
@@ -113,7 +115,7 @@ const QuoteReport = (props) => {
   };
   const deleteClient = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/deleteQuote`, {
+    fetch(`https://lantana.truewayagentbackend.com/deleteQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -78,7 +78,7 @@ const AdminDashboard = () => {
   }, [cuotitas]);
 
   const getQuoteStatuses = () => {
-    fetch(`https://truewayagentbackend.com/getStatus`)
+    fetch(`https://lantana.truewayagentbackend.com/getStatus`)
       .then((res) => res.json())
       .then((json) => setCuotitas(json))
       .catch((err) => console.log(err));
@@ -86,7 +86,9 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getUserPayment?UserId=${UserId}`)
+      .get(
+        `https://lantana.truewayagentbackend.com/getUserPayment?UserId=${UserId}`
+      )
       .then(function (response) {
         setPayments(response.data);
       })

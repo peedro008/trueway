@@ -28,7 +28,7 @@ const DepositCash = () => {
   useEffect(() => {
     axios
       .get(
-        `https://truewayagentbackend.com/getCashPayment?LocationId=${LocationId}`
+        `https://lantana.truewayagentbackend.com/getCashPayment?LocationId=${LocationId}`
       )
       .then(function (response) {
         setDbPayments(response.data);
@@ -80,7 +80,7 @@ const DepositCash = () => {
         Number(box.pay100) * 100,
     };
     onOpenModal();
-    fetch(`https://truewayagentbackend.com/deposit`, {
+    fetch(`https://lantana.truewayagentbackend.com/deposit`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ const DepositCash = () => {
       body: JSON.stringify(data),
     }).then((a) => {
       axios
-        .get(`https://truewayagentbackend.com/getDeposit`)
+        .get(`https://lantana.truewayagentbackend.com/getDeposit`)
         .then(function (response) {
           dispatch(getDeposits(response.data));
         })

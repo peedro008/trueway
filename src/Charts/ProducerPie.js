@@ -8,7 +8,7 @@ function ProducerPie({ aboutProps, google }) {
   let userId = aboutProps;
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/quotes`)
+      .get(`https://lantana.truewayagentbackend.com/quotes`)
       .then(function (response) {
         let paz = response.data;
         console.log(userId);
@@ -40,7 +40,6 @@ function ProducerPie({ aboutProps, google }) {
       ["Sold", sold],
     ]);
   }, [quotes]);
-  console.log(quotes);
   useEffect(() => {
     setTimeout(() => {
       if (google && !chart) {

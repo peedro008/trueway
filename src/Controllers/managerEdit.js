@@ -41,7 +41,7 @@ const ManagerEdit = (props) => {
   setValue("ProducerId", `${Producer.id}`);
 
   const onSubmit = (data) => {
-    fetch(`https://truewayagentbackend.com/modifyManager`, {
+    fetch(`https://lantana.truewayagentbackend.com/modifyManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

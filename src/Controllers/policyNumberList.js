@@ -250,7 +250,7 @@ const PolicyList = () => {
   useEffect(() => {
     if (search?.length > 2) {
       fetch(
-        `https://truewayagentbackend.com/getPolicyNumber?policyNumber=${search}`
+        `https://lantana.truewayagentbackend.com/getPolicyNumber?policyNumber=${search}`
       )
         .then((res) => res.json())
         .then((json) => {
@@ -267,7 +267,7 @@ const PolicyList = () => {
 
   const searchByDate = () => {
     fetch(
-      `https://truewayagentbackend.com/getPolicyByDate?dateFrom=${dateFrom}&dateTo=${dateTo}`
+      `https://lantana.truewayagentbackend.com/getPolicyByDate?dateFrom=${dateFrom}&dateTo=${dateTo}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -303,7 +303,7 @@ const PolicyList = () => {
   console.log(payments);
   useEffect(() => {
     setIsLoader(true);
-    fetch(`https://truewayagentbackend.com/getMonthlyPayments`)
+    fetch(`https://lantana.truewayagentbackend.com/getMonthlyPayments`)
       .then((res) => res.json())
       .then((json) => {
         setMonthlyPayments(json);

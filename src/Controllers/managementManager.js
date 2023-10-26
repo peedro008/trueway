@@ -40,7 +40,7 @@ const ManagementManager = () => {
   const onSubmit = (data) => {
     data && setinputs({ ...inputs, UserRole: "Producer" });
 
-    fetch(`https://truewayagentbackend.com/addManager`, {
+    fetch(`https://lantana.truewayagentbackend.com/addManager`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

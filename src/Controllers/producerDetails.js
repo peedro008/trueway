@@ -42,7 +42,7 @@ const ProducerDetails = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://truewayagentbackend.com/producerQuotes?UserId=${Producer?.UserId}`
+        `https://lantana.truewayagentbackend.com/producerQuotes?UserId=${Producer?.UserId}`
       )
       .then(function (response) {
         setQuotes(response.data);
@@ -56,7 +56,7 @@ const ProducerDetails = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://truewayagentbackend.com/getUserPayment?UserId=${Producer?.UserId}`
+        `https://lantana.truewayagentbackend.com/getUserPayment?UserId=${Producer?.UserId}`
       )
       .then(function (response) {
         setPayments(response.data);

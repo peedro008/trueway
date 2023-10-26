@@ -29,7 +29,7 @@ function ManagementDealerSalePerson() {
 
   const onSubmit = (data) => {
     data &&
-      fetch(`https://truewayagentbackend.com/addDealerSalePerson`, {
+      fetch(`https://lantana.truewayagentbackend.com/addDealerSalePerson`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

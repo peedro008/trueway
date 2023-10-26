@@ -99,7 +99,7 @@ const AddQuote = () => {
       (data.monthlyPayments == "" && setValue("monthlyPayment", "0"));
     setValue("Bound", `${inputs.Bound}`);
 
-    fetch(`https://truewayagentbackend.com/addQuote`, {
+    fetch(`https://lantana.truewayagentbackend.com/addQuote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -123,7 +123,7 @@ const AddQuote = () => {
   };
   const handleDealer = (x = null) => {
     inputs.DealerSalePerson && !x
-      ? fetch(`https://truewayagentbackend.com/addDealer`, {
+      ? fetch(`https://lantana.truewayagentbackend.com/addDealer`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -146,7 +146,7 @@ const AddQuote = () => {
           .catch((err) => {
             console.log(err);
           })
-      : fetch(`https://truewayagentbackend.com/addDealer`, {
+      : fetch(`https://lantana.truewayagentbackend.com/addDealer`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

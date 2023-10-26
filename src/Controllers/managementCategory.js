@@ -32,7 +32,7 @@ const ManagerCategory = () => {
 
   const onSubmit = (data) => {
     data &&
-      fetch(`https://truewayagentbackend.com/addCategories`, {
+      fetch(`https://lantana.truewayagentbackend.com/addCategories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

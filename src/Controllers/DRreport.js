@@ -23,7 +23,7 @@ const DRreport = () => {
   const [payments, setPayments] = useState([]);
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDailyReports`)
+      .get(`https://lantana.truewayagentbackend.com/getDailyReports`)
       .then(function (response) {
         setPayments(response.data);
       })
@@ -50,7 +50,7 @@ const DRreport = () => {
       return e.id;
     });
     console.log({ IDs: IDs, dailyID: e.dailyID });
-    fetch(`https://truewayagentbackend.com/resetDailyReport`, {
+    fetch(`https://lantana.truewayagentbackend.com/resetDailyReport`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

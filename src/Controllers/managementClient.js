@@ -42,7 +42,7 @@ const ManagementClient = () => {
 
   const onSubmit = (data) => {
     data && console.log(JSON.stringify(data));
-    fetch(`https://truewayagentbackend.com/addClient`, {
+    fetch(`https://lantana.truewayagentbackend.com/addClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

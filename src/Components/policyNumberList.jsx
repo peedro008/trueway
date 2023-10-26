@@ -102,6 +102,9 @@ const PolicyNumberList = ({
               <th scope="col" className="column1">
                 <p className="REPtype2">Policy Number</p>
               </th>
+              <th scope="col" className="column1">
+                <p className="REPtype2">User</p>
+              </th>
               <th scope="col" className="column1" style={{ width: "100px" }}>
                 <p className="REPtype2">Date</p>
               </th>
@@ -148,7 +151,9 @@ const PolicyNumberList = ({
                       <td scope="row" style={{ fontWeight: "bold" }}>
                         {e?.policyNumber || " "}
                       </td>
-
+                      <td scope="row" style={{ fontWeight: "bold" }}>
+                        {e?.User.name || " "}
+                      </td>
                       <td scope="row" style={{ fontWeight: "bold" }}>
                         {e?.date}
                       </td>
@@ -236,7 +241,8 @@ const PolicyNumberList = ({
                     marginTop: "-5px",
                   }}
                 >
-                  Down P. {searchDate || month}
+                  {/* Down P. {searchDate || month} */}
+                  Policies {searchDate || month}
                 </p>
                 <p
                   className="dashCardText"
@@ -279,7 +285,8 @@ const PolicyNumberList = ({
                     marginTop: "-5px",
                   }}
                 >
-                  Down P. {searchDate || month}
+                  {/* Down P. {searchDate || month} */}
+                  Policies {searchDate || month}
                 </p>
                 <p
                   className="dashCardText"
@@ -322,7 +329,8 @@ const PolicyNumberList = ({
                     marginTop: "-5px",
                   }}
                 >
-                  Down P. {searchDate || month}
+                  {/* Down P. {searchDate || month} */}
+                  Policies {searchDate || month}
                 </p>
                 <p
                   className="dashCardText"
@@ -365,7 +373,8 @@ const PolicyNumberList = ({
                     marginTop: "-5px",
                   }}
                 >
-                  Down P. {searchDate || month}
+                  {/* Down P. {searchDate || month} */}
+                  Policies {searchDate || month}
                 </p>
                 <p
                   className="dashCardText"

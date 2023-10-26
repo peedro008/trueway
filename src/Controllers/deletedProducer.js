@@ -26,7 +26,7 @@ const DeletedProducers = () => {
   };
   const deleteProducer = (data) => {
     data && console.log(data);
-    fetch(`https://truewayagentbackend.com/undeleteProducer`, {
+    fetch(`https://lantana.truewayagentbackend.com/undeleteProducer`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const DeletedProducers = () => {
   };
   useEffect(() => {
     axios
-      .get(`https://truewayagentbackend.com/getDeletedProducer`)
+      .get(`https://lantana.truewayagentbackend.com/getDeletedProducer`)
       .then(function (response) {
         setProducers(response.data);
       })

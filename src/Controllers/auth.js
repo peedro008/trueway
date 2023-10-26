@@ -46,7 +46,7 @@ const Auth = () => {
       UserName,
       Password,
     };
-    fetch(`https://truewayagentbackend.com/login`, {
+    fetch(`https://lantana.truewayagentbackend.com/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ const Auth = () => {
     const payload = {
       email: reset,
     };
-    fetch(`https://truewayagentbackend.com/send`, {
+    fetch(`https://lantana.truewayagentbackend.com/send`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

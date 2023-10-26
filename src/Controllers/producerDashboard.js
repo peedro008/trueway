@@ -23,7 +23,7 @@ const ProducerDashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://truewayagentbackend.com/producerQuotesThisMonth?UserId=${user.userId}`
+        `https://lantana.truewayagentbackend.com/producerQuotesThisMonth?UserId=${user.userId}`
       )
       .then(function (response) {
         setPquotes(response.data);
@@ -36,7 +36,7 @@ const ProducerDashboard = () => {
   useEffect(() => {
     axios
       .get(
-        `https://truewayagentbackend.com/getUserPayment?UserId=${user.userId}`
+        `https://lantana.truewayagentbackend.com/getUserPayment?UserId=${user.userId}`
       )
       .then(function (response) {
         setPayments(

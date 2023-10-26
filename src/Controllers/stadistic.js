@@ -58,7 +58,9 @@ function Stadistic() {
       });
       setPayments([]);
       axios
-        .get(`https://truewayagentbackend.com/getPaymentsStats`, { params })
+        .get(`https://lantana.truewayagentbackend.com/getPaymentsStats`, {
+          params,
+        })
         .then(function (response) {
           setPayments(response.data);
         })
@@ -82,7 +84,9 @@ function Stadistic() {
       });
       setQuotes([]);
       axios
-        .get(`https://truewayagentbackend.com/getQuotesStats`, { params })
+        .get(`https://lantana.truewayagentbackend.com/getQuotesStats`, {
+          params,
+        })
         .then(function (response) {
           setQuotes(response.data);
           setLoader(false);
@@ -178,12 +182,13 @@ function Stadistic() {
         if (e.CategoryId !== 7) {
           if (e.CategoryId == 2) {
             pes += 10;
+          } else {
+            pes +=
+              5 *
+              (e?.NSDvalue?.length
+                ? parseFloat(e.NSDvalue) / parseFloat(e.Category?.NSDvalue)
+                : 0);
           }
-          pes +=
-            5 *
-            (e?.NSDvalue?.length
-              ? parseFloat(e.NSDvalue) / parseFloat(e.Category?.NSDvalue)
-              : 0);
         }
       });
     }
