@@ -19,28 +19,27 @@ const schema = yup
     DealerSalePersonId: yup.number().required(),
     amount: yup.string().required(),
     paid: yup.bool().required().default(false),
-    })
+  })
   .required();
 
 const ManagementDealerComponent = ({
-        neww,
-        setNeww,
-        open,
-        client,
-        dealerSalePerson,
-        control,
-        optionsC,
-        optionsD,
-        reload,
-        inputs,
-        setinputs,
-        handleSubmit,
-        onSubmit,
-        register,
-        errors,
-  
-    }) => {
-    return (
+  neww,
+  setNeww,
+  open,
+  client,
+  dealerSalePerson,
+  control,
+  optionsC,
+  optionsD,
+  reload,
+  inputs,
+  setinputs,
+  handleSubmit,
+  onSubmit,
+  register,
+  errors,
+}) => {
+  return (
     <div className="genericDiv">
       <div className="genericHeader">
         <p className="genericTitle">Add Dealer</p>
@@ -48,7 +47,7 @@ const ManagementDealerComponent = ({
 
       <div className="managerInputsContainer">
         <div className="managerInputsubContainer" style={{ width: "50vw" }}>
-        <div className="inputDiv">
+          <div className="inputDiv">
             <p className="PAYtitle">Client</p>
             <Controller
               control={control}
@@ -58,7 +57,7 @@ const ManagementDealerComponent = ({
                   value={optionsC?.find((c) => c.value === value)}
                   onChange={(val) => onChange(val.value)}
                   control={control}
-                  options={client.map((e) => ({
+                  options={client?.map((e) => ({
                     value: e.id,
                     label: e.name,
                   }))}
@@ -97,38 +96,33 @@ const ManagementDealerComponent = ({
             <input
               {...register("amount")}
               placeholder="Insert Amount"
-           
               className="AQinput"
             ></input>
             <p className="FORMerror">
               {errors.amount?.message.substring(0, 25)}
             </p>
           </div>
-          <div
-                  className="AQinputContainer"
-                 
-                >
-                  <p className="AQinputName">Paid</p>
-                  <div className="AQyesNoContainer">
-                    <div>
-                      <input
-                        className="AQcheckInput"
-                        type="checkbox"
-                        checked={neww}
-                        name="paid"
-                        {...register("paid")}
-                        onChange={(event) => setNeww(!neww)}
-                      />
-                      {neww ? (
-                        <p className="AQyesNoText">Yes</p>
-                      ) : (
-                        <p className="AQyesNoText">No</p>
-                      )}
-                    </div>
-                  </div>
-                </div>
+          <div className="AQinputContainer">
+            <p className="AQinputName">Paid</p>
+            <div className="AQyesNoContainer">
+              <div>
+                <input
+                  className="AQcheckInput"
+                  type="checkbox"
+                  checked={neww}
+                  name="paid"
+                  {...register("paid")}
+                  onChange={(event) => setNeww(!neww)}
+                />
+                {neww ? (
+                  <p className="AQyesNoText">Yes</p>
+                ) : (
+                  <p className="AQyesNoText">No</p>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        
       </div>
 
       <div
@@ -168,9 +162,9 @@ const ManagementDealerComponent = ({
           </button>
         </div>
       </Modal>
-      
+
       <BsChevronLeft
-          cursor='pointer'
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",

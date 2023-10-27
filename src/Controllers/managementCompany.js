@@ -60,7 +60,7 @@ const ManagerCompany = () => {
         console.log(err);
       });
   };
-  const options = Categories.map((e) => ({ value: e.id, label: e.name }));
+  const options = Categories?.map((e) => ({ value: e.id, label: e.name }));
   return (
     <ManagementCompanyComponent
       onOpenModal={onOpenModal}

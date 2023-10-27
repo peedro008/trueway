@@ -73,7 +73,7 @@ const ManagementClient = () => {
     setValue("address", `${address}`);
   }, [address]);
 
-  const options = Companies.map((e) => ({ value: e.id, label: e.name }));
+  const options = Companies?.map((e) => ({ value: e.id, label: e.name }));
 
   return (
     <ManagementClientComponent

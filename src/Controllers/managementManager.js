@@ -66,7 +66,7 @@ const ManagementManager = () => {
         console.log(err);
       });
   };
-  const options = locations.map((e) => ({ value: e.id, label: e.name }));
+  const options = locations?.map((e) => ({ value: e.id, label: e.name }));
 
   return (
     <ManagementManagerComponenet

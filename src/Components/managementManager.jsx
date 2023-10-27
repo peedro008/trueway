@@ -7,10 +7,9 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import Icon from "../assets/Icon.png";
 import { NavLink } from "react-router-dom";
-import {  Controller } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 import { BsChevronLeft } from "react-icons/bs";
-
 
 const ManagementManagerComponenet = ({
   onOpenModal,
@@ -28,7 +27,6 @@ const ManagementManagerComponenet = ({
   onClo,
   schema,
 }) => {
-  
   return (
     <div className="genericDiv">
       <div className="genericHeader">
@@ -79,7 +77,6 @@ const ManagementManagerComponenet = ({
               {errors.phone?.message.substring(0, 25)}
             </p>
           </div>
-        
         </div>
         <div className="managerInputsubContainer" style={{ width: "32.5vw" }}>
           <div className="inputDiv">
@@ -99,10 +96,10 @@ const ManagementManagerComponenet = ({
               name="LocationId"
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Select
-                  value={options.find((c) => c.value === value)}
+                  value={options?.find((c) => c.value === value)}
                   onChange={(val) => onChange(val.value)}
                   control={control}
-                  options={locations.map((e) => ({
+                  options={locations?.map((e) => ({
                     value: e.id,
                     label: e.name,
                   }))}
@@ -154,9 +151,9 @@ const ManagementManagerComponenet = ({
           </button>
         </div>
       </Modal>
-      
+
       <BsChevronLeft
-          cursor='pointer'
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",

@@ -210,9 +210,9 @@ function StadisticComponent({
                   aboutProps: {
                     type: "Q",
                     title: `Cancelations ${yearLabel}`,
-                    producer: Producers.filter((e) => e.UserId == UserId)[0]
+                    producer: Producers?.filter((e) => e.UserId == UserId)[0]
                       .name,
-                    items: quotes.filter(
+                    items: quotes?.filter(
                       (f) =>
                         f.UserId == UserId &&
                         f.QuoteStatuses[0].Status == "Cancelled"
@@ -235,7 +235,7 @@ function StadisticComponent({
               </NavLink>
             </div>
           ) : (
-            Producers.map((e, i) => {
+            Producers?.map((e, i) => {
               return (
                 <div style={{ marginRight: "20px" }}>
                   <p
@@ -252,7 +252,7 @@ function StadisticComponent({
                         type: "P",
                         title: `NSD Sold ${yearLabel}`,
                         producer: e.name,
-                        items: payments.filter(
+                        items: payments?.filter(
                           (f) => f.UserId == e.UserId && f.NSDvalue !== "0"
                         ),
                       },
@@ -262,7 +262,7 @@ function StadisticComponent({
                       <p className="StadBoxTitle">NSD Sold</p>
                       <p className="StadBoxVal">
                         {
-                          payments.filter(
+                          payments?.filter(
                             (f) => f.UserId == e.UserId && f.NSDvalue !== "0"
                           ).length
                         }
@@ -277,7 +277,7 @@ function StadisticComponent({
                         type: "P",
                         title: `NSD Sold ${yearLabel}`,
                         producer: e.name,
-                        items: payments.filter(
+                        items: payments?.filter(
                           (f) => f.UserId == e.UserId && f.NSDvalue !== "0"
                         ),
                       },
@@ -287,7 +287,7 @@ function StadisticComponent({
                       <p className="StadBoxTitle">NSD Commision</p>
                       <p className="StadBoxVal">
                         {getComission(
-                          payments.filter(
+                          payments?.filter(
                             (f) => f.UserId == e.UserId && f.NSDvalue !== "0"
                           ),
                           quotes.filter((f) => f.UserId == e.UserId)

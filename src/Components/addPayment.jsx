@@ -415,7 +415,7 @@ function AddPaymentComponent({
                             defaultValue={optionsComp?.find(
                               (c) => c.value === form.Company
                             )}
-                            value={optionsComp.find((c) => c.value === value)}
+                            value={optionsComp?.find((c) => c.value === value)}
                             onChange={(val) => {
                               onChange(val.value);
                               setTotalValues({
@@ -447,10 +447,10 @@ function AddPaymentComponent({
               name="LocationId"
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Select
-                  defaultValue={optionsL.find(
+                  defaultValue={optionsL?.find(
                     (c) => c.value === form.LocationId
                   )}
-                  value={optionsL.find((c) => c.value === value)}
+                  value={optionsL?.find((c) => c.value === value)}
                   onChange={(val) => {
                     onChange(val.value);
                     setTotalValues({
@@ -459,7 +459,7 @@ function AddPaymentComponent({
                     });
                   }}
                   control={control}
-                  options={locations.map((e) => ({
+                  options={locations?.map((e) => ({
                     value: e.id,
                     label: e.name,
                   }))}
@@ -478,7 +478,7 @@ function AddPaymentComponent({
             <input
               placeholder="Amount"
               className="AQinput"
-              value={payment.amount}
+              value={payment?.amount}
               {...register("amount")}
               onChange={(e) => {
                 setTotalValues({ ...totalValues, amount: e.target.value });
@@ -494,13 +494,13 @@ function AddPaymentComponent({
               name="type"
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Select
-                  value={optionT.find((c) => c.value === value)}
+                  value={optionT?.find((c) => c.value === value)}
                   onChange={(val) => {
                     onChange(val.value);
                     setIsEndorsement(val.value);
                   }}
                   control={control}
-                  options={optionT.map((e) => ({
+                  options={optionT?.map((e) => ({
                     value: e.value,
                     label: e.label,
                   }))}
@@ -576,13 +576,13 @@ function AddPaymentComponent({
                 name="method"
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <Select
-                    value={optionM.find((c) => c.value === value)}
+                    value={optionM?.find((c) => c.value === value)}
                     onChange={(val) => {
                       onChange(val.value);
                       setMethod(val.value);
                     }}
                     control={control}
-                    options={optionM.map((e) => ({
+                    options={optionM?.map((e) => ({
                       value: e.value,
                       label: e.label,
                     }))}
@@ -692,7 +692,7 @@ function AddPaymentComponent({
                   type="checkbox"
                   checked={inputs.NSD}
                   value={inputs.NSD}
-                  disabled={totalValues.Category ? false : true}
+                  disabled={totalValues?.Category ? false : true}
                   key="NSD"
                   name="NSD"
                   onChange={(event) => {
@@ -839,13 +839,13 @@ function AddPaymentComponent({
                 name="method"
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <Select
-                    value={optionM.find((c) => c.value === value)}
+                    value={optionM?.find((c) => c.value === value)}
                     onChange={(val) => {
                       onChange(val.value);
                       setMethod(val.value);
                     }}
                     control={control}
-                    options={optionM.map((e) => ({
+                    options={optionM?.map((e) => ({
                       value: e.value,
                       label: e.label,
                     }))}
@@ -894,13 +894,13 @@ function AddPaymentComponent({
                 name="method2"
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <Select
-                    value={optionM.find((c) => c.value === value)}
+                    value={optionM?.find((c) => c.value === value)}
                     onChange={(val) => {
                       onChange(val.value);
                       setMethod2(val.value);
                     }}
                     control={control}
-                    options={optionM.map((e) => ({
+                    options={optionM?.map((e) => ({
                       value: e.value,
                       label: e.label,
                     }))}

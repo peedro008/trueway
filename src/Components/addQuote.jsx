@@ -242,10 +242,10 @@ const AddQuoteComponent = ({
                 name="CompanyId"
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <Select
-                    value={optionsCo.find((c) => c.value === value)}
+                    value={optionsCo?.find((c) => c.value === value)}
                     onChange={(val) => onChange(val.value)}
                     control={control}
-                    options={companies.map((e) => ({
+                    options={companies?.map((e) => ({
                       value: e.id,
                       label: e.name,
                     }))}
@@ -265,10 +265,10 @@ const AddQuoteComponent = ({
                 name="LocationId"
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <Select
-                    value={optionsL.find((c) => c.value === value)}
+                    value={optionsL?.find((c) => c.value === value)}
                     onChange={(val) => onChange(val.value)}
                     control={control}
-                    options={locations.map((e) => ({
+                    options={locations?.map((e) => ({
                       value: e.id,
                       label: e.name,
                     }))}

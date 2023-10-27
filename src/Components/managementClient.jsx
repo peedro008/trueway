@@ -107,10 +107,10 @@ const ManagementClientComponent = ({
                 name="CompanyId"
                 render={({ field: { onChange, onBlur, value, ref } }) => (
                   <Select
-                    value={options.find((c) => c.value === value)}
+                    value={options?.find((c) => c.value === value)}
                     onChange={(val) => onChange(val.value)}
                     control={control}
-                    options={Companies.map((e) => ({
+                    options={Companies?.map((e) => ({
                       value: e.id,
                       label: e.name,
                     }))}
@@ -133,8 +133,14 @@ const ManagementClientComponent = ({
               <p className="FORMerror">{errors.dateOfBirth?.message}</p>
             </div>
             <div className="inputDiv" style={{ marginRight: "52%" }}>
-            <div style={{flexDirection:"row", display:"flex"}}> <p className="PAYtitle">Address</p><GrCircleQuestion onClick={()=>setShow(!show)}/></div>
-              {!show ? (<></>
+              <div style={{ flexDirection: "row", display: "flex" }}>
+                {" "}
+                <p className="PAYtitle">Address</p>
+                <GrCircleQuestion onClick={() => setShow(!show)} />
+              </div>
+              {!show ? (
+                <></>
+              ) : (
                 // <div class="autocomplete-container" id="autocomplete-container">
                 //   <GeoapifyContext apiKey="fae2fbe3125e4b1d870dd3ab7c96f6b3">
                 //     <GeoapifyGeocoderAutocomplete
@@ -147,9 +153,10 @@ const ManagementClientComponent = ({
                 //     />
                 //   </GeoapifyContext>
                 // </div>
-              ) : (
                 <input
-                    onChange={(e)=>{setAddress(e.target.value)}}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                  }}
                   placeholder="Address"
                   className="AQinput"
                 ></input>
@@ -200,7 +207,11 @@ const ManagementClientComponent = ({
           <button className="modalButton">
             {" "}
             <NavLink
-              style={{ textDecoration: "none", color: "#000", cursor:'pointer' }}
+              style={{
+                textDecoration: "none",
+                color: "#000",
+                cursor: "pointer",
+              }}
               to={"/Management"}
             >
               Continue
@@ -220,7 +231,7 @@ const ManagementClientComponent = ({
         }}
       />
       <BsChevronLeft
-          cursor='pointer'
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",

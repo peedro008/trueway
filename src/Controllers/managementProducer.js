@@ -62,7 +62,7 @@ const ManagementProducer = () => {
       });
   };
 
-  const options = locations.map((e) => ({ value: e.id, label: e.name }));
+  const options = locations?.map((e) => ({ value: e.id, label: e.name }));
 
   return (
     <ManagementProducerComponent

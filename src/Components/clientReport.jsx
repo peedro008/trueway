@@ -72,7 +72,7 @@ function ClientReportComponent({
           </tr>
           {!search
             ? clients
-                .filter(
+                ?.filter(
                   (e) =>
                     e.Quotes?.filter(
                       (e) =>
