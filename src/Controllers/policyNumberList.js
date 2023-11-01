@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PolicyNumberList from "../Components/policyNumberList";
 import { GetLastPayments } from "../Logic/Fetch";
+import PolicyNumberListLantana from "../Components/policyNumberListLantana";
 
 const PolicyList = () => {
   const dispatch = useDispatch();
@@ -316,26 +317,52 @@ const PolicyList = () => {
       });
   }, []);
 
-  return (
-    <PolicyNumberList
-      payments={policies}
-      setPaginator={setPaginator}
-      paginator={paginator}
-      companies={companies}
-      setSearch={setSearch}
-      totalMonthlyPayments={totalMonthlyPayments}
-      filterOn={filterOn}
-      setFilterOn={setFilterOn}
-      isLoader={isLoader}
-      totalRenew={totalRenew}
-      totalEndorsement={totalEndorsement}
-      setDateFrom={setDateFrom}
-      searchByDate={searchByDate}
-      setDateTo={setDateTo}
-      dateFrom={dateFrom}
-      dateTo={dateTo}
-      searchDate={searchDate}
-    />
-  );
+  let url = "https://lantana.truewayagentbackend.com";
+
+  if (url.includes("lantana")) {
+    return (
+      <PolicyNumberListLantana
+        payments={policies}
+        setPaginator={setPaginator}
+        paginator={paginator}
+        companies={companies}
+        setSearch={setSearch}
+        totalMonthlyPayments={totalMonthlyPayments}
+        filterOn={filterOn}
+        setFilterOn={setFilterOn}
+        isLoader={isLoader}
+        totalRenew={totalRenew}
+        totalEndorsement={totalEndorsement}
+        setDateFrom={setDateFrom}
+        searchByDate={searchByDate}
+        setDateTo={setDateTo}
+        dateFrom={dateFrom}
+        dateTo={dateTo}
+        searchDate={searchDate}
+      />
+    );
+  } else {
+    return (
+      <PolicyNumberList
+        payments={policies}
+        setPaginator={setPaginator}
+        paginator={paginator}
+        companies={companies}
+        setSearch={setSearch}
+        totalMonthlyPayments={totalMonthlyPayments}
+        filterOn={filterOn}
+        setFilterOn={setFilterOn}
+        isLoader={isLoader}
+        totalRenew={totalRenew}
+        totalEndorsement={totalEndorsement}
+        setDateFrom={setDateFrom}
+        searchByDate={searchByDate}
+        setDateTo={setDateTo}
+        dateFrom={dateFrom}
+        dateTo={dateTo}
+        searchDate={searchDate}
+      />
+    );
+  }
 };
 export default PolicyList;

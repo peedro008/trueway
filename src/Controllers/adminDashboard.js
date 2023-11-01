@@ -123,20 +123,22 @@ const AdminDashboard = () => {
         )?.map((e, i) => {
           temp += parseFloat(e.NSDvalue) ? parseFloat(e.NSDvalue) : 0;
         })
-      : payments?.map((e) => {
-          if (e.Category.name !== "HEALTH INSURANCE") {
-            if (e.Category.id == 2) {
-              temp += 10;
+      : payments
+          ?.filter((e) => e.date.substring(0, 7) == DATE.substring(0, 7))
+          ?.map((e) => {
+            if (e.Category.name !== "HEALTH INSURANCE") {
+              if (e.Category.id == 2) {
+                temp += 10;
+              }
+              if (e.NSDvalue !== "") {
+                temp +=
+                  5 *
+                  (e.NSDamount
+                    ? parseFloat(e.NSDamount)
+                    : parseFloat(e.NSDvalue) / parseFloat(e.Category.NSDvalue));
+              }
             }
-            if (e.NSDvalue !== "") {
-              temp +=
-                5 *
-                (e.NSDamount
-                  ? parseFloat(e.NSDamount)
-                  : parseFloat(e.NSDvalue) / parseFloat(e.Category.NSDvalue));
-            }
-          }
-        });
+          });
     quotes
       ?.filter(
         (f) =>

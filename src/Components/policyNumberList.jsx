@@ -92,7 +92,7 @@ const PolicyNumberList = ({
           </p>
         </button>
       </div>
-      <div style={{ marginBottom: "30px", marginTop: "40px" }}>
+      <div style={{ marginBottom: "100px", marginTop: "40px" }}>
         <table
           className="table2"
           style={{ minWidth: "90vw", maxWidth: "90vw" }}
@@ -209,19 +209,19 @@ const PolicyNumberList = ({
           }}
         />
       ) : (
-        <div style={{ display: "flex" }}>
+        <>
           <div className="dashContCard2">
             <div
-              className="dashCard"
               onClick={() => {
-                setFilterOn("CC");
+                setFilterOn("TW1");
                 setPaginator(0);
               }}
+              className="dashCard"
               style={{
-                marginLeft: "20px",
+                marginLeft: "50px",
                 cursor: "pointer",
                 backgroundColor:
-                  filterOn === "CC"
+                  filterOn === "TW1"
                     ? " rgba(0, 39, 82,0.6)"
                     : " rgba(0, 39, 82,0.8)",
               }}
@@ -230,7 +230,7 @@ const PolicyNumberList = ({
                 className="dashCircle"
                 style={{ backgroundColor: "#ebeff2" }}
               >
-                <p className="dashCardText">Lantan.</p>
+                <p className="dashCardText">TW 1</p>
               </div>
               <div className="dashText">
                 <p
@@ -248,10 +248,144 @@ const PolicyNumberList = ({
                   className="dashCardText"
                   style={{ color: "#ebeff2", marginBottom: "5px" }}
                 >
-                  Lantana
+                  Trueway 1
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalMonthlyPayments[0]}
+                </p>
+              </div>
+            </div>
+            <div
+              className="dashCard"
+              onClick={() => {
+                setFilterOn("TW2");
+                setPaginator(0);
+              }}
+              style={{
+                marginLeft: "50px",
+                cursor: "pointer",
+                backgroundColor:
+                  filterOn === "TW2"
+                    ? " rgba(0, 39, 82,0.6)"
+                    : " rgba(0, 39, 82,0.8)",
+              }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">TW 2</p>
+              </div>
+              <div className="dashText">
+                <p
+                  className="dashCardText"
+                  style={{
+                    color: "#ebeff2",
+                    marginBottom: "-5px",
+                    marginTop: "-5px",
+                  }}
+                >
+                  {/* Down P. {searchDate || month} */}
+                  Policies {searchDate || month}
+                </p>
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  Trueway 2
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalMonthlyPayments[1]}
+                </p>
+              </div>
+            </div>
+            <div
+              className="dashCard"
+              onClick={() => {
+                setFilterOn("CC");
+                setPaginator(0);
+              }}
+              style={{
+                marginLeft: "50px",
+                cursor: "pointer",
+                backgroundColor:
+                  filterOn === "CC"
+                    ? " rgba(0, 39, 82,0.6)"
+                    : " rgba(0, 39, 82,0.8)",
+              }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">CC</p>
+              </div>
+              <div className="dashText">
+                <p
+                  className="dashCardText"
+                  style={{
+                    color: "#ebeff2",
+                    marginBottom: "-5px",
+                    marginTop: "-5px",
+                  }}
+                >
+                  {/* Down P. {searchDate || month} */}
+                  Policies {searchDate || month}
+                </p>
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  Call Center
                 </p>
                 <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
                   {totalMonthlyPayments[2]}
+                </p>
+              </div>
+            </div>
+            <div
+              className="dashCard"
+              onClick={() => {
+                setFilterOn("TOTAL");
+                setPaginator(0);
+              }}
+              style={{
+                marginLeft: "50px",
+                cursor: "pointer",
+                backgroundColor:
+                  filterOn === "TOTAL"
+                    ? " rgba(0, 39, 82,0.6)"
+                    : " rgba(0, 39, 82,0.8)",
+              }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">TOTAL</p>
+              </div>
+              <div className="dashText">
+                <p
+                  className="dashCardText"
+                  style={{
+                    color: "#ebeff2",
+                    marginBottom: "-5px",
+                    marginTop: "-5px",
+                  }}
+                >
+                  {/* Down P. {searchDate || month} */}
+                  Policies {searchDate || month}
+                </p>
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  TOTAL
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalMonthlyPayments[2] +
+                    totalMonthlyPayments[1] +
+                    totalMonthlyPayments[0]}
                 </p>
               </div>
             </div>
@@ -259,12 +393,12 @@ const PolicyNumberList = ({
           <div className="dashContCard2">
             <div
               onClick={() => {
-                setFilterOn("CCEND");
+                setFilterOn("TW1END");
                 setPaginator(0);
               }}
               className="dashCard"
               style={{
-                marginLeft: "20px",
+                marginLeft: "50px",
                 cursor: "pointer",
                 backgroundColor: " #d8af4d",
               }}
@@ -273,7 +407,7 @@ const PolicyNumberList = ({
                 className="dashCircle"
                 style={{ backgroundColor: "#ebeff2" }}
               >
-                <p className="dashCardText">Lantan.</p>
+                <p className="dashCardText">TW 1</p>
               </div>
               <div className="dashText">
                 <p
@@ -290,10 +424,132 @@ const PolicyNumberList = ({
                   className="dashCardText"
                   style={{ color: "#ebeff2", marginBottom: "5px" }}
                 >
-                  Lantana
+                  Trueway 1
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalEndorsement[0]}
+                </p>
+              </div>
+            </div>
+            <div
+              onClick={() => {
+                setFilterOn("TW2END");
+                setPaginator(0);
+              }}
+              className="dashCard"
+              style={{
+                marginLeft: "50px",
+                cursor: "pointer",
+                backgroundColor: " #d8af4d",
+              }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">TW 2</p>
+              </div>
+              <div className="dashText">
+                <p
+                  className="dashCardText"
+                  style={{
+                    color: "#ebeff2",
+                    marginBottom: "-5px",
+                    marginTop: "-5px",
+                  }}
+                >
+                  Endors. {searchDate || month}
+                </p>
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  Trueway 2
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalEndorsement[1]}
+                </p>
+              </div>
+            </div>
+            <div
+              onClick={() => {
+                setFilterOn("CCEND");
+                setPaginator(0);
+              }}
+              className="dashCard"
+              style={{
+                marginLeft: "50px",
+                cursor: "pointer",
+                backgroundColor: " #d8af4d",
+              }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">CC</p>
+              </div>
+              <div className="dashText">
+                <p
+                  className="dashCardText"
+                  style={{
+                    color: "#ebeff2",
+                    marginBottom: "-5px",
+                    marginTop: "-5px",
+                  }}
+                >
+                  Endors. {searchDate || month}
+                </p>
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  Call Center
                 </p>
                 <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
                   {totalEndorsement[2]}
+                </p>
+              </div>
+            </div>
+            <div
+              onClick={() => {
+                setFilterOn("TOTALEND");
+                setPaginator(0);
+              }}
+              className="dashCard"
+              style={{
+                marginLeft: "50px",
+                cursor: "pointer",
+                backgroundColor: " #d8af4d",
+              }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">TOTAL</p>
+              </div>
+              <div className="dashText">
+                <p
+                  className="dashCardText"
+                  style={{
+                    color: "#ebeff2",
+                    marginBottom: "-5px",
+                    marginTop: "-5px",
+                  }}
+                >
+                  Endors. {searchDate || month}
+                </p>
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  TOTAL
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalEndorsement[2] +
+                    totalEndorsement[1] +
+                    totalEndorsement[0]}
                 </p>
               </div>
             </div>
@@ -301,22 +557,21 @@ const PolicyNumberList = ({
           <div className="dashContCard2">
             <div
               onClick={() => {
-                setFilterOn("CCRENEW");
+                setFilterOn("TW1RENEW");
                 setPaginator(0);
               }}
               className="dashCard"
               style={{
-                marginLeft: "20px",
+                marginLeft: "50px",
                 cursor: "pointer",
                 backgroundColor: "#2ca58d",
-                marginBottom: "100px",
               }}
             >
               <div
                 className="dashCircle"
                 style={{ backgroundColor: "#ebeff2" }}
               >
-                <p className="dashCardText">Lantan.</p>
+                <p className="dashCardText">TW 1</p>
               </div>
               <div className="dashText">
                 <p
@@ -333,15 +588,137 @@ const PolicyNumberList = ({
                   className="dashCardText"
                   style={{ color: "#ebeff2", marginBottom: "5px" }}
                 >
-                  Lantana
+                  Trueway 1
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalRenew[0]}
+                </p>
+              </div>
+            </div>
+            <div
+              onClick={() => {
+                setFilterOn("TW2RENEW");
+                setPaginator(0);
+              }}
+              className="dashCard"
+              style={{
+                marginLeft: "50px",
+                cursor: "pointer",
+                backgroundColor: "#2ca58d",
+              }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">TW 2</p>
+              </div>
+              <div className="dashText">
+                <p
+                  className="dashCardText"
+                  style={{
+                    color: "#ebeff2",
+                    marginBottom: "-5px",
+                    marginTop: "-5px",
+                  }}
+                >
+                  Renew {searchDate || month}
+                </p>
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  Trueway 2
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalRenew[1]}
+                </p>
+              </div>
+            </div>
+            <div
+              onClick={() => {
+                setFilterOn("CCRENEW");
+                setPaginator(0);
+              }}
+              className="dashCard"
+              style={{
+                marginLeft: "50px",
+                cursor: "pointer",
+                backgroundColor: "#2ca58d",
+                marginBottom: "100px",
+              }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">CC</p>
+              </div>
+              <div className="dashText">
+                <p
+                  className="dashCardText"
+                  style={{
+                    color: "#ebeff2",
+                    marginBottom: "-5px",
+                    marginTop: "-5px",
+                  }}
+                >
+                  Renew {searchDate || month}
+                </p>
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  Call Center
                 </p>
                 <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
                   {totalRenew[2]}
                 </p>
               </div>
             </div>
+            <div
+              onClick={() => {
+                setFilterOn("TOTALRENEW");
+                setPaginator(0);
+              }}
+              className="dashCard"
+              style={{
+                marginLeft: "50px",
+                cursor: "pointer",
+                backgroundColor: "#2ca58d",
+                marginBottom: "100px",
+              }}
+            >
+              <div
+                className="dashCircle"
+                style={{ backgroundColor: "#ebeff2" }}
+              >
+                <p className="dashCardText">TOTAL</p>
+              </div>
+              <div className="dashText">
+                <p
+                  className="dashCardText"
+                  style={{
+                    color: "#ebeff2",
+                    marginBottom: "-5px",
+                    marginTop: "-5px",
+                  }}
+                >
+                  Renew {searchDate || month}
+                </p>
+                <p
+                  className="dashCardText"
+                  style={{ color: "#ebeff2", marginBottom: "5px" }}
+                >
+                  TOTAL
+                </p>
+                <p className="dashCardTitle" style={{ color: "#ebeff2" }}>
+                  {totalRenew[2] + totalRenew[1] + totalRenew[0]}
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
+        </>
       )}
 
       <div className="PaginatorBox">
