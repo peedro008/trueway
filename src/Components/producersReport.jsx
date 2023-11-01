@@ -17,7 +17,7 @@ const ProducerReportComponent = ({
   userRole,
   setDeleteConf,
 }) => {
-  console.log(quotes)
+  console.log(producers);
   return (
     <div className="genericDiv1">
       <div className="genericHeader">
@@ -66,7 +66,7 @@ const ProducerReportComponent = ({
             {producers?.map((e) => {
               return (
                 <tr>
-                  <td scope="row" style={{fontWeight: 'bold'}}>
+                  <td scope="row" style={{ fontWeight: "bold" }}>
                     {
                       <NavLink
                         style={{
@@ -87,18 +87,17 @@ const ProducerReportComponent = ({
                     }
                   </td>
 
-                  <td scope="row" style={{fontWeight: 'bold'}}>{e.email}</td>
-                  <td scope="row" style={{fontWeight: 'bold'}}>{e.phone}</td>
-                  <td scope="row" style={{fontWeight: 'bold'}}>
-                    {
-                      quotes?.filter(
-                        (f) =>f.id == e.UserId)[0]?.sold
-                    }
+                  <td scope="row" style={{ fontWeight: "bold" }}>
+                    {e.email}
                   </td>
-                  <td scope="row" style={{fontWeight: 'bold'}}>
-                    {
-                      quotes?.filter((f) =>f.id == e.UserId)[0]?.unsold
-                    }
+                  <td scope="row" style={{ fontWeight: "bold" }}>
+                    {e.phone}
+                  </td>
+                  <td scope="row" style={{ fontWeight: "bold" }}>
+                    {quotes?.filter((f) => f.id == e.UserId)[0]?.sold}
+                  </td>
+                  <td scope="row" style={{ fontWeight: "bold" }}>
+                    {quotes?.filter((f) => f.id == e.UserId)[0]?.unsold}
                   </td>
                   {userRole !== "Producer" && (
                     <td className="ClientName" scope="row">
@@ -146,7 +145,7 @@ const ProducerReportComponent = ({
         </NavLink>
       </div>
       <BsChevronLeft
-      cursor='pointer'
+        cursor="pointer"
         color="grey"
         style={{
           minWidth: "30px",

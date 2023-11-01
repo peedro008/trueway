@@ -1540,7 +1540,7 @@
 .dashContCard2 {
   display: flex;
   flex-direction: row;
-  width: 90%;
+  width: 50%;
   margin-top: 10px;
   margin-bottom: 5px;
   justify-content: space-between;
